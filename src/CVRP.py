@@ -6,19 +6,25 @@ class CVRP(ABC):
     Abstract class for solving the Capacitated Vehicle Routing Problem (CVRP).
 
     Attributes:
-        vehicle_capacities (list): List of vehicle capacities.
+        vehicles (int | list): Number of vehicles with unlimited capacity or list of vehicle capacities.
         depot (int): Index of the depot, which is the starting and ending point for each vehicle.
         locations (list): List of coordinates for each location.
         trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
         num_vehicles (int): Number of vehicles available.
     """
 
-    def __init__(self, vehicle_capacities, depot, locations, trips):
-        self.vehicle_capacities = vehicle_capacities
+    def __init__(self, vehicles, depot, locations, trips):
+        if type(vehicles) == int:
+            self.num_vehicles = vehicles
+            self.use_capacity = False
+        else:
+            self.num_vehicles = len(vehicles)
+            self.vehicle_capacities = vehicles
+            self.use_capacity = True
+
         self.depot = depot
         self.locations = locations
         self.trips = trips
-        self.num_vehicles = len(vehicle_capacities)
         self.distance_matrix = self.compute_distance()
 
     def compute_distance(self):

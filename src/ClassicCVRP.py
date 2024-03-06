@@ -8,6 +8,32 @@ class ClassicCVRP(CVRP):
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with classic algorithms, using Google's OR Tools.
     """
 
+    SOLUTION_STRATEGY = (
+        routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION
+    )
+    LOCAL_SEARCH_METAHEURISTIC = routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
+    DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 100
+
+    def solve(self):
+        """
+        Solve the CVRP using Google's OR Tools.
+        """
+
+        self.manager = pywrapcp.RoutingIndexManager(
+            len(self.distance_matrix), self.num_vehicles, self.depot
+        )
+        self.routing = pywrapcp.RoutingModel(self.manager)
+
+        self.set_distance_dimension()
+        if self.use_capacity:
+            self.set_capacity_dimension()
+        self.set_pickup_and_deliveries()
+
+        search_parameters = self.get_search_parameters()
+        solution = self.routing.SolveWithParameters(search_parameters)
+        if solution:
+            self.print_solution(solution)
+
     def distance_callback(self, from_index, to_index):
         """Returns the distance between the two nodes."""
 
@@ -27,15 +53,8 @@ class ClassicCVRP(CVRP):
 
         return pickup_demand - delivery_demand
 
-    def solve(self):
-        """
-        Solve the CVRP using Google's OR Tools.
-        """
-
-        self.manager = pywrapcp.RoutingIndexManager(
-            len(self.distance_matrix), self.num_vehicles, self.depot
-        )
-        self.routing = pywrapcp.RoutingModel(self.manager)
+    def set_distance_dimension(self):
+        """Set the distance dimension and cost for the problem."""
 
         # Define the cost of each arc.
         transit_callback_index = self.routing.RegisterTransitCallback(
@@ -43,55 +62,63 @@ class ClassicCVRP(CVRP):
         )
         self.routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
 
+        dimension_name = "Distance"
+        self.routing.AddDimension(
+            transit_callback_index,
+            0,
+            3000,
+            True,
+            dimension_name,
+        )
+        self.distance_dimension = self.routing.GetDimensionOrDie(dimension_name)
+
+        # Balances the distance between each vehicle.
+        self.distance_dimension.SetGlobalSpanCostCoefficient(
+            self.DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT
+        )
+
+    def set_capacity_dimension(self):
+        """Set the capacity dimension and constraint for the problem."""
+
+        print("Using capacity dimension")
         demand_callback_index = self.routing.RegisterUnaryTransitCallback(
             self.demand_callback
         )
         self.routing.AddDimensionWithVehicleCapacity(
             demand_callback_index,
             0,  # null capacity slack - no extra capacity
-            self.vehicle_capacities,  # vehicle maximum capacities
+            self.vehicle_capacities,
             True,  # start counting at 0
             "Capacity",
         )
 
-        # Add Distance dimension.
-        distance_dimension = "Distance"
-        self.routing.AddDimension(
-            transit_callback_index,
-            0,  # no slack
-            3000,  # vehicle maximum travel distance
-            True,  # start cumul to zero
-            distance_dimension,
-        )
-        distance_dimension = self.routing.GetDimensionOrDie(distance_dimension)
+    def set_pickup_and_deliveries(self):
+        """Set the pickup and delivery constraints for the problem."""
 
-        # Balances the distance between each vehicle.
-        distance_dimension.SetGlobalSpanCostCoefficient(100)
-
-        # Define Transportation Requests.
         for trip in self.trips:
             pickup_index = self.manager.NodeToIndex(trip[0])
             delivery_index = self.manager.NodeToIndex(trip[1])
+
             self.routing.AddPickupAndDelivery(pickup_index, delivery_index)
+
             self.routing.solver().Add(
                 self.routing.VehicleVar(pickup_index)
                 == self.routing.VehicleVar(delivery_index)
             )
+
             self.routing.solver().Add(
-                distance_dimension.CumulVar(pickup_index)
-                <= distance_dimension.CumulVar(delivery_index)
+                self.distance_dimension.CumulVar(pickup_index)
+                <= self.distance_dimension.CumulVar(delivery_index)
             )
 
-        # Setting first solution heuristic.
-        search_parameters = pywrapcp.DefaultRoutingSearchParameters()
-        search_parameters.first_solution_strategy = (
-            routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION
-        )
+    def get_search_parameters(self):
+        """Returns the search parameters for the problem."""
 
-        # Solve the problem.
-        solution = self.routing.SolveWithParameters(search_parameters)
-        if solution:
-            self.print_solution(solution)
+        search_parameters = pywrapcp.DefaultRoutingSearchParameters()
+        search_parameters.first_solution_strategy = self.SOLUTION_STRATEGY
+        search_parameters.local_search_metaheuristic = self.LOCAL_SEARCH_METAHEURISTIC
+
+        return search_parameters
 
     def print_solution(self, solution):
         """Prints solution on console."""
@@ -109,16 +136,25 @@ class ClassicCVRP(CVRP):
                 route_load += self.demand_callback(
                     index
                 )  # This assumes each location only has one vehicle visiting it
-                plan_output += (
-                    f" {self.manager.IndexToNode(index)} Load({route_load}) -> "
-                )
+
+                if self.use_capacity:
+                    plan_output += (
+                        f" {self.manager.IndexToNode(index)} Load({route_load}) -> "
+                    )
+                else:
+                    plan_output += f" {self.manager.IndexToNode(index)} -> "
+
                 previous_index = index
                 index = solution.Value(self.routing.NextVar(index))
                 route_distance += self.routing.GetArcCostForVehicle(
                     previous_index, index, vehicle_id
                 )
 
-            plan_output += f"{self.manager.IndexToNode(index)} Load({route_load})\n"
+            if self.use_capacity:
+                plan_output += f"{self.manager.IndexToNode(index)} Load({route_load})\n"
+            else:
+                plan_output += f"{self.manager.IndexToNode(index)}\n"
+
             plan_output += f"Distance of the route: {route_distance}m\n"
             print(plan_output)
             total_distance += route_distance
