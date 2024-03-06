@@ -9,15 +9,15 @@ class CVRP(ABC):
         vehicle_capacities (list): List of vehicle capacities.
         depot (int): Index of the depot, which is the starting and ending point for each vehicle.
         locations (list): List of coordinates for each location.
-        demands (list): List of demands for each location, corresponding to the quantity of customers to be picked up.
+        trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
         num_vehicles (int): Number of vehicles available.
     """
 
-    def __init__(self, vehicle_capacities, depot, locations, demands):
+    def __init__(self, vehicle_capacities, depot, locations, trips):
         self.vehicle_capacities = vehicle_capacities
         self.depot = depot
         self.locations = locations
-        self.demands = demands
+        self.trips = trips
         self.num_vehicles = len(vehicle_capacities)
         self.distance_matrix = self.compute_distance()
 
