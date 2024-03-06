@@ -16,16 +16,16 @@ class ClassicCVRP(CVRP):
         to_node = self.manager.IndexToNode(to_index)
         return self.distance_matrix[from_node][to_node]
 
-    def demand_callback(
-        self, from_index
-    ):  # TODO change this to work with pickup and delivery
+    def demand_callback(self, from_index):
         """Returns the demand of the node."""
 
-        # add the people picked up in this station and subtract the people delivered
-
         # Convert from index to demands NodeIndex.
-        # from_node = self.manager.IndexToNode(from_index)
-        # return self.demands[from_node]
+        from_node = self.manager.IndexToNode(from_index)
+
+        pickup_demand = sum(trip[2] for trip in self.trips if from_node == trip[0])
+        delivery_demand = sum(trip[2] for trip in self.trips if from_node == trip[1])
+
+        return pickup_demand - delivery_demand
 
     def solve(self):
         """
@@ -43,16 +43,27 @@ class ClassicCVRP(CVRP):
         )
         self.routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
 
+        demand_callback_index = self.routing.RegisterUnaryTransitCallback(
+            self.demand_callback
+        )
+        self.routing.AddDimensionWithVehicleCapacity(
+            demand_callback_index,
+            0,  # null capacity slack - no extra capacity
+            self.vehicle_capacities,  # vehicle maximum capacities
+            True,  # start counting at 0
+            "Capacity",
+        )
+
         # Add Distance dimension.
-        dimension_name = "Distance"
+        distance_dimension = "Distance"
         self.routing.AddDimension(
             transit_callback_index,
             0,  # no slack
             3000,  # vehicle maximum travel distance
             True,  # start cumul to zero
-            dimension_name,
+            distance_dimension,
         )
-        distance_dimension = self.routing.GetDimensionOrDie(dimension_name)
+        distance_dimension = self.routing.GetDimensionOrDie(distance_dimension)
 
         # Balances the distance between each vehicle.
         distance_dimension.SetGlobalSpanCostCoefficient(100)
@@ -70,18 +81,6 @@ class ClassicCVRP(CVRP):
                 distance_dimension.CumulVar(pickup_index)
                 <= distance_dimension.CumulVar(delivery_index)
             )
-
-        # TODO: Add Capacity constraint.
-        # demand_callback_index = self.routing.RegisterUnaryTransitCallback(
-        #     self.demand_callback
-        # )
-        # self.routing.AddDimensionWithVehicleCapacity(
-        #     demand_callback_index,
-        #     0,  # null capacity slack - no extra capacity
-        #     self.vehicle_capacities,  # vehicle maximum capacities
-        #     True,  # start counting at 0
-        #     "Capacity",
-        # )
 
         # Setting first solution heuristic.
         search_parameters = pywrapcp.DefaultRoutingSearchParameters()
@@ -104,16 +103,22 @@ class ClassicCVRP(CVRP):
             index = self.routing.Start(vehicle_id)
             plan_output = f"Route for vehicle {vehicle_id}:\n"
             route_distance = 0
+            route_load = 0
 
             while not self.routing.IsEnd(index):
-                plan_output += f" {self.manager.IndexToNode(index)} -> "
+                route_load += self.demand_callback(
+                    index
+                )  # This assumes each location only has one vehicle visiting it
+                plan_output += (
+                    f" {self.manager.IndexToNode(index)} Load({route_load}) -> "
+                )
                 previous_index = index
                 index = solution.Value(self.routing.NextVar(index))
                 route_distance += self.routing.GetArcCostForVehicle(
                     previous_index, index, vehicle_id
                 )
 
-            plan_output += f"{self.manager.IndexToNode(index)}\n"
+            plan_output += f"{self.manager.IndexToNode(index)} Load({route_load})\n"
             plan_output += f"Distance of the route: {route_distance}m\n"
             print(plan_output)
             total_distance += route_distance
