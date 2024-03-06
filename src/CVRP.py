@@ -19,6 +19,23 @@ class CVRP(ABC):
         self.locations = locations
         self.demands = demands
         self.num_vehicles = len(vehicle_capacities)
+        self.distance_matrix = self.compute_distance()
+
+    def compute_distance(self):
+        """
+        Compute the distance matrix between each pair of locations using Manhattan.
+        """
+
+        distance_matrix = []
+        for from_location in self.locations:
+            row = []
+            for to_location in self.locations:
+                row.append(
+                    abs(from_location[0] - to_location[0])
+                    + abs(from_location[1] - to_location[1])
+                )
+            distance_matrix.append(row)
+        return distance_matrix
 
     @abstractmethod
     def solve(self):
