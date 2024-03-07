@@ -2,7 +2,7 @@ from ClassicCVRP import ClassicCVRP
 
 if __name__ == "__main__":
     cvrp = ClassicCVRP(
-        [9, 15, 15, 15],
+        4,
         0,
         [
             (456, 320),
