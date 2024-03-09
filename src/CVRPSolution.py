@@ -28,6 +28,7 @@ class CVRPSolution:
         total_distance,
         routes,
         distances,
+        depot,
         loads=None,
     ):
         self.num_vehicles = num_vehicles
@@ -37,12 +38,15 @@ class CVRPSolution:
         self.routes = routes
         self.distances = distances
         self.loads = loads
+        self.depot = depot
         self.use_capacity = loads is not None
 
-    def display(self):  # TODO: extract methods, paint 0 black, fix hover info
+    def display(self):  # TODO: fix hover info, loads, distance, total_distance
+        """
+        Display the solution using a plotly figure.
+        """
         fig = go.Figure()
 
-        # Draw routes
         for vehicle_id in range(self.num_vehicles):
             route_coordinates = [
                 (self.locations[node][0], self.locations[node][1])
@@ -51,6 +55,7 @@ class CVRPSolution:
 
             color = self.COLOR_LIST[vehicle_id % len(self.COLOR_LIST)]
 
+            # Draw routes
             fig.add_trace(
                 go.Scatter(
                     x=[loc[0] for loc in route_coordinates],
@@ -63,41 +68,12 @@ class CVRPSolution:
 
             # Draw annotations
             for i in range(len(route_coordinates) - 1):
-                x_start, y_start = route_coordinates[i]
-                x_end, y_end = route_coordinates[i + 1]
-                x_mid = (x_start + x_end) / 2
-                y_mid = (y_start + y_end) / 2
-
-                # Draw arrows
-                fig.add_trace(
-                    go.Scatter(
-                        x=[x_start, x_mid],
-                        y=[y_start, y_mid],
-                        mode="lines+markers",
-                        line=dict(width=5, color=color),
-                        marker=dict(size=20, symbol="arrow-up", angleref="previous"),
-                        hoverinfo="skip",
-                        showlegend=False,
-                    )
+                self.plot_direction(
+                    fig, route_coordinates[i], route_coordinates[i + 1], color, 5
                 )
+                self.plot_location(fig, route_coordinates[i], color)
 
-                # Draw locations
-                fig.add_trace(
-                    go.Scatter(
-                        x=[x_start],
-                        y=[y_start],
-                        mode="markers+text",
-                        marker=dict(
-                            size=50, symbol="circle", color=color, line_width=2
-                        ),
-                        text=str(
-                            self.locations.index(route_coordinates[i])
-                        ),  # Display the index of the location
-                        textposition="middle center",
-                        textfont=dict(color="white", size=15),
-                        showlegend=False,
-                    )
-                )
+        self.plot_location(fig, self.locations[self.depot], "gray")
 
         fig.update_layout(
             xaxis_title="X Coordinate",
@@ -105,6 +81,41 @@ class CVRPSolution:
         )
 
         fig.show()
+
+    def plot_direction(self, fig, loc1, loc2, color, line_width):
+        """
+        Plot an arrow representing the direction from coord1 to coord2 with the given color and line width.
+        """
+        x_mid = (loc1[0] + loc2[0]) / 2
+        y_mid = (loc1[1] + loc2[1]) / 2
+
+        fig.add_trace(
+            go.Scatter(
+                x=[loc1[0], x_mid],
+                y=[loc1[1], y_mid],
+                mode="lines+markers",
+                line=dict(width=line_width, color=color),
+                marker=dict(size=20, symbol="arrow-up", angleref="previous"),
+                hoverinfo="skip",
+                showlegend=False,
+            )
+        )
+
+    def plot_location(self, fig, loc, color):
+        fig.add_trace(
+            go.Scatter(
+                x=[loc[0]],
+                y=[loc[1]],
+                mode="markers+text",
+                marker=dict(size=50, symbol="circle", color=color, line_width=2),
+                text=str(
+                    self.locations.index(loc)
+                ),  # Display the index of the location
+                textposition="middle center",
+                textfont=dict(color="white", size=15),
+                showlegend=False,
+            )
+        )
 
     def print(self):
         """Print the solution to the console."""

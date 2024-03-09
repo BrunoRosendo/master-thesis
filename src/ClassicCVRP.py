@@ -165,5 +165,6 @@ class ClassicCVRP(CVRP):
             total_distance,
             routes,
             distances,
+            self.depot,
             loads if self.use_capacity else None,
         )
