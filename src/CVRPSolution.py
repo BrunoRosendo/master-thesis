@@ -4,6 +4,20 @@ import numpy as np
 
 
 class CVRPSolution:
+    """
+    Class to represent a solution to the Capacitated Vehicle Routing Problem (CVRP).
+
+    Attributes:
+    - num_vehicles (int): The number of vehicles used in the solution.
+    - locations (list of tuples): The coordinates of the locations.
+    - objective (float): The objective value of the solution.
+    - total_distance (float): The total distance traveled by all vehicles.
+    - routes (list of lists): The routes (indices) taken by each vehicle.
+    - distances (list of floats): The distance traveled by each vehicle.
+    - loads (list of lists): The load of each vehicle at each location of its route.
+    - depot (int): The index of the depot location.
+    - use_capacity (bool): Whether the solution uses vehicle capacity or not.
+    """
 
     COLOR_LIST = [  # TODO: Refine colors
         "blue",
@@ -120,6 +134,9 @@ class CVRPSolution:
     def plot_location(
         self, fig, loc, color, legend_group=None, vehicle_id=None, route_id=None
     ):
+        """
+        Plot a location with the given color and legend group.
+        """
         hovertext = (
             "Starting Point"
             if vehicle_id is None
