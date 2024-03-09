@@ -41,7 +41,9 @@ class CVRPSolution:
         self.depot = depot
         self.use_capacity = loads is not None
 
-    def display(self):  # TODO: fix hover info, loads, distance, total_distance
+    def display(
+        self,
+    ):  # TODO: distance, total_distance, end load
         """
         Display the solution using a plotly figure.
         """
@@ -54,6 +56,7 @@ class CVRPSolution:
             ]
 
             color = self.COLOR_LIST[vehicle_id % len(self.COLOR_LIST)]
+            legend_group = f"Vehicle {vehicle_id + 1}"
 
             # Draw routes
             fig.add_trace(
@@ -63,17 +66,25 @@ class CVRPSolution:
                     mode="lines",
                     line=dict(width=5, color=color),
                     name=f"Vehicle {vehicle_id + 1}",
+                    legendgroup=legend_group,
                 )
             )
 
             # Draw annotations
             for i in range(len(route_coordinates) - 1):
                 self.plot_direction(
-                    fig, route_coordinates[i], route_coordinates[i + 1], color, 5
+                    fig,
+                    route_coordinates[i],
+                    route_coordinates[i + 1],
+                    color,
+                    5,
+                    legend_group,
                 )
-                self.plot_location(fig, route_coordinates[i], color)
+                self.plot_location(
+                    fig, route_coordinates[i], color, legend_group, vehicle_id, i
+                )
 
-        self.plot_location(fig, self.locations[self.depot], "gray")
+        self.plot_location(fig, self.locations[self.depot], "gray", legend_group)
 
         fig.update_layout(
             xaxis_title="X Coordinate",
@@ -82,7 +93,7 @@ class CVRPSolution:
 
         fig.show()
 
-    def plot_direction(self, fig, loc1, loc2, color, line_width):
+    def plot_direction(self, fig, loc1, loc2, color, line_width, legend_group=None):
         """
         Plot an arrow representing the direction from coord1 to coord2 with the given color and line width.
         """
@@ -98,10 +109,19 @@ class CVRPSolution:
                 marker=dict(size=20, symbol="arrow-up", angleref="previous"),
                 hoverinfo="skip",
                 showlegend=False,
+                legendgroup=legend_group,
             )
         )
 
-    def plot_location(self, fig, loc, color):
+    def plot_location(
+        self, fig, loc, color, legend_group=None, vehicle_id=None, route_id=None
+    ):
+        hovertext = (
+            "Starting Point"
+            if vehicle_id is None
+            else f"Vehicle {vehicle_id + 1}: {self.loads[vehicle_id][route_id]} passengers"
+        )
+
         fig.add_trace(
             go.Scatter(
                 x=[loc[0]],
@@ -114,6 +134,9 @@ class CVRPSolution:
                 textposition="middle center",
                 textfont=dict(color="white", size=15),
                 showlegend=False,
+                hoverinfo="text",
+                hovertext=hovertext,
+                legendgroup=legend_group,
             )
         )
 
