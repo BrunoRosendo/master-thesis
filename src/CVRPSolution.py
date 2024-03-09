@@ -41,9 +41,7 @@ class CVRPSolution:
         self.depot = depot
         self.use_capacity = loads is not None
 
-    def display(
-        self,
-    ):  # TODO: distance, total_distance, end load
+    def display(self):
         """
         Display the solution using a plotly figure.
         """
@@ -65,7 +63,7 @@ class CVRPSolution:
                     y=[loc[1] for loc in route_coordinates],
                     mode="lines",
                     line=dict(width=5, color=color),
-                    name=f"Vehicle {vehicle_id + 1}",
+                    name=f"Vehicle {vehicle_id + 1}: {self.distances[vehicle_id]}m",
                     legendgroup=legend_group,
                 )
             )
@@ -84,11 +82,17 @@ class CVRPSolution:
                     fig, route_coordinates[i], color, legend_group, vehicle_id, i
                 )
 
-        self.plot_location(fig, self.locations[self.depot], "gray", legend_group)
+        self.plot_location(fig, self.locations[self.depot], "gray")
 
         fig.update_layout(
             xaxis_title="X Coordinate",
             yaxis_title="Y Coordinate",
+            legend=dict(
+                title=f"Total Distance: {self.total_distance}m",
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+            ),
         )
 
         fig.show()
@@ -119,7 +123,11 @@ class CVRPSolution:
         hovertext = (
             "Starting Point"
             if vehicle_id is None
-            else f"Vehicle {vehicle_id + 1}: {self.loads[vehicle_id][route_id]} passengers"
+            else (
+                f"Vehicle {vehicle_id + 1}: {self.loads[vehicle_id][route_id]} passengers"
+                if self.use_capacity
+                else f"Vehicle {vehicle_id + 1}"
+            )
         )
 
         fig.add_trace(
