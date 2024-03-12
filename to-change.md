@@ -2,3 +2,4 @@
 
 - Include Google's OR Tools as state of the art of classical optimisation (and why I chose to use it)
 - Reformulate the problem with Porto's transportation in mind
+- Explain the math formulation used for QUBO
