@@ -49,11 +49,7 @@ class ClassicCVRP(CVRP):
 
         # Convert from index to demands NodeIndex.
         from_node = self.manager.IndexToNode(from_index)
-
-        pickup_demand = sum(trip[2] for trip in self.trips if from_node == trip[0])
-        delivery_demand = sum(trip[2] for trip in self.trips if from_node == trip[1])
-
-        return pickup_demand - delivery_demand
+        return self.get_location_demand(from_node)
 
     def set_distance_dimension(self):
         """Set the distance dimension and cost for the problem."""

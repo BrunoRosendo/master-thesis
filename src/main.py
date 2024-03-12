@@ -1,9 +1,10 @@
 from ClassicCVRP import ClassicCVRP
+from QuboCVRP import QuboCVRP
 
 if __name__ == "__main__":
-    cvrp = ClassicCVRP(
+    cvrp = QuboCVRP(
         [15, 15, 15, 15],
-        0,
+        0,  # TODO: depot 0 by default
         [
             (456, 320),
             (228, 0),
@@ -33,5 +34,6 @@ if __name__ == "__main__":
             [13, 12, 6],
             [16, 14, 4],
         ],
+        True,
     )
     cvrp.solve()
