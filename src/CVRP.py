@@ -49,9 +49,10 @@ class CVRP(ABC):
         """
         Get the demand for a location.
         """
-        pickup_demand = sum(trip[2] for trip in self.trips if idx == trip[0])
-        delivery_demand = sum(trip[2] for trip in self.trips if idx == trip[1])
-        return pickup_demand - delivery_demand
+        return 1  # TODO: Change once pickup and delivery is implemented in qubo
+        # pickup_demand = sum(trip[2] for trip in self.trips if idx == trip[0])
+        # delivery_demand = sum(trip[2] for trip in self.trips if idx == trip[1])
+        # return pickup_demand - delivery_demand
 
     @abstractmethod
     def _solve_cvrp(self):

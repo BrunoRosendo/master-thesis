@@ -42,6 +42,9 @@ class QuboCVRP(CVRP):
             # optimizer = MinimumEigenOptimizer(min_eigen_solver=self.min_eigen_solver)
             # result = optimizer.solve(qubo)
 
+        if result.status.name != "SUCCESS":
+            raise Exception("Failed to solve the problem!")
+
         return result
 
     def get_cplex_model(self):
@@ -69,8 +72,12 @@ class QuboCVRP(CVRP):
 
         # Each location must be visited exactly once
         for i in range(1, num_locations):
-            model.add_constraint(model.sum(x[i, j] for j in range(num_locations)) == 1)
-            model.add_constraint(model.sum(x[j, i] for j in range(num_locations)) == 1)
+            model.add_constraint(
+                model.sum(x[i, j] for j in range(num_locations) if i != j) == 1
+            )
+            model.add_constraint(
+                model.sum(x[j, i] for j in range(num_locations) if i != j) == 1
+            )
 
         # All vehicles need to leave and return to the depot
         model.add_constraint(
@@ -124,7 +131,6 @@ class QuboCVRP(CVRP):
         """
         Convert the optimizer result to a CVRPSolution solution.
         """
-
         var_dict = result.variables_dict
         route_starts = self.get_result_route_starts(var_dict)
 
