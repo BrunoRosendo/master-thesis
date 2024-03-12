@@ -54,8 +54,22 @@ class CVRP(ABC):
         return pickup_demand - delivery_demand
 
     @abstractmethod
+    def _solve_cvrp(self):
+        """
+        Solve the CVRP with a specific solver.
+        """
+        pass
+
+    @abstractmethod
+    def _convert_solution(self, result):
+        """
+        Convert the result from the solver to a CVRP solution.
+        """
+        pass
+
     def solve(self):
         """
         Solve the CVRP.
         """
-        pass
+        result = self._solve_cvrp()
+        return self._convert_solution(result)

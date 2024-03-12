@@ -23,7 +23,7 @@ class QuboCVRP(CVRP):
         super().__init__(vehicles, depot, locations, trips)
         self.classical_solver = classical_solver
 
-    def solve(self):
+    def _solve_cvrp(self):
         """
         Solve the CVRP using QUBO implemented in Qiskit.
         """
@@ -42,9 +42,7 @@ class QuboCVRP(CVRP):
             # optimizer = MinimumEigenOptimizer(min_eigen_solver=self.min_eigen_solver)
             # result = optimizer.solve(qubo)
 
-        # Get the solution
-        # solution = self.convert_solution(result)
-        # solution.display()
+        return result
 
     def get_cplex_model(self):
         """
@@ -120,5 +118,85 @@ class QuboCVRP(CVRP):
     def solve_classic(self, qp):
         optimizer = CplexOptimizer()
         result = optimizer.solve(qp)
-        print(result)
         return result
+
+    def _convert_solution(self, result):
+        """
+        Convert the optimizer result to a CVRPSolution solution.
+        """
+
+        var_dict = result.variables_dict
+        route_starts = self.get_result_route_starts(var_dict)
+
+        routes = []
+        loads = []
+        distances = []
+        total_distance = 0
+
+        for start in route_starts:
+            index = start
+            previous_index = self.depot
+
+            route = [self.depot]
+            route_loads = [0]
+            route_distance = 0
+            cur_load = 0
+
+            while True:
+                route_distance += self.distance_matrix[previous_index][index]
+                cur_load += self.get_location_demand(index)
+                route.append(index)
+                route_loads.append(cur_load)
+
+                if index == self.depot:
+                    break
+
+                previous_index = index
+                index = self.get_result_next_location(var_dict, index)
+
+            routes.append(route)
+            distances.append(route_distance)
+            loads.append(route_loads)
+            total_distance += route_distance
+
+        return CVRPSolution(
+            self.num_vehicles,
+            self.locations,
+            result.fval,
+            total_distance,
+            routes,
+            distances,
+            self.depot,
+            loads if self.use_capacity else None,
+        )
+
+    def get_var_name(self, i, j):
+        """
+        Get the name of a variable.
+        """
+        return f"x_{i}_{j}"
+
+    def get_result_route_starts(self, var_dict):
+        """
+        Get the starting location for each route from the variable dictionary.
+        """
+        route_starts = []
+
+        cur_location = 1
+        while len(route_starts) < self.num_vehicles:
+            var_value = var_dict[self.get_var_name(0, cur_location)]
+            if var_value == 1.0:
+                route_starts.append(cur_location)
+            cur_location += 1
+
+        return route_starts
+
+    def get_result_next_location(self, var_dict, cur_location):
+        """
+        Get the next location for a route from the variable dictionary.
+        """
+        for i in range(len(self.locations)):
+            var_value = var_dict[self.get_var_name(cur_location, i)]
+            if var_value == 1.0:
+                return i
+        return None

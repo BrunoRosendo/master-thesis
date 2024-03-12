@@ -15,7 +15,7 @@ class ClassicCVRP(CVRP):
     LOCAL_SEARCH_METAHEURISTIC = routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
     DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 100
 
-    def solve(self):
+    def _solve_cvrp(self):
         """
         Solve the CVRP using Google's OR Tools.
         """
@@ -32,9 +32,7 @@ class ClassicCVRP(CVRP):
 
         search_parameters = self.get_search_parameters()
         or_solution = self.routing.SolveWithParameters(search_parameters)
-        if or_solution:
-            solution = self.convert_solution(or_solution)
-            solution.display()
+        return or_solution
 
     def distance_callback(self, from_index, to_index):
         """Returns the distance between the two nodes."""
@@ -117,8 +115,8 @@ class ClassicCVRP(CVRP):
 
         return search_parameters
 
-    def convert_solution(self, or_solution):
-        """Converts OR-Tools solution to CVRP solution."""
+    def _convert_solution(self, result):
+        """Converts OR-Tools result to CVRP solution."""
 
         routes = []
         loads = []
@@ -139,7 +137,7 @@ class ClassicCVRP(CVRP):
                 )  # This assumes each location only has one vehicle visiting it
 
                 previous_index = index
-                index = or_solution.Value(self.routing.NextVar(index))
+                index = result.Value(self.routing.NextVar(index))
                 route_distance += self.routing.GetArcCostForVehicle(
                     previous_index, index, vehicle_id
                 )
@@ -157,7 +155,7 @@ class ClassicCVRP(CVRP):
         return CVRPSolution(
             self.num_vehicles,
             self.locations,
-            or_solution.ObjectiveValue(),
+            result.ObjectiveValue(),
             total_distance,
             routes,
             distances,
