@@ -57,39 +57,63 @@ class QuboCVRP(CVRP):
         num_locations = len(self.distance_matrix)
 
         # Create variables
-        x = model.binary_var_matrix(num_locations, num_locations, name="x")
+        x = model.binary_var_cube(
+            num_locations, num_locations, self.num_vehicles, name="x"
+        )
         u = model.binary_var_list(range(1, num_locations), name="u")
 
         # Objective function
         objective = model.sum(
-            self.distance_matrix[i][j] * x[i, j]
+            self.distance_matrix[i][j] * x[i, j, k]
             for i in range(num_locations)
             for j in range(num_locations)
+            for k in range(self.num_vehicles)
         )
 
         model.minimize(objective)
 
         # Constraints
 
-        # Each location must be visited exactly once
+        # Each vehicle leaves the locations it enters
+        for k in range(self.num_vehicles):
+            for i in range(num_locations):
+                model.add_constraint(
+                    model.sum(x[i, j, k] for j in range(num_locations) if i != j)
+                    == model.sum(x[j, i, k] for j in range(num_locations) if i != j)
+                )
+
+        # Each location is entered once
         for i in range(1, num_locations):
             model.add_constraint(
-                model.sum(x[i, j] for j in range(num_locations) if i != j) == 1
-            )
-            model.add_constraint(
-                model.sum(x[j, i] for j in range(num_locations) if i != j) == 1
+                model.sum(
+                    x[i, j, k]
+                    for j in range(num_locations)
+                    for k in range(self.num_vehicles)
+                    if i != j
+                )
+                == 1
             )
 
-        # All vehicles need to leave and return to the depot
-        model.add_constraint(
-            model.sum(x[0, i] for i in range(1, num_locations)) == self.num_vehicles
-        )
-        model.add_constraint(
-            model.sum(x[i, 0] for i in range(1, num_locations)) == self.num_vehicles
-        )
+        # All vehicles leave the depot
+        for k in range(self.num_vehicles):
+            model.add_constraint(
+                model.sum(x[0, i, k] for i in range(1, num_locations)) == 1
+            )
 
         # TODO: handle multiple capacities and setting for constant capacity
         capacity = self.vehicle_capacities[0]
+
+        # Capacity constraint
+        for k in range(self.num_vehicles):
+            model.add_constraint(
+                model.sum(
+                    self.get_location_demand(j) * x[i, j, k]
+                    for i in range(num_locations)
+                    for j in range(1, num_locations)
+                    if i != j
+                )
+                <= capacity
+            )
 
         # Subtour elimination (MTV)
         for i in range(1, num_locations):
@@ -98,8 +122,8 @@ class QuboCVRP(CVRP):
                     continue
 
                 model.add_constraint(
-                    u[i - 1] - u[j - 1] + capacity * x[i, j]
-                    <= capacity - self.get_location_demand(j)
+                    u[j - 1] - u[i - 1]
+                    >= self.get_location_demand(j) - capacity * (1 - x[i, j, k])
                 )
 
             model.add_constraint(u[i - 1] >= self.get_location_demand(i))
@@ -107,15 +131,85 @@ class QuboCVRP(CVRP):
 
         return model
 
+    # def get_cplex_model(self):
+    #     """
+    #     Get the CPLEX model for the CVRP.
+    #     """
+
+    #     model = Model("CVRP")
+    #     num_locations = len(self.distance_matrix)
+
+    #     # Create variables
+    #     x = model.binary_var_matrix(num_locations, num_locations, name="x")
+    #     u = model.binary_var_list(range(1, num_locations), name="u")
+
+    #     # Objective function
+    #     objective = model.sum(
+    #         self.distance_matrix[i][j] * x[i, j]
+    #         for i in range(num_locations)
+    #         for j in range(num_locations)
+    #     )
+
+    #     model.minimize(objective)
+
+    #     # Constraints
+
+    #     # Each location must be visited exactly once
+    #     for i in range(1, num_locations):
+    #         model.add_constraint(
+    #             model.sum(x[i, j] for j in range(num_locations) if i != j) == 1
+    #         )
+    #         model.add_constraint(
+    #             model.sum(x[j, i] for j in range(num_locations) if i != j) == 1
+    #         )
+
+    #     # All vehicles need to leave and return to the depot
+    #     model.add_constraint(
+    #         model.sum(x[0, i] for i in range(1, num_locations)) == self.num_vehicles
+    #     )
+    #     model.add_constraint(
+    #         model.sum(x[i, 0] for i in range(1, num_locations)) == self.num_vehicles
+    #     )
+
+    #     # TODO: handle multiple capacities and setting for constant capacity
+    #     capacity = self.vehicle_capacities[0]
+
+    #     # Subtour elimination (MTV)
+    #     for i in range(1, num_locations):
+    #         for j in range(1, num_locations):
+    #             if i == j:
+    #                 continue
+
+    #             model.add_constraint(
+    #                 u[i - 1] - u[j - 1] + capacity * x[i, j]
+    #                 <= capacity - self.get_location_demand(j)
+    #             )
+
+    #         model.add_constraint(u[i - 1] >= self.get_location_demand(i))
+    #         model.add_constraint(u[i - 1] <= capacity)
+
+    #     return model
+
     def simplify_problem(self, qp):
         """
         Simplify the problem by removing unnecessary variables.
         """
 
         for i in range(len(self.locations)):
-            qp = qp.substitute_variables({f"x_{i}_{i}": 0})
+            for k in range(self.num_vehicles):
+                qp = qp.substitute_variables({f"x_{i}_{i}_{k}": 0})
 
         return qp
+
+    # def simplify_problem(self, qp):
+    #     """
+    #     Simplify the problem by removing unnecessary variables.
+    #     """
+
+    #     for i in range(len(self.locations)):
+    #         qp = qp.substitute_variables({f"x_{i}_{i}": 0})
+
+    #     return qp
 
     def quadratic_to_qubo(self, qp):
         """
