@@ -29,6 +29,7 @@ class QuboCVRP(CVRP):
         """
         cplex = self.get_cplex_model()
         qp = from_docplex_mp(cplex)
+        qp = self.simplify_problem(qp)
 
         if self.classical_solver:
             result = self.solve_classic(qp)
@@ -97,7 +98,7 @@ class QuboCVRP(CVRP):
                     continue
 
                 model.add_constraint(
-                    u[i - 1] - u[j - 1] + (capacity * x[i, j])
+                    u[i - 1] - u[j - 1] + capacity * x[i, j]
                     <= capacity - self.get_location_demand(j)
                 )
 
@@ -105,6 +106,16 @@ class QuboCVRP(CVRP):
             model.add_constraint(u[i - 1] <= capacity)
 
         return model
+
+    def simplify_problem(self, qp):
+        """
+        Simplify the problem by removing unnecessary variables.
+        """
+
+        for i in range(len(self.locations)):
+            qp = qp.substitute_variables({f"x_{i}_{i}": 0})
+
+        return qp
 
     def quadratic_to_qubo(self, qp):
         """
