@@ -15,7 +15,7 @@ class CVRP(ABC):
         distance_matrix (list): Matrix with the distance between each pair of locations.
     """
 
-    def __init__(self, vehicles, depot, locations, trips):
+    def __init__(self, vehicles, locations, trips):
         if type(vehicles) == int:
             self.num_vehicles = vehicles
             self.use_capacity = False
@@ -24,7 +24,7 @@ class CVRP(ABC):
             self.vehicle_capacities = vehicles
             self.use_capacity = True
 
-        self.depot = depot
+        self.depot = 0
         self.locations = locations
         self.trips = trips
         self.distance_matrix = self.compute_distance()

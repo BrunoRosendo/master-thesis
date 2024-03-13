@@ -19,8 +19,8 @@ class QuboCVRP(CVRP):
     - classical_solver (bool): Whether to use a classical solver to solve the QUBO problem.
     """
 
-    def __init__(self, vehicles, depot, locations, trips, classical_solver=False):
-        super().__init__(vehicles, depot, locations, trips)
+    def __init__(self, vehicles, locations, trips, classical_solver=False):
+        super().__init__(vehicles, locations, trips)
         self.classical_solver = classical_solver
 
     def _solve_cvrp(self):

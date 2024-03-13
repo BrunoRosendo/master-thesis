@@ -4,7 +4,6 @@ from QuboCVRP import QuboCVRP
 if __name__ == "__main__":
     cvrp = QuboCVRP(
         [15, 15, 15],
-        0,  # TODO: depot 0 by default
         [
             (456, 320),
             (228, 0),
