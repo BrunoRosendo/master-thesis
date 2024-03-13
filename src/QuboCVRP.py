@@ -1,14 +1,14 @@
-from CVRP import CVRP
-from CVRPSolution import CVRPSolution
 from docplex.mp.model import Model
-from qiskit_optimization.algorithms import MinimumEigenOptimizer
-from qiskit_optimization.translators import from_docplex_mp
+from qiskit_optimization.algorithms import CplexOptimizer
 from qiskit_optimization.converters import (
     InequalityToEquality,
     IntegerToBinary,
     LinearEqualityToPenalty,
 )
-from qiskit_optimization.algorithms import CplexOptimizer
+from qiskit_optimization.translators import from_docplex_mp
+
+from CVRP import CVRP
+from CVRPSolution import CVRPSolution
 
 
 class QuboCVRP(CVRP):
@@ -29,7 +29,7 @@ class QuboCVRP(CVRP):
         """
         cplex = self.get_cplex_model()
         qp = from_docplex_mp(cplex)
-        qp = self.simplify_problem(qp)
+        # qp = self.simplify_problem(qp)
 
         if self.classical_solver:
             result = self.solve_classic(qp)
@@ -58,7 +58,7 @@ class QuboCVRP(CVRP):
 
         # Create variables
         x = model.binary_var_matrix(num_locations, num_locations, name="x")
-        u = model.binary_var_list(range(1, num_locations), name="u")
+        u = model.integer_var_list(range(1, num_locations), name="u")
 
         # Objective function
         objective = model.sum(
@@ -91,7 +91,7 @@ class QuboCVRP(CVRP):
         # TODO: handle multiple capacities and setting for constant capacity
         capacity = self.vehicle_capacities[0]
 
-        # Subtour elimination (MTV)
+        # Sub-tour elimination (MTV)
         for i in range(1, num_locations):
             for j in range(1, num_locations):
                 if i == j:
