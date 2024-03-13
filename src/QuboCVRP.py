@@ -101,6 +101,9 @@ class QuboCVRP(CVRP):
                     <= capacity - self.get_location_demand(j)
                 )
 
+            model.add_constraint(u[i - 1] >= self.get_location_demand(i))
+            model.add_constraint(u[i - 1] <= capacity)
+
         return model
 
     def quadratic_to_qubo(self, qp):
