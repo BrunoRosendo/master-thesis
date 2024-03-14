@@ -152,6 +152,10 @@ class DiffCapModel(CPLEXModel):
         Simplify the problem by removing unnecessary variables.
         """
 
+        for k in range(self.num_vehicles):
+            for i in range(self.num_locations):
+                qp = qp.substitute_variables({f"x_{i}_{i}_{k}": 0})
+
         return qp
 
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
