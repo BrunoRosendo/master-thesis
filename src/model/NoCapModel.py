@@ -11,10 +11,15 @@ class NoCapModel(SameCapModel):
         depot (int): Index of the depot, which is the starting and ending point for each vehicle.
         distance_matrix (list): Matrix with the distance between each pair of locations.
         cplex (Model): CPLEX model for the CVRP
+        simplify (bool): Whether to simplify the problem by removing unnecessary variables.
     """
 
-    def __init__(self, num_vehicles, trips, depot, distance_matrix, locations):
-        super().__init__(num_vehicles, trips, depot, distance_matrix, None, locations)
+    def __init__(
+        self, num_vehicles, trips, depot, distance_matrix, locations, simplify
+    ):
+        super().__init__(
+            num_vehicles, trips, depot, distance_matrix, None, locations, simplify
+        )
 
     def create_subtour_constraints(self):
         """

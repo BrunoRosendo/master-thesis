@@ -29,7 +29,9 @@ class QuboCVRP(CVRP):
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
         classical_solver=False,
+        simplify=True,
     ):
+        self.simplify = simplify
         super().__init__(num_vehicles, capacities, locations, trips)
         self.classical_solver = classical_solver
 
@@ -37,7 +39,7 @@ class QuboCVRP(CVRP):
         """
         Solve the CVRP using QUBO implemented in Qiskit.
         """
-        qp = self.model.quadratic_program(False)
+        qp = self.model.quadratic_program()
 
         if self.classical_solver:
             result = self.solve_classic(qp)
@@ -141,6 +143,7 @@ class QuboCVRP(CVRP):
                 self.depot,
                 self.distance_matrix,
                 self.locations,
+                self.simplify,
             )
         elif self.same_capacity:
             return SameCapModel(
@@ -150,6 +153,7 @@ class QuboCVRP(CVRP):
                 self.distance_matrix,
                 self.capacities,
                 self.locations,
+                self.simplify,
             )
         else:
             return DiffCapModel(
@@ -159,4 +163,5 @@ class QuboCVRP(CVRP):
                 self.distance_matrix,
                 self.capacities,
                 self.locations,
+                self.simplify,
             )

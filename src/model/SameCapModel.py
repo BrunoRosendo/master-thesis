@@ -14,13 +14,16 @@ class SameCapModel(CPLEXModel):
         depot (int): Index of the depot, which is the starting and ending point for each vehicle.
         distance_matrix (list): Matrix with the distance between each pair of locations.
         cplex (Model): CPLEX model for the CVRP
+        simplify (bool): Whether to simplify the problem by removing unnecessary variables.
     """
 
     def __init__(
-        self, num_vehicles, trips, depot, distance_matrix, capacity, locations
+        self, num_vehicles, trips, depot, distance_matrix, capacity, locations, simplify
     ):
         self.capacity = capacity
-        super().__init__(num_vehicles, trips, depot, distance_matrix, locations)
+        super().__init__(
+            num_vehicles, trips, depot, distance_matrix, locations, simplify
+        )
 
     def create_vars(self):
         """
@@ -105,7 +108,7 @@ class SameCapModel(CPLEXModel):
             self.cplex.add_constraint(self.u[i - 1] >= self.get_location_demand(i))
             self.cplex.add_constraint(self.u[i - 1] <= self.capacity)
 
-    def simplify(self, qp: QuadraticProgram) -> QuadraticProgram:
+    def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
         """
         Simplify the problem by removing unnecessary variables.
         """
@@ -123,7 +126,7 @@ class SameCapModel(CPLEXModel):
 
         cur_location = 1
         while len(route_starts) < self.num_vehicles:
-            var_value = var_dict[self.get_var_name(0, cur_location)]
+            var_value = self.get_var(var_dict, 0, cur_location)
             if var_value == 1.0:
                 route_starts.append(cur_location)
             cur_location += 1
@@ -137,12 +140,12 @@ class SameCapModel(CPLEXModel):
         Get the next location for a route from the variable dictionary.
         """
         for i in range(len(self.locations)):
-            var_value = var_dict[self.get_var_name(cur_location, i)]
+            var_value = self.get_var(var_dict, cur_location, i)
             if var_value == 1.0:
                 return i
         return None
 
-    def get_var_name(self, i: int, j: int) -> str:
+    def get_var_name(self, i: int, j: int, k: int | None = None) -> str:
         """
         Get the name of a variable.
         """
