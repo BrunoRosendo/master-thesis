@@ -1,9 +1,9 @@
-from ClassicCVRP import ClassicCVRP
+from src.solver.QuboCVRP import QuboCVRP
 
 if __name__ == "__main__":
-    cvrp = ClassicCVRP(
-        [15, 15, 15, 15],
-        0,
+    cvrp = QuboCVRP(
+        8,
+        None,
         [
             (456, 320),
             (228, 0),
@@ -24,14 +24,16 @@ if __name__ == "__main__":
             (798, 640),
         ],
         [
-            [1, 6, 5],
-            [2, 10, 6],
-            [4, 3, 4],
-            [5, 9, 2],
-            [7, 8, 7],
-            [15, 11, 4],
-            [13, 12, 6],
-            [16, 14, 4],
+            (1, 6, 5),
+            (2, 10, 6),
+            (4, 3, 4),
+            (5, 9, 2),
+            (7, 8, 7),
+            (15, 11, 4),
+            (13, 12, 6),
+            (16, 14, 4),
         ],
+        True,
     )
-    cvrp.solve()
+    result = cvrp.solve()
+    result.display()
