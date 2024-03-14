@@ -16,9 +16,11 @@ class DiffCapModel(CPLEXModel):
         cplex (Model): CPLEX model for the CVRP
     """
 
-    def __init__(self, num_vehicles, trips, depot, distance_matrix, capacities):
+    def __init__(
+        self, num_vehicles, trips, depot, distance_matrix, capacities, locations
+    ):
         self.capacities = capacities
-        super().__init__(num_vehicles, trips, depot, distance_matrix)
+        super().__init__(num_vehicles, trips, depot, distance_matrix, locations)
 
     def create_vars(self):
         """
@@ -51,6 +53,7 @@ class DiffCapModel(CPLEXModel):
 
         self.create_location_constraints()
         self.create_vehicle_constraints()
+        self.create_capacity_constraints()
         self.create_subtour_constraints()
 
     def create_location_constraints(self):
@@ -93,16 +96,32 @@ class DiffCapModel(CPLEXModel):
                 == 1
             )
 
+    def create_capacity_constraints(self):
+        """
+        Create the constraints that ensure the vehicle capacity is not exceeded. This is needed because
+        this version of subtour elimination does not guarantee that the vehicle capacity is not exceeded.
+        """
+
+        for k in range(self.num_vehicles):
+            self.cplex.add_constraint(
+                self.cplex.sum(
+                    self.get_location_demand(j) * self.x[i, j, k]
+                    for i in range(self.num_locations)
+                    for j in range(1, self.num_locations)
+                    if i != j
+                )
+                <= self.capacities[k]
+            )
+
     def create_subtour_constraints(self):
         """
         Create the constraints that eliminate subtours (MTV).
         """
 
+        max_capacity = max(self.capacities)
+
         for i in range(1, self.num_locations):
             for k in range(self.num_vehicles):
-                self.cplex.add_constraint(
-                    self.u[i - 1] <= self.capacities[k]
-                )  # TODO: not correct, this will use the smallest capacity
 
                 for j in range(1, self.num_locations):
                     if i == j:
@@ -115,6 +134,7 @@ class DiffCapModel(CPLEXModel):
                         <= self.capacities[k] - self.get_location_demand(j)
                     )
 
+            self.cplex.add_constraint(self.u[i - 1] <= max_capacity)
             self.cplex.add_constraint(self.u[i - 1] >= self.get_location_demand(i))
 
     def simplify(self, qp: QuadraticProgram) -> QuadraticProgram:  # TODO
@@ -123,3 +143,39 @@ class DiffCapModel(CPLEXModel):
         """
 
         return qp
+
+    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
+        """
+        Get the starting location for each route from the variable dictionary.
+        """
+        route_starts = []
+
+        cur_location = 1
+        while len(route_starts) < self.num_vehicles:
+            for k in range(self.num_vehicles):
+                var_value = var_dict[self.get_var_name(0, cur_location, k)]
+                if var_value == 1.0:
+                    route_starts.append(cur_location)
+                    break
+            cur_location += 1
+
+        return route_starts
+
+    def get_result_next_location(
+        self, var_dict: dict[str, float], cur_location: int
+    ) -> int | None:
+        """
+        Get the next location for a route from the variable dictionary.
+        """
+        for i in range(self.num_locations):
+            for k in range(self.num_vehicles):
+                var_value = var_dict[self.get_var_name(cur_location, i, k)]
+                if var_value == 1.0:
+                    return i
+        return None
+
+    def get_var_name(self, i: int, j: int, k: int) -> str:
+        """
+        Get the name of a variable.
+        """
+        return f"x_{i}_{j}_{k}"

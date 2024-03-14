@@ -13,8 +13,8 @@ class NoCapModel(SameCapModel):
         cplex (Model): CPLEX model for the CVRP
     """
 
-    def __init__(self, num_vehicles, trips, depot, distance_matrix):
-        super().__init__(num_vehicles, trips, depot, distance_matrix, None)
+    def __init__(self, num_vehicles, trips, depot, distance_matrix, locations):
+        super().__init__(num_vehicles, trips, depot, distance_matrix, None, locations)
 
     def create_subtour_constraints(self):
         """

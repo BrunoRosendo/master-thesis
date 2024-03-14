@@ -19,8 +19,8 @@ class CPLEXModel(ABC, CVRPModel):
         cplex (Model): CPLEX model for the CVRP
     """
 
-    def __init__(self, num_vehicles, trips, depot, distance_matrix):
-        super().__init__(num_vehicles, trips, depot, distance_matrix)
+    def __init__(self, num_vehicles, trips, depot, distance_matrix, locations):
+        super().__init__(num_vehicles, trips, depot, distance_matrix, locations)
 
         self.cplex = Model("CVRP")
         self.build_cplex()
@@ -69,5 +69,21 @@ class CPLEXModel(ABC, CVRPModel):
     def simplify(self, qp: QuadraticProgram) -> QuadraticProgram:
         """
         Simplify the problem by removing unnecessary variables.
+        """
+        pass
+
+    @abstractmethod
+    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
+        """
+        Get the starting location for each route from the variable dictionary.
+        """
+        pass
+
+    @abstractmethod
+    def get_result_next_location(
+        self, var_dict: dict[str, float], cur_location: int
+    ) -> int | None:
+        """
+        Get the next location for a route from the variable dictionary.
         """
         pass
