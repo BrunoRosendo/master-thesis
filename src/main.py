@@ -3,7 +3,7 @@ from src.solver.QuboCVRP import QuboCVRP
 if __name__ == "__main__":
     cvrp = QuboCVRP(
         3,
-        [12, 10, 15],
+        15,
         [
             (456, 320),
             (228, 0),
