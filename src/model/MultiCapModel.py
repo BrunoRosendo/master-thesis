@@ -3,7 +3,7 @@ from qiskit_optimization import QuadraticProgram
 from src.model.CPLEXModel import CPLEXModel
 
 
-class DiffCapModel(CPLEXModel):
+class MultiCapModel(CPLEXModel):
     """
     A class to represent a CPLEX math formulation of the CVRP model with all vehicles having the same capacity.
 

@@ -8,7 +8,7 @@ from qiskit_optimization.converters import (
 
 from src.model.CPLEXModel import CPLEXModel
 from src.model.CVRPSolution import CVRPSolution
-from src.model.DiffCapModel import DiffCapModel
+from src.model.MultiCapModel import MultiCapModel
 from src.model.NoCapModel import NoCapModel
 from src.model.SameCapModel import SameCapModel
 from src.solver.CVRP import CVRP
@@ -156,7 +156,7 @@ class QuboCVRP(CVRP):
                 self.simplify,
             )
         else:
-            return DiffCapModel(
+            return MultiCapModel(
                 self.num_vehicles,
                 self.trips,
                 self.depot,
