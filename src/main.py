@@ -2,8 +2,8 @@ from src.solver.QuboCVRP import QuboCVRP
 
 if __name__ == "__main__":
     cvrp = QuboCVRP(
-        4,
-        15,
+        8,
+        None,
         [
             (456, 320),
             (228, 0),

@@ -9,6 +9,7 @@ from qiskit_optimization.converters import (
 from src.model.CPLEXModel import CPLEXModel
 from src.model.CVRPSolution import CVRPSolution
 from src.model.DiffCapModel import DiffCapModel
+from src.model.NoCapModel import NoCapModel
 from src.model.SameCapModel import SameCapModel
 from src.solver.CVRP import CVRP
 
@@ -166,7 +167,14 @@ class QuboCVRP(CVRP):
         Get a cplex instance of the CVRPModel.
         """
 
-        if self.same_capacity:
+        if not self.use_capacity:
+            return NoCapModel(
+                self.num_vehicles,
+                self.trips,
+                self.depot,
+                self.distance_matrix,
+            )
+        elif self.same_capacity:
             return SameCapModel(
                 self.num_vehicles,
                 self.trips,
