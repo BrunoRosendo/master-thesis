@@ -16,9 +16,11 @@ class SameCapModel(CPLEXModel):
         cplex (Model): CPLEX model for the CVRP
     """
 
-    def __init__(self, num_vehicles, trips, depot, distance_matrix, capacity):
+    def __init__(
+        self, num_vehicles, trips, depot, distance_matrix, capacity, locations
+    ):
         self.capacity = capacity
-        super().__init__(num_vehicles, trips, depot, distance_matrix)
+        super().__init__(num_vehicles, trips, depot, distance_matrix, locations)
 
     def create_vars(self):
         """
@@ -112,3 +114,36 @@ class SameCapModel(CPLEXModel):
             qp = qp.substitute_variables({f"x_{i}_{i}": 0})
 
         return qp
+
+    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
+        """
+        Get the starting location for each route from the variable dictionary.
+        """
+        route_starts = []
+
+        cur_location = 1
+        while len(route_starts) < self.num_vehicles:
+            var_value = var_dict[self.get_var_name(0, cur_location)]
+            if var_value == 1.0:
+                route_starts.append(cur_location)
+            cur_location += 1
+
+        return route_starts
+
+    def get_result_next_location(
+        self, var_dict: dict[str, float], cur_location: int
+    ) -> int | None:
+        """
+        Get the next location for a route from the variable dictionary.
+        """
+        for i in range(len(self.locations)):
+            var_value = var_dict[self.get_var_name(cur_location, i)]
+            if var_value == 1.0:
+                return i
+        return None
+
+    def get_var_name(self, i: int, j: int) -> str:
+        """
+        Get the name of a variable.
+        """
+        return f"x_{i}_{j}"

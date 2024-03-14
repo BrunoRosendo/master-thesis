@@ -1,5 +1,5 @@
 class CVRPModel:
-    def __init__(self, num_vehicles, trips, depot, distance_matrix):
+    def __init__(self, num_vehicles, trips, depot, distance_matrix, locations):
         """
         A class to represent a formulation of the CVRP model.
 
@@ -15,6 +15,7 @@ class CVRPModel:
         self.depot = depot
         self.distance_matrix = distance_matrix
         self.num_locations = len(distance_matrix)
+        self.locations = locations
 
     def get_location_demand(self, idx: int) -> int:
         """

@@ -85,7 +85,7 @@ class QuboCVRP(CVRP):
         Convert the optimizer result to a CVRPSolution solution.
         """
         var_dict = result.variables_dict
-        route_starts = self.get_result_route_starts(var_dict)
+        route_starts = self.model.get_result_route_starts(var_dict)
 
         routes = []
         loads = []
@@ -111,7 +111,7 @@ class QuboCVRP(CVRP):
                     break
 
                 previous_index = index
-                index = self.get_result_next_location(var_dict, index)
+                index = self.model.get_result_next_location(var_dict, index)
 
             routes.append(route)
             distances.append(route_distance)
@@ -129,39 +129,6 @@ class QuboCVRP(CVRP):
             loads if self.use_capacity else None,
         )
 
-    def get_var_name(self, i: int, j: int) -> str:
-        """
-        Get the name of a variable.
-        """
-        return f"x_{i}_{j}"
-
-    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
-        """
-        Get the starting location for each route from the variable dictionary.
-        """
-        route_starts = []
-
-        cur_location = 1
-        while len(route_starts) < self.num_vehicles:
-            var_value = var_dict[self.get_var_name(0, cur_location)]
-            if var_value == 1.0:
-                route_starts.append(cur_location)
-            cur_location += 1
-
-        return route_starts
-
-    def get_result_next_location(
-        self, var_dict: dict[str, float], cur_location: int
-    ) -> int | None:
-        """
-        Get the next location for a route from the variable dictionary.
-        """
-        for i in range(len(self.locations)):
-            var_value = var_dict[self.get_var_name(cur_location, i)]
-            if var_value == 1.0:
-                return i
-        return None
-
     def get_model(self) -> CPLEXModel:
         """
         Get a cplex instance of the CVRPModel.
@@ -173,6 +140,7 @@ class QuboCVRP(CVRP):
                 self.trips,
                 self.depot,
                 self.distance_matrix,
+                self.locations,
             )
         elif self.same_capacity:
             return SameCapModel(
@@ -181,6 +149,7 @@ class QuboCVRP(CVRP):
                 self.depot,
                 self.distance_matrix,
                 self.capacities,
+                self.locations,
             )
         else:
             return DiffCapModel(
@@ -189,4 +158,5 @@ class QuboCVRP(CVRP):
                 self.depot,
                 self.distance_matrix,
                 self.capacities,
+                self.locations,
             )

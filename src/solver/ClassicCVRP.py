@@ -178,5 +178,9 @@ class ClassicCVRP(CVRP):
         """
 
         return CVRPModel(
-            self.num_vehicles, self.trips, self.depot, self.distance_matrix
+            self.num_vehicles,
+            self.trips,
+            self.depot,
+            self.distance_matrix,
+            self.locations,
         )
