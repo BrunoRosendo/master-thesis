@@ -1,35 +1,51 @@
 from abc import ABC, abstractmethod
 
+from src.model.CVRPModel import CVRPModel
+from src.model.CVRPSolution import CVRPSolution
+
 
 class CVRP(ABC):
     """
     Abstract class for solving the Capacitated Vehicle Routing Problem (CVRP).
 
     Attributes:
-        vehicle_capacities (int | list): List of vehicle capacities, if available.
+        num_vehicles (int): Number of vehicles available.
+        capacities (int | list | None): Vehicle capacity or list of vehicle capacities, if used.
         use_capacity (bool): Whether the problem uses vehicle capacities or not
+        same_capacity (bool): Whether all vehicles have the same capacity or not
         depot (int): Index of the depot, which is the starting and ending point for each vehicle.
         locations (list): List of coordinates for each location.
         trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
-        num_vehicles (int): Number of vehicles available.
         distance_matrix (list): Matrix with the distance between each pair of locations.
+        model (CVRPModel): The CVRP model instance.
     """
 
-    def __init__(self, vehicles, locations, trips):
-        if type(vehicles) == int:
-            self.num_vehicles = vehicles
+    def __init__(
+        self,
+        num_vehicles: int,
+        capacities: int | list[int] | None,
+        locations: list[tuple[int, int]],
+        trips: list[tuple[int, int, int]],
+    ):
+        if capacities is None:
             self.use_capacity = False
-        else:
-            self.num_vehicles = len(vehicles)
-            self.vehicle_capacities = vehicles
+            self.same_capacity = True  # Infinitely large capacity
+        elif isinstance(capacities, int):
             self.use_capacity = True
+            self.same_capacity = True
+        else:
+            self.use_capacity = True
+            self.same_capacity = False
 
         self.depot = 0
+        self.num_vehicles = num_vehicles
+        self.capacities = capacities
         self.locations = locations
         self.trips = trips
         self.distance_matrix = self.compute_distance()
+        self.model = self.get_model()
 
-    def compute_distance(self):
+    def compute_distance(self) -> list[list[int]]:
         """
         Compute the distance matrix between each pair of locations using Manhattan.
         """
@@ -45,30 +61,28 @@ class CVRP(ABC):
             distance_matrix.append(row)
         return distance_matrix
 
-    def get_location_demand(self, idx):
-        """
-        Get the demand for a location.
-        """
-        return 1  # TODO: Change once pickup and delivery is implemented in qubo
-        # pickup_demand = sum(trip[2] for trip in self.trips if idx == trip[0])
-        # delivery_demand = sum(trip[2] for trip in self.trips if idx == trip[1])
-        # return pickup_demand - delivery_demand
-
     @abstractmethod
-    def _solve_cvrp(self):
+    def _solve_cvrp(self) -> any:
         """
         Solve the CVRP with a specific solver.
         """
         pass
 
     @abstractmethod
-    def _convert_solution(self, result):
+    def _convert_solution(self, result: any) -> CVRPSolution:
         """
         Convert the result from the solver to a CVRP solution.
         """
         pass
 
-    def solve(self):
+    @abstractmethod
+    def get_model(self) -> CVRPModel:
+        """
+        Get the CVRPModel instance.
+        """
+        pass
+
+    def solve(self) -> CVRPSolution:
         """
         Solve the CVRP.
         """

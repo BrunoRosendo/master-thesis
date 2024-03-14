@@ -1,14 +1,16 @@
-from docplex.mp.model import Model
-from qiskit_optimization.algorithms import CplexOptimizer
+from qiskit_optimization import QuadraticProgram
+from qiskit_optimization.algorithms import CplexOptimizer, OptimizationResult
 from qiskit_optimization.converters import (
     InequalityToEquality,
     IntegerToBinary,
     LinearEqualityToPenalty,
 )
-from qiskit_optimization.translators import from_docplex_mp
 
-from CVRP import CVRP
-from CVRPSolution import CVRPSolution
+from src.model.CPLEXModel import CPLEXModel
+from src.model.CVRPSolution import CVRPSolution
+from src.model.DiffCapModel import DiffCapModel
+from src.model.SameCapModel import SameCapModel
+from src.solver.CVRP import CVRP
 
 
 class QuboCVRP(CVRP):
@@ -19,17 +21,22 @@ class QuboCVRP(CVRP):
     - classical_solver (bool): Whether to use a classical solver to solve the QUBO problem.
     """
 
-    def __init__(self, vehicles, locations, trips, classical_solver=False):
-        super().__init__(vehicles, locations, trips)
+    def __init__(
+        self,
+        num_vehicles: int,
+        capacities: int | list[int] | None,
+        locations: list[tuple[int, int]],
+        trips: list[tuple[int, int, int]],
+        classical_solver=False,
+    ):
+        super().__init__(num_vehicles, capacities, locations, trips)
         self.classical_solver = classical_solver
 
-    def _solve_cvrp(self):
+    def _solve_cvrp(self) -> OptimizationResult:
         """
         Solve the CVRP using QUBO implemented in Qiskit.
         """
-        cplex = self.get_cplex_model()
-        qp = from_docplex_mp(cplex)
-        # qp = self.simplify_problem(qp)
+        qp = self.model.quadratic_program(False)
 
         if self.classical_solver:
             result = self.solve_classic(qp)
@@ -48,76 +55,7 @@ class QuboCVRP(CVRP):
 
         return result
 
-    def get_cplex_model(self):
-        """
-        Get the CPLEX model for the CVRP.
-        """
-
-        model = Model("CVRP")
-        num_locations = len(self.distance_matrix)
-
-        # Create variables
-        x = model.binary_var_matrix(num_locations, num_locations, name="x")
-        u = model.integer_var_list(range(1, num_locations), name="u")
-
-        # Objective function
-        objective = model.sum(
-            self.distance_matrix[i][j] * x[i, j]
-            for i in range(num_locations)
-            for j in range(num_locations)
-        )
-
-        model.minimize(objective)
-
-        # Constraints
-
-        # Each location must be visited exactly once
-        for i in range(1, num_locations):
-            model.add_constraint(
-                model.sum(x[i, j] for j in range(num_locations) if i != j) == 1
-            )
-            model.add_constraint(
-                model.sum(x[j, i] for j in range(num_locations) if i != j) == 1
-            )
-
-        # All vehicles need to leave and return to the depot
-        model.add_constraint(
-            model.sum(x[0, i] for i in range(1, num_locations)) == self.num_vehicles
-        )
-        model.add_constraint(
-            model.sum(x[i, 0] for i in range(1, num_locations)) == self.num_vehicles
-        )
-
-        # TODO: handle multiple capacities and setting for constant capacity
-        capacity = self.vehicle_capacities[0]
-
-        # Sub-tour elimination (MTV)
-        for i in range(1, num_locations):
-            for j in range(1, num_locations):
-                if i == j:
-                    continue
-
-                model.add_constraint(
-                    u[i - 1] - u[j - 1] + capacity * x[i, j]
-                    <= capacity - self.get_location_demand(j)
-                )
-
-            model.add_constraint(u[i - 1] >= self.get_location_demand(i))
-            model.add_constraint(u[i - 1] <= capacity)
-
-        return model
-
-    def simplify_problem(self, qp):
-        """
-        Simplify the problem by removing unnecessary variables.
-        """
-
-        for i in range(len(self.locations)):
-            qp = qp.substitute_variables({f"x_{i}_{i}": 0})
-
-        return qp
-
-    def quadratic_to_qubo(self, qp):
+    def quadratic_to_qubo(self, qp: QuadraticProgram) -> QuadraticProgram:
         """
         Convert the quadratic program to a QUBO problem, using the Qiskit converters.
         """
@@ -136,12 +74,12 @@ class QuboCVRP(CVRP):
 
         return qubo
 
-    def solve_classic(self, qp):
+    def solve_classic(self, qp: QuadraticProgram) -> OptimizationResult:
         optimizer = CplexOptimizer()
         result = optimizer.solve(qp)
         return result
 
-    def _convert_solution(self, result):
+    def _convert_solution(self, result: OptimizationResult) -> CVRPSolution:
         """
         Convert the optimizer result to a CVRPSolution solution.
         """
@@ -164,7 +102,7 @@ class QuboCVRP(CVRP):
 
             while True:
                 route_distance += self.distance_matrix[previous_index][index]
-                cur_load += self.get_location_demand(index)
+                cur_load += self.model.get_location_demand(index)
                 route.append(index)
                 route_loads.append(cur_load)
 
@@ -190,13 +128,13 @@ class QuboCVRP(CVRP):
             loads if self.use_capacity else None,
         )
 
-    def get_var_name(self, i, j):
+    def get_var_name(self, i: int, j: int) -> str:
         """
         Get the name of a variable.
         """
         return f"x_{i}_{j}"
 
-    def get_result_route_starts(self, var_dict):
+    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
         """
         Get the starting location for each route from the variable dictionary.
         """
@@ -211,7 +149,9 @@ class QuboCVRP(CVRP):
 
         return route_starts
 
-    def get_result_next_location(self, var_dict, cur_location):
+    def get_result_next_location(
+        self, var_dict: dict[str, float], cur_location: int
+    ) -> int | None:
         """
         Get the next location for a route from the variable dictionary.
         """
@@ -220,3 +160,25 @@ class QuboCVRP(CVRP):
             if var_value == 1.0:
                 return i
         return None
+
+    def get_model(self) -> CPLEXModel:
+        """
+        Get a cplex instance of the CVRPModel.
+        """
+
+        if self.same_capacity:
+            return SameCapModel(
+                self.num_vehicles,
+                self.trips,
+                self.depot,
+                self.distance_matrix,
+                self.capacities,
+            )
+        else:
+            return DiffCapModel(
+                self.num_vehicles,
+                self.trips,
+                self.depot,
+                self.distance_matrix,
+                self.capacities,
+            )

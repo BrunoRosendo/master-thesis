@@ -1,7 +1,9 @@
-from CVRP import CVRP
-from CVRPSolution import CVRPSolution
-from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
+from ortools.constraint_solver import routing_enums_pb2
+
+from src.model.CVRPModel import CVRPModel
+from src.model.CVRPSolution import CVRPSolution
+from src.solver.CVRP import CVRP
 
 
 class ClassicCVRP(CVRP):
@@ -15,7 +17,7 @@ class ClassicCVRP(CVRP):
     LOCAL_SEARCH_METAHEURISTIC = routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
     DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 100
 
-    def _solve_cvrp(self):
+    def _solve_cvrp(self) -> any:
         """
         Solve the CVRP using Google's OR Tools.
         """
@@ -34,7 +36,7 @@ class ClassicCVRP(CVRP):
         or_solution = self.routing.SolveWithParameters(search_parameters)
         return or_solution
 
-    def distance_callback(self, from_index, to_index):
+    def distance_callback(self, from_index: any, to_index: any) -> int:
         """Returns the distance between the two nodes."""
 
         # Convert from index to distance matrix NodeIndex.
@@ -42,12 +44,12 @@ class ClassicCVRP(CVRP):
         to_node = self.manager.IndexToNode(to_index)
         return self.distance_matrix[from_node][to_node]
 
-    def demand_callback(self, from_index):
+    def demand_callback(self, from_index: any) -> int:
         """Returns the demand of the node."""
 
         # Convert from index to demands NodeIndex.
         from_node = self.manager.IndexToNode(from_index)
-        return self.get_location_demand(from_node)
+        return self.model.get_location_demand(from_node)
 
     def set_distance_dimension(self):
         """Set the distance dimension and cost for the problem."""
@@ -79,10 +81,17 @@ class ClassicCVRP(CVRP):
         demand_callback_index = self.routing.RegisterUnaryTransitCallback(
             self.demand_callback
         )
+
+        capacities = (
+            [self.capacities] * self.num_vehicles
+            if self.same_capacity
+            else self.capacities
+        )
+
         self.routing.AddDimensionWithVehicleCapacity(
             demand_callback_index,
             0,  # null capacity slack - no extra capacity
-            self.vehicle_capacities,
+            capacities,
             True,  # start counting at 0
             "Capacity",
         )
@@ -106,7 +115,7 @@ class ClassicCVRP(CVRP):
                 <= self.distance_dimension.CumulVar(delivery_index)
             )
 
-    def get_search_parameters(self):
+    def get_search_parameters(self) -> pywrapcp.DefaultRoutingSearchParameters:
         """Returns the search parameters for the problem."""
 
         search_parameters = pywrapcp.DefaultRoutingSearchParameters()
@@ -115,7 +124,7 @@ class ClassicCVRP(CVRP):
 
         return search_parameters
 
-    def _convert_solution(self, result):
+    def _convert_solution(self, result: any) -> CVRPSolution:
         """Converts OR-Tools result to CVRP solution."""
 
         routes = []
@@ -161,4 +170,13 @@ class ClassicCVRP(CVRP):
             distances,
             self.depot,
             loads if self.use_capacity else None,
+        )
+
+    def get_model(self) -> CVRPModel:
+        """
+        Get the CVRPModel instance.
+        """
+
+        return CVRPModel(
+            self.num_vehicles, self.trips, self.depot, self.distance_matrix
         )
