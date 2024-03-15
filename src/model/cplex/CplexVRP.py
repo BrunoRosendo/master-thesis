@@ -4,10 +4,10 @@ from docplex.mp.model import Model
 from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.translators import from_docplex_mp
 
-from src.model.CVRPModel import CVRPModel
+from src.model.VRP import VRP
 
 
-class CPLEXModel(ABC, CVRPModel):
+class CplexVRP(ABC, VRP):
     """
     A class to represent a CPLEX math formulation of the CVRP model.
 

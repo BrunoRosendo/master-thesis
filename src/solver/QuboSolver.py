@@ -6,15 +6,15 @@ from qiskit_optimization.converters import (
     LinearEqualityToPenalty,
 )
 
-from src.model.CPLEXModel import CPLEXModel
-from src.model.CVRPSolution import CVRPSolution
-from src.model.MultiCapModel import MultiCapModel
-from src.model.NoCapModel import NoCapModel
-from src.model.SameCapModel import SameCapModel
-from src.solver.CVRP import CVRP
+from src.model.VRPSolution import VRPSolution
+from src.model.cplex.ConstantCVRP import ConstantCVRP
+from src.model.cplex.CplexVRP import CplexVRP
+from src.model.cplex.InfiniteCVRP import InfiniteCVRP
+from src.model.cplex.MultiCVRP import MultiCVRP
+from src.solver.VRPSolver import VRPSolver
 
 
-class QuboCVRP(CVRP):
+class QuboSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with QUBO algorithm, using Qiskit.
 
@@ -82,7 +82,7 @@ class QuboCVRP(CVRP):
         result = optimizer.solve(qp)
         return result
 
-    def _convert_solution(self, result: OptimizationResult) -> CVRPSolution:
+    def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
         """
         Convert the optimizer result to a CVRPSolution solution.
         """
@@ -120,7 +120,7 @@ class QuboCVRP(CVRP):
             loads.append(route_loads)
             total_distance += route_distance
 
-        return CVRPSolution(
+        return VRPSolution(
             self.num_vehicles,
             self.locations,
             result.fval,
@@ -131,13 +131,13 @@ class QuboCVRP(CVRP):
             loads if self.use_capacity else None,
         )
 
-    def get_model(self) -> CPLEXModel:
+    def get_model(self) -> CplexVRP:
         """
         Get a cplex instance of the CVRPModel.
         """
 
         if not self.use_capacity:
-            return NoCapModel(
+            return InfiniteCVRP(
                 self.num_vehicles,
                 self.trips,
                 self.depot,
@@ -147,7 +147,7 @@ class QuboCVRP(CVRP):
                 self.simplify,
             )
         elif self.same_capacity:
-            return SameCapModel(
+            return ConstantCVRP(
                 self.num_vehicles,
                 self.trips,
                 self.depot,
@@ -158,7 +158,7 @@ class QuboCVRP(CVRP):
                 self.simplify,
             )
         else:
-            return MultiCapModel(
+            return MultiCVRP(
                 self.num_vehicles,
                 self.trips,
                 self.depot,

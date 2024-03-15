@@ -1,7 +1,7 @@
-from src.solver.ClassicCVRP import ClassicCVRP
+from src.solver.ClassicSolver import ClassicSolver
 
 if __name__ == "__main__":
-    cvrp = ClassicCVRP(
+    cvrp = ClassicSolver(
         4,
         15,
         [

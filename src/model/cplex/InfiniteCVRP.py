@@ -1,7 +1,7 @@
-from src.model.SameCapModel import SameCapModel
+from src.model.cplex.ConstantCVRP import ConstantCVRP
 
 
-class NoCapModel(SameCapModel):
+class InfiniteCVRP(ConstantCVRP):
     """
     A class to represent a CPLEX math formulation of the CVRP model with all vehicles having the same capacity.
 

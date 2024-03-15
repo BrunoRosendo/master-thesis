@@ -1,7 +1,7 @@
 import plotly.graph_objects as go
 
 
-class CVRPSolution:
+class VRPSolution:
     """
     Class to represent a solution to the Capacitated Vehicle Routing Problem (CVRP).
 

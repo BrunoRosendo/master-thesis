@@ -1,12 +1,12 @@
 from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
 
-from src.model.CVRPModel import CVRPModel
-from src.model.CVRPSolution import CVRPSolution
-from src.solver.CVRP import CVRP
+from src.model.VRP import VRP
+from src.model.VRPSolution import VRPSolution
+from src.solver.VRPSolver import VRPSolver
 
 
-class ClassicCVRP(CVRP):
+class ClassicSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with classic algorithms, using Google's OR Tools.
     """
@@ -127,7 +127,7 @@ class ClassicCVRP(CVRP):
 
         return search_parameters
 
-    def _convert_solution(self, result: any) -> CVRPSolution:
+    def _convert_solution(self, result: any) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
 
         routes = []
@@ -164,7 +164,7 @@ class ClassicCVRP(CVRP):
             loads.append(route_loads)
             total_distance += route_distance
 
-        return CVRPSolution(
+        return VRPSolution(
             self.num_vehicles,
             self.locations,
             result.ObjectiveValue(),
@@ -175,12 +175,12 @@ class ClassicCVRP(CVRP):
             loads if self.use_capacity else None,
         )
 
-    def get_model(self) -> CVRPModel:
+    def get_model(self) -> VRP:
         """
         Get the CVRPModel instance.
         """
 
-        return CVRPModel(
+        return VRP(
             self.num_vehicles,
             self.trips,
             self.depot,

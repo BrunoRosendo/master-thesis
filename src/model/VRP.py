@@ -1,4 +1,4 @@
-class CVRPModel:
+class VRP:
     def __init__(
         self,
         num_vehicles: int,
