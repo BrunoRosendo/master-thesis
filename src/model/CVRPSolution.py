@@ -34,14 +34,14 @@ class CVRPSolution:
 
     def __init__(
         self,
-        num_vehicles,
-        locations,
-        objective,
-        total_distance,
-        routes,
-        distances,
-        depot,
-        loads=None,
+        num_vehicles: int,
+        locations: list[tuple[int, int]],
+        objective: float,
+        total_distance: int,
+        routes: list[list[int]],
+        distances: list[int],
+        depot: int,
+        loads: list[list[int]] = None,
     ):
         self.num_vehicles = num_vehicles
         self.locations = locations

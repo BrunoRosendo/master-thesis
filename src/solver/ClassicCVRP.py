@@ -30,7 +30,8 @@ class ClassicCVRP(CVRP):
         self.set_distance_dimension()
         if self.use_capacity:
             self.set_capacity_dimension()
-        self.set_pickup_and_deliveries()
+        if self.use_deliveries:
+            self.set_pickup_and_deliveries()
 
         search_parameters = self.get_search_parameters()
         or_solution = self.routing.SolveWithParameters(search_parameters)
@@ -60,20 +61,22 @@ class ClassicCVRP(CVRP):
         )
         self.routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
 
-        dimension_name = "Distance"
-        self.routing.AddDimension(
-            transit_callback_index,
-            0,
-            3000,
-            True,
-            dimension_name,
-        )
-        self.distance_dimension = self.routing.GetDimensionOrDie(dimension_name)
+        # Distance dimension is used for pickup-delivery order.
+        if self.use_deliveries:
+            dimension_name = "Distance"
+            self.routing.AddDimension(
+                transit_callback_index,
+                0,
+                3000,
+                True,
+                dimension_name,
+            )
+            self.distance_dimension = self.routing.GetDimensionOrDie(dimension_name)
 
-        # Balances the distance between each vehicle.
-        self.distance_dimension.SetGlobalSpanCostCoefficient(
-            self.DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT
-        )
+            # Balances the distance between each vehicle.
+            self.distance_dimension.SetGlobalSpanCostCoefficient(
+                self.DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT
+            )
 
     def set_capacity_dimension(self):
         """Set the capacity dimension and constraint for the problem."""
@@ -183,4 +186,5 @@ class ClassicCVRP(CVRP):
             self.depot,
             self.distance_matrix,
             self.locations,
+            self.use_deliveries,
         )

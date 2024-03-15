@@ -143,6 +143,7 @@ class QuboCVRP(CVRP):
                 self.depot,
                 self.distance_matrix,
                 self.locations,
+                self.use_deliveries,
                 self.simplify,
             )
         elif self.same_capacity:
@@ -153,6 +154,7 @@ class QuboCVRP(CVRP):
                 self.distance_matrix,
                 self.capacities,
                 self.locations,
+                self.use_deliveries,
                 self.simplify,
             )
         else:
@@ -163,5 +165,6 @@ class QuboCVRP(CVRP):
                 self.distance_matrix,
                 self.capacities,
                 self.locations,
+                self.use_deliveries,
                 self.simplify,
             )

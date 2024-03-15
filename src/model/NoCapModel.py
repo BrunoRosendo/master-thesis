@@ -10,15 +10,31 @@ class NoCapModel(SameCapModel):
         trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
         depot (int): Index of the depot, which is the starting and ending point for each vehicle.
         distance_matrix (list): Matrix with the distance between each pair of locations.
+        locations (list): List of coordinates for each location.
+        use_deliveries (bool): Whether the problem uses deliveries or not.
         cplex (Model): CPLEX model for the CVRP
         simplify (bool): Whether to simplify the problem by removing unnecessary variables.
     """
 
     def __init__(
-        self, num_vehicles, trips, depot, distance_matrix, locations, simplify
+        self,
+        num_vehicles: int,
+        trips: list[tuple[int, int, int]],
+        depot: int,
+        distance_matrix: list[list[int]],
+        locations: list[tuple[int, int]],
+        use_deliveries: bool,
+        simplify: bool,
     ):
         super().__init__(
-            num_vehicles, trips, depot, distance_matrix, None, locations, simplify
+            num_vehicles,
+            trips,
+            depot,
+            distance_matrix,
+            None,
+            locations,
+            use_deliveries,
+            simplify,
         )
 
     def create_subtour_constraints(self):
