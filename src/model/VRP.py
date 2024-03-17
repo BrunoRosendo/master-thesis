@@ -32,9 +32,23 @@ class VRP:
         """
         Get the demand for a location.
         """
-        pickup_demand = sum(trip[2] for trip in self.trips if idx == trip[0])
+        pickup_demand = self.get_location_pickup(idx)
         if not self.use_deliveries:
             return pickup_demand
 
-        delivery_demand = sum(trip[2] for trip in self.trips if idx == trip[1])
+        delivery_demand = self.get_location_delivery(idx)
         return pickup_demand - delivery_demand
+
+    def get_location_pickup(self, idx: int) -> int:
+        """
+        Get the demand for a location.
+        """
+        pickup_demand = sum(trip[2] for trip in self.trips if idx == trip[0])
+        return pickup_demand
+
+    def get_location_delivery(self, idx: int) -> int:
+        """
+        Get the demand for a location.
+        """
+        delivery_demand = sum(trip[2] for trip in self.trips if idx == trip[1])
+        return delivery_demand

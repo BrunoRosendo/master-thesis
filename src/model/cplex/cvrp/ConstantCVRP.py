@@ -50,7 +50,9 @@ class ConstantCVRP(CplexVRP):
             self.num_locations, self.num_locations, name="x"
         )
 
-        self.u = self.cplex.integer_var_list(range(1, self.num_locations), name="u")
+        self.u = self.cplex.integer_var_list(
+            range(1, self.num_locations), name="u", lb=0, ub=self.capacity
+        )
 
     def create_objective(self):
         """

@@ -1,7 +1,7 @@
-from src.solver.ClassicSolver import ClassicSolver
+from src.solver.QuboSolver import QuboSolver
 
 if __name__ == "__main__":
-    cvrp = ClassicSolver(
+    cvrp = QuboSolver(
         4,
         15,
         [
@@ -33,6 +33,7 @@ if __name__ == "__main__":
             (13, 12, 6),
             (16, 14, 4),
         ],
+        False,
         True,
     )
     result = cvrp.solve()

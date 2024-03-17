@@ -1,4 +1,4 @@
-from src.model.cplex.ConstantCVRP import ConstantCVRP
+from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
 
 
 class InfiniteCVRP(ConstantCVRP):

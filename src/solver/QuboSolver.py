@@ -7,10 +7,10 @@ from qiskit_optimization.converters import (
 )
 
 from src.model.VRPSolution import VRPSolution
-from src.model.cplex.ConstantCVRP import ConstantCVRP
 from src.model.cplex.CplexVRP import CplexVRP
-from src.model.cplex.InfiniteCVRP import InfiniteCVRP
-from src.model.cplex.MultiCVRP import MultiCVRP
+from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
+from src.model.cplex.cvrp.InfiniteCVRP import InfiniteCVRP
+from src.model.cplex.cvrp.MultiCVRP import MultiCVRP
 from src.solver.VRPSolver import VRPSolver
 
 
@@ -28,11 +28,12 @@ class QuboSolver(VRPSolver):
         capacities: int | list[int] | None,
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
+        use_deliveries: bool,
         classical_solver=False,
         simplify=True,
     ):
         self.simplify = simplify
-        super().__init__(num_vehicles, capacities, locations, trips)
+        super().__init__(num_vehicles, capacities, locations, trips, use_deliveries)
         self.classical_solver = classical_solver
 
     def _solve_cvrp(self) -> OptimizationResult:
