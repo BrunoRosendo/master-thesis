@@ -1,12 +1,12 @@
 from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
 
-from src.model.CVRPModel import CVRPModel
-from src.model.CVRPSolution import CVRPSolution
-from src.solver.CVRP import CVRP
+from src.model.VRP import VRP
+from src.model.VRPSolution import VRPSolution
+from src.solver.VRPSolver import VRPSolver
 
 
-class ClassicCVRP(CVRP):
+class ClassicSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with classic algorithms, using Google's OR Tools.
     """
@@ -30,7 +30,8 @@ class ClassicCVRP(CVRP):
         self.set_distance_dimension()
         if self.use_capacity:
             self.set_capacity_dimension()
-        self.set_pickup_and_deliveries()
+        if self.use_deliveries:
+            self.set_pickup_and_deliveries()
 
         search_parameters = self.get_search_parameters()
         or_solution = self.routing.SolveWithParameters(search_parameters)
@@ -60,20 +61,22 @@ class ClassicCVRP(CVRP):
         )
         self.routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
 
-        dimension_name = "Distance"
-        self.routing.AddDimension(
-            transit_callback_index,
-            0,
-            3000,
-            True,
-            dimension_name,
-        )
-        self.distance_dimension = self.routing.GetDimensionOrDie(dimension_name)
+        # Distance dimension is used for pickup-delivery order.
+        if self.use_deliveries:
+            dimension_name = "Distance"
+            self.routing.AddDimension(
+                transit_callback_index,
+                0,
+                3000,
+                True,
+                dimension_name,
+            )
+            self.distance_dimension = self.routing.GetDimensionOrDie(dimension_name)
 
-        # Balances the distance between each vehicle.
-        self.distance_dimension.SetGlobalSpanCostCoefficient(
-            self.DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT
-        )
+            # Balances the distance between each vehicle.
+            self.distance_dimension.SetGlobalSpanCostCoefficient(
+                self.DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT
+            )
 
     def set_capacity_dimension(self):
         """Set the capacity dimension and constraint for the problem."""
@@ -124,7 +127,7 @@ class ClassicCVRP(CVRP):
 
         return search_parameters
 
-    def _convert_solution(self, result: any) -> CVRPSolution:
+    def _convert_solution(self, result: any) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
 
         routes = []
@@ -161,7 +164,7 @@ class ClassicCVRP(CVRP):
             loads.append(route_loads)
             total_distance += route_distance
 
-        return CVRPSolution(
+        return VRPSolution(
             self.num_vehicles,
             self.locations,
             result.ObjectiveValue(),
@@ -172,15 +175,16 @@ class ClassicCVRP(CVRP):
             loads if self.use_capacity else None,
         )
 
-    def get_model(self) -> CVRPModel:
+    def get_model(self) -> VRP:
         """
         Get the CVRPModel instance.
         """
 
-        return CVRPModel(
+        return VRP(
             self.num_vehicles,
             self.trips,
             self.depot,
             self.distance_matrix,
             self.locations,
+            self.use_deliveries,
         )
