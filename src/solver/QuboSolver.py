@@ -169,6 +169,7 @@ class QuboSolver(VRPSolver):
             routes,
             distances,
             self.depot,
+            self.capacities,
             loads if self.use_capacity else None,
         )
 
