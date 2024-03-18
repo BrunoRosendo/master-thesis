@@ -20,6 +20,7 @@ class QuboSolver(VRPSolver):
 
     Attributes:
     - classical_solver (bool): Whether to use a classical solver to solve the QUBO problem.
+    - simplify (bool): Whether to simplify the problem by removing unnecessary constraints.
     """
 
     def __init__(
@@ -64,7 +65,7 @@ class QuboSolver(VRPSolver):
         Convert the quadratic program to a QUBO problem, using the Qiskit converters.
         """
 
-        # If there are inequality constraints
+        # Convert inequality constraints
         ineq_to_eq = InequalityToEquality()
         qp_eq = ineq_to_eq.convert(qp)
 
@@ -79,9 +80,18 @@ class QuboSolver(VRPSolver):
         return qubo
 
     def solve_classic(self, qp: QuadraticProgram) -> OptimizationResult:
+        """
+        Solve the QUBO problem using the classical CPLEX optimizer.
+        """
+
         optimizer = CplexOptimizer()
         result = optimizer.solve(qp)
         return result
+
+    def solve_qubo(self, qp: QuadraticProgram) -> OptimizationResult:
+        """
+        Solve the QUBO problem using the configured Qiskit optimizer.
+        """
 
     def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
         """
