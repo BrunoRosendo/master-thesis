@@ -12,6 +12,7 @@ class VRPSolution:
     - total_distance (float): The total distance traveled by all vehicles.
     - routes (list of lists): The routes (indices) taken by each vehicle.
     - distances (list of floats): The distance traveled by each vehicle.
+    - capacities (int or list of ints): The capacity of each vehicle.
     - loads (list of lists): The load of each vehicle at each location of its route.
     - depot (int): The index of the depot location.
     - use_capacity (bool): Whether the solution uses vehicle capacity or not.
@@ -41,6 +42,7 @@ class VRPSolution:
         routes: list[list[int]],
         distances: list[int],
         depot: int,
+        capacities: int | list[int] = None,
         loads: list[list[int]] = None,
     ):
         self.num_vehicles = num_vehicles
@@ -51,7 +53,8 @@ class VRPSolution:
         self.distances = distances
         self.loads = loads
         self.depot = depot
-        self.use_capacity = loads is not None
+        self.capacities = capacities
+        self.use_capacity = loads is not None and capacities is not None
 
     def display(self):
         """
@@ -66,7 +69,18 @@ class VRPSolution:
             ]
 
             color = self.COLOR_LIST[vehicle_id % len(self.COLOR_LIST)]
+
+            capacity = (
+                self.capacities[vehicle_id]
+                if isinstance(self.capacities, list)
+                else self.capacities
+            )
             legend_group = f"Vehicle {vehicle_id + 1}"
+            legend_name = (
+                f"Vehicle {vehicle_id + 1} ({capacity})"
+                if self.use_capacity
+                else f"Vehicle {vehicle_id + 1}"
+            )
 
             # Draw routes
             fig.add_trace(
@@ -75,7 +89,7 @@ class VRPSolution:
                     y=[loc[1] for loc in route_coordinates],
                     mode="lines",
                     line=dict(width=5, color=color),
-                    name=f"Vehicle {vehicle_id + 1}: {self.distances[vehicle_id]}m",
+                    name=legend_name,
                     legendgroup=legend_group,
                 )
             )
