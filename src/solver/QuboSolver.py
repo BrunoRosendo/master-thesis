@@ -114,9 +114,8 @@ class QuboSolver(VRPSolver):
         qaoa = QAOA(sampler=self.sampler, optimizer=self.classic_optimizer)
 
         if self.warm_start:
-            # TODO check if it should be relaxed
             optimizer = WarmStartQAOAOptimizer(
-                pre_solver=self.pre_solver, relax_for_pre_solver=True, qaoa=qaoa
+                pre_solver=self.pre_solver, relax_for_pre_solver=False, qaoa=qaoa
             )
         else:
             optimizer = MinimumEigenOptimizer(qaoa)

@@ -11,6 +11,7 @@ if __name__ == "__main__":
         ],
         [(1, 2, 5)],
         False,
+        warm_start=True,
     )
     # cvrp = QuboSolver(
     #     4,
