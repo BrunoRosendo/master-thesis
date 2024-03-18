@@ -5,17 +5,37 @@ from src.model.VRP import VRP
 from src.model.VRPSolution import VRPSolution
 from src.solver.VRPSolver import VRPSolver
 
+DEFAULT_SOLUTION_STRATEGY = (
+    routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION
+)
+DEFAULT_LOCAL_SEARCH_METAHEURISTIC = (
+    routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
+)
+DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 100
+
 
 class ClassicSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with classic algorithms, using Google's OR Tools.
     """
 
-    SOLUTION_STRATEGY = (
-        routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION
-    )
-    LOCAL_SEARCH_METAHEURISTIC = routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
-    DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 100
+    def __init__(
+        self,
+        num_vehicles: int,
+        capacities: int | list[int] | None,
+        locations: list[tuple[int, int]],
+        trips: list[tuple[int, int, int]],
+        use_deliveries: bool,
+        solution_strategy: int = DEFAULT_SOLUTION_STRATEGY,
+        local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
+        distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
+    ):
+        super().__init__(num_vehicles, capacities, locations, trips, use_deliveries)
+        self.solution_strategy = solution_strategy
+        self.local_search_metaheuristic = local_search_metaheuristic
+        self.distance_global_span_cost_coefficient = (
+            distance_global_span_cost_coefficient
+        )
 
     def _solve_cvrp(self) -> any:
         """
@@ -75,7 +95,7 @@ class ClassicSolver(VRPSolver):
 
             # Balances the distance between each vehicle.
             self.distance_dimension.SetGlobalSpanCostCoefficient(
-                self.DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT
+                self.distance_global_span_cost_coefficient
             )
 
     def set_capacity_dimension(self):
@@ -122,8 +142,8 @@ class ClassicSolver(VRPSolver):
         """Returns the search parameters for the problem."""
 
         search_parameters = pywrapcp.DefaultRoutingSearchParameters()
-        search_parameters.first_solution_strategy = self.SOLUTION_STRATEGY
-        search_parameters.local_search_metaheuristic = self.LOCAL_SEARCH_METAHEURISTIC
+        search_parameters.first_solution_strategy = self.solution_strategy
+        search_parameters.local_search_metaheuristic = self.local_search_metaheuristic
 
         return search_parameters
 

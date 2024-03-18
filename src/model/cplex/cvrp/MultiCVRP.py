@@ -50,7 +50,9 @@ class MultiCVRP(CplexVRP):
             self.num_locations, self.num_locations, self.num_vehicles, name="x"
         )
 
-        self.u = self.cplex.integer_var_list(range(1, self.num_locations), name="u")
+        self.u = self.cplex.integer_var_list(
+            range(1, self.num_locations), name="u", lb=0, ub=max(self.capacities)
+        )
 
     def create_objective(self):
         """
@@ -137,8 +139,6 @@ class MultiCVRP(CplexVRP):
         Create the constraints that eliminate subtours (MTV).
         """
 
-        max_capacity = max(self.capacities)
-
         for i in range(1, self.num_locations):
             for k in range(self.num_vehicles):
 
@@ -153,7 +153,6 @@ class MultiCVRP(CplexVRP):
                         <= self.capacities[k] - self.get_location_demand(j)
                     )
 
-            self.cplex.add_constraint(self.u[i - 1] <= max_capacity)
             self.cplex.add_constraint(self.u[i - 1] >= self.get_location_demand(i))
 
     def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:

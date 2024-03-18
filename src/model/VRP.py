@@ -34,7 +34,7 @@ class VRP:
         """
         pickup_demand = self.get_location_pickup(idx)
         if not self.use_deliveries:
-            return pickup_demand
+            return max(pickup_demand, 1)
 
         delivery_demand = self.get_location_delivery(idx)
         return pickup_demand - delivery_demand
