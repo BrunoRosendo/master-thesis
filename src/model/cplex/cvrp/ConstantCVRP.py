@@ -51,7 +51,7 @@ class ConstantCVRP(CplexVRP):
         )
 
         self.u = self.cplex.integer_var_list(
-            range(1, self.num_locations), name="u", lb=0, ub=self.capacity
+            range(1, self.num_locations), name="u", lb=0, ub=self.get_u_upper_bound()
         )
 
     def create_objective(self):
@@ -124,7 +124,6 @@ class ConstantCVRP(CplexVRP):
                 )
 
             self.cplex.add_constraint(self.u[i - 1] >= self.get_location_demand(i))
-            self.cplex.add_constraint(self.u[i - 1] <= self.capacity)
 
     def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
         """
@@ -168,3 +167,10 @@ class ConstantCVRP(CplexVRP):
         Get the name of a variable.
         """
         return f"x_{i}_{j}"
+
+    def get_u_upper_bound(self) -> int:
+        """
+        Get the upper bound for the u variable.
+        """
+
+        return self.capacity

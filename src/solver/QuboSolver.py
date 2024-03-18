@@ -1,5 +1,13 @@
+from qiskit.primitives import Sampler
+from qiskit_algorithms import QAOA
+from qiskit_algorithms.optimizers import COBYLA
 from qiskit_optimization import QuadraticProgram
-from qiskit_optimization.algorithms import CplexOptimizer, OptimizationResult
+from qiskit_optimization.algorithms import (
+    CplexOptimizer,
+    OptimizationResult,
+    WarmStartQAOAOptimizer,
+    MinimumEigenOptimizer,
+)
 from qiskit_optimization.converters import (
     InequalityToEquality,
     IntegerToBinary,
@@ -12,6 +20,10 @@ from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
 from src.model.cplex.cvrp.InfiniteCVRP import InfiniteCVRP
 from src.model.cplex.cvrp.MultiCVRP import MultiCVRP
 from src.solver.VRPSolver import VRPSolver
+
+DEFAULT_SAMPLER = Sampler()
+DEFAULT_CLASSIC_OPTIMIZER = COBYLA()
+DEFAULT_PRE_SOLVER = CplexOptimizer()
 
 
 class QuboSolver(VRPSolver):
@@ -32,10 +44,18 @@ class QuboSolver(VRPSolver):
         use_deliveries: bool,
         classical_solver=False,
         simplify=True,
+        sampler=DEFAULT_SAMPLER,
+        classic_optimizer=DEFAULT_CLASSIC_OPTIMIZER,
+        warm_start=False,
+        pre_solver=DEFAULT_PRE_SOLVER,
     ):
         self.simplify = simplify
         super().__init__(num_vehicles, capacities, locations, trips, use_deliveries)
         self.classical_solver = classical_solver
+        self.sampler = sampler
+        self.classic_optimizer = classic_optimizer
+        self.warm_start = warm_start
+        self.pre_solver = pre_solver
 
     def _solve_cvrp(self) -> OptimizationResult:
         """
@@ -51,9 +71,7 @@ class QuboSolver(VRPSolver):
             print(f"The number of variables is {qubo.get_num_vars()}")
             print(qubo.prettyprint())
 
-            # Solve the QUBO problem
-            # optimizer = MinimumEigenOptimizer(min_eigen_solver=self.min_eigen_solver)
-            # result = optimizer.solve(qubo)
+            result = self.solve_qubo(qubo)
 
         if result.status.name != "SUCCESS":
             raise Exception("Failed to solve the problem!")
@@ -92,6 +110,19 @@ class QuboSolver(VRPSolver):
         """
         Solve the QUBO problem using the configured Qiskit optimizer.
         """
+
+        qaoa = QAOA(sampler=self.sampler, optimizer=self.classic_optimizer)
+
+        if self.warm_start:
+            # TODO check if it should be relaxed
+            optimizer = WarmStartQAOAOptimizer(
+                pre_solver=self.pre_solver, relax_for_pre_solver=True, qaoa=qaoa
+            )
+        else:
+            optimizer = MinimumEigenOptimizer(qaoa)
+
+        result = optimizer.solve(qp)
+        return result
 
     def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
         """
