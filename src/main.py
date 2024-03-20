@@ -1,4 +1,4 @@
-from src.solver.ClassicSolver import ClassicSolver
+from src.solver.QuboSolver import QuboSolver
 
 if __name__ == "__main__":
     # cvrp = QuboSolver(
@@ -13,9 +13,9 @@ if __name__ == "__main__":
     #     False,
     #     warm_start=True,
     # )
-    cvrp = ClassicSolver(
+    cvrp = QuboSolver(
         4,
-        [15, 14, 10, 20],
+        None,
         [
             (456, 320),
             (228, 0),
@@ -45,6 +45,8 @@ if __name__ == "__main__":
             (13, 12, 6),
             (16, 14, 4),
         ],
+        True,
+        True,
         True,
     )
     result = cvrp.solve()

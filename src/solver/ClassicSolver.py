@@ -17,6 +17,11 @@ DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 100
 class ClassicSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with classic algorithms, using Google's OR Tools.
+
+    Attributes:
+    - solution_strategy (int): The strategy to use to find the first solution.
+    - local_search_metaheuristic (int): The local search metaheuristic to use.
+    - distance_global_span_cost_coefficient (int): The coefficient for the global span cost.
     """
 
     def __init__(
@@ -26,11 +31,14 @@ class ClassicSolver(VRPSolver):
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
         use_deliveries: bool,
+        use_rpp: bool,
         solution_strategy: int = DEFAULT_SOLUTION_STRATEGY,
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
     ):
-        super().__init__(num_vehicles, capacities, locations, trips, use_deliveries)
+        super().__init__(
+            num_vehicles, capacities, locations, trips, use_deliveries, use_rpp
+        )
         self.solution_strategy = solution_strategy
         self.local_search_metaheuristic = local_search_metaheuristic
         self.distance_global_span_cost_coefficient = (

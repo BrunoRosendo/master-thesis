@@ -1,12 +1,13 @@
 from qiskit.primitives import Sampler
 from qiskit_algorithms import QAOA
-from qiskit_algorithms.optimizers import COBYLA
+from qiskit_algorithms.optimizers import COBYLA, Optimizer
 from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.algorithms import (
     CplexOptimizer,
     OptimizationResult,
     WarmStartQAOAOptimizer,
     MinimumEigenOptimizer,
+    OptimizationAlgorithm,
 )
 from qiskit_optimization.converters import (
     InequalityToEquality,
@@ -19,6 +20,7 @@ from src.model.cplex.CplexVRP import CplexVRP
 from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
 from src.model.cplex.cvrp.InfiniteCVRP import InfiniteCVRP
 from src.model.cplex.cvrp.MultiCVRP import MultiCVRP
+from src.model.cplex.rpp.InfiniteRPP import InfiniteRPP
 from src.solver.VRPSolver import VRPSolver
 
 DEFAULT_SAMPLER = Sampler()
@@ -33,6 +35,10 @@ class QuboSolver(VRPSolver):
     Attributes:
     - classical_solver (bool): Whether to use a classical solver to solve the QUBO problem.
     - simplify (bool): Whether to simplify the problem by removing unnecessary constraints.
+    - sampler (Sampler): The Qiskit sampler to use for the QUBO problem.
+    - classic_optimizer (Optimizer): The Qiskit optimizer to use for the QUBO problem.
+    - warm_start (bool): Whether to use a warm start for the QAOA optimizer.
+    - pre_solver (OptimizationAlgorithm): The Qiskit optimizer to use for the pre-solver.
     """
 
     def __init__(
@@ -42,15 +48,18 @@ class QuboSolver(VRPSolver):
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
         use_deliveries: bool,
+        use_rpp: bool,
         classical_solver=False,
         simplify=True,
-        sampler=DEFAULT_SAMPLER,
-        classic_optimizer=DEFAULT_CLASSIC_OPTIMIZER,
+        sampler: Sampler = DEFAULT_SAMPLER,
+        classic_optimizer: Optimizer = DEFAULT_CLASSIC_OPTIMIZER,
         warm_start=False,
-        pre_solver=DEFAULT_PRE_SOLVER,
+        pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
     ):
         self.simplify = simplify
-        super().__init__(num_vehicles, capacities, locations, trips, use_deliveries)
+        super().__init__(
+            num_vehicles, capacities, locations, trips, use_deliveries, use_rpp
+        )
         self.classical_solver = classical_solver
         self.sampler = sampler
         self.classic_optimizer = classic_optimizer
@@ -64,6 +73,8 @@ class QuboSolver(VRPSolver):
         qp = self.model.quadratic_program()
 
         if self.classical_solver:
+            print(f"The number of variables is {qp.get_num_vars()}")
+            print(qp.prettyprint())
             result = self.solve_classic(qp)
         else:
             qubo = self.quadratic_to_qubo(qp)
@@ -177,6 +188,15 @@ class QuboSolver(VRPSolver):
         """
         Get a cplex instance of the CVRPModel.
         """
+
+        if self.use_rpp:
+            return InfiniteRPP(
+                self.num_vehicles,
+                self.trips,
+                self.distance_matrix,
+                self.locations,
+                self.simplify,
+            )
 
         if not self.use_capacity:
             return InfiniteCVRP(
