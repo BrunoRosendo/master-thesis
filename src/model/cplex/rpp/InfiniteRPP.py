@@ -10,6 +10,8 @@ class InfiniteRPP(CplexVRP):
     Note that this model assumes a starting point with no cost to the first node for each vehicle,
     as to avoid the need for a depot.
 
+    This model should always be simplified, since some constraints assume the simplification.
+
     Attributes:
         num_trips (int): Number of trips to be made.
         num_steps (int): Number of max steps for each vehicle.
@@ -70,9 +72,18 @@ class InfiniteRPP(CplexVRP):
             for s in range(self.num_steps - 1)
         )
 
+        # We assume the weight of returning to start as 1 (max)
+        # TODO Try to formulate without starting point
+        return_to_start_penalty = self.cplex.sum(
+            self.x[k, i, s] * self.x[k, 0, s + 1]
+            for k in range(self.num_vehicles)
+            for i in range(1, self.num_used_locations + 1)
+            for s in range(self.num_steps - 1)
+        )
+
         trip_incentive = self.create_trip_incentive()
 
-        self.cplex.minimize(cost - trip_incentive)
+        self.cplex.minimize(cost + return_to_start_penalty - trip_incentive)
 
     def create_constraints(self):
         """
@@ -130,8 +141,8 @@ class InfiniteRPP(CplexVRP):
         """
 
         return self.cplex.sum(
-            self.x[k, self.used_locations_indices.index(i), s1]
-            * self.x[k, self.used_locations_indices.index(j), s2]
+            self.x[k, self.used_locations_indices.index(i) + 1, s1]
+            * self.x[k, self.used_locations_indices.index(j) + 1, s2]
             for k in range(self.num_vehicles)
             for i, j, _ in self.trips
             for s1 in range(self.num_steps - 1)
