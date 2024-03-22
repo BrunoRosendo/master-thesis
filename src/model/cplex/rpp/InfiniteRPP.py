@@ -171,7 +171,16 @@ class InfiniteRPP(CplexVRP):
         Get the starting location for each route from the variable dictionary.
         """
 
-        return []
+        route_starts = []
+
+        for k in range(self.num_vehicles):
+            for s in range(self.num_steps):
+                if self.get_var(var_dict, k, 0, s) == 0.0:
+                    start = self.get_result_location(var_dict, k, s)
+                    route_starts.append(start)
+                    break
+
+        return route_starts
 
     def get_result_next_location(
         self, var_dict: dict[str, float], cur_location: int
@@ -180,11 +189,45 @@ class InfiniteRPP(CplexVRP):
         Get the next location for a route from the variable dictionary.
         """
 
-        return 0
+        cplex_location = self.used_locations_indices.index(cur_location) + 1
 
-    def get_var_name(self, i: int, j: int, k: int | None = None) -> str:
+        for k in range(self.num_vehicles):
+            for s in range(self.num_steps - 1):
+                if self.get_var(var_dict, k, cplex_location, s) == 1.0:
+                    return self.get_result_location(var_dict, k, s + 1)
+
+        return None
+
+    def get_result_location(
+        self, var_dict: dict[str, float], k: int, s: int
+    ) -> int | None:
+        """
+        Get the location for a vehicle at a given step.
+        """
+
+        for i, location in enumerate(self.used_locations_indices):
+            if self.get_var(var_dict, k, i + 1, s) == 1.0:
+                return location
+
+        return None
+
+    # TODO Consider adding a common CVRP after changing their model
+    def get_var(
+        self, var_dict: dict[str, float], k: int, i: int, s: int | None = None
+    ) -> float:
+        """
+        Get the variable value for the given indices.
+        """
+
+        if self.simplify and i == 0 and s == self.num_steps - 1:
+            return 0.0
+
+        var_name = self.get_var_name(k, i, s)
+        return var_dict[var_name]
+
+    def get_var_name(self, k: int, i: int, s: int | None = None) -> str:
         """
         Get the name of a variable.
         """
 
-        return f"x_{i}_{j}_{k}"
+        return f"x_{k}_{i}_{s}"

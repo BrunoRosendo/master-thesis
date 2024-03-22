@@ -136,7 +136,7 @@ class QuboSolver(VRPSolver):
 
     def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
         """
-        Convert the optimizer result to a CVRPSolution solution.
+        Convert the optimizer result to a VRPSolution result.
         """
         var_dict = result.variables_dict
         route_starts = self.model.get_result_route_starts(var_dict)
@@ -147,25 +147,28 @@ class QuboSolver(VRPSolver):
         total_distance = 0
 
         for start in route_starts:
-            index = start
-            previous_index = self.depot
-
-            route = [self.depot]
-            route_loads = [0]
+            route = []
+            route_loads = []
             route_distance = 0
             cur_load = 0
 
-            while True:
+            index = start
+            previous_index = start if self.use_rpp else self.depot
+            if not self.use_rpp:
+                route.append(self.depot)
+                route_loads.append(0)
+
+            while index is not None:
                 route_distance += self.distance_matrix[previous_index][index]
                 cur_load += self.model.get_location_demand(index)
                 route.append(index)
                 route_loads.append(cur_load)
 
-                if index == self.depot:
-                    break
-
                 previous_index = index
                 index = self.model.get_result_next_location(var_dict, index)
+
+                if index == self.depot and not self.use_rpp:
+                    break
 
             routes.append(route)
             distances.append(route_distance)
@@ -180,6 +183,7 @@ class QuboSolver(VRPSolver):
             routes,
             distances,
             self.depot,
+            not self.use_rpp,
             self.capacities,
             loads if self.use_capacity else None,
         )

@@ -13,6 +13,7 @@ class VRPSolution:
     - routes (list of lists): The routes (indices) taken by each vehicle.
     - distances (list of floats): The distance traveled by each vehicle.
     - capacities (int or list of ints): The capacity of each vehicle.
+    - use_depot (bool): Whether the vehicles start and return to the depot after visiting all locations.
     - loads (list of lists): The load of each vehicle at each location of its route.
     - depot (int): The index of the depot location.
     - use_capacity (bool): Whether the solution uses vehicle capacity or not.
@@ -42,6 +43,7 @@ class VRPSolution:
         routes: list[list[int]],
         distances: list[int],
         depot: int,
+        use_depot: bool,
         capacities: int | list[int] = None,
         loads: list[list[int]] = None,
     ):
@@ -53,6 +55,7 @@ class VRPSolution:
         self.distances = distances
         self.loads = loads
         self.depot = depot
+        self.use_depot = use_depot
         self.capacities = capacities
         self.use_capacity = loads is not None and capacities is not None
 
@@ -108,7 +111,18 @@ class VRPSolution:
                     fig, route_coordinates[i], color, legend_group, vehicle_id, i
                 )
 
-        self.plot_location(fig, self.locations[self.depot], "gray")
+            if not self.use_depot:
+                self.plot_location(
+                    fig,
+                    route_coordinates[-1],
+                    color,
+                    legend_group,
+                    vehicle_id,
+                    len(route_coordinates) - 1,
+                )
+
+        if self.use_depot:
+            self.plot_location(fig, self.locations[self.depot], "gray")
 
         fig.update_layout(
             xaxis_title="X Coordinate",
