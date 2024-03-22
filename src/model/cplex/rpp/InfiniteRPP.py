@@ -154,7 +154,8 @@ class InfiniteRPP(CplexVRP):
         Simplify the problem by removing unnecessary variables.
         """
 
-        # TODO in the article
+        for k in range(self.num_vehicles):
+            qp = qp.substitute_variables({f"x_{k}_{0}_{self.num_steps - 1}": 0})
 
         return qp
 
