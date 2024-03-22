@@ -130,7 +130,8 @@ class InfiniteRPP(CplexVRP):
         """
 
         return self.cplex.sum(
-            self.x[k, i, s1] * self.x[k, j, s2]
+            self.x[k, self.used_locations_indices.index(i), s1]
+            * self.x[k, self.used_locations_indices.index(j), s2]
             for k in range(self.num_vehicles)
             for i, j, _ in self.trips
             for s1 in range(self.num_steps - 1)
@@ -151,7 +152,7 @@ class InfiniteRPP(CplexVRP):
         Get the indices of the locations used in the problem. This helps reduce the number of variables.
         """
 
-        return list({location for trip in self.trips for location in trip})
+        return list({location for trip in self.trips for location in trip[:2]})
 
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
         """
