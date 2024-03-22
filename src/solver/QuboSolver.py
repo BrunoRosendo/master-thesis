@@ -164,11 +164,11 @@ class QuboSolver(VRPSolver):
                 route.append(index)
                 route_loads.append(cur_load)
 
-                previous_index = index
-                index = self.model.get_result_next_location(var_dict, index)
-
                 if index == self.depot and not self.use_rpp:
                     break
+
+                previous_index = index
+                index = self.model.get_result_next_location(var_dict, index)
 
             routes.append(route)
             distances.append(route_distance)
