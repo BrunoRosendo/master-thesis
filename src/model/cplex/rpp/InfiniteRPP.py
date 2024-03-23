@@ -1,5 +1,4 @@
 import numpy as np
-from qiskit_optimization import QuadraticProgram
 
 from src.model.cplex.CplexVRP import CplexVRP
 
@@ -149,27 +148,15 @@ class InfiniteRPP(CplexVRP):
             for s2 in range(s1 + 1, self.num_steps)
         )
 
-    def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
+    def get_simplified_variables(self) -> dict[str, int]:
         """
-        Simplify the problem by removing unnecessary variables.
-        """
-
-        for k in range(self.num_vehicles):
-            qp = qp.substitute_variables(
-                {self.get_var_name(k, 0, self.num_steps - 1): 0}
-            )
-
-        return qp
-
-    def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
-        """
-        Re-add the variables that were removed during the simplification.
+        Get the variables that should be replaced during the simplification and their values.
         """
 
-        for k in range(self.num_vehicles):
-            var_dict[self.get_var_name(k, 0, self.num_steps - 1)] = 0.0
-
-        return var_dict
+        return {
+            self.get_var_name(k, 0, self.num_steps - 1): 0
+            for k in range(self.num_vehicles)
+        }
 
     def get_used_locations(self) -> list[int]:
         """

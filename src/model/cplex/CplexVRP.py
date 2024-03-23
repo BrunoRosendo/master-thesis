@@ -82,18 +82,26 @@ class CplexVRP(ABC, VRP):
         pass
 
     @abstractmethod
+    def get_simplified_variables(self) -> dict[str, int]:
+        """
+        Get the variables that should be replaced during the simplification and their values.
+        """
+        pass
+
     def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
         """
         Simplify the problem by removing unnecessary variables.
         """
-        pass
+        return qp.substitute_variables(self.get_simplified_variables())
 
-    @abstractmethod
     def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
         """
         Re-add the variables that were removed during the simplification.
         """
-        pass
+        replaced_vars = self.get_simplified_variables()
+        for var_name, value in replaced_vars.items():
+            var_dict[var_name] = float(value)
+        return var_dict
 
     def build_var_dict(self, result: OptimizationResult) -> dict[str, float]:
         """
