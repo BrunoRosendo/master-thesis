@@ -153,10 +153,29 @@ class InfiniteRPP(CplexVRP):
         Get the variables that should be replaced during the simplification and their values.
         """
 
-        return {
-            self.get_var_name(k, 0, self.num_steps - 1): 0
-            for k in range(self.num_vehicles)
-        }
+        variables = {}
+
+        for k in range(self.num_vehicles):
+            # Vehicles start at their respective locations and not anywhere else
+            variables[self.get_var_name(k, 0, 0)] = 1
+            for i in range(1, self.num_used_locations + 1):
+                variables[self.get_var_name(k, i, 0)] = 0
+
+            # Vehicles can't be at the starting point at the last step (see paper)
+            variables[self.get_var_name(k, 0, self.num_steps - 1)] = 0
+
+            # It's impossible to go from start to a drop-off and to end at a pick-up
+            for i, j, _ in self.trips:
+                variables[
+                    self.get_var_name(k, self.used_locations_indices.index(j), 1)
+                ] = 0
+                variables[
+                    self.get_var_name(
+                        k, self.used_locations_indices.index(i), self.num_steps - 1
+                    )
+                ] = 0
+
+        return variables
 
     def get_used_locations(self) -> list[int]:
         """
