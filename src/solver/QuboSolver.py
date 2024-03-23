@@ -1,12 +1,13 @@
 from qiskit.primitives import Sampler
 from qiskit_algorithms import QAOA
-from qiskit_algorithms.optimizers import COBYLA
+from qiskit_algorithms.optimizers import COBYLA, Optimizer
 from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.algorithms import (
     CplexOptimizer,
     OptimizationResult,
     WarmStartQAOAOptimizer,
     MinimumEigenOptimizer,
+    OptimizationAlgorithm,
 )
 from qiskit_optimization.converters import (
     InequalityToEquality,
@@ -19,6 +20,8 @@ from src.model.cplex.CplexVRP import CplexVRP
 from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
 from src.model.cplex.cvrp.InfiniteCVRP import InfiniteCVRP
 from src.model.cplex.cvrp.MultiCVRP import MultiCVRP
+from src.model.cplex.rpp.CapacityRPP import CapacityRPP
+from src.model.cplex.rpp.InfiniteRPP import InfiniteRPP
 from src.solver.VRPSolver import VRPSolver
 
 DEFAULT_SAMPLER = Sampler()
@@ -33,6 +36,10 @@ class QuboSolver(VRPSolver):
     Attributes:
     - classical_solver (bool): Whether to use a classical solver to solve the QUBO problem.
     - simplify (bool): Whether to simplify the problem by removing unnecessary constraints.
+    - sampler (Sampler): The Qiskit sampler to use for the QUBO problem.
+    - classic_optimizer (Optimizer): The Qiskit optimizer to use for the QUBO problem.
+    - warm_start (bool): Whether to use a warm start for the QAOA optimizer.
+    - pre_solver (OptimizationAlgorithm): The Qiskit optimizer to use for the pre-solver.
     """
 
     def __init__(
@@ -42,15 +49,18 @@ class QuboSolver(VRPSolver):
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
         use_deliveries: bool,
+        use_rpp: bool,
         classical_solver=False,
         simplify=True,
-        sampler=DEFAULT_SAMPLER,
-        classic_optimizer=DEFAULT_CLASSIC_OPTIMIZER,
+        sampler: Sampler = DEFAULT_SAMPLER,
+        classic_optimizer: Optimizer = DEFAULT_CLASSIC_OPTIMIZER,
         warm_start=False,
-        pre_solver=DEFAULT_PRE_SOLVER,
+        pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
     ):
         self.simplify = simplify
-        super().__init__(num_vehicles, capacities, locations, trips, use_deliveries)
+        super().__init__(
+            num_vehicles, capacities, locations, trips, use_deliveries, use_rpp
+        )
         self.classical_solver = classical_solver
         self.sampler = sampler
         self.classic_optimizer = classic_optimizer
@@ -64,6 +74,8 @@ class QuboSolver(VRPSolver):
         qp = self.model.quadratic_program()
 
         if self.classical_solver:
+            print(f"The number of variables is {qp.get_num_vars()}")
+            print(qp.prettyprint())
             result = self.solve_classic(qp)
         else:
             qubo = self.quadratic_to_qubo(qp)
@@ -125,7 +137,7 @@ class QuboSolver(VRPSolver):
 
     def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
         """
-        Convert the optimizer result to a CVRPSolution solution.
+        Convert the optimizer result to a VRPSolution result.
         """
         var_dict = result.variables_dict
         route_starts = self.model.get_result_route_starts(var_dict)
@@ -136,21 +148,24 @@ class QuboSolver(VRPSolver):
         total_distance = 0
 
         for start in route_starts:
-            index = start
-            previous_index = self.depot
-
-            route = [self.depot]
-            route_loads = [0]
+            route = []
+            route_loads = []
             route_distance = 0
             cur_load = 0
 
-            while True:
+            index = start
+            previous_index = start if self.use_rpp else self.depot
+            if not self.use_rpp:
+                route.append(self.depot)
+                route_loads.append(0)
+
+            while index is not None:
                 route_distance += self.distance_matrix[previous_index][index]
                 cur_load += self.model.get_location_demand(index)
                 route.append(index)
                 route_loads.append(cur_load)
 
-                if index == self.depot:
+                if index == self.depot and not self.use_rpp:
                     break
 
                 previous_index = index
@@ -169,6 +184,7 @@ class QuboSolver(VRPSolver):
             routes,
             distances,
             self.depot,
+            not self.use_rpp,
             self.capacities,
             loads if self.use_capacity else None,
         )
@@ -177,6 +193,28 @@ class QuboSolver(VRPSolver):
         """
         Get a cplex instance of the CVRPModel.
         """
+
+        if self.use_rpp:
+            if self.use_capacity:
+                return CapacityRPP(
+                    self.num_vehicles,
+                    self.trips,
+                    self.distance_matrix,
+                    self.locations,
+                    (
+                        [self.capacities] * self.num_vehicles
+                        if self.same_capacity
+                        else self.capacities
+                    ),
+                    self.simplify,
+                )
+            return InfiniteRPP(
+                self.num_vehicles,
+                self.trips,
+                self.distance_matrix,
+                self.locations,
+                self.simplify,
+            )
 
         if not self.use_capacity:
             return InfiniteCVRP(
@@ -188,7 +226,7 @@ class QuboSolver(VRPSolver):
                 self.use_deliveries,
                 self.simplify,
             )
-        elif self.same_capacity:
+        if self.same_capacity:
             return ConstantCVRP(
                 self.num_vehicles,
                 self.trips,
@@ -199,14 +237,14 @@ class QuboSolver(VRPSolver):
                 self.use_deliveries,
                 self.simplify,
             )
-        else:
-            return MultiCVRP(
-                self.num_vehicles,
-                self.trips,
-                self.depot,
-                self.distance_matrix,
-                self.capacities,
-                self.locations,
-                self.use_deliveries,
-                self.simplify,
-            )
+
+        return MultiCVRP(
+            self.num_vehicles,
+            self.trips,
+            self.depot,
+            self.distance_matrix,
+            self.capacities,
+            self.locations,
+            self.use_deliveries,
+            self.simplify,
+        )
