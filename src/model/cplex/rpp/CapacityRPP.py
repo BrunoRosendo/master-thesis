@@ -39,7 +39,7 @@ class CapacityRPP(InfiniteRPP):
         """
 
         for k in range(self.num_vehicles):
-            for cur_step in range(self.num_steps):
+            for cur_step in range(1, self.num_steps):  # start has no demand
                 self.cplex.add_constraint(
                     self.cplex.sum(
                         self.get_location_demand(self.used_locations_indices[i - 1])
