@@ -15,7 +15,7 @@ if __name__ == "__main__":
     # )
     cvrp = QuboSolver(
         2,
-        None,
+        10,
         [
             (456, 320),
             (228, 0),

@@ -20,6 +20,7 @@ from src.model.cplex.CplexVRP import CplexVRP
 from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
 from src.model.cplex.cvrp.InfiniteCVRP import InfiniteCVRP
 from src.model.cplex.cvrp.MultiCVRP import MultiCVRP
+from src.model.cplex.rpp.CapacityRPP import CapacityRPP
 from src.model.cplex.rpp.InfiniteRPP import InfiniteRPP
 from src.solver.VRPSolver import VRPSolver
 
@@ -194,6 +195,19 @@ class QuboSolver(VRPSolver):
         """
 
         if self.use_rpp:
+            if self.use_capacity:
+                return CapacityRPP(
+                    self.num_vehicles,
+                    self.trips,
+                    self.distance_matrix,
+                    self.locations,
+                    (
+                        [self.capacities] * self.num_vehicles
+                        if self.same_capacity
+                        else self.capacities
+                    ),
+                    self.simplify,
+                )
             return InfiniteRPP(
                 self.num_vehicles,
                 self.trips,
@@ -212,7 +226,7 @@ class QuboSolver(VRPSolver):
                 self.use_deliveries,
                 self.simplify,
             )
-        elif self.same_capacity:
+        if self.same_capacity:
             return ConstantCVRP(
                 self.num_vehicles,
                 self.trips,
@@ -223,14 +237,14 @@ class QuboSolver(VRPSolver):
                 self.use_deliveries,
                 self.simplify,
             )
-        else:
-            return MultiCVRP(
-                self.num_vehicles,
-                self.trips,
-                self.depot,
-                self.distance_matrix,
-                self.capacities,
-                self.locations,
-                self.use_deliveries,
-                self.simplify,
-            )
+
+        return MultiCVRP(
+            self.num_vehicles,
+            self.trips,
+            self.depot,
+            self.distance_matrix,
+            self.capacities,
+            self.locations,
+            self.use_deliveries,
+            self.simplify,
+        )
