@@ -155,9 +155,21 @@ class InfiniteRPP(CplexVRP):
         """
 
         for k in range(self.num_vehicles):
-            qp = qp.substitute_variables({f"x_{k}_{0}_{self.num_steps - 1}": 0})
+            qp = qp.substitute_variables(
+                {self.get_var_name(k, 0, self.num_steps - 1): 0}
+            )
 
         return qp
+
+    def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
+        """
+        Re-add the variables that were removed during the simplification.
+        """
+
+        for k in range(self.num_vehicles):
+            var_dict[self.get_var_name(k, 0, self.num_steps - 1)] = 0.0
+
+        return var_dict
 
     def get_used_locations(self) -> list[int]:
         """
@@ -210,20 +222,6 @@ class InfiniteRPP(CplexVRP):
                 return location
 
         return None
-
-    # TODO Consider adding a common CVRP after changing their model
-    def get_var(
-        self, var_dict: dict[str, float], k: int, i: int, s: int | None = None
-    ) -> float:
-        """
-        Get the variable value for the given indices.
-        """
-
-        if self.simplify and i == 0 and s == self.num_steps - 1:
-            return 0.0
-
-        var_name = self.get_var_name(k, i, s)
-        return var_dict[var_name]
 
     def get_var_name(self, k: int, i: int, s: int | None = None) -> str:
         """

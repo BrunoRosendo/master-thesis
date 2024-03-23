@@ -131,9 +131,19 @@ class ConstantCVRP(CplexVRP):
         """
 
         for i in range(len(self.distance_matrix)):
-            qp = qp.substitute_variables({f"x_{i}_{i}": 0})
+            qp = qp.substitute_variables({self.get_var_name(i, i): 0})
 
         return qp
+
+    def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
+        """
+        Re-add the variables that were removed during the simplification.
+        """
+
+        for i in range(len(self.distance_matrix)):
+            var_dict[self.get_var_name(i, i)] = 0.0
+
+        return var_dict
 
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
         """

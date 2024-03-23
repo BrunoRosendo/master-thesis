@@ -162,9 +162,20 @@ class MultiCVRP(CplexVRP):
 
         for k in range(self.num_vehicles):
             for i in range(self.num_locations):
-                qp = qp.substitute_variables({f"x_{i}_{i}_{k}": 0})
+                qp = qp.substitute_variables({self.get_var_name(i, i, k): 0})
 
         return qp
+
+    def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
+        """
+        Re-add the variables that were removed during the simplification.
+        """
+
+        for k in range(self.num_vehicles):
+            for i in range(self.num_locations):
+                var_dict[self.get_var_name(i, i, k)] = 0.0
+
+        return var_dict
 
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
         """
