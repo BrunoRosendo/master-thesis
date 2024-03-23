@@ -139,7 +139,7 @@ class QuboSolver(VRPSolver):
         """
         Convert the optimizer result to a VRPSolution result.
         """
-        var_dict = result.variables_dict
+        var_dict = self.model.build_var_dict(result)
         route_starts = self.model.get_result_route_starts(var_dict)
 
         routes = []

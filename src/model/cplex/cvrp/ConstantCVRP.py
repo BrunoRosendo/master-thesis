@@ -1,5 +1,3 @@
-from qiskit_optimization import QuadraticProgram
-
 from src.model.cplex.CplexVRP import CplexVRP
 
 
@@ -125,15 +123,12 @@ class ConstantCVRP(CplexVRP):
 
             self.cplex.add_constraint(self.u[i - 1] >= self.get_location_demand(i))
 
-    def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
+    def get_simplified_variables(self) -> dict[str, int]:
         """
-        Simplify the problem by removing unnecessary variables.
+        Get the variables that are relevant for the solution.
         """
 
-        for i in range(len(self.distance_matrix)):
-            qp = qp.substitute_variables({f"x_{i}_{i}": 0})
-
-        return qp
+        return {self.get_var_name(i, i): 0 for i in range(len(self.distance_matrix))}
 
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
         """

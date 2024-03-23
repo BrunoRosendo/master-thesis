@@ -1,5 +1,3 @@
-from qiskit_optimization import QuadraticProgram
-
 from src.model.cplex.CplexVRP import CplexVRP
 
 
@@ -155,16 +153,16 @@ class MultiCVRP(CplexVRP):
 
             self.cplex.add_constraint(self.u[i - 1] >= self.get_location_demand(i))
 
-    def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
+    def get_simplified_variables(self) -> dict[str, int]:
         """
-        Simplify the problem by removing unnecessary variables.
+        Get the variables that should be replaced during the simplification and their values.
         """
 
-        for k in range(self.num_vehicles):
-            for i in range(self.num_locations):
-                qp = qp.substitute_variables({f"x_{i}_{i}_{k}": 0})
-
-        return qp
+        return {
+            self.get_var_name(i, i, k): 0
+            for k in range(self.num_vehicles)
+            for i in range(self.num_locations)
+        }
 
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
         """

@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 from docplex.mp.model import Model
 from qiskit_optimization import QuadraticProgram
+from qiskit_optimization.algorithms import OptimizationResult
 from qiskit_optimization.translators import from_docplex_mp
 
 from src.model.VRP import VRP
@@ -81,11 +82,35 @@ class CplexVRP(ABC, VRP):
         pass
 
     @abstractmethod
+    def get_simplified_variables(self) -> dict[str, int]:
+        """
+        Get the variables that should be replaced during the simplification and their values.
+        """
+        pass
+
     def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
         """
         Simplify the problem by removing unnecessary variables.
         """
-        pass
+        return qp.substitute_variables(self.get_simplified_variables())
+
+    def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
+        """
+        Re-add the variables that were removed during the simplification.
+        """
+        replaced_vars = self.get_simplified_variables()
+        for var_name, value in replaced_vars.items():
+            var_dict[var_name] = float(value)
+        return var_dict
+
+    def build_var_dict(self, result: OptimizationResult) -> dict[str, float]:
+        """
+        Build a dictionary with the variable values from the result. It takes the simplification step into consideration
+        """
+        var_dict = result.variables_dict
+        if self.simplify:
+            var_dict = self.re_add_variables(var_dict)
+        return var_dict
 
     @abstractmethod
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
@@ -116,9 +141,6 @@ class CplexVRP(ABC, VRP):
         """
         Get the variable value for the given indices.
         """
-
-        if self.simplify and i == j:
-            return 0.0
 
         var_name = self.get_var_name(i, j, k)
         return var_dict[var_name]

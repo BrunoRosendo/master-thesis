@@ -1,5 +1,4 @@
 import numpy as np
-from qiskit_optimization import QuadraticProgram
 
 from src.model.cplex.CplexVRP import CplexVRP
 
@@ -149,15 +148,15 @@ class InfiniteRPP(CplexVRP):
             for s2 in range(s1 + 1, self.num_steps)
         )
 
-    def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
+    def get_simplified_variables(self) -> dict[str, int]:
         """
-        Simplify the problem by removing unnecessary variables.
+        Get the variables that should be replaced during the simplification and their values.
         """
 
-        for k in range(self.num_vehicles):
-            qp = qp.substitute_variables({f"x_{k}_{0}_{self.num_steps - 1}": 0})
-
-        return qp
+        return {
+            self.get_var_name(k, 0, self.num_steps - 1): 0
+            for k in range(self.num_vehicles)
+        }
 
     def get_used_locations(self) -> list[int]:
         """
@@ -210,20 +209,6 @@ class InfiniteRPP(CplexVRP):
                 return location
 
         return None
-
-    # TODO Consider adding a common CVRP after changing their model
-    def get_var(
-        self, var_dict: dict[str, float], k: int, i: int, s: int | None = None
-    ) -> float:
-        """
-        Get the variable value for the given indices.
-        """
-
-        if self.simplify and i == 0 and s == self.num_steps - 1:
-            return 0.0
-
-        var_name = self.get_var_name(k, i, s)
-        return var_dict[var_name]
 
     def get_var_name(self, k: int, i: int, s: int | None = None) -> str:
         """
