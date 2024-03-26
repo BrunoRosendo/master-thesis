@@ -20,10 +20,9 @@ class CapacityRPP(InfiniteRPP):
         distance_matrix: list[list[int]],
         locations: list[tuple[int, int]],
         capacities: list[int],
-        simplify: bool,
     ):
         self.capacities = capacities
-        super().__init__(num_vehicles, trips, distance_matrix, locations, simplify)
+        super().__init__(num_vehicles, trips, distance_matrix, locations)
 
     def create_constraints(self):
         """

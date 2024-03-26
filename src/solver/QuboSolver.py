@@ -206,42 +206,30 @@ class QuboSolver(VRPSolver):
                         if self.same_capacity
                         else self.capacities
                     ),
-                    self.simplify,
                 )
             return InfiniteRPP(
                 self.num_vehicles,
                 self.trips,
                 self.distance_matrix,
                 self.locations,
-                self.simplify,
             )
 
         if not self.use_capacity:
             return InfiniteCVRP(
-                self.num_vehicles,
-                self.trips,
-                self.depot,
-                self.distance_matrix,
-                self.locations,
-                self.use_deliveries,
-                self.simplify,
+                self.num_vehicles, self.distance_matrix, self.locations, self.simplify
             )
         if self.same_capacity:
             return ConstantCVRP(
                 self.num_vehicles,
-                self.trips,
-                self.depot,
                 self.distance_matrix,
                 self.capacities,
                 self.locations,
-                self.use_deliveries,
                 self.simplify,
             )
 
         return MultiCVRP(
             self.num_vehicles,
             self.trips,
-            self.depot,
             self.distance_matrix,
             self.capacities,
             self.locations,

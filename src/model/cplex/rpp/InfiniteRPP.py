@@ -9,7 +9,7 @@ class InfiniteRPP(CplexVRP):
     Note that this model assumes a starting point with no cost to the first node for each vehicle,
     as to avoid the need for a depot.
 
-    This model should always be simplified, since some constraints assume the simplification.
+    This model is always be simplified, since some constraints assume the simplification.
 
     Attributes:
         num_trips (int): Number of trips to be made.
@@ -24,7 +24,6 @@ class InfiniteRPP(CplexVRP):
         trips: list[tuple[int, int, int]],
         distance_matrix: list[list[int]],
         locations: list[tuple[int, int]],
-        simplify: bool,
     ):
         self.trips = trips
         self.num_trips = len(trips)
@@ -36,9 +35,7 @@ class InfiniteRPP(CplexVRP):
         self.epsilon = 0  # TODO Check this value
         self.normalization_factor = np.max(distance_matrix) + self.epsilon
 
-        super().__init__(
-            num_vehicles, trips, None, distance_matrix, locations, True, simplify
-        )
+        super().__init__(num_vehicles, trips, distance_matrix, locations, True, True)
 
     def create_vars(self):
         """

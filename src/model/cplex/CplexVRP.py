@@ -15,7 +15,6 @@ class CplexVRP(ABC, VRP):
     Attributes:
         num_vehicles (int): Number of vehicles available.
         trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
-        depot (int | None): Index of the depot, which is the starting and ending point for each vehicle. None if using RPP.
         distance_matrix (list): Matrix with the distance between each pair of locations.
         locations (list): List of coordinates for each location.
         use_deliveries (bool): Whether the problem uses deliveries or not.
@@ -27,14 +26,13 @@ class CplexVRP(ABC, VRP):
         self,
         num_vehicles: int,
         trips: list[tuple[int, int, int]],
-        depot: int | None,
         distance_matrix: list[list[int]],
         locations: list[tuple[int, int]],
         use_deliveries: bool,
         simplify: bool,
     ):
         super().__init__(
-            num_vehicles, trips, depot, distance_matrix, locations, use_deliveries
+            num_vehicles, trips, distance_matrix, locations, use_deliveries
         )
 
         self.simplify = simplify

@@ -7,12 +7,9 @@ class ConstantCVRP(CplexVRP):
 
     Attributes:
         num_vehicles (int): Number of vehicles available.
-        capacity (int): Capacity of each vehicle.
-        trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
-        depot (int): Index of the depot, which is the starting and ending point for each vehicle.
         distance_matrix (list): Matrix with the distance between each pair of locations.
+        capacity (int): Capacity of each vehicle.
         locations (list): List of coordinates for each location.
-        use_deliveries (bool): Whether the problem uses deliveries or not.
         cplex (Model): CPLEX model for the CVRP
         simplify (bool): Whether to simplify the problem by removing unnecessary variables.
     """
@@ -20,24 +17,13 @@ class ConstantCVRP(CplexVRP):
     def __init__(
         self,
         num_vehicles: int,
-        trips: list[tuple[int, int, int]],
-        depot: int,
         distance_matrix: list[list[int]],
         capacity: int | None,
         locations: list[tuple[int, int]],
-        use_deliveries: bool,
         simplify: bool,
     ):
         self.capacity = capacity
-        super().__init__(
-            num_vehicles,
-            trips,
-            depot,
-            distance_matrix,
-            locations,
-            use_deliveries,
-            simplify,
-        )
+        super().__init__(num_vehicles, [], distance_matrix, locations, False, simplify)
 
     def create_vars(self):
         """
