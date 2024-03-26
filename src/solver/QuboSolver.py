@@ -229,10 +229,8 @@ class QuboSolver(VRPSolver):
 
         return MultiCVRP(
             self.num_vehicles,
-            self.trips,
             self.distance_matrix,
             self.capacities,
             self.locations,
             self.use_deliveries,
-            self.simplify,
         )

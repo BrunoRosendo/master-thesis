@@ -7,7 +7,7 @@ class CapacityRPP(InfiniteRPP):
     Note that this model assumes a starting point with no cost to the first node for each vehicle,
     as to avoid the need for a depot.
 
-    This model should always be simplified, since some constraints assume the simplification.
+    This model is always be simplified, since some constraints assume the simplification.
 
     Attributes:
         capacities (list): Capacities for each vehicle.
