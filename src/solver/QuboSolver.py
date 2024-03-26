@@ -147,14 +147,14 @@ class QuboSolver(VRPSolver):
         distances = []
         total_distance = 0
 
-        for start in route_starts:
+        for i in range(self.num_vehicles):
             route = []
             route_loads = []
             route_distance = 0
             cur_load = 0
 
-            index = start
-            previous_index = start if self.use_rpp else self.depot
+            index = route_starts[i] if i < len(route_starts) else None
+            previous_index = index if self.use_rpp else self.depot
             if not self.use_rpp:
                 route.append(self.depot)
                 route_loads.append(0)

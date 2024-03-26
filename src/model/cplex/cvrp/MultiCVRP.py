@@ -1,3 +1,5 @@
+import numpy as np
+
 from src.model.cplex.CplexVRP import CplexVRP
 
 
@@ -29,6 +31,11 @@ class MultiCVRP(CplexVRP):
         simplify: bool,
     ):
         self.capacities = capacities
+        self.num_steps = len(distance_matrix) + 1
+
+        self.epsilon = 0  # TODO Check this value
+        self.normalization_factor = np.max(distance_matrix) + self.epsilon
+
         super().__init__(
             num_vehicles,
             trips,
@@ -45,11 +52,7 @@ class MultiCVRP(CplexVRP):
         """
 
         self.x = self.cplex.binary_var_cube(
-            self.num_locations, self.num_locations, self.num_vehicles, name="x"
-        )
-
-        self.u = self.cplex.integer_var_list(
-            range(1, self.num_locations), name="u", lb=0, ub=max(self.capacities)
+            self.num_vehicles, self.num_locations, self.num_steps, name="x"
         )
 
     def create_objective(self):
@@ -58,11 +61,16 @@ class MultiCVRP(CplexVRP):
         """
 
         objective = self.cplex.sum(
-            self.distance_matrix[i][j] * self.x[i, j, k]
+            self.distance_matrix[i][j]
+            / self.normalization_factor
+            * self.x[k, i, s]
+            * self.x[k, j, s + 1]
+            for k in range(self.num_vehicles)
             for i in range(self.num_locations)
             for j in range(self.num_locations)
-            for k in range(self.num_vehicles)
+            for s in range(self.num_steps - 1)
         )
+
         self.cplex.minimize(objective)
 
     def create_constraints(self):
@@ -73,7 +81,6 @@ class MultiCVRP(CplexVRP):
         self.create_location_constraints()
         self.create_vehicle_constraints()
         self.create_capacity_constraints()
-        self.create_subtour_constraints()
 
     def create_location_constraints(self):
         """
@@ -83,19 +90,9 @@ class MultiCVRP(CplexVRP):
         for i in range(1, self.num_locations):
             self.cplex.add_constraint(
                 self.cplex.sum(
-                    self.x[i, j, k]
-                    for j in range(self.num_locations)
+                    self.x[k, i, s]
                     for k in range(self.num_vehicles)
-                    if i != j
-                )
-                == 1
-            )
-            self.cplex.add_constraint(
-                self.cplex.sum(
-                    self.x[j, i, k]
-                    for j in range(self.num_locations)
-                    for k in range(self.num_vehicles)
-                    if i != j
+                    for s in range(self.num_steps)
                 )
                 == 1
             )
@@ -106,63 +103,45 @@ class MultiCVRP(CplexVRP):
         """
 
         for k in range(self.num_vehicles):
-            self.cplex.add_constraint(
-                self.cplex.sum(self.x[0, i, k] for i in range(1, self.num_locations))
-                == 1
-            )
-            self.cplex.add_constraint(
-                self.cplex.sum(self.x[i, 0, k] for i in range(1, self.num_locations))
-                == 1
-            )
+            for s in range(self.num_steps):
+                self.cplex.add_constraint(
+                    self.cplex.sum(self.x[k, i, s] for i in range(self.num_locations))
+                    == 1
+                )
 
     def create_capacity_constraints(self):
         """
-        Create the constraints that ensure the vehicle capacity is not exceeded. This is needed because
-        this version of subtour elimination does not guarantee that the vehicle capacity is not exceeded.
+        Create the capacity constraints for the CPLEX model.
         """
 
         for k in range(self.num_vehicles):
-            self.cplex.add_constraint(
-                self.cplex.sum(
-                    self.get_location_demand(j) * self.x[i, j, k]
-                    for i in range(self.num_locations)
-                    for j in range(1, self.num_locations)
-                    if i != j
-                )
-                <= self.capacities[k]
-            )
-
-    def create_subtour_constraints(self):
-        """
-        Create the constraints that eliminate subtours (MTV).
-        """
-
-        for i in range(1, self.num_locations):
-            for k in range(self.num_vehicles):
-
-                for j in range(1, self.num_locations):
-                    if i == j:
-                        continue
-
-                    self.cplex.add_constraint(
-                        self.u[i - 1]
-                        - self.u[j - 1]
-                        + self.capacities[k] * self.x[i, j, k]
-                        <= self.capacities[k] - self.get_location_demand(j)
+            for cur_step in range(1, self.num_steps):  # depot has no demand
+                self.cplex.add_constraint(
+                    self.cplex.sum(
+                        self.get_location_demand(i) * self.x[k, i, s]
+                        for i in range(1, self.num_locations)
+                        for s in range(cur_step + 1)
                     )
-
-            self.cplex.add_constraint(self.u[i - 1] >= self.get_location_demand(i))
+                    <= self.capacities[k]
+                )
 
     def get_simplified_variables(self) -> dict[str, int]:
         """
         Get the variables that should be replaced during the simplification and their values.
         """
 
-        return {
-            self.get_var_name(i, i, k): 0
-            for k in range(self.num_vehicles)
-            for i in range(self.num_locations)
-        }
+        variables = {}
+
+        for k in range(self.num_vehicles):
+            # Vehicles start and end at the depot
+            variables[self.get_var_name(k, 0, 0)] = 1
+            variables[self.get_var_name(k, 0, self.num_steps - 1)] = 1
+
+            for i in range(1, self.num_locations):
+                variables[self.get_var_name(k, i, 0)] = 0
+                variables[self.get_var_name(k, i, self.num_steps - 1)] = 0
+
+        return variables
 
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
         """
@@ -170,14 +149,12 @@ class MultiCVRP(CplexVRP):
         """
         route_starts = []
 
-        cur_location = 1
-        while len(route_starts) < self.num_vehicles:
-            for k in range(self.num_vehicles):
-                var_value = self.get_var(var_dict, 0, cur_location, k)
-                if var_value == 1.0:
-                    route_starts.append(cur_location)
+        for k in range(self.num_vehicles):
+            for s in range(self.num_steps):
+                if self.get_var(var_dict, k, 0, s) == 0.0:
+                    start = self.get_result_location(var_dict, k, s)
+                    route_starts.append(start)
                     break
-            cur_location += 1
 
         return route_starts
 
@@ -187,15 +164,29 @@ class MultiCVRP(CplexVRP):
         """
         Get the next location for a route from the variable dictionary.
         """
-        for i in range(self.num_locations):
-            for k in range(self.num_vehicles):
-                var_value = self.get_var(var_dict, cur_location, i, k)
-                if var_value == 1.0:
-                    return i
+        for k in range(self.num_vehicles):
+            for s in range(self.num_steps - 1):
+                if self.get_var(var_dict, k, cur_location, s) == 1.0:
+                    return self.get_result_location(var_dict, k, s + 1)
+
         return None
 
-    def get_var_name(self, i: int, j: int, k: int) -> str:
+    def get_result_location(
+        self, var_dict: dict[str, float], k: int, s: int
+    ) -> int | None:
+        """
+        Get the location for a vehicle at a given step.
+        """
+
+        for i in range(self.num_locations):
+            if self.get_var(var_dict, k, i, s) == 1.0:
+                return i
+
+        return None
+
+    def get_var_name(self, k: int, i: int, s: int | None = None) -> str:
         """
         Get the name of a variable.
         """
-        return f"x_{i}_{j}_{k}"
+
+        return f"x_{k}_{i}_{s}"
