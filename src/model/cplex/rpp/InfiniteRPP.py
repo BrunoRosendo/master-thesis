@@ -1,5 +1,3 @@
-import numpy as np
-
 from src.model.cplex.CplexVRP import CplexVRP
 
 
@@ -32,9 +30,6 @@ class InfiniteRPP(CplexVRP):
 
         self.used_locations_indices = self.get_used_locations()
         self.num_used_locations = len(self.used_locations_indices)
-
-        self.epsilon = 0  # TODO Check this value
-        self.normalization_factor = np.max(distance_matrix) + self.epsilon
 
         super().__init__(
             num_vehicles, trips, None, distance_matrix, locations, True, simplify

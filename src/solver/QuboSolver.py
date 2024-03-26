@@ -17,7 +17,6 @@ from qiskit_optimization.converters import (
 
 from src.model.VRPSolution import VRPSolution
 from src.model.cplex.CplexVRP import CplexVRP
-from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
 from src.model.cplex.cvrp.InfiniteCVRP import InfiniteCVRP
 from src.model.cplex.cvrp.MultiCVRP import MultiCVRP
 from src.model.cplex.rpp.CapacityRPP import CapacityRPP
@@ -147,14 +146,14 @@ class QuboSolver(VRPSolver):
         distances = []
         total_distance = 0
 
-        for start in route_starts:
+        for i in range(self.num_vehicles):
             route = []
             route_loads = []
             route_distance = 0
             cur_load = 0
 
-            index = start
-            previous_index = start if self.use_rpp else self.depot
+            index = route_starts[i] if i < len(route_starts) else None
+            previous_index = index if self.use_rpp else self.depot
             if not self.use_rpp:
                 route.append(self.depot)
                 route_loads.append(0)
@@ -227,7 +226,7 @@ class QuboSolver(VRPSolver):
                 self.simplify,
             )
         if self.same_capacity:
-            return ConstantCVRP(
+            return InfiniteCVRP(
                 self.num_vehicles,
                 self.trips,
                 self.depot,

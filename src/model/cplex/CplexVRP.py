@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+import numpy as np
 from docplex.mp.model import Model
 from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.algorithms import OptimizationResult
@@ -36,6 +37,9 @@ class CplexVRP(ABC, VRP):
         super().__init__(
             num_vehicles, trips, depot, distance_matrix, locations, use_deliveries
         )
+
+        self.epsilon = 0  # TODO Check this value
+        self.normalization_factor = np.max(distance_matrix) + self.epsilon
 
         self.simplify = simplify
         self.cplex = Model("CVRP")
