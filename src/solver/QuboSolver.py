@@ -1,3 +1,4 @@
+from docplex.util.status import JobSolveStatus
 from qiskit.primitives import Sampler
 from qiskit_algorithms import QAOA
 from qiskit_algorithms.optimizers import COBYLA, Optimizer
@@ -8,6 +9,7 @@ from qiskit_optimization.algorithms import (
     WarmStartQAOAOptimizer,
     MinimumEigenOptimizer,
     OptimizationAlgorithm,
+    OptimizationResultStatus,
 )
 from qiskit_optimization.converters import (
     InequalityToEquality,
@@ -82,9 +84,7 @@ class QuboSolver(VRPSolver):
 
             result = self.solve_qubo(qubo)
 
-        if result.status.name != "SUCCESS":
-            raise Exception("Failed to solve the problem!")
-
+        self.check_feasibility(result)
         return result
 
     def quadratic_to_qubo(self, qp: QuadraticProgram) -> QuadraticProgram:
@@ -131,6 +131,26 @@ class QuboSolver(VRPSolver):
 
         result = optimizer.solve(qp)
         return result
+
+    def check_feasibility(self, result: OptimizationResult):
+        if result.status == OptimizationResultStatus.FAILURE:
+            raise Exception("Failed to solve the problem, aborting!")
+
+        # Results marked as infeasible by the solver can still have valid solutions
+        raw_status = result.raw_results.solve_status
+        status_name = raw_status.name.lower().replace("_", " ")
+        print(f"The solver marked the result as {status_name}")
+
+        if raw_status in [
+            JobSolveStatus.INFEASIBLE_SOLUTION,
+            JobSolveStatus.UNBOUNDED_SOLUTION,
+            JobSolveStatus.INFEASIBLE_OR_UNBOUNDED_SOLUTION,
+        ]:
+            raise Exception("The problem is infeasible or unbounded, aborting!")
+
+        var_dict = self.model.build_var_dict(result)
+        if not self.model.is_result_feasible(var_dict):
+            raise Exception("The solution is infeasible, aborting!")
 
     def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
         """

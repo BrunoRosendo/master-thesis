@@ -126,6 +126,12 @@ class CplexVRP(ABC, VRP):
         """
         pass
 
+    def is_result_feasible(self, var_dict: dict[str, float]) -> bool:
+        """
+        Check if the result is feasible. This method can optionally be implemented by the subclass.
+        """
+        return True
+
     @abstractmethod
     def get_var_name(self, i: int, j: int, k: int | None) -> str:
         """
