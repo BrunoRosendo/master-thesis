@@ -148,6 +148,10 @@ class QuboSolver(VRPSolver):
         ]:
             raise Exception("The problem is infeasible or unbounded, aborting!")
 
+        var_dict = self.model.build_var_dict(result)
+        if not self.model.is_result_feasible(var_dict):
+            raise Exception("The solution is infeasible, aborting!")
+
     def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
         """
         Convert the optimizer result to a VRPSolution result.
