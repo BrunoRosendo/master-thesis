@@ -141,4 +141,4 @@ class CplexVRP(ABC, VRP):
         """
 
         var_name = self.get_var_name(i, j, k)
-        return var_dict[var_name]
+        return round(var_dict[var_name])
