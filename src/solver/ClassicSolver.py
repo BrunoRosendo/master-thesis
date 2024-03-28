@@ -30,20 +30,20 @@ class ClassicSolver(VRPSolver):
         capacities: int | list[int] | None,
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
-        use_deliveries: bool,
         use_rpp: bool,
         solution_strategy: int = DEFAULT_SOLUTION_STRATEGY,
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
     ):
-        super().__init__(
-            num_vehicles, capacities, locations, trips, use_deliveries, use_rpp
-        )
+        super().__init__(num_vehicles, capacities, locations, trips, use_rpp)
         self.solution_strategy = solution_strategy
         self.local_search_metaheuristic = local_search_metaheuristic
         self.distance_global_span_cost_coefficient = (
             distance_global_span_cost_coefficient
         )
+
+        if self.use_rpp:
+            self.add_dummy_depot()
 
     def _solve_cvrp(self) -> any:
         """
@@ -58,7 +58,7 @@ class ClassicSolver(VRPSolver):
         self.set_distance_dimension()
         if self.use_capacity:
             self.set_capacity_dimension()
-        if self.use_deliveries:
+        if self.use_rpp:
             self.set_pickup_and_deliveries()
 
         search_parameters = self.get_search_parameters()
@@ -90,7 +90,7 @@ class ClassicSolver(VRPSolver):
         self.routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
 
         # Distance dimension is used for pickup-delivery order.
-        if self.use_deliveries:
+        if self.use_rpp:
             dimension_name = "Distance"
             self.routing.AddDimension(
                 transit_callback_index,
@@ -155,6 +155,17 @@ class ClassicSolver(VRPSolver):
 
         return search_parameters
 
+    def add_dummy_depot(self):
+        """
+        Add a dummy depot to the distance matrix, in order to solve RPP.
+        It's important to add the dummy depot after the distance matrix is set, to avoid indexing issues.
+        """
+
+        self.depot = len(self.distance_matrix)
+        self.distance_matrix.append([0] * len(self.distance_matrix))
+        for i in range(len(self.distance_matrix)):
+            self.distance_matrix[i].append(0)
+
     def _convert_solution(self, result: any) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
 
@@ -165,6 +176,8 @@ class ClassicSolver(VRPSolver):
 
         for vehicle_id in range(self.num_vehicles):
             index = self.routing.Start(vehicle_id)
+            if self.use_rpp:  # Skip dummy depot
+                index = result.Value(self.routing.NextVar(index))
 
             route = []
             route_loads = []
@@ -178,14 +191,16 @@ class ClassicSolver(VRPSolver):
 
                 previous_index = index
                 index = result.Value(self.routing.NextVar(index))
+
                 route_distance += self.routing.GetArcCostForVehicle(
                     previous_index, index, vehicle_id
                 )
                 route.append(self.manager.IndexToNode(previous_index))
                 route_loads.append(cur_load)
 
-            route.append(self.manager.IndexToNode(index))
-            route_loads.append(cur_load)
+            if not self.use_rpp:
+                route.append(self.manager.IndexToNode(index))
+                route_loads.append(cur_load)
 
             routes.append(route)
             distances.append(route_distance)
@@ -215,5 +230,5 @@ class ClassicSolver(VRPSolver):
             self.trips,
             self.distance_matrix,
             self.locations,
-            self.use_deliveries,
+            self.use_rpp,
         )

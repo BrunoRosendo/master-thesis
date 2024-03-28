@@ -111,7 +111,7 @@ class VRPSolution:
                     fig, route_coordinates[i], color, legend_group, vehicle_id, i
                 )
 
-            if not self.use_depot:
+            if not self.use_depot and len(route_coordinates) > 0:
                 self.plot_location(
                     fig,
                     route_coordinates[-1],
