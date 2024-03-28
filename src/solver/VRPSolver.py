@@ -18,7 +18,6 @@ class VRPSolver(ABC):
         trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
         distance_matrix (list): Matrix with the distance between each pair of locations.
         model (VRP): The CVRP model instance.
-        use_deliveries (bool): Whether the problem uses deliveries or not.
         use_rpp (bool): Whether the problem uses the Ride Pooling Problem (RPP) or not.
     """
 
@@ -28,7 +27,6 @@ class VRPSolver(ABC):
         capacities: int | list[int] | None,
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
-        use_deliveries: bool,
         use_rpp: bool,
     ):
         if capacities is None:
@@ -46,7 +44,6 @@ class VRPSolver(ABC):
         self.capacities = capacities
         self.locations = locations
         self.trips = trips
-        self.use_deliveries = use_deliveries
         self.use_rpp = use_rpp
         self.distance_matrix = self.compute_distance()
         self.model = self.get_model()

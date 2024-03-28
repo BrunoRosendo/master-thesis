@@ -14,7 +14,6 @@ class MultiCVRP(CplexVRP):
         capacities (list): List of vehicle capacities.
         distance_matrix (list): Matrix with the distance between each pair of locations.
         locations (list): List of coordinates for each location.
-        use_deliveries (bool): Whether the problem uses deliveries or not.
         cplex (Model): CPLEX model for the CVRP
     """
 
@@ -24,7 +23,6 @@ class MultiCVRP(CplexVRP):
         distance_matrix: list[list[int]],
         capacities: list[int],
         locations: list[tuple[int, int]],
-        use_deliveries: bool,
     ):
         self.capacities = capacities
         self.num_steps = len(distance_matrix) + 1
@@ -32,9 +30,7 @@ class MultiCVRP(CplexVRP):
         self.epsilon = 0  # TODO Check this value
         self.normalization_factor = np.max(distance_matrix) + self.epsilon
 
-        super().__init__(
-            num_vehicles, [], distance_matrix, locations, use_deliveries, True
-        )
+        super().__init__(num_vehicles, [], distance_matrix, locations, False, True)
 
     def create_vars(self):
         """

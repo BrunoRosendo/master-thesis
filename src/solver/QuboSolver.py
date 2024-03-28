@@ -48,7 +48,6 @@ class QuboSolver(VRPSolver):
         capacities: int | list[int] | None,
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
-        use_deliveries: bool,
         use_rpp: bool,
         classical_solver=False,
         simplify=True,
@@ -58,9 +57,7 @@ class QuboSolver(VRPSolver):
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
     ):
         self.simplify = simplify
-        super().__init__(
-            num_vehicles, capacities, locations, trips, use_deliveries, use_rpp
-        )
+        super().__init__(num_vehicles, capacities, locations, trips, use_rpp)
         self.classical_solver = classical_solver
         self.sampler = sampler
         self.classic_optimizer = classic_optimizer
@@ -228,9 +225,5 @@ class QuboSolver(VRPSolver):
             )
 
         return MultiCVRP(
-            self.num_vehicles,
-            self.distance_matrix,
-            self.capacities,
-            self.locations,
-            self.use_deliveries,
+            self.num_vehicles, self.distance_matrix, self.capacities, self.locations
         )
