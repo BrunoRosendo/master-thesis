@@ -1,4 +1,5 @@
 from docplex.util.status import JobSolveStatus
+from numpy import ndarray
 from qiskit.primitives import Sampler
 from qiskit_algorithms import QAOA
 from qiskit_algorithms.optimizers import COBYLA, Optimizer
@@ -53,6 +54,7 @@ class QuboSolver(VRPSolver):
         use_rpp: bool,
         classical_solver=False,
         simplify=True,
+        track_progress=True,
         sampler: Sampler = DEFAULT_SAMPLER,
         classic_optimizer: Optimizer = DEFAULT_CLASSIC_OPTIMIZER,
         warm_start=False,
@@ -60,6 +62,7 @@ class QuboSolver(VRPSolver):
     ):
         self.simplify = simplify
         super().__init__(num_vehicles, capacities, locations, trips, use_rpp)
+        self.track_progress = track_progress
         self.classical_solver = classical_solver
         self.sampler = sampler
         self.classic_optimizer = classic_optimizer
@@ -111,7 +114,7 @@ class QuboSolver(VRPSolver):
         Solve the QUBO problem using the classical CPLEX optimizer.
         """
 
-        optimizer = CplexOptimizer()
+        optimizer = CplexOptimizer(disp=self.track_progress)
         result = optimizer.solve(qp)
         return result
 
@@ -120,7 +123,11 @@ class QuboSolver(VRPSolver):
         Solve the QUBO problem using the configured Qiskit optimizer.
         """
 
-        qaoa = QAOA(sampler=self.sampler, optimizer=self.classic_optimizer)
+        qaoa = QAOA(
+            sampler=self.sampler,
+            optimizer=self.classic_optimizer,
+            callback=self.qaoa_callback if self.track_progress else None,
+        )
 
         if self.warm_start:
             optimizer = WarmStartQAOAOptimizer(
@@ -132,21 +139,32 @@ class QuboSolver(VRPSolver):
         result = optimizer.solve(qp)
         return result
 
+    def qaoa_callback(
+        self, iter_num: int, ansatz: ndarray, objective: float, metadata: dict[str, any]
+    ):
+        print(f"Iteration {iter_num}: {objective.real} objective")
+
     def check_feasibility(self, result: OptimizationResult):
         if result.status == OptimizationResultStatus.FAILURE:
             raise Exception("Failed to solve the problem, aborting!")
 
-        # Results marked as infeasible by the solver can still have valid solutions
-        raw_status = result.raw_results.solve_status
-        status_name = raw_status.name.lower().replace("_", " ")
-        print(f"The solver marked the result as {status_name}")
+        if result.raw_results is None:
+            if result.status != OptimizationResultStatus.SUCCESS:
+                raise Exception(
+                    f"Problem is not successful, aborting as {result.status.name.lower()}! (raw results not available)"
+                )
+        else:
+            # Results marked as infeasible by the solver can still have valid solutions
+            raw_status = result.raw_results.solve_status
+            status_name = raw_status.name.lower().replace("_", " ")
+            print(f"The solver marked the result as {status_name}")
 
-        if raw_status in [
-            JobSolveStatus.INFEASIBLE_SOLUTION,
-            JobSolveStatus.UNBOUNDED_SOLUTION,
-            JobSolveStatus.INFEASIBLE_OR_UNBOUNDED_SOLUTION,
-        ]:
-            raise Exception("The problem is infeasible or unbounded, aborting!")
+            if raw_status in [
+                JobSolveStatus.INFEASIBLE_SOLUTION,
+                JobSolveStatus.UNBOUNDED_SOLUTION,
+                JobSolveStatus.INFEASIBLE_OR_UNBOUNDED_SOLUTION,
+            ]:
+                raise Exception("The problem is infeasible or unbounded, aborting!")
 
         var_dict = self.model.build_var_dict(result)
         if not self.model.is_result_feasible(var_dict):

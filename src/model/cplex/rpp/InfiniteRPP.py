@@ -234,11 +234,12 @@ class InfiniteRPP(CplexVRP):
         """
 
         for i, j, _ in self.trips:
+            i_var = self.used_locations_indices.index(i) + 1
+            j_var = self.used_locations_indices.index(j) + 1
+
             trip_sum = sum(
-                self.get_var(var_dict, k, self.used_locations_indices.index(i) + 1, s1)
-                * self.get_var(
-                    var_dict, k, self.used_locations_indices.index(j) + 1, s2
-                )
+                self.get_var(var_dict, k, i_var, s1)
+                * self.get_var(var_dict, k, j_var, s2)
                 for k in range(self.num_vehicles)
                 for s1 in range(self.num_steps - 1)
                 for s2 in range(s1 + 1, self.num_steps)
