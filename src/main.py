@@ -14,22 +14,16 @@ if __name__ == "__main__":
     #     warm_start=True,
     # )
     cvrp = QuboSolver(
-        2,
-        10,
+        1,
+        None,
         [
             (456, 320),
             (228, 0),
-            (912, 0),
-            (0, 80),
-            (114, 80),
         ],
-        [
-            (0, 3, 12),
-            (2, 1, 6),
-            (3, 4, 4),
-        ],
-        True,
-        True,
+        [(1, 3, 7)],
+        False,
+        False,
+        warm_start=True,
     )
     result = cvrp.solve()
     result.display()
