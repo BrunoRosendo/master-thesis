@@ -61,8 +61,9 @@ class QuboSolver(VRPSolver):
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
     ):
         self.simplify = simplify
-        super().__init__(num_vehicles, capacities, locations, trips, use_rpp)
-        self.track_progress = track_progress
+        super().__init__(
+            num_vehicles, capacities, locations, trips, use_rpp, track_progress
+        )
         self.classical_solver = classical_solver
         self.sampler = sampler
         self.classic_optimizer = classic_optimizer

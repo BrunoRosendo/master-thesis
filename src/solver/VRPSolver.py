@@ -19,6 +19,7 @@ class VRPSolver(ABC):
         distance_matrix (list): Matrix with the distance between each pair of locations.
         model (VRP): The CVRP model instance.
         use_rpp (bool): Whether the problem uses the Ride Pooling Problem (RPP) or not.
+        track_progress (bool): Whether to track the progress of the solver or not.
     """
 
     def __init__(
@@ -28,6 +29,7 @@ class VRPSolver(ABC):
         locations: list[tuple[int, int]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
+        track_progress: bool,
     ):
         if capacities is None:
             self.use_capacity = False
@@ -45,6 +47,7 @@ class VRPSolver(ABC):
         self.locations = locations
         self.trips = trips
         self.use_rpp = use_rpp
+        self.track_progress = track_progress
         self.distance_matrix = self.compute_distance()
         self.model = self.get_model()
 
