@@ -3,7 +3,7 @@ from src.model.cplex.cvrp.CplexConstantCVRP import CplexConstantCVRP
 
 class CplexInfiniteCVRP(CplexConstantCVRP):
     """
-    A class to represent a CPLEX math formulation of the CVRP model with all vehicles having the same capacity.
+    A class to represent a CPLEX math formulation of the CVRP model with all vehicles having infinite capacity.
 
     Attributes:
         num_vehicles (int): Number of vehicles available.

@@ -1,4 +1,5 @@
 import dimod
+import numpy as np
 
 from src.model.dwave.DWaveVRP import DWaveVRP
 
@@ -23,7 +24,7 @@ class DWaveConstantCVRP(DWaveVRP):
         distance_matrix: list[list[int]],
         locations: list[tuple[int, int]],
         simplify: bool,
-        capacity: int,
+        capacity: int | None,
     ):
         self.capacity = capacity
         self.copy_vars = False
@@ -42,11 +43,17 @@ class DWaveConstantCVRP(DWaveVRP):
             ]
         )
 
-        # TODO refactor
-        self.u = dimod.IntegerArray([f"u_{i}" for i in range(1, self.num_locations)])
-        for i in range(1, self.num_locations):
-            self.u[i - 1].set_lower_bound(f"u_{i}", self.get_location_demand(i))
-            self.u[i - 1].set_upper_bound(f"u_{i}", self.capacity)
+        self.u = np.array(
+            [
+                dimod.Integer(
+                    f"u_{i}",
+                    lower_bound=self.get_u_lower_bound(i),
+                    upper_bound=self.get_u_upper_bound(),
+                )
+                for i in range(1, self.num_locations)
+            ],
+            dtype=object,
+        )
 
     def create_objective(self):
         """
@@ -141,3 +148,17 @@ class DWaveConstantCVRP(DWaveVRP):
         """
 
         return f"x_{i}_{j}"
+
+    def get_u_lower_bound(self, i: int) -> int:
+        """
+        Get the lower bound for the u variable, at the given index.
+        """
+
+        return self.get_location_demand(i)
+
+    def get_u_upper_bound(self) -> int:
+        """
+        Get the upper bound for the u variable.
+        """
+
+        return self.capacity
