@@ -1,7 +1,7 @@
-from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
+from src.model.cplex.cvrp.CplexConstantCVRP import CplexConstantCVRP
 
 
-class InfiniteCVRP(ConstantCVRP):
+class CplexInfiniteCVRP(CplexConstantCVRP):
     """
     A class to represent a CPLEX math formulation of the CVRP model with all vehicles having the same capacity.
 

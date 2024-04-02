@@ -3,7 +3,7 @@ import numpy as np
 from src.model.cplex.CplexVRP import CplexVRP
 
 
-class MultiCVRP(CplexVRP):
+class CplexMultiCVRP(CplexVRP):
     """
     A class to represent a CPLEX math formulation of the CVRP model with all vehicles having the same capacity.
 

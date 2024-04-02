@@ -10,7 +10,7 @@ from src.model.VRP import VRP
 
 class CplexVRP(ABC, VRP):
     """
-    A class to represent a CPLEX math formulation of the CVRP model.
+    A class to represent a CPLEX math formulation of the VRP model.
 
     Attributes:
         num_vehicles (int): Number of vehicles available.

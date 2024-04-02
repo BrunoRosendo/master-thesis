@@ -3,7 +3,7 @@ import numpy as np
 from src.model.cplex.CplexVRP import CplexVRP
 
 
-class InfiniteRPP(CplexVRP):
+class CplexInfiniteRPP(CplexVRP):
     """
     A class to represent a CPLEX math formulation of the RPP model with an infinite capacity.
     Note that this model assumes a starting point with no cost to the first node for each vehicle,
