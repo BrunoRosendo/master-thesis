@@ -34,7 +34,7 @@ class DWaveInfiniteCVRP(DWaveConstantCVRP):
                     self.cqm.add_constraint(
                         self.u[i - 1]
                         - self.u[j - 1]
-                        + self.num_locations * self.x[i * self.num_locations + j]
+                        + self.num_locations * self.x_var(i, j)
                         <= self.num_locations - 1
                     )
 

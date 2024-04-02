@@ -12,7 +12,6 @@ class DWaveConstantCVRP(DWaveVRP):
         num_vehicles (int): Number of vehicles available.
         distance_matrix (list): Matrix with the distance between each pair of locations.
         locations (list): List of coordinates for each location.
-        use_deliveries (bool): Whether the problem uses deliveries or not.
         capacity (int): Capacity of each vehicle.
         cqm (ConstrainedQuadraticModel): DWave Ocean model for the CVRP
         simplify (bool): Whether to simplify the problem by removing unnecessary variables.
@@ -37,7 +36,7 @@ class DWaveConstantCVRP(DWaveVRP):
 
         self.x = dimod.BinaryArray(
             [
-                f"x_{i}_{j}"
+                self.get_var_name(i, j)
                 for i in range(self.num_locations)
                 for j in range(self.num_locations)
             ]
@@ -62,7 +61,7 @@ class DWaveConstantCVRP(DWaveVRP):
 
         self.cqm.set_objective(
             dimod.quicksum(
-                self.distance_matrix[i][j] * self.x[i * self.num_locations + j]
+                self.distance_matrix[i][j] * self.x_var(i, j)
                 for i in range(self.num_locations)
                 for j in range(self.num_locations)
             )
@@ -84,18 +83,14 @@ class DWaveConstantCVRP(DWaveVRP):
         for i in range(1, self.num_locations):
             self.cqm.add_constraint(
                 dimod.quicksum(
-                    self.x[i * self.num_locations + j]
-                    for j in range(self.num_locations)
-                    if i != j
+                    self.x_var(i, j) for j in range(self.num_locations) if i != j
                 )
                 == 1,
                 copy=self.copy_vars,
             )
             self.cqm.add_constraint(
                 dimod.quicksum(
-                    self.x[j * self.num_locations + i]
-                    for j in range(self.num_locations)
-                    if i != j
+                    self.x_var(j, i) for j in range(self.num_locations) if i != j
                 )
                 == 1,
                 copy=self.copy_vars,
@@ -107,15 +102,13 @@ class DWaveConstantCVRP(DWaveVRP):
         """
 
         self.cqm.add_constraint(
-            dimod.quicksum(self.x[i] for i in range(1, self.num_locations))
+            dimod.quicksum(self.x_var(0, i) for i in range(1, self.num_locations))
             == self.num_vehicles,
             copy=self.copy_vars,
         )
 
         self.cqm.add_constraint(
-            dimod.quicksum(
-                self.x[i * self.num_locations] for i in range(1, self.num_locations)
-            )
+            dimod.quicksum(self.x_var(i, 0) for i in range(1, self.num_locations))
             == self.num_vehicles,
             copy=self.copy_vars,
         )
@@ -129,9 +122,7 @@ class DWaveConstantCVRP(DWaveVRP):
             for j in range(1, self.num_locations):
                 if i != j:
                     self.cqm.add_constraint(
-                        self.u[i - 1]
-                        - self.u[j - 1]
-                        + self.capacity * self.x[i * self.num_locations + j]
+                        self.u[i - 1] - self.u[j - 1] + self.capacity * self.x_var(i, j)
                         <= self.capacity - self.get_location_demand(j)
                     )
 
@@ -141,6 +132,9 @@ class DWaveConstantCVRP(DWaveVRP):
         """
 
         return {self.get_var_name(i, i): 0 for i in range(len(self.distance_matrix))}
+
+    def x_var(self, i: int, j: int) -> int:
+        return self.x[i * self.num_locations + j]
 
     def get_var_name(self, i: int, j: int, k: int | None = None) -> str:
         """
