@@ -127,3 +127,17 @@ class DWaveConstantCVRP(DWaveVRP):
                         + self.capacity * self.x[i * self.num_locations + j]
                         <= self.capacity - self.get_location_demand(j)
                     )
+
+    def get_simplified_variables(self) -> dict[str, int]:
+        """
+        Get the variables that are relevant for the solution.
+        """
+
+        return {self.get_var_name(i, i): 0 for i in range(len(self.distance_matrix))}
+
+    def get_var_name(self, i: int, j: int, k: int | None = None) -> str:
+        """
+        Get the name of a variable.
+        """
+
+        return f"x_{i}_{j}"

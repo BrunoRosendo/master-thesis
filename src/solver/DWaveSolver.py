@@ -1,4 +1,4 @@
-from dimod import ConstrainedQuadraticModel, ExactCQMSolver, Sampler
+from dimod import ExactCQMSolver, Sampler
 
 from src.model.VRPSolution import VRPSolution
 from src.model.dwave.DWaveVRP import DWaveVRP
@@ -39,7 +39,7 @@ class DWaveSolver(VRPSolver):
         self.sampler = sampler
 
     def _solve_cvrp(self) -> any:
-        cqm: ConstrainedQuadraticModel = self.model.cqm
+        cqm = self.model.constrained_quadratic_model()
         print(cqm)
 
         result = self.sampler.sample_cqm(cqm)

@@ -55,7 +55,7 @@ class CplexVRP(ABC, VRP):
 
         qp = from_docplex_mp(self.cplex)
         if self.simplify:
-            qp = self.simplify_problem(qp)
+            qp = qp.substitute_variables(self.get_simplified_variables())
         return qp
 
     @abstractmethod
@@ -85,12 +85,6 @@ class CplexVRP(ABC, VRP):
         Get the variables that should be replaced during the simplification and their values.
         """
         pass
-
-    def simplify_problem(self, qp: QuadraticProgram) -> QuadraticProgram:
-        """
-        Simplify the problem by removing unnecessary variables.
-        """
-        return qp.substitute_variables(self.get_simplified_variables())
 
     def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
         """

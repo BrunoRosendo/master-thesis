@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-import dimod
+from dimod import ConstrainedQuadraticModel
 
 from src.model.VRP import VRP
 
@@ -32,7 +32,7 @@ class DWaveVRP(ABC, VRP):
         )
 
         self.simplify = simplify
-        self.cqm = dimod.ConstrainedQuadraticModel()
+        self.cqm = ConstrainedQuadraticModel()
         self.build_cqm()
 
     def build_cqm(self):
@@ -43,6 +43,23 @@ class DWaveVRP(ABC, VRP):
         self.create_vars()
         self.create_objective()
         self.create_constraints()
+
+    def constrained_quadratic_model(self) -> ConstrainedQuadraticModel:
+        """
+        Returns the constrained quadratic model for VRP, based on DWave Ocean.
+        Removes unnecessary constraints if simplify is set to True.
+        """
+
+        if self.simplify:
+            self.cqm.fix_variables(self.get_simplified_variables())
+        return self.cqm
+
+    @abstractmethod
+    def get_simplified_variables(self) -> dict[str, int]:
+        """
+        Get the variables that should be replaced during the simplification and their values.
+        """
+        pass
 
     @abstractmethod
     def create_vars(self):
@@ -62,5 +79,12 @@ class DWaveVRP(ABC, VRP):
     def create_constraints(self):
         """
         Create the constraints for the CQM model.
+        """
+        pass
+
+    @abstractmethod
+    def get_var_name(self, i: int, j: int, k: int | None) -> str:
+        """
+        Get the variable name for the given indices.
         """
         pass
