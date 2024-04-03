@@ -52,6 +52,11 @@ class DWaveVRP(ABC, VRP):
 
         if self.simplify:
             self.cqm.fix_variables(self.get_simplified_variables())
+
+            for key in list(self.cqm.constraints):
+                if self.cqm.constraints[key]:  # Redundant constraint (always true)
+                    self.cqm.remove_constraint(key)
+
         return self.cqm
 
     @abstractmethod
@@ -102,6 +107,7 @@ class DWaveVRP(ABC, VRP):
             dict[str, float]: Dictionary of variable names and their values.
             float: Energy of the best solution.
         """
+
         try:
             solution = result.filter(lambda s: s.is_feasible).lowest().first
         except ValueError:
