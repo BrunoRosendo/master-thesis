@@ -230,7 +230,9 @@ class DWaveInfiniteRPP(DWaveVRP):
         return None
 
     def x_var(self, k: int, i: int, s: int) -> int:
-        return self.x[k * self.num_locations * self.num_steps + i * self.num_steps + s]
+        return self.x[
+            k * (self.num_locations + 1) * self.num_steps + i * self.num_steps + s
+        ]
 
     def get_used_locations(self) -> list[int]:
         """

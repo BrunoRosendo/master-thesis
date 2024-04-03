@@ -2,13 +2,13 @@ from src.solver.DWaveSolver import DWaveSolver
 
 if __name__ == "__main__":
     cvrp = DWaveSolver(
-        1,
-        None,
+        2,
+        5,
         [
             (456, 320),
             (228, 0),
             (912, 0),
-            # (0, 80),
+            (0, 80),
             # (114, 80),
             # (570, 160),
             # (798, 160),
@@ -27,7 +27,7 @@ if __name__ == "__main__":
             (0, 3, 5),
             (2, 1, 6),
         ],
-        False,
+        True,
         True,
     )
     result = cvrp.solve()
