@@ -163,11 +163,11 @@ class CplexInfiniteRPP(CplexVRP):
             # It's impossible to go from start to a drop-off and to end at a pick-up
             for i, j, _ in self.trips:
                 variables[
-                    self.get_var_name(k, self.used_locations_indices.index(j), 1)
+                    self.get_var_name(k, self.used_locations_indices.index(j) + 1, 1)
                 ] = 0
                 variables[
                     self.get_var_name(
-                        k, self.used_locations_indices.index(i), self.num_steps - 1
+                        k, self.used_locations_indices.index(i) + 1, self.num_steps - 1
                     )
                 ] = 0
 

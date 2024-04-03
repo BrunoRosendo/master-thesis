@@ -3,12 +3,12 @@ from src.solver.DWaveSolver import DWaveSolver
 if __name__ == "__main__":
     cvrp = DWaveSolver(
         1,
-        10,
+        None,
         [
             (456, 320),
             (228, 0),
             (912, 0),
-            # (0, 80),
+            (0, 80),
             # (114, 80),
             # (570, 160),
             # (798, 160),
@@ -26,14 +26,8 @@ if __name__ == "__main__":
         [
             (0, 3, 5),
             (2, 1, 6),
-            (4, 3, 4),
-            (5, 9, 2),
-            (7, 8, 7),
-            (15, 11, 4),
-            (13, 12, 6),
-            (16, 14, 4),
         ],
-        False,
+        True,
     )
     result = cvrp.solve()
     result.display()

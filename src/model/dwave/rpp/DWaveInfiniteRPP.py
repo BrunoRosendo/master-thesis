@@ -129,14 +129,15 @@ class DWaveInfiniteRPP(DWaveVRP):
                     copy=self.copy_vars,
                 )
 
-                # Half-hot constraint meant to reduce variables in the last step
-                self.cqm.add_constraint(
-                    dimod.quicksum(
-                        self.x_var(k, i, final_step)
-                        for i in range(1, self.num_used_locations + 1)
-                    )
-                    <= 1
+            # Half-hot constraint meant to reduce variables in the last step
+            self.cqm.add_constraint(
+                dimod.quicksum(
+                    self.x_var(k, i, final_step)
+                    for i in range(1, self.num_used_locations + 1)
                 )
+                <= 1,
+                copy=self.copy_vars,
+            )
 
     def create_trip_incentive(self):
         """
@@ -173,11 +174,11 @@ class DWaveInfiniteRPP(DWaveVRP):
             # It's impossible to go from start to a drop-off and to end at a pick-up
             for i, j, _ in self.trips:
                 variables[
-                    self.get_var_name(k, self.used_locations_indices.index(j), 1)
+                    self.get_var_name(k, self.used_locations_indices.index(j) + 1, 1)
                 ] = 0
                 variables[
                     self.get_var_name(
-                        k, self.used_locations_indices.index(i), self.num_steps - 1
+                        k, self.used_locations_indices.index(i) + 1, self.num_steps - 1
                     )
                 ] = 0
 
