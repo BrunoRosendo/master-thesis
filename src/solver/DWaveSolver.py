@@ -1,4 +1,4 @@
-from dimod import ExactCQMSolver, Sampler
+from dimod import ExactCQMSolver, Sampler, SampleSet
 
 from src.model.VRPSolution import VRPSolution
 from src.model.dwave.DWaveVRP import DWaveVRP
@@ -43,17 +43,75 @@ class DWaveSolver(VRPSolver):
         self.sampler = sampler
 
     def _solve_cvrp(self) -> any:
+        """
+        Solve the CVRP using Quantum Annealing implemented in DWave.
+        """
         cqm = self.model.constrained_quadratic_model()
         print(cqm)
 
         result = self.sampler.sample_cqm(cqm)
-        print(result)
         return result
 
-    def _convert_solution(self, result: any) -> VRPSolution:
-        pass
+    def _convert_solution(self, result: SampleSet) -> VRPSolution:
+        """
+        Convert the optimizer result to a VRPSolution result.
+        """
+
+        var_dict, energy = self.model.build_var_dict(result)
+        route_starts = self.model.get_result_route_starts(var_dict)
+
+        routes = []
+        loads = []
+        distances = []
+        total_distance = 0
+
+        for i in range(self.num_vehicles):
+            route = []
+            route_loads = []
+            route_distance = 0
+            cur_load = 0
+
+            index = route_starts[i] if i < len(route_starts) else None
+            previous_index = index if self.use_rpp else self.depot
+            if not self.use_rpp:
+                route.append(self.depot)
+                route_loads.append(0)
+
+            while index is not None:
+                route_distance += self.distance_matrix[previous_index][index]
+                cur_load += self.model.get_location_demand(index)
+                route.append(index)
+                route_loads.append(cur_load)
+
+                if index == self.depot and not self.use_rpp:
+                    break
+
+                previous_index = index
+                index = self.model.get_result_next_location(var_dict, index)
+
+            routes.append(route)
+            distances.append(route_distance)
+            loads.append(route_loads)
+            total_distance += route_distance
+
+        return VRPSolution(
+            self.num_vehicles,
+            self.locations,
+            energy,
+            total_distance,
+            routes,
+            distances,
+            self.depot,
+            not self.use_rpp,
+            self.capacities,
+            loads if self.use_capacity else None,
+        )
 
     def get_model(self) -> DWaveVRP:
+        """
+        Get an instance of the DWaveVRP model.
+        """
+
         if self.use_rpp:
             if self.use_capacity:
                 return DWaveCapacityRPP(

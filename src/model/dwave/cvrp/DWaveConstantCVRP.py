@@ -133,6 +133,33 @@ class DWaveConstantCVRP(DWaveVRP):
 
         return {self.get_var_name(i, i): 0 for i in range(len(self.distance_matrix))}
 
+    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
+        """
+        Get the starting location for each route from the variable dictionary.
+        """
+        route_starts = []
+
+        cur_location = 1
+        while len(route_starts) < self.num_vehicles:
+            var_value = self.get_var(var_dict, 0, cur_location)
+            if var_value == 1.0:
+                route_starts.append(cur_location)
+            cur_location += 1
+
+        return route_starts
+
+    def get_result_next_location(
+        self, var_dict: dict[str, float], cur_location: int
+    ) -> int | None:
+        """
+        Get the next location for a route from the variable dictionary.
+        """
+        for i in range(len(self.locations)):
+            var_value = self.get_var(var_dict, cur_location, i)
+            if var_value == 1.0:
+                return i
+        return None
+
     def x_var(self, i: int, j: int) -> int:
         return self.x[i * self.num_locations + j]
 

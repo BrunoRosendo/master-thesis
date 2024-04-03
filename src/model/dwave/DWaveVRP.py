@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from dimod import ConstrainedQuadraticModel
+from dimod import ConstrainedQuadraticModel, SampleSet
 
 from src.model.VRP import VRP
 
@@ -82,9 +82,66 @@ class DWaveVRP(ABC, VRP):
         """
         pass
 
+    def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
+        """
+        Re-add the variables that were removed during the simplification.
+        """
+
+        replaced_vars = self.get_simplified_variables()
+        for var_name, value in replaced_vars.items():
+            var_dict[var_name] = float(value)
+        return var_dict
+
+    def build_var_dict(self, result: SampleSet) -> (dict[str, float], float):
+        """
+        Builds a dictionary of variable names and their values from the result.
+        Assumes the order of energy returned by the sampler.
+        It takes the simplification step into consideration.
+
+        Returns:
+            dict[str, float]: Dictionary of variable names and their values.
+            float: Energy of the best solution.
+        """
+
+        for i, var_dict in enumerate(result):
+            is_feasible = result.record.is_feasible[i]
+            energy = result.record.energy[i]
+            if is_feasible:
+                if self.simplify:
+                    var_dict = self.re_add_variables(dict(var_dict))
+                return var_dict, energy
+
+        raise Exception("The solution is infeasible, aborting!")
+
+    @abstractmethod
+    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
+        """
+        Get the starting location for each route from the variable dictionary.
+        """
+        pass
+
+    @abstractmethod
+    def get_result_next_location(
+        self, var_dict: dict[str, float], cur_location: int
+    ) -> int | None:
+        """
+        Get the next location for a route from the variable dictionary.
+        """
+        pass
+
     @abstractmethod
     def get_var_name(self, i: int, j: int, k: int | None) -> str:
         """
         Get the variable name for the given indices.
         """
         pass
+
+    def get_var(
+        self, var_dict: dict[str, float], i: int, j: int, k: int | None = None
+    ) -> float:
+        """
+        Get the variable value for the given indices.
+        """
+
+        var_name = self.get_var_name(i, j, k)
+        return round(var_dict[var_name])
