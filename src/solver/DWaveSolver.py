@@ -3,6 +3,10 @@ from dimod import ExactCQMSolver, Sampler
 from src.model.VRPSolution import VRPSolution
 from src.model.dwave.DWaveVRP import DWaveVRP
 from src.model.dwave.cvrp.DWaveConstantCVRP import DWaveConstantCVRP
+from src.model.dwave.cvrp.DWaveInfiniteCVRP import DWaveInfiniteCVRP
+from src.model.dwave.cvrp.DWaveMultiCVRP import DWaveMultiCVRP
+from src.model.dwave.rpp.DWaveCapacityRPP import DWaveCapacityRPP
+from src.model.dwave.rpp.DWaveInfiniteRPP import DWaveInfiniteRPP
 from src.solver.VRPSolver import VRPSolver
 
 DEFAULT_SAMPLER = ExactCQMSolver()
@@ -50,10 +54,39 @@ class DWaveSolver(VRPSolver):
         pass
 
     def get_model(self) -> DWaveVRP:
-        return DWaveConstantCVRP(
-            self.num_vehicles,
-            self.distance_matrix,
-            self.locations,
-            self.simplify,
-            self.capacities,
+        if self.use_rpp:
+            if self.use_capacity:
+                return DWaveCapacityRPP(
+                    self.num_vehicles,
+                    self.trips,
+                    self.distance_matrix,
+                    self.locations,
+                    (
+                        [self.capacities] * self.num_vehicles
+                        if self.same_capacity
+                        else self.capacities
+                    ),
+                )
+            return DWaveInfiniteRPP(
+                self.num_vehicles,
+                self.trips,
+                self.distance_matrix,
+                self.locations,
+            )
+
+        if not self.use_capacity:
+            return DWaveInfiniteCVRP(
+                self.num_vehicles, self.distance_matrix, self.locations, self.simplify
+            )
+        if self.same_capacity:
+            return DWaveConstantCVRP(
+                self.num_vehicles,
+                self.distance_matrix,
+                self.locations,
+                self.simplify,
+                self.capacities,
+            )
+
+        return DWaveMultiCVRP(
+            self.num_vehicles, self.distance_matrix, self.capacities, self.locations
         )

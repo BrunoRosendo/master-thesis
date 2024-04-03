@@ -1,11 +1,12 @@
+import dimod
 import numpy as np
 
-from src.model.cplex.CplexVRP import CplexVRP
+from src.model.dwave.DWaveVRP import DWaveVRP
 
 
-class CplexInfiniteRPP(CplexVRP):
+class DWaveInfiniteRPP(DWaveVRP):
     """
-    A class to represent a CPLEX math formulation of the RPP model with an infinite capacity.
+    A class to represent a CQM DWave math formulation of the RPP model with an infinite capacity.
     Note that this model assumes a starting point with no cost to the first node for each vehicle,
     as to avoid the need for a depot.
 
@@ -35,6 +36,8 @@ class CplexInfiniteRPP(CplexVRP):
         self.epsilon = 0  # TODO Check this value
         self.normalization_factor = np.max(distance_matrix) + self.epsilon
 
+        self.copy_vars = False
+
         super().__init__(num_vehicles, trips, distance_matrix, locations, True, True)
 
     def create_vars(self):
@@ -45,23 +48,28 @@ class CplexInfiniteRPP(CplexVRP):
         s: step
         """
 
-        self.x = self.cplex.binary_var_cube(
-            self.num_vehicles, self.num_used_locations + 1, self.num_steps, name="x"
+        self.x = dimod.BinaryArray(
+            [
+                self.get_var_name(k, i, s)
+                for k in range(self.num_vehicles)
+                for i in range(self.num_locations + 1)
+                for s in range(self.num_steps)
+            ]
         )
 
     def create_objective(self):
         """
-        Create the objective function for the CPLEX model. The cost ignores the starting point.
+        Create the objective function for the CQM model. The cost ignores the starting point.
         The trip incentive is subtracted from the cost.
         """
 
-        cost = self.cplex.sum(
+        cost = dimod.quicksum(
             self.distance_matrix[self.used_locations_indices[i - 1]][
                 self.used_locations_indices[j - 1]
             ]
             / self.normalization_factor
-            * self.x[k, i, s]
-            * self.x[k, j, s + 1]
+            * self.x_var(k, i, s)
+            * self.x_var(k, j, s + 1)
             for k in range(self.num_vehicles)
             for i in range(1, self.num_used_locations + 1)
             for j in range(1, self.num_used_locations + 1)
@@ -69,8 +77,8 @@ class CplexInfiniteRPP(CplexVRP):
         )
 
         # We assume the weight of returning to start as 1 (max)
-        return_to_start_penalty = self.cplex.sum(
-            self.x[k, i, s] * self.x[k, 0, s + 1]
+        return_to_start_penalty = dimod.quicksum(
+            self.x_var(k, i, s) * self.x_var(k, 0, s + 1)
             for k in range(self.num_vehicles)
             for i in range(1, self.num_used_locations + 1)
             for s in range(self.num_steps - 1)
@@ -78,11 +86,11 @@ class CplexInfiniteRPP(CplexVRP):
 
         trip_incentive = self.create_trip_incentive()
 
-        self.cplex.minimize(cost + return_to_start_penalty - trip_incentive)
+        self.cqm.set_objective(cost + return_to_start_penalty - trip_incentive)
 
     def create_constraints(self):
         """
-        Create the constraints for the CPLEX model.
+        Create the constraints for the CQM model.
         """
 
         self.create_location_constraints()
@@ -94,13 +102,14 @@ class CplexInfiniteRPP(CplexVRP):
         """
 
         for i in range(1, self.num_used_locations + 1):
-            self.cplex.add_constraint(
-                self.cplex.sum(
-                    self.x[k, i, s]
+            self.cqm.add_constraint(
+                dimod.quicksum(
+                    self.x_var(k, i, s)
                     for k in range(self.num_vehicles)
                     for s in range(self.num_steps)
                 )
-                == 1
+                == 1,
+                copy=self.copy_vars,
             )
 
     def create_vehicle_constraints(self):
@@ -112,21 +121,22 @@ class CplexInfiniteRPP(CplexVRP):
 
         for k in range(self.num_vehicles):
             for s in range(final_step):
-                self.cplex.add_constraint(
-                    self.cplex.sum(
-                        self.x[k, i, s] for i in range(self.num_used_locations + 1)
+                self.cqm.add_constraint(
+                    dimod.quicksum(
+                        self.x_var(k, i, s) for i in range(self.num_used_locations + 1)
                     )
-                    == 1
+                    == 1,
+                    copy=self.copy_vars,
                 )
 
-            # Half-hot constraint meant to reduce variables in the last step
-            self.cplex.add_constraint(
-                self.cplex.sum(
-                    self.x[k, i, final_step]
-                    for i in range(1, self.num_used_locations + 1)
+                # Half-hot constraint meant to reduce variables in the last step
+                self.cqm.add_constraint(
+                    dimod.quicksum(
+                        self.x_var(k, i, final_step)
+                        for i in range(1, self.num_used_locations + 1)
+                    )
+                    <= 1
                 )
-                <= 1
-            )
 
     def create_trip_incentive(self):
         """
@@ -135,9 +145,9 @@ class CplexInfiniteRPP(CplexVRP):
         which would require more variables.
         """
 
-        return self.cplex.sum(
-            self.x[k, self.used_locations_indices.index(i) + 1, s1]
-            * self.x[k, self.used_locations_indices.index(j) + 1, s2]
+        return dimod.quicksum(
+            self.x_var(k, self.used_locations_indices.index(i) + 1, s1)
+            * self.x_var(k, self.used_locations_indices.index(j) + 1, s2)
             for k in range(self.num_vehicles)
             for i, j, _ in self.trips
             for s1 in range(self.num_steps - 1)
@@ -173,81 +183,15 @@ class CplexInfiniteRPP(CplexVRP):
 
         return variables
 
+    def x_var(self, k: int, i: int, s: int) -> int:
+        return self.x[k * self.num_locations * self.num_steps + i * self.num_steps + s]
+
     def get_used_locations(self) -> list[int]:
         """
         Get the indices of the locations used in the problem. This helps reduce the number of variables.
         """
 
         return list({location for trip in self.trips for location in trip[:2]})
-
-    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
-        """
-        Get the starting location for each route from the variable dictionary.
-        """
-
-        route_starts = []
-
-        for k in range(self.num_vehicles):
-            for s in range(self.num_steps):
-                if self.get_var(var_dict, k, 0, s) == 0.0:
-                    start = self.get_result_location(var_dict, k, s)
-                    route_starts.append(start)
-                    break
-
-        return route_starts
-
-    def get_result_next_location(
-        self, var_dict: dict[str, float], cur_location: int
-    ) -> int | None:
-        """
-        Get the next location for a route from the variable dictionary.
-        """
-
-        cplex_location = self.used_locations_indices.index(cur_location) + 1
-
-        for k in range(self.num_vehicles):
-            for s in range(self.num_steps - 1):
-                if self.get_var(var_dict, k, cplex_location, s) == 1.0:
-                    return self.get_result_location(var_dict, k, s + 1)
-
-        return None
-
-    def get_result_location(
-        self, var_dict: dict[str, float], k: int, s: int
-    ) -> int | None:
-        """
-        Get the location for a vehicle at a given step.
-        """
-
-        for i, location in enumerate(self.used_locations_indices):
-            if self.get_var(var_dict, k, i + 1, s) == 1.0:
-                return location
-
-        return None
-
-    def is_result_feasible(self, var_dict: dict[str, float]) -> bool:
-        """
-        Check if the result is feasible by validating the trip constraints.
-        This post-processing is needed because the model uses a trip incentive instead of constraints.
-        However, the feasible solutions will be chosen if they exist. This removes false positives.
-        """
-
-        for i, j, _ in self.trips:
-            i_var = self.used_locations_indices.index(i) + 1
-            j_var = self.used_locations_indices.index(j) + 1
-
-            trip_sum = sum(
-                self.get_var(var_dict, k, i_var, s1)
-                * self.get_var(var_dict, k, j_var, s2)
-                for k in range(self.num_vehicles)
-                for s1 in range(self.num_steps - 1)
-                for s2 in range(s1 + 1, self.num_steps)
-            )
-
-            if trip_sum < 1:
-                return False
-
-        return True
 
     def get_var_name(self, k: int, i: int, s: int | None = None) -> str:
         """
