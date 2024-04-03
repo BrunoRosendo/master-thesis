@@ -1,16 +1,13 @@
 from abc import ABC, abstractmethod
 
-from docplex.mp.model import Model
-from qiskit_optimization import QuadraticProgram
-from qiskit_optimization.algorithms import OptimizationResult
-from qiskit_optimization.translators import from_docplex_mp
+from dimod import ConstrainedQuadraticModel, SampleSet
 
 from src.model.VRP import VRP
 
 
-class CplexVRP(ABC, VRP):
+class DWaveVRP(ABC, VRP):
     """
-    A class to represent a CPLEX math formulation of the VRP model.
+    A class to represent a DWave Ocean formulation of the VRP model.
 
     Attributes:
         num_vehicles (int): Number of vehicles available.
@@ -18,8 +15,7 @@ class CplexVRP(ABC, VRP):
         distance_matrix (list): Matrix with the distance between each pair of locations.
         locations (list): List of coordinates for each location.
         use_deliveries (bool): Whether the problem uses deliveries or not.
-        cplex (Model): CPLEX model for the CVRP
-        simplify (bool): Whether to simplify the problem by removing unnecessary variables.
+        cqm (ConstrainedQuadraticModel): DWave Ocean model for the VRP
     """
 
     def __init__(
@@ -36,48 +32,27 @@ class CplexVRP(ABC, VRP):
         )
 
         self.simplify = simplify
-        self.cplex = Model("CVRP")
-        self.build_cplex()
+        self.cqm = ConstrainedQuadraticModel()
+        self.build_cqm()
 
-    def build_cplex(self):
+    def build_cqm(self):
         """
-        Builds the CPLEX model for CVRP.
+        Builds the CQM DWave model for VRP.
         """
 
         self.create_vars()
         self.create_objective()
         self.create_constraints()
 
-    def quadratic_program(self) -> QuadraticProgram:
+    def constrained_quadratic_model(self) -> ConstrainedQuadraticModel:
         """
-        Builds the quadratic program for CVRP, based on CPLEX.
+        Returns the constrained quadratic model for VRP, based on DWave Ocean.
+        Removes unnecessary constraints if simplify is set to True.
         """
 
-        qp = from_docplex_mp(self.cplex)
         if self.simplify:
-            qp = qp.substitute_variables(self.get_simplified_variables())
-        return qp
-
-    @abstractmethod
-    def create_vars(self):
-        """
-        Create the variables for the CPLEX model.
-        """
-        pass
-
-    @abstractmethod
-    def create_objective(self):
-        """
-        Create the objective function for the CPLEX model.
-        """
-        pass
-
-    @abstractmethod
-    def create_constraints(self):
-        """
-        Create the constraints for the CPLEX model.
-        """
-        pass
+            self.cqm.fix_variables(self.get_simplified_variables())
+        return self.cqm
 
     @abstractmethod
     def get_simplified_variables(self) -> dict[str, int]:
@@ -86,23 +61,56 @@ class CplexVRP(ABC, VRP):
         """
         pass
 
+    @abstractmethod
+    def create_vars(self):
+        """
+        Create the variables for the CQM model.
+        """
+        pass
+
+    @abstractmethod
+    def create_objective(self):
+        """
+        Create the objective function for the CQM model.
+        """
+        pass
+
+    @abstractmethod
+    def create_constraints(self):
+        """
+        Create the constraints for the CQM model.
+        """
+        pass
+
     def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
         """
         Re-add the variables that were removed during the simplification.
         """
+
         replaced_vars = self.get_simplified_variables()
         for var_name, value in replaced_vars.items():
             var_dict[var_name] = float(value)
         return var_dict
 
-    def build_var_dict(self, result: OptimizationResult) -> dict[str, float]:
+    def build_var_dict(self, result: SampleSet) -> (dict[str, float], float):
         """
-        Build a dictionary with the variable values from the result. It takes the simplification step into consideration
+        Builds a dictionary of variable names and their values from the result.
+        Assumes the order of energy returned by the sampler.
+        It takes the simplification step into consideration.
+
+        Returns:
+            dict[str, float]: Dictionary of variable names and their values.
+            float: Energy of the best solution.
         """
-        var_dict = result.variables_dict
+        try:
+            solution = result.filter(lambda s: s.is_feasible).lowest().first
+        except ValueError:
+            raise Exception("The solution is infeasible, aborting!")
+
+        var_dict = solution.sample
         if self.simplify:
-            var_dict = self.re_add_variables(var_dict)
-        return var_dict
+            var_dict = self.re_add_variables(dict(var_dict))
+        return var_dict, solution.energy
 
     @abstractmethod
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
@@ -119,12 +127,6 @@ class CplexVRP(ABC, VRP):
         Get the next location for a route from the variable dictionary.
         """
         pass
-
-    def is_result_feasible(self, var_dict: dict[str, float]) -> bool:
-        """
-        Check if the result is feasible. This method can optionally be implemented by the subclass.
-        """
-        return True
 
     @abstractmethod
     def get_var_name(self, i: int, j: int, k: int | None) -> str:

@@ -1,7 +1,7 @@
-from src.model.cplex.rpp.InfiniteRPP import InfiniteRPP
+from src.model.cplex.rpp.CplexInfiniteRPP import CplexInfiniteRPP
 
 
-class CapacityRPP(InfiniteRPP):
+class CplexCapacityRPP(CplexInfiniteRPP):
     """
     A class to represent a CPLEX math formulation of the RPP model with a capacity constraint for each vehicle.
     Note that this model assumes a starting point with no cost to the first node for each vehicle,

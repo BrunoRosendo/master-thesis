@@ -3,7 +3,7 @@ import numpy as np
 from src.model.cplex.CplexVRP import CplexVRP
 
 
-class InfiniteRPP(CplexVRP):
+class CplexInfiniteRPP(CplexVRP):
     """
     A class to represent a CPLEX math formulation of the RPP model with an infinite capacity.
     Note that this model assumes a starting point with no cost to the first node for each vehicle,
@@ -69,7 +69,6 @@ class InfiniteRPP(CplexVRP):
         )
 
         # We assume the weight of returning to start as 1 (max)
-        # TODO Try to formulate without starting point
         return_to_start_penalty = self.cplex.sum(
             self.x[k, i, s] * self.x[k, 0, s + 1]
             for k in range(self.num_vehicles)
@@ -164,11 +163,11 @@ class InfiniteRPP(CplexVRP):
             # It's impossible to go from start to a drop-off and to end at a pick-up
             for i, j, _ in self.trips:
                 variables[
-                    self.get_var_name(k, self.used_locations_indices.index(j), 1)
+                    self.get_var_name(k, self.used_locations_indices.index(j) + 1, 1)
                 ] = 0
                 variables[
                     self.get_var_name(
-                        k, self.used_locations_indices.index(i), self.num_steps - 1
+                        k, self.used_locations_indices.index(i) + 1, self.num_steps - 1
                     )
                 ] = 0
 

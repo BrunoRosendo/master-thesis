@@ -20,11 +20,11 @@ from qiskit_optimization.converters import (
 
 from src.model.VRPSolution import VRPSolution
 from src.model.cplex.CplexVRP import CplexVRP
-from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
-from src.model.cplex.cvrp.InfiniteCVRP import InfiniteCVRP
-from src.model.cplex.cvrp.MultiCVRP import MultiCVRP
-from src.model.cplex.rpp.CapacityRPP import CapacityRPP
-from src.model.cplex.rpp.InfiniteRPP import InfiniteRPP
+from src.model.cplex.cvrp.CplexConstantCVRP import CplexConstantCVRP
+from src.model.cplex.cvrp.CplexInfiniteCVRP import CplexInfiniteCVRP
+from src.model.cplex.cvrp.CplexMultiCVRP import CplexMultiCVRP
+from src.model.cplex.rpp.CplexCapacityRPP import CplexCapacityRPP
+from src.model.cplex.rpp.CplexInfiniteRPP import CplexInfiniteRPP
 from src.solver.VRPSolver import VRPSolver
 
 DEFAULT_SAMPLER = Sampler()
@@ -32,7 +32,7 @@ DEFAULT_CLASSIC_OPTIMIZER = COBYLA()
 DEFAULT_PRE_SOLVER = CplexOptimizer()
 
 
-class QuboSolver(VRPSolver):
+class CplexSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with QUBO algorithm, using Qiskit.
 
@@ -232,7 +232,7 @@ class QuboSolver(VRPSolver):
 
         if self.use_rpp:
             if self.use_capacity:
-                return CapacityRPP(
+                return CplexCapacityRPP(
                     self.num_vehicles,
                     self.trips,
                     self.distance_matrix,
@@ -243,7 +243,7 @@ class QuboSolver(VRPSolver):
                         else self.capacities
                     ),
                 )
-            return InfiniteRPP(
+            return CplexInfiniteRPP(
                 self.num_vehicles,
                 self.trips,
                 self.distance_matrix,
@@ -251,11 +251,11 @@ class QuboSolver(VRPSolver):
             )
 
         if not self.use_capacity:
-            return InfiniteCVRP(
+            return CplexInfiniteCVRP(
                 self.num_vehicles, self.distance_matrix, self.locations, self.simplify
             )
         if self.same_capacity:
-            return ConstantCVRP(
+            return CplexConstantCVRP(
                 self.num_vehicles,
                 self.distance_matrix,
                 self.capacities,
@@ -263,6 +263,6 @@ class QuboSolver(VRPSolver):
                 self.simplify,
             )
 
-        return MultiCVRP(
+        return CplexMultiCVRP(
             self.num_vehicles, self.distance_matrix, self.capacities, self.locations
         )

@@ -1,9 +1,9 @@
-from src.model.cplex.cvrp.ConstantCVRP import ConstantCVRP
+from src.model.cplex.cvrp.CplexConstantCVRP import CplexConstantCVRP
 
 
-class InfiniteCVRP(ConstantCVRP):
+class CplexInfiniteCVRP(CplexConstantCVRP):
     """
-    A class to represent a CPLEX math formulation of the CVRP model with all vehicles having the same capacity.
+    A class to represent a CPLEX math formulation of the CVRP model with all vehicles having infinite capacity.
 
     Attributes:
         num_vehicles (int): Number of vehicles available.
@@ -36,8 +36,6 @@ class InfiniteCVRP(ConstantCVRP):
                     self.u[i - 1] - self.u[j - 1] + self.num_locations * self.x[i, j]
                     <= self.num_locations - 1
                 )
-
-            self.cplex.add_constraint(self.u[i - 1] >= 1)
 
     def get_u_upper_bound(self):
         """
