@@ -35,8 +35,10 @@ class CplexConstantCVRP(CplexVRP):
         )
 
         self.u = self.cplex.integer_var_list(
-            range(1, self.num_locations), name="u", lb=0, ub=self.get_u_upper_bound()
+            range(1, self.num_locations), name="u", ub=self.get_u_upper_bound()
         )
+        for i, var in enumerate(self.u):
+            var.set_lb(self.get_u_lower_bound(i + 1))
 
     def create_objective(self):
         """
@@ -107,8 +109,6 @@ class CplexConstantCVRP(CplexVRP):
                     <= self.capacity - self.get_location_demand(j)
                 )
 
-            self.cplex.add_constraint(self.u[i - 1] >= self.get_location_demand(i))
-
     def get_simplified_variables(self) -> dict[str, int]:
         """
         Get the variables that are relevant for the solution.
@@ -148,6 +148,13 @@ class CplexConstantCVRP(CplexVRP):
         Get the name of a variable.
         """
         return f"x_{i}_{j}"
+
+    def get_u_lower_bound(self, i: int) -> int:
+        """
+        Get the lower bound for the u variable, at the given index.
+        """
+
+        return self.get_location_demand(i)
 
     def get_u_upper_bound(self) -> int:
         """

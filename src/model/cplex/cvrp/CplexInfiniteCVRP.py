@@ -37,8 +37,6 @@ class CplexInfiniteCVRP(CplexConstantCVRP):
                     <= self.num_locations - 1
                 )
 
-            self.cplex.add_constraint(self.u[i - 1] >= 1)
-
     def get_u_upper_bound(self):
         """
         Get the upper bound for the variable u.
