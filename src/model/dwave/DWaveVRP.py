@@ -102,16 +102,15 @@ class DWaveVRP(ABC, VRP):
             dict[str, float]: Dictionary of variable names and their values.
             float: Energy of the best solution.
         """
+        try:
+            solution = result.filter(lambda s: s.is_feasible).lowest().first
+        except ValueError:
+            raise Exception("The solution is infeasible, aborting!")
 
-        for i, var_dict in enumerate(result):
-            is_feasible = result.record.is_feasible[i]
-            energy = result.record.energy[i]
-            if is_feasible:
-                if self.simplify:
-                    var_dict = self.re_add_variables(dict(var_dict))
-                return var_dict, energy
-
-        raise Exception("The solution is infeasible, aborting!")
+        var_dict = solution.sample
+        if self.simplify:
+            var_dict = self.re_add_variables(dict(var_dict))
+        return var_dict, solution.energy
 
     @abstractmethod
     def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
