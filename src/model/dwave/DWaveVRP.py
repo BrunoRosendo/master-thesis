@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from dimod import ConstrainedQuadraticModel, SampleSet
+from dimod.sym import Sense
 
 from src.model.VRP import VRP
 
@@ -53,8 +54,10 @@ class DWaveVRP(ABC, VRP):
         if self.simplify:
             self.cqm.fix_variables(self.get_simplified_variables())
 
+            # Check redundant constraint (always true). Other senses don't implement __bool__()
             for key in list(self.cqm.constraints):
-                if self.cqm.constraints[key]:  # Redundant constraint (always true)
+                constraint = self.cqm.constraints[key]
+                if constraint.sense is Sense.Eq and constraint:
                     self.cqm.remove_constraint(key)
 
         return self.cqm
