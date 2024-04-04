@@ -8,7 +8,7 @@ class VRP:
         use_deliveries: bool,
     ):
         """
-        A class to represent a formulation of the CVRP model.
+        A class to represent a formulation of the VRP model.
 
         Attributes:
             num_vehicles (int): Number of vehicles available.

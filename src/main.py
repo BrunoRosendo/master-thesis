@@ -1,7 +1,7 @@
-from src.solver.DWaveSolver import DWaveSolver
+from src.solver.CplexSolver import CplexSolver
 
 if __name__ == "__main__":
-    cvrp = DWaveSolver(
+    cvrp = CplexSolver(
         1,
         2,
         [
