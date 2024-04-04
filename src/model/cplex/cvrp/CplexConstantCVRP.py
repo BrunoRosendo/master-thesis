@@ -85,7 +85,7 @@ class CplexConstantCVRP(CplexVRP):
         Create the constraints that ensure each vehicle starts and ends at the depot.
         """
 
-        self.cplex.add_constraint(
+        a = self.cplex.add_constraint(
             self.cplex.sum(self.x[0, i] for i in range(1, self.num_locations))
             == self.num_vehicles
         )

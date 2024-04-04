@@ -39,3 +39,10 @@ class Adapter(ABC):
         Add the QUBO constraints to the model used.
         """
         pass
+
+    @abstractmethod
+    def model(self) -> object:
+        """
+        Returns the model for VRP, based on the solver.
+        """
+        pass

@@ -38,7 +38,7 @@ class CplexAdapter(Adapter):
         for constraint in self.qubo.constraints:
             self.model.add_constraint(constraint)
 
-    def quadratic_program(self) -> QuadraticProgram:
+    def model(self) -> QuadraticProgram:
         """
         Builds the quadratic program for CVRP, based on CPLEX.
         """

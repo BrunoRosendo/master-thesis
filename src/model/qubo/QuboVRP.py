@@ -73,12 +73,6 @@ class QuboVRP(VRP, ABC):
         """
         pass
 
-    def get_variables(self) -> list[Var]:
-        """
-        Get all the variables in the VRP model.
-        """
-        return self.x + self.u
-
     def re_add_variables(self, var_dict: dict[str, float]) -> dict[str, float]:
         """
         Re-add the variables that were removed during the simplification.
