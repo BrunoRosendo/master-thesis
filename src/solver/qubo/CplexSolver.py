@@ -19,20 +19,15 @@ from qiskit_optimization.converters import (
 )
 
 from src.model.VRPSolution import VRPSolution
-from src.model.cplex.CplexVRP import CplexVRP
-from src.model.cplex.cvrp.CplexConstantCVRP import CplexConstantCVRP
-from src.model.cplex.cvrp.CplexInfiniteCVRP import CplexInfiniteCVRP
-from src.model.cplex.cvrp.CplexMultiCVRP import CplexMultiCVRP
-from src.model.cplex.rpp.CplexCapacityRPP import CplexCapacityRPP
-from src.model.cplex.rpp.CplexInfiniteRPP import CplexInfiniteRPP
-from src.solver.VRPSolver import VRPSolver
+from src.model.adapter.CplexAdapter import CplexAdapter
+from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = Sampler()
 DEFAULT_CLASSIC_OPTIMIZER = COBYLA()
 DEFAULT_PRE_SOLVER = CplexOptimizer()
 
 
-class CplexSolver(VRPSolver):
+class CplexSolver(QuboSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with QUBO algorithm, using Qiskit.
 
@@ -60,40 +55,46 @@ class CplexSolver(VRPSolver):
         warm_start=False,
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
     ):
-        self.simplify = simplify
         super().__init__(
-            num_vehicles, capacities, locations, trips, use_rpp, track_progress
+            num_vehicles,
+            capacities,
+            locations,
+            trips,
+            use_rpp,
+            track_progress,
+            simplify,
         )
         self.classical_solver = classical_solver
         self.sampler = sampler
         self.classic_optimizer = classic_optimizer
         self.warm_start = warm_start
         self.pre_solver = pre_solver
+        self.adapter = CplexAdapter(self.model)
 
     def _solve_cvrp(self) -> OptimizationResult:
         """
         Solve the CVRP using QUBO implemented in Qiskit.
         """
-        qp = self.model.quadratic_program()
+        qp = self.adapter.solver_model()
 
         if self.classical_solver:
             print(f"The number of variables is {qp.get_num_vars()}")
             print(qp.prettyprint())
             result = self.solve_classic(qp)
         else:
-            qubo = self.quadratic_to_qubo(qp)
+            qp = self.convert_quadratic_program(qp)
 
-            print(f"The number of variables is {qubo.get_num_vars()}")
-            print(qubo.prettyprint())
+            print(f"The number of variables is {qp.get_num_vars()}")
+            print(qp.prettyprint())
 
-            result = self.solve_qubo(qubo)
+            result = self.solve_qubo(qp)
 
         self.check_feasibility(result)
         return result
 
-    def quadratic_to_qubo(self, qp: QuadraticProgram) -> QuadraticProgram:
+    def convert_quadratic_program(self, qp: QuadraticProgram) -> QuadraticProgram:
         """
-        Convert the quadratic program to a QUBO problem, using the Qiskit converters.
+        Convert the quadratic program to a canonic formulation, using the Qiskit converters.
         """
 
         # Convert inequality constraints
@@ -106,9 +107,9 @@ class CplexSolver(VRPSolver):
 
         # Convert linear equality constraints to penalty terms
         lin_eq_to_penalty = LinearEqualityToPenalty()
-        qubo = lin_eq_to_penalty.convert(qp_bin)
+        qp_penalties = lin_eq_to_penalty.convert(qp_bin)
 
-        return qubo
+        return qp_penalties
 
     def solve_classic(self, qp: QuadraticProgram) -> OptimizationResult:
         """
@@ -167,102 +168,22 @@ class CplexSolver(VRPSolver):
             ]:
                 raise Exception("The problem is infeasible or unbounded, aborting!")
 
-        var_dict = self.model.build_var_dict(result)
-        if not self.model.is_result_feasible(var_dict):
+        self.var_dict = self.build_var_dict(result)
+        if not self.model.is_result_feasible(self.var_dict):
             raise Exception("The solution is infeasible, aborting!")
 
     def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
         """
         Convert the optimizer result to a VRPSolution result.
         """
-        var_dict = self.model.build_var_dict(result)
-        route_starts = self.model.get_result_route_starts(var_dict)
 
-        routes = []
-        loads = []
-        distances = []
-        total_distance = 0
+        return self.model.convert_result(self.var_dict, result.fval)
 
-        for i in range(self.num_vehicles):
-            route = []
-            route_loads = []
-            route_distance = 0
-            cur_load = 0
-
-            index = route_starts[i] if i < len(route_starts) else None
-            previous_index = index if self.use_rpp else self.depot
-            if not self.use_rpp:
-                route.append(self.depot)
-                route_loads.append(0)
-
-            while index is not None:
-                route_distance += self.distance_matrix[previous_index][index]
-                cur_load += self.model.get_location_demand(index)
-                route.append(index)
-                route_loads.append(cur_load)
-
-                if index == self.depot and not self.use_rpp:
-                    break
-
-                previous_index = index
-                index = self.model.get_result_next_location(var_dict, index)
-
-            routes.append(route)
-            distances.append(route_distance)
-            loads.append(route_loads)
-            total_distance += route_distance
-
-        return VRPSolution(
-            self.num_vehicles,
-            self.locations,
-            result.fval,
-            total_distance,
-            routes,
-            distances,
-            self.depot,
-            not self.use_rpp,
-            self.capacities,
-            loads if self.use_capacity else None,
-        )
-
-    def get_model(self) -> CplexVRP:
+    def build_var_dict(self, result: OptimizationResult) -> dict[str, float]:
         """
-        Get a cplex instance of the CVRPModel.
+        Build a dictionary with the variable values from the result. It takes the simplification step into consideration
         """
-
-        if self.use_rpp:
-            if self.use_capacity:
-                return CplexCapacityRPP(
-                    self.num_vehicles,
-                    self.trips,
-                    self.distance_matrix,
-                    self.locations,
-                    (
-                        [self.capacities] * self.num_vehicles
-                        if self.same_capacity
-                        else self.capacities
-                    ),
-                )
-            return CplexInfiniteRPP(
-                self.num_vehicles,
-                self.trips,
-                self.distance_matrix,
-                self.locations,
-            )
-
-        if not self.use_capacity:
-            return CplexInfiniteCVRP(
-                self.num_vehicles, self.distance_matrix, self.locations, self.simplify
-            )
-        if self.same_capacity:
-            return CplexConstantCVRP(
-                self.num_vehicles,
-                self.distance_matrix,
-                self.capacities,
-                self.locations,
-                self.simplify,
-            )
-
-        return CplexMultiCVRP(
-            self.num_vehicles, self.distance_matrix, self.capacities, self.locations
-        )
+        var_dict = result.variables_dict
+        if self.simplify:
+            var_dict = self.model.re_add_variables(var_dict)
+        return var_dict

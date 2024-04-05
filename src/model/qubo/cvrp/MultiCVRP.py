@@ -1,20 +1,18 @@
 import numpy as np
+from docplex.mp.dvar import Var
+from docplex.mp.linear import LinearExpr
 
-from src.model.cplex.CplexVRP import CplexVRP
+from src.model.qubo.QuboVRP import QuboVRP
 
 
-class CplexMultiCVRP(CplexVRP):
+class MultiCVRP(QuboVRP):
     """
-    A class to represent a CPLEX math formulation of the CVRP model with all vehicles having the same capacity.
+    A class to represent a QUBO math formulation of the CVRP model with all vehicles having different capacities.
 
     This model is always be simplified, since some constraints assume the simplification.
 
     Attributes:
-        num_vehicles (int): Number of vehicles available.
         capacities (list): List of vehicle capacities.
-        distance_matrix (list): Matrix with the distance between each pair of locations.
-        locations (list): List of coordinates for each location.
-        cplex (Model): CPLEX model for the CVRP
     """
 
     def __init__(
@@ -30,34 +28,37 @@ class CplexMultiCVRP(CplexVRP):
         self.epsilon = 0  # TODO Check this value
         self.normalization_factor = np.max(distance_matrix) + self.epsilon
 
+        self.copy_vars = False
+
         super().__init__(num_vehicles, [], distance_matrix, locations, False, True)
 
     def create_vars(self):
         """
-        Create the variables for the CPLEX model.
+        Create the variables for the CVRP model.
         """
 
-        self.x = self.cplex.binary_var_cube(
-            self.num_vehicles, self.num_locations, self.num_steps, name="x"
+        self.x.extend(
+            self.model.binary_var(self.get_var_name(k, i, s))
+            for k in range(self.num_vehicles)
+            for i in range(self.num_locations)
+            for s in range(self.num_steps)
         )
 
-    def create_objective(self):
+    def create_objective(self) -> LinearExpr:
         """
-        Create the objective function for the CPLEX model.
+        Create the objective function for the CVRP model.
         """
 
-        objective = self.cplex.sum(
+        return self.model.sum(
             self.distance_matrix[i][j]
             / self.normalization_factor
-            * self.x[k, i, s]
-            * self.x[k, j, s + 1]
+            * self.x_var(k, i, s)
+            * self.x_var(k, j, s + 1)
             for k in range(self.num_vehicles)
             for i in range(self.num_locations)
             for j in range(self.num_locations)
             for s in range(self.num_steps - 1)
         )
-
-        self.cplex.minimize(objective)
 
     def create_constraints(self):
         """
@@ -73,43 +74,42 @@ class CplexMultiCVRP(CplexVRP):
         Create the constraints that ensure each location is visited exactly once.
         """
 
-        for i in range(1, self.num_locations):
-            self.cplex.add_constraint(
-                self.cplex.sum(
-                    self.x[k, i, s]
-                    for k in range(self.num_vehicles)
-                    for s in range(self.num_steps)
-                )
-                == 1
+        self.constraints.extend(
+            self.model.sum(
+                self.x_var(k, i, s)
+                for k in range(self.num_vehicles)
+                for s in range(self.num_steps)
             )
+            == 1
+            for i in range(1, self.num_locations)
+        )
 
     def create_vehicle_constraints(self):
         """
         Create the constraints that ensure each vehicle starts and ends at the depot.
         """
 
-        for k in range(self.num_vehicles):
-            for s in range(self.num_steps):
-                self.cplex.add_constraint(
-                    self.cplex.sum(self.x[k, i, s] for i in range(self.num_locations))
-                    == 1
-                )
+        self.constraints.extend(
+            self.model.sum(self.x_var(k, i, s) for i in range(self.num_locations)) == 1
+            for k in range(self.num_vehicles)
+            for s in range(self.num_steps)
+        )
 
     def create_capacity_constraints(self):
         """
         Create the capacity constraints for the CPLEX model.
         """
 
-        for k in range(self.num_vehicles):
-            for cur_step in range(1, self.num_steps):  # depot has no demand
-                self.cplex.add_constraint(
-                    self.cplex.sum(
-                        self.get_location_demand(i) * self.x[k, i, s]
-                        for i in range(1, self.num_locations)
-                        for s in range(cur_step + 1)
-                    )
-                    <= self.capacities[k]
-                )
+        self.constraints.extend(
+            self.model.sum(
+                self.get_location_demand(i) * self.x_var(k, i, s)
+                for i in range(1, self.num_locations)
+                for s in range(cur_step + 1)
+            )
+            <= self.capacities[k]
+            for k in range(self.num_vehicles)
+            for cur_step in range(1, self.num_steps)
+        )
 
     def get_simplified_variables(self) -> dict[str, int]:
         """
@@ -176,3 +176,13 @@ class CplexMultiCVRP(CplexVRP):
         """
 
         return f"x_{k}_{i}_{s}"
+
+    def x_var(self, k: int, i: int, s: int) -> Var:
+        return self.x[k * self.num_locations * self.num_steps + i * self.num_steps + s]
+
+    def get_capacity(self) -> int | list[int] | None:
+        """
+        Get the capacity of the vehicles.
+        """
+
+        return self.capacities

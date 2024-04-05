@@ -6,9 +6,10 @@ class VRP:
         distance_matrix: list[list[int]],
         locations: list[tuple[int, int]],
         use_deliveries: bool,
+        depot: int | None = 0,
     ):
         """
-        A class to represent a formulation of the CVRP model.
+        A class to represent a formulation of the VRP model.
 
         Attributes:
             num_vehicles (int): Number of vehicles available.
@@ -16,6 +17,7 @@ class VRP:
             distance_matrix (list): Matrix with the distance between each pair of locations.
             locations (list): List of coordinates for each location.
             use_deliveries (bool): Whether the problem uses deliveries or not.
+            depot (int | None): Index of the depot location, if it exists.
         """
 
         self.num_vehicles = num_vehicles
@@ -24,6 +26,7 @@ class VRP:
         self.num_locations = len(distance_matrix)
         self.locations = locations
         self.use_deliveries = use_deliveries
+        self.depot = depot
 
     def get_location_demand(self, idx: int) -> int:
         """

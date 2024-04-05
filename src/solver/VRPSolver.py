@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 from src.model.VRP import VRP
 from src.model.VRPSolution import VRPSolution
+from src.model.qubo.QuboVRP import QuboVRP
 
 
 class VRPSolver(ABC):
@@ -17,9 +18,10 @@ class VRPSolver(ABC):
         locations (list): List of coordinates for each location.
         trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
         distance_matrix (list): Matrix with the distance between each pair of locations.
-        model (VRP): The CVRP model instance.
         use_rpp (bool): Whether the problem uses the Ride Pooling Problem (RPP) or not.
         track_progress (bool): Whether to track the progress of the solver or not.
+        simplify (bool): Whether to simplify the problem by removing unnecessary variables.
+        model (QuboVRP): VRP instance of the model.
     """
 
     def __init__(
@@ -30,6 +32,7 @@ class VRPSolver(ABC):
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         track_progress: bool,
+        simplify: bool = True,
     ):
         if capacities is None:
             self.use_capacity = False
@@ -48,6 +51,7 @@ class VRPSolver(ABC):
         self.trips = trips
         self.use_rpp = use_rpp
         self.track_progress = track_progress
+        self.simplify = simplify
         self.distance_matrix = self.compute_distance()
         self.model = self.get_model()
 
@@ -81,16 +85,16 @@ class VRPSolver(ABC):
         """
         pass
 
-    @abstractmethod
-    def get_model(self) -> VRP:
-        """
-        Get the CVRPModel instance.
-        """
-        pass
-
     def solve(self) -> VRPSolution:
         """
         Solve the CVRP.
         """
         result = self._solve_cvrp()
         return self._convert_solution(result)
+
+    @abstractmethod
+    def get_model(self) -> VRP:
+        """
+        Get a VRP instance of the model.
+        """
+        pass

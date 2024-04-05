@@ -1,17 +1,15 @@
-from src.model.cplex.CplexVRP import CplexVRP
+from docplex.mp.dvar import Var
+from docplex.mp.linear import LinearExpr
+
+from src.model.qubo.QuboVRP import QuboVRP
 
 
-class CplexConstantCVRP(CplexVRP):
+class ConstantCVRP(QuboVRP):
     """
-    A class to represent a CPLEX math formulation of the CVRP model with all vehicles having the same capacity.
+    A class to represent a QUBO math formulation of the CVRP model with all vehicles having the same capacity.
 
     Attributes:
-        num_vehicles (int): Number of vehicles available.
-        distance_matrix (list): Matrix with the distance between each pair of locations.
         capacity (int): Capacity of each vehicle.
-        locations (list): List of coordinates for each location.
-        cplex (Model): CPLEX model for the CVRP
-        simplify (bool): Whether to simplify the problem by removing unnecessary variables.
     """
 
     def __init__(
@@ -27,34 +25,36 @@ class CplexConstantCVRP(CplexVRP):
 
     def create_vars(self):
         """
-        Create the variables for the CPLEX model.
+        Create the variables for the CVRP model.
         """
 
-        self.x = self.cplex.binary_var_matrix(
-            self.num_locations, self.num_locations, name="x"
-        )
-
-        self.u = self.cplex.integer_var_list(
-            range(1, self.num_locations), name="u", ub=self.get_u_upper_bound()
-        )
-        for i, var in enumerate(self.u):
-            var.set_lb(self.get_u_lower_bound(i + 1))
-
-    def create_objective(self):
-        """
-        Create the objective function for the CPLEX model.
-        """
-
-        objective = self.cplex.sum(
-            self.distance_matrix[i][j] * self.x[i, j]
+        self.x.extend(
+            self.model.binary_var(self.get_var_name(i, j))
             for i in range(self.num_locations)
             for j in range(self.num_locations)
         )
-        self.cplex.minimize(objective)
+
+        self.u.extend(
+            self.model.integer_var(
+                self.get_u_lower_bound(i), self.get_u_upper_bound(), f"u_{i}"
+            )
+            for i in range(1, self.num_locations)
+        )
+
+    def create_objective(self) -> LinearExpr:
+        """
+        Create the objective function for the CVRP model.
+        """
+
+        return self.model.sum(
+            self.distance_matrix[i][j] * self.x_var(i, j)
+            for i in range(self.num_locations)
+            for j in range(self.num_locations)
+        )
 
     def create_constraints(self):
         """
-        Create the constraints for the CPLEX model.
+        Create the constraints for the CVRP model.
         """
 
         self.create_location_constraints()
@@ -66,32 +66,35 @@ class CplexConstantCVRP(CplexVRP):
         Create the constraints that ensure each location is visited exactly once.
         """
 
-        for i in range(1, self.num_locations):
-            self.cplex.add_constraint(
-                self.cplex.sum(
-                    self.x[i, j] for j in range(self.num_locations) if i != j
-                )
-                == 1
+        self.constraints.extend(
+            self.model.sum(
+                self.x_var(i, j) for j in range(self.num_locations) if i != j
             )
-            self.cplex.add_constraint(
-                self.cplex.sum(
-                    self.x[j, i] for j in range(self.num_locations) if i != j
-                )
-                == 1
+            == 1
+            for i in range(1, self.num_locations)
+        )
+
+        self.constraints.extend(
+            self.model.sum(
+                self.x_var(j, i) for j in range(self.num_locations) if i != j
             )
+            == 1
+            for i in range(1, self.num_locations)
+        )
 
     def create_vehicle_constraints(self):
         """
         Create the constraints that ensure each vehicle starts and ends at the depot.
         """
 
-        self.cplex.add_constraint(
-            self.cplex.sum(self.x[0, i] for i in range(1, self.num_locations))
-            == self.num_vehicles
+        self.constraints.append(
+            self.model.sum(self.x_var(0, i) for i in range(1, self.num_locations))
+            == self.num_vehicles,
         )
-        self.cplex.add_constraint(
-            self.cplex.sum(self.x[i, 0] for i in range(1, self.num_locations))
-            == self.num_vehicles
+
+        self.constraints.append(
+            self.model.sum(self.x_var(i, 0) for i in range(1, self.num_locations))
+            == self.num_vehicles,
         )
 
     def create_subtour_constraints(self):
@@ -99,15 +102,13 @@ class CplexConstantCVRP(CplexVRP):
         Create the constraints that eliminate subtours (MTV).
         """
 
-        for i in range(1, self.num_locations):
-            for j in range(1, self.num_locations):
-                if i == j:
-                    continue
-
-                self.cplex.add_constraint(
-                    self.u[i - 1] - self.u[j - 1] + self.capacity * self.x[i, j]
-                    <= self.capacity - self.get_location_demand(j)
-                )
+        self.constraints.extend(
+            self.u[i - 1] - self.u[j - 1] + self.capacity * self.x_var(i, j)
+            <= self.capacity - self.get_location_demand(j)
+            for i in range(1, self.num_locations)
+            for j in range(1, self.num_locations)
+            if i != j
+        )
 
     def get_simplified_variables(self) -> dict[str, int]:
         """
@@ -137,6 +138,7 @@ class CplexConstantCVRP(CplexVRP):
         """
         Get the next location for a route from the variable dictionary.
         """
+
         for i in range(len(self.locations)):
             var_value = self.get_var(var_dict, cur_location, i)
             if var_value == 1.0:
@@ -145,20 +147,30 @@ class CplexConstantCVRP(CplexVRP):
 
     def get_var_name(self, i: int, j: int, k: int | None = None) -> str:
         """
-        Get the name of a variable.
+        Get the name of a decision variable.
         """
+
         return f"x_{i}_{j}"
+
+    def x_var(self, i: int, j: int, k: int | None = None) -> Var:
+        return self.x[i * self.num_locations + j]
 
     def get_u_lower_bound(self, i: int) -> int:
         """
-        Get the lower bound for the u variable, at the given index.
+        Get the lower bound for the auxiliary variable, at the given index.
         """
 
         return self.get_location_demand(i)
 
     def get_u_upper_bound(self) -> int:
         """
-        Get the upper bound for the u variable.
+        Get the upper bound for the auxiliary variables.
         """
 
+        return self.capacity
+
+    def get_capacity(self) -> int | list[int] | None:
+        """
+        Get the capacity of the vehicles.
+        """
         return self.capacity
