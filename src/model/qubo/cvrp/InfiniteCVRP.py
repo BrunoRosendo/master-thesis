@@ -34,3 +34,10 @@ class InfiniteCVRP(ConstantCVRP):
         """
 
         return self.num_locations
+
+    def get_capacity(self) -> int | list[int] | None:
+        """
+        Get the capacity of the vehicles. In this case, it is infinite.
+        """
+
+        return None

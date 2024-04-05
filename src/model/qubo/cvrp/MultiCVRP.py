@@ -179,3 +179,10 @@ class MultiCVRP(QuboVRP):
 
     def x_var(self, k: int, i: int, s: int) -> Var:
         return self.x[k * self.num_locations * self.num_steps + i * self.num_steps + s]
+
+    def get_capacity(self) -> int | list[int] | None:
+        """
+        Get the capacity of the vehicles.
+        """
+
+        return self.capacities

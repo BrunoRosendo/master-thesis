@@ -42,8 +42,7 @@ class VRPSolution:
         total_distance: int,
         routes: list[list[int]],
         distances: list[int],
-        depot: int,
-        use_depot: bool,
+        depot: int | None,
         capacities: int | list[int] = None,
         loads: list[list[int]] = None,
     ):
@@ -55,7 +54,7 @@ class VRPSolution:
         self.distances = distances
         self.loads = loads
         self.depot = depot
-        self.use_depot = use_depot
+        self.use_depot = depot is not None
         self.capacities = capacities
         self.use_capacity = loads is not None and capacities is not None
 

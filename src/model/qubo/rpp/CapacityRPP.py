@@ -48,3 +48,10 @@ class CapacityRPP(InfiniteRPP):
             for k in range(self.num_vehicles)
             for cur_step in range(1, self.num_steps)
         )
+
+    def get_capacity(self) -> int | list[int] | None:
+        """
+        Get the capacity of the vehicles.
+        """
+
+        return self.capacities

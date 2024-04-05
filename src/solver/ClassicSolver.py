@@ -219,7 +219,6 @@ class ClassicSolver(VRPSolver):
             routes,
             distances,
             self.depot,
-            not self.use_rpp,
             self.capacities,
             loads if self.use_capacity else None,
         )
@@ -231,4 +230,5 @@ class ClassicSolver(VRPSolver):
             self.distance_matrix,
             self.locations,
             self.use_rpp,
+            self.depot,
         )

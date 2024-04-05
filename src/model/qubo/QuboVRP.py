@@ -31,9 +31,10 @@ class QuboVRP(VRP, ABC):
         locations: list[tuple[int, int]],
         use_deliveries: bool,
         simplify: bool,
+        depot: int | None = 0,
     ):
         super().__init__(
-            num_vehicles, trips, distance_matrix, locations, use_deliveries
+            num_vehicles, trips, distance_matrix, locations, use_deliveries, depot
         )
 
         self.simplify = simplify
@@ -129,7 +130,6 @@ class QuboVRP(VRP, ABC):
         var_name = self.get_var_name(i, j, k)
         return round(var_dict[var_name])
 
-    # TODO convert this
     def convert_result(
         self, var_dict: dict[str, float], objective: float
     ) -> VRPSolution:
@@ -137,6 +137,7 @@ class QuboVRP(VRP, ABC):
         Convert the final variables into a VRPSolution result.
         """
 
+        use_depot = self.depot is not None
         route_starts = self.get_result_route_starts(var_dict)
 
         routes = []
@@ -151,8 +152,8 @@ class QuboVRP(VRP, ABC):
             cur_load = 0
 
             index = route_starts[i] if i < len(route_starts) else None
-            previous_index = index if self.use_rpp else self.depot
-            if not self.use_rpp:
+            previous_index = self.depot if use_depot else index
+            if use_depot:
                 route.append(self.depot)
                 route_loads.append(0)
 
@@ -162,7 +163,7 @@ class QuboVRP(VRP, ABC):
                 route.append(index)
                 route_loads.append(cur_load)
 
-                if index == self.depot and not self.use_rpp:
+                if use_depot and index == self.depot:
                     break
 
                 previous_index = index
@@ -181,7 +182,12 @@ class QuboVRP(VRP, ABC):
             routes,
             distances,
             self.depot,
-            not self.use_rpp,
-            self.capacities,
-            loads if self.use_capacity else None,
+            self.get_capacity(),
+            loads if self.get_capacity() else None,
         )
+
+    def get_capacity(self) -> int | list[int] | None:
+        """
+        Get the capacity of the vehicles. This method can optionally be implemented by the subclass.
+        """
+        return None
