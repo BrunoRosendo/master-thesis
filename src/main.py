@@ -1,8 +1,8 @@
-from src.solver.qubo.DWaveSolver import DWaveSolver
+from src.solver.ClassicSolver import ClassicSolver
 
 if __name__ == "__main__":
-    cvrp = DWaveSolver(
-        1,
+    cvrp = ClassicSolver(
+        2,
         6,
         [
             (456, 320),

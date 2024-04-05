@@ -66,6 +66,10 @@ class ClassicSolver(VRPSolver):
 
         search_parameters = self.get_search_parameters()
         or_solution = self.routing.SolveWithParameters(search_parameters)
+
+        if or_solution is None:
+            raise Exception("The solution is infeasible, aborting!")
+
         return or_solution
 
     def distance_callback(self, from_index: any, to_index: any) -> int:
@@ -221,6 +225,7 @@ class ClassicSolver(VRPSolver):
             self.depot,
             self.capacities,
             loads if self.use_capacity else None,
+            not self.use_rpp,
         )
 
     def get_model(self) -> VRP:
