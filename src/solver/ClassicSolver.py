@@ -225,10 +225,6 @@ class ClassicSolver(VRPSolver):
         )
 
     def get_model(self) -> VRP:
-        """
-        Get the CVRPModel instance.
-        """
-
         return VRP(
             self.num_vehicles,
             self.trips,

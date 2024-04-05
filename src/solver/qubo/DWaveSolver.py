@@ -41,13 +41,13 @@ class DWaveSolver(VRPSolver):
             simplify,
         )
         self.sampler = sampler
-        self.adapter = DWaveAdapter(self.qubo)
+        self.adapter = DWaveAdapter(self.model)
 
     def _solve_cvrp(self) -> any:
         """
         Solve the CVRP using Quantum Annealing implemented in DWave.
         """
-        cqm = self.adapter.get_model()
+        cqm = self.adapter.solver_model()
         print(cqm)
 
         result = self.sampler.sample_cqm(cqm)
@@ -59,7 +59,7 @@ class DWaveSolver(VRPSolver):
         """
 
         var_dict, energy = self.build_var_dict(result)
-        return self.qubo.convert_result(var_dict, energy)
+        return self.model.convert_result(var_dict, energy)
 
     def build_var_dict(self, result: SampleSet) -> (dict[str, float], float):
         """
@@ -79,5 +79,5 @@ class DWaveSolver(VRPSolver):
 
         var_dict = solution.sample
         if self.simplify:
-            var_dict = self.qubo.re_add_variables(dict(var_dict))
+            var_dict = self.model.re_add_variables(dict(var_dict))
         return var_dict, solution.energy

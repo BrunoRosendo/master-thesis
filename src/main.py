@@ -1,4 +1,4 @@
-from src.solver.CplexSolver import CplexSolver
+from src.solver.qubo.CplexSolver import CplexSolver
 
 if __name__ == "__main__":
     cvrp = CplexSolver(

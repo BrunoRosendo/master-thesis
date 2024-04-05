@@ -69,13 +69,13 @@ class CplexSolver(VRPSolver):
         self.classic_optimizer = classic_optimizer
         self.warm_start = warm_start
         self.pre_solver = pre_solver
-        self.adapter = CplexAdapter(self.qubo)
+        self.adapter = CplexAdapter(self.model)
 
     def _solve_cvrp(self) -> OptimizationResult:
         """
         Solve the CVRP using QUBO implemented in Qiskit.
         """
-        qp = self.adapter.get_model()
+        qp = self.adapter.solver_model()
 
         if self.classical_solver:
             print(f"The number of variables is {qp.get_num_vars()}")
@@ -169,7 +169,7 @@ class CplexSolver(VRPSolver):
                 raise Exception("The problem is infeasible or unbounded, aborting!")
 
         self.var_dict = self.build_var_dict(result)
-        if not self.qubo.is_result_feasible(self.var_dict):
+        if not self.model.is_result_feasible(self.var_dict):
             raise Exception("The solution is infeasible, aborting!")
 
     def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
@@ -177,7 +177,7 @@ class CplexSolver(VRPSolver):
         Convert the optimizer result to a VRPSolution result.
         """
 
-        return self.qubo.convert_result(self.var_dict, result.fval)
+        return self.model.convert_result(self.var_dict, result.fval)
 
     def build_var_dict(self, result: OptimizationResult) -> dict[str, float]:
         """
@@ -185,5 +185,5 @@ class CplexSolver(VRPSolver):
         """
         var_dict = result.variables_dict
         if self.simplify:
-            var_dict = self.qubo.re_add_variables(var_dict)
+            var_dict = self.model.re_add_variables(var_dict)
         return var_dict

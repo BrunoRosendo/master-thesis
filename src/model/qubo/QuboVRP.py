@@ -129,6 +129,7 @@ class QuboVRP(VRP, ABC):
         var_name = self.get_var_name(i, j, k)
         return round(var_dict[var_name])
 
+    # TODO convert this
     def convert_result(
         self, var_dict: dict[str, float], objective: float
     ) -> VRPSolution:
