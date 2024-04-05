@@ -4,7 +4,7 @@ from docplex.mp.basic import Expr
 from docplex.mp.linear import LinearExpr, ConstantExpr
 from docplex.mp.quad import QuadExpr
 
-from src.model.qubo.adapter.Adapter import Adapter
+from src.model.adapter.Adapter import Adapter
 
 
 class DWaveAdapter(Adapter):

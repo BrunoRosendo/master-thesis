@@ -1,7 +1,7 @@
 from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.translators import from_docplex_mp
 
-from src.model.qubo.adapter.Adapter import Adapter
+from src.model.adapter.Adapter import Adapter
 
 
 class CplexAdapter(Adapter):
