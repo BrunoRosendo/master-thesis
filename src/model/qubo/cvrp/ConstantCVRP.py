@@ -29,20 +29,16 @@ class ConstantCVRP(QuboVRP):
         """
 
         self.x.extend(
-            [
-                self.model.binary_var(self.get_var_name(i, j))
-                for i in range(self.num_locations)
-                for j in range(self.num_locations)
-            ]
+            self.model.binary_var(self.get_var_name(i, j))
+            for i in range(self.num_locations)
+            for j in range(self.num_locations)
         )
 
         self.u.extend(
-            [
-                self.model.integer_var(
-                    self.get_u_lower_bound(i), self.get_u_upper_bound(), f"u_{i}"
-                )
-                for i in range(1, self.num_locations)
-            ]
+            self.model.integer_var(
+                self.get_u_lower_bound(i), self.get_u_upper_bound(), f"u_{i}"
+            )
+            for i in range(1, self.num_locations)
         )
 
     def create_objective(self) -> LinearExpr:

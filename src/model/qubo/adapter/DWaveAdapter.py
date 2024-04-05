@@ -13,10 +13,12 @@ class DWaveAdapter(Adapter):
 
     Attributes:
         model (ConstrainedQuadraticModel): DWave model to be adapted.
+        copy_vars (bool): Flag to indicate if the variables should be copied when adding constraints.
     """
 
     def __init__(self, qubo):
         self.model = ConstrainedQuadraticModel()
+        self.copy_vars = False
         super().__init__(qubo)
 
     def add_vars(self):
@@ -49,6 +51,7 @@ class DWaveAdapter(Adapter):
                 self.expression_to_tuples(constraint.left_expr),
                 constraint.sense.operator_symbol,
                 self.expression_to_tuples(constraint.right_expr),
+                copy=self.copy_vars,
             )
 
     def model(self) -> ConstrainedQuadraticModel:
