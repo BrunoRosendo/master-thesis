@@ -51,7 +51,6 @@ class DWaveAdapter(Adapter):
                 self.expression_to_tuples(constraint.left_expr),
                 constraint.sense.operator_symbol,
                 self.expression_to_tuples(constraint.right_expr),
-                copy=self.copy_vars,
             )
 
     def solver_model(self) -> ConstrainedQuadraticModel:

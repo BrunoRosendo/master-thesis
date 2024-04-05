@@ -20,14 +20,14 @@ from qiskit_optimization.converters import (
 
 from src.model.VRPSolution import VRPSolution
 from src.model.adapter.CplexAdapter import CplexAdapter
-from src.solver.VRPSolver import VRPSolver
+from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = Sampler()
 DEFAULT_CLASSIC_OPTIMIZER = COBYLA()
 DEFAULT_PRE_SOLVER = CplexOptimizer()
 
 
-class CplexSolver(VRPSolver):
+class CplexSolver(QuboSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with QUBO algorithm, using Qiskit.
 

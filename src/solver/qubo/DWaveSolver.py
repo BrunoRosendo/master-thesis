@@ -2,12 +2,12 @@ from dimod import ExactCQMSolver, Sampler, SampleSet
 
 from src.model.VRPSolution import VRPSolution
 from src.model.adapter.DWaveAdapter import DWaveAdapter
-from src.solver.VRPSolver import VRPSolver
+from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = ExactCQMSolver()
 
 
-class DWaveSolver(VRPSolver):
+class DWaveSolver(QuboSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with Quantum Annealing, using DWave's system.
 
