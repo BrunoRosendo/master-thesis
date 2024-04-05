@@ -6,6 +6,7 @@ from docplex.mp.linear import LinearExpr
 from docplex.mp.model import Model
 
 from src.model.VRP import VRP
+from src.model.VRPSolution import VRPSolution
 
 
 class QuboVRP(VRP, ABC):
@@ -127,3 +128,59 @@ class QuboVRP(VRP, ABC):
 
         var_name = self.get_var_name(i, j, k)
         return round(var_dict[var_name])
+
+    def convert_result(
+        self, var_dict: dict[str, float], objective: float
+    ) -> VRPSolution:
+        """
+        Convert the final variables into a VRPSolution result.
+        """
+
+        route_starts = self.get_result_route_starts(var_dict)
+
+        routes = []
+        loads = []
+        distances = []
+        total_distance = 0
+
+        for i in range(self.num_vehicles):
+            route = []
+            route_loads = []
+            route_distance = 0
+            cur_load = 0
+
+            index = route_starts[i] if i < len(route_starts) else None
+            previous_index = index if self.use_rpp else self.depot
+            if not self.use_rpp:
+                route.append(self.depot)
+                route_loads.append(0)
+
+            while index is not None:
+                route_distance += self.distance_matrix[previous_index][index]
+                cur_load += self.get_location_demand(index)
+                route.append(index)
+                route_loads.append(cur_load)
+
+                if index == self.depot and not self.use_rpp:
+                    break
+
+                previous_index = index
+                index = self.get_result_next_location(var_dict, index)
+
+            routes.append(route)
+            distances.append(route_distance)
+            loads.append(route_loads)
+            total_distance += route_distance
+
+        return VRPSolution(
+            self.num_vehicles,
+            self.locations,
+            objective,
+            total_distance,
+            routes,
+            distances,
+            self.depot,
+            not self.use_rpp,
+            self.capacities,
+            loads if self.use_capacity else None,
+        )

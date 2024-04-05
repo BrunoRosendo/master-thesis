@@ -54,7 +54,7 @@ class DWaveAdapter(Adapter):
                 copy=self.copy_vars,
             )
 
-    def model(self) -> ConstrainedQuadraticModel:
+    def get_model(self) -> ConstrainedQuadraticModel:
         """
         Returns the constrained quadratic model for VRP, based on DWave Ocean.
         Removes unnecessary constraints if simplify is set to True.

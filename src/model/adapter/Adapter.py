@@ -41,7 +41,7 @@ class Adapter(ABC):
         pass
 
     @abstractmethod
-    def model(self) -> object:
+    def get_model(self) -> object:
         """
         Returns the model for VRP, based on the solver.
         """
