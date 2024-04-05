@@ -36,7 +36,7 @@ class InfiniteRPP(QuboVRP):
         self.normalization_factor = max(max(distance_matrix)) + self.epsilon
 
         super().__init__(
-            num_vehicles, [], distance_matrix, locations, False, True, None
+            num_vehicles, self.trips, distance_matrix, locations, True, True, None
         )
 
     def create_vars(self):

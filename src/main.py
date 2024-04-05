@@ -3,7 +3,7 @@ from src.solver.qubo.DWaveSolver import DWaveSolver
 if __name__ == "__main__":
     cvrp = DWaveSolver(
         1,
-        10,
+        6,
         [
             (456, 320),
             (228, 0),
