@@ -47,7 +47,7 @@ class InfiniteRPP(QuboVRP):
         self.x.extend(
             self.model.binary_var(self.get_var_name(k, i, s))
             for k in range(self.num_vehicles)
-            for i in range(self.num_locations + 1)
+            for i in range(self.num_used_locations + 1)
             for s in range(self.num_steps)
         )
 
@@ -260,4 +260,6 @@ class InfiniteRPP(QuboVRP):
         return f"x_{k}_{i}_{s}"
 
     def x_var(self, k: int, i: int, s: int) -> Var:
-        return self.x[k * self.num_locations * self.num_steps + i * self.num_steps + s]
+        return self.x[
+            k * (self.num_used_locations + 1) * self.num_steps + i * self.num_steps + s
+        ]
