@@ -1,9 +1,9 @@
-from src.solver.ClassicSolver import ClassicSolver
+from src.solver.qubo.CplexSolver import CplexSolver
 
 if __name__ == "__main__":
-    cvrp = ClassicSolver(
+    cvrp = CplexSolver(
         2,
-        6,
+        None,
         [
             (456, 320),
             (228, 0),
