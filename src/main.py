@@ -5,11 +5,11 @@ from src.solver.qubo.DWaveSolver import DWaveSolver
 if __name__ == "__main__":
     cvrp = DWaveSolver(
         1,
-        None,
+        [10],
         [
             (456, 320),
             (228, 0),
-            # (912, 0),
+            (912, 0),
             # (0, 80),
             # (114, 80),
             # (570, 160),
@@ -29,7 +29,7 @@ if __name__ == "__main__":
             (0, 1, 6),
             # (3, 0, 5),
         ],
-        True,
+        False,
         sampler=ExactSolver(),
         embed_bqm=False,
     )

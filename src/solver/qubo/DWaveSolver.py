@@ -34,6 +34,8 @@ class DWaveSolver(QuboSolver):
     - embed_bqm (bool): Whether to embed the BQM before sampling. This must be true if using a real BQM sampler
     and false otherwise.
     - num_reads (int): Number of reads for the sampler. Defaults to None, decided by the sampler.
+    - adapter (DWaveAdapter): Adapter to convert the QUBO model to the DWave model.
+    - cqm (ConstrainedQuadraticModel): The CQM model to be solved.
     """
 
     def __init__(
@@ -66,19 +68,19 @@ class DWaveSolver(QuboSolver):
         self.use_bqm = not self.is_cqm_sampler(sampler)
         self.embed_bqm = embed_bqm
         self.invert: CQMToBQMInverter | None = None
+        self.cqm = self.adapter.solver_model()
 
     def _solve_cvrp(self) -> SampleSet:
         """
         Solve the CVRP using Quantum Annealing implemented in DWave.
         """
-        cqm = self.adapter.solver_model()
-        print(cqm)
+        print(self.cqm)
 
         if self.use_bqm:
-            result, self.invert = self.sample_as_bqm(cqm)
+            result, self.invert = self.sample_as_bqm(self.cqm)
             return result
 
-        return self.sampler.sample_cqm(cqm, num_reads=self.num_reads)
+        return self.sampler.sample_cqm(self.cqm)
 
     def _convert_solution(self, result: SampleSet) -> VRPSolution:
         """
@@ -100,7 +102,18 @@ class DWaveSolver(QuboSolver):
         """
 
         try:
-            solution = result.filter(lambda s: s.is_feasible).lowest().first
+            solution = (
+                result.filter(
+                    lambda s: (
+                        self.cqm.check_feasible(s.sample)
+                        if self.use_bqm
+                        else s.is_feasible
+                    )
+                )
+                .lowest()
+                .first
+            )
+
         except ValueError:
             raise Exception("The solution is infeasible, aborting!")
 
