@@ -36,6 +36,8 @@ class DWaveSolver(QuboSolver):
     - num_reads (int): Number of reads for the sampler. Defaults to None, decided by the sampler.
     - adapter (DWaveAdapter): Adapter to convert the QUBO model to the DWave model.
     - cqm (ConstrainedQuadraticModel): The CQM model to be solved.
+    - use_bqm (bool): Flag to indicate if the model should be converted to a BQM.
+    - invert (CQMToBQMInverter): Inverter to convert the BQM solution back to the CQM solution.
     """
 
     def __init__(
@@ -64,8 +66,8 @@ class DWaveSolver(QuboSolver):
         self.sampler = sampler
         self.embedding = embedding
         self.num_reads = num_reads
-        self.adapter = DWaveAdapter(self.model)
         self.use_bqm = not self.is_cqm_sampler(sampler)
+        self.adapter = DWaveAdapter(self.model, self.use_bqm)
         self.embed_bqm = embed_bqm
         self.invert: CQMToBQMInverter | None = None
         self.cqm = self.adapter.solver_model()
@@ -102,25 +104,27 @@ class DWaveSolver(QuboSolver):
         """
 
         try:
-            solution = (
-                result.filter(
-                    lambda s: (
-                        self.cqm.check_feasible(s.sample)
-                        if self.use_bqm
-                        else s.is_feasible
-                    )
-                )
-                .lowest()
-                .first
-            )
+            solution = result.filter(self.is_sample_feasible).lowest().first
 
         except ValueError:
             raise Exception("The solution is infeasible, aborting!")
 
-        var_dict = solution.sample
+        var_dict = self.invert(solution.sample) if self.use_bqm else solution.sample
         if self.simplify:
             var_dict = self.model.re_add_variables(dict(var_dict))
         return var_dict, solution.energy
+
+    def is_sample_feasible(self, s):
+        """
+        Check if the sample is feasible (part of SampleSet).
+        @type s: Sample
+        """
+
+        if self.use_bqm:
+            inverted_sample = self.invert(s.sample)
+            return self.cqm.check_feasible(inverted_sample)
+
+        return s.is_feasible
 
     def is_cqm_sampler(self, sampler: Sampler) -> bool:
         """
