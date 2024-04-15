@@ -1,10 +1,12 @@
 from dimod import ConstrainedQuadraticModel
 from dimod.sym import Sense
 from docplex.mp.basic import Expr
+from docplex.mp.dvar import Var
 from docplex.mp.linear import LinearExpr, ConstantExpr
 from docplex.mp.quad import QuadExpr
 
 from src.model.adapter.Adapter import Adapter
+from src.model.qubo.QuboVRP import QuboVRP
 
 
 class DWaveAdapter(Adapter):
@@ -14,11 +16,13 @@ class DWaveAdapter(Adapter):
     Attributes:
         model (ConstrainedQuadraticModel): DWave model to be adapted.
         copy_vars (bool): Flag to indicate if the variables should be copied when adding constraints.
+        use_bqm (bool): Flag to indicate if the model should be converted to a BQM.
     """
 
-    def __init__(self, qubo):
+    def __init__(self, qubo: QuboVRP, use_bqm: bool):
         self.model = ConstrainedQuadraticModel()
         self.copy_vars = False
+        self.use_bqm = use_bqm
         super().__init__(qubo)
 
     def add_vars(self):
@@ -30,8 +34,26 @@ class DWaveAdapter(Adapter):
             self.model.add_variable("BINARY", v.name)
 
         for v in self.qubo.u:
-            self.model.add_variable(
-                "INTEGER", v.name, lower_bound=v.lb, upper_bound=v.ub
+            if self.use_bqm:
+                self.add_bqm_int_var(v)
+            else:
+                self.model.add_variable(
+                    "INTEGER", v.name, lower_bound=v.lb, upper_bound=v.ub
+                )
+
+    def add_bqm_int_var(self, v: Var):
+        """
+        Add an integer variable to the BQM. It differs from CQM because all integer variables
+        must have a lower bound equal to 0. The strategy is to instead add a constraint.
+        """
+
+        self.model.add_variable("INTEGER", v.name, lower_bound=0, upper_bound=v.ub)
+
+        if v.lb > 0:
+            self.model.add_constraint([(v.name, 1)], Sense.Ge, v.lb)
+        else:
+            raise ValueError(
+                "For BQM, integers' lower bound must be greater or equal to 0."
             )
 
     def add_objective(self):
