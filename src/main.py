@@ -1,14 +1,16 @@
-from src.solver.qubo.CplexSolver import CplexSolver
+from dimod import ExactSolver
+
+from src.solver.qubo.DWaveSolver import DWaveSolver
 
 if __name__ == "__main__":
-    cvrp = CplexSolver(
-        2,
+    cvrp = DWaveSolver(
+        1,
         None,
         [
             (456, 320),
             (228, 0),
-            (912, 0),
-            (0, 80),
+            # (912, 0),
+            # (0, 80),
             # (114, 80),
             # (570, 160),
             # (798, 160),
@@ -24,11 +26,12 @@ if __name__ == "__main__":
             # (798, 640),
         ],
         [
-            (2, 1, 6),
-            (3, 0, 5),
+            (0, 1, 6),
+            # (3, 0, 5),
         ],
         True,
-        True,
+        sampler=ExactSolver(),
+        embed_bqm=False,
     )
     result = cvrp.solve()
     result.display()
