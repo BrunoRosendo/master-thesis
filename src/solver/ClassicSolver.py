@@ -36,9 +36,13 @@ class ClassicSolver(VRPSolver):
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
     ):
+        if use_rpp:
+            self.remove_unused_locations(locations, trips)
+
         super().__init__(
             num_vehicles, capacities, locations, trips, use_rpp, track_progress
         )
+
         self.solution_strategy = solution_strategy
         self.local_search_metaheuristic = local_search_metaheuristic
         self.distance_global_span_cost_coefficient = (
@@ -173,6 +177,25 @@ class ClassicSolver(VRPSolver):
         self.distance_matrix.append([0] * len(self.distance_matrix))
         for i in range(len(self.distance_matrix)):
             self.distance_matrix[i].append(0)
+
+    def remove_unused_locations(
+        self, locations: list[tuple[int, int]], trips: list[tuple[int, int, int]]
+    ):
+        """
+        Remove locations that are not used in the trips. Trips are updated to reflect the new indices.
+        """
+
+        used_locations = {loc for trip in trips for loc in trip[:2]}
+        old_to_new_index = {old: new for new, old in enumerate(used_locations)}
+
+        # Mutate locations list
+        locations[:] = [loc for i, loc in enumerate(locations) if i in used_locations]
+
+        # Mutate trips list
+        trips[:] = [
+            (old_to_new_index[trip[0]], old_to_new_index[trip[1]], trip[2])
+            for trip in trips
+        ]
 
     def _convert_solution(self, result: any) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
