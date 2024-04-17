@@ -16,7 +16,7 @@ if __name__ == "__main__":
             (0, 1, 6),
         ],
         True,
-        sampler=get_backend_sampler("ibm_osaka"),
+        sampler=get_backend_sampler(),
     )
     result = cvrp.solve()
     result.display()
