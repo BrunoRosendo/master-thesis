@@ -1,6 +1,9 @@
+import os
+
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
-from qiskit.primitives import Sampler
+from qiskit import IBMQ
+from qiskit.primitives import Sampler, BackendSampler
 from qiskit_algorithms import QAOA
 from qiskit_algorithms.optimizers import COBYLA, Optimizer
 from qiskit_optimization import QuadraticProgram
@@ -50,7 +53,7 @@ class CplexSolver(QuboSolver):
         classical_solver=False,
         simplify=True,
         track_progress=True,
-        sampler: Sampler = DEFAULT_SAMPLER,
+        sampler: Sampler | BackendSampler = DEFAULT_SAMPLER,
         classic_optimizer: Optimizer = DEFAULT_CLASSIC_OPTIMIZER,
         warm_start=False,
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
@@ -187,3 +190,21 @@ class CplexSolver(QuboSolver):
         if self.simplify:
             var_dict = self.model.re_add_variables(var_dict)
         return var_dict
+
+
+def get_backend_sampler(backend: str, hub: str = "ibm-q") -> BackendSampler:
+    """
+    Get a Qiskit sampler for the specified backend.
+    Loads the IBM-Q account using the token from the environment variable.
+    """
+
+    IBMQ.save_account(
+        os.getenv("IBM_TOKEN"),
+        overwrite=True,
+    )
+    IBMQ.load_account()
+
+    provider = IBMQ.get_provider(hub)
+    backend = provider.get_backend(backend)
+
+    return BackendSampler(backend)
