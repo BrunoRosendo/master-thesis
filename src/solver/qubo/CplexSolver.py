@@ -1,8 +1,15 @@
+import os
+
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
 from qiskit.primitives import Sampler
 from qiskit_algorithms import QAOA
 from qiskit_algorithms.optimizers import COBYLA, Optimizer
+from qiskit_ibm_runtime import (
+    QiskitRuntimeService,
+    Session,
+    SamplerV1 as CloudSampler,
+)
 from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.algorithms import (
     CplexOptimizer,
@@ -50,7 +57,7 @@ class CplexSolver(QuboSolver):
         classical_solver=False,
         simplify=True,
         track_progress=True,
-        sampler: Sampler = DEFAULT_SAMPLER,
+        sampler: Sampler | CloudSampler = DEFAULT_SAMPLER,
         classic_optimizer: Optimizer = DEFAULT_CLASSIC_OPTIMIZER,
         warm_start=False,
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
@@ -75,6 +82,7 @@ class CplexSolver(QuboSolver):
         """
         Solve the CVRP using QUBO implemented in Qiskit.
         """
+
         qp = self.adapter.solver_model()
 
         if self.classical_solver:
@@ -187,3 +195,22 @@ class CplexSolver(QuboSolver):
         if self.simplify:
             var_dict = self.model.re_add_variables(var_dict)
         return var_dict
+
+
+def get_backend_sampler(
+    backend_name: str = None, channel: str = "ibm_quantum"
+) -> CloudSampler:
+    """
+    Get a Qiskit sampler for the specified backend.
+    Loads the IBM-Q account using the token from the environment variable.
+    """
+
+    service = QiskitRuntimeService(token=os.getenv("IBM_TOKEN"), channel=channel)
+
+    if backend_name is None:
+        backend = service.least_busy(operational=True, simulator=False)
+    else:
+        backend = service.backend(backend_name)
+
+    session = Session(service, backend)
+    return CloudSampler(session=session)

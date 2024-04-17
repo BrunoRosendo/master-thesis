@@ -1,30 +1,22 @@
-from src.solver.qubo.DWaveSolver import DWaveSolver
+from dotenv import load_dotenv
+
+from src.solver.qubo.CplexSolver import CplexSolver, get_backend_sampler
 
 if __name__ == "__main__":
-    cvrp = DWaveSolver(
-        2,
+    load_dotenv()
+
+    cvrp = CplexSolver(
+        1,
         None,
         [
             (456, 320),
             (228, 0),
-            (912, 0),
-            (0, 80),
-            (114, 80),
-            (570, 160),
-            (798, 160),
-            (342, 240),
         ],
         [
-            (2, 1, 6),
-            (3, 0, 5),
-            (4, 5, 8),
-            (6, 7, 2),
+            (0, 1, 6),
         ],
         True,
-        True,
-        # sampler=DWaveSampler(),
-        # num_reads=3500,
-        # time_limit=10,
+        sampler=get_backend_sampler(),
     )
     result = cvrp.solve()
     result.display()
