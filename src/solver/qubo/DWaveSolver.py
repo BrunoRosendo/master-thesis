@@ -7,6 +7,7 @@ from dimod import (
     ConstrainedQuadraticModel,
     cqm_to_bqm,
     BinaryQuadraticModelStructureError,
+    BinaryQuadraticModel,
 )
 from dimod.constrained.constrained import CQMToBQMInverter
 from dwave.system import EmbeddingComposite
@@ -38,6 +39,7 @@ class DWaveSolver(QuboSolver):
     - cqm (ConstrainedQuadraticModel): The CQM model to be solved.
     - use_bqm (bool): Flag to indicate if the model should be converted to a BQM.
     - invert (CQMToBQMInverter): Inverter to convert the BQM solution back to the CQM solution.
+    - time_limit (int): Time limit for the sampler.
     """
 
     def __init__(
@@ -53,6 +55,7 @@ class DWaveSolver(QuboSolver):
         embedding: type = DEFAULT_EMBEDDING,
         embed_bqm=True,
         num_reads: int = None,
+        time_limit: int = None,
     ):
         super().__init__(
             num_vehicles,
@@ -66,6 +69,7 @@ class DWaveSolver(QuboSolver):
         self.sampler = sampler
         self.embedding = embedding
         self.num_reads = num_reads
+        self.time_limit = time_limit
         self.use_bqm = not self.is_cqm_sampler(sampler)
         self.adapter = DWaveAdapter(self.model, self.use_bqm)
         self.embed_bqm = embed_bqm
@@ -82,7 +86,7 @@ class DWaveSolver(QuboSolver):
             result, self.invert = self.sample_as_bqm(self.cqm)
             return result
 
-        return self.sampler.sample_cqm(self.cqm)
+        return self.sample_cqm()
 
     def _convert_solution(self, result: SampleSet) -> VRPSolution:
         """
@@ -152,14 +156,29 @@ class DWaveSolver(QuboSolver):
         bqm, invert = cqm_to_bqm(cqm)
 
         try:
-            result = (
-                composed_sampler.sample(bqm)  # default value differs from None
-                if self.num_reads is None
-                else composed_sampler.sample(bqm, num_reads=self.num_reads)
-            )
+            return self.sample_bqm(bqm, composed_sampler), invert
         except BinaryQuadraticModelStructureError:
             raise Exception(
                 "The BQM structure is invalid. Make sure `embed_bqm` is set to True when running in a real BQM sampler."
             )
 
-        return result, invert
+    def sample_cqm(self) -> SampleSet:
+        """
+        Sample the CQM using the selected sampler and time limit.
+        """
+        kwargs = {"time_limit": self.time_limit} if self.time_limit else {}
+        return self.sampler.sample_cqm(self.cqm, **kwargs)
+
+    def sample_bqm(
+        self, bqm: BinaryQuadraticModel, sampler: Sampler = None
+    ) -> SampleSet:
+        """
+        Sample the BQM using the selected sampler, number of reads and time limit.
+        """
+
+        sampler = sampler or self.sampler
+        kwargs = {"num_reads": self.num_reads} if self.num_reads else {}
+        if self.time_limit:
+            kwargs["time_limit"] = self.time_limit
+
+        return sampler.sample(bqm, **kwargs)

@@ -1,7 +1,7 @@
-from src.solver.ClassicSolver import ClassicSolver
+from src.solver.qubo.DWaveSolver import DWaveSolver
 
 if __name__ == "__main__":
-    cvrp = ClassicSolver(
+    cvrp = DWaveSolver(
         2,
         None,
         [
@@ -10,24 +10,21 @@ if __name__ == "__main__":
             (912, 0),
             (0, 80),
             (114, 80),
-            # (570, 160),
-            # (798, 160),
-            # (342, 240),
-            # (684, 240),
-            # (570, 400),
-            # (912, 400),
-            # (114, 480),
-            # (228, 480),
-            # (342, 560),
-            # (684, 560),
-            # (0, 640),
-            # (798, 640),
+            (570, 160),
+            (798, 160),
+            (342, 240),
         ],
         [
-            (0, 1, 6),
-            (2, 3, 5),
+            (2, 1, 6),
+            (3, 0, 5),
+            (4, 5, 8),
+            (6, 7, 2),
         ],
         True,
+        True,
+        # sampler=DWaveSampler(),
+        # num_reads=3500,
+        # time_limit=10,
     )
     result = cvrp.solve()
     result.display()
