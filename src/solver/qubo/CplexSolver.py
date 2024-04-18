@@ -4,7 +4,6 @@ from typing import Any
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
 from qiskit.primitives import Sampler
-from qiskit_algorithms import QAOA
 from qiskit_algorithms.optimizers import COBYLA, Optimizer
 from qiskit_ibm_runtime import (
     QiskitRuntimeService,
@@ -28,6 +27,7 @@ from qiskit_optimization.converters import (
 
 from src.model.VRPSolution import VRPSolution
 from src.model.adapter.CplexAdapter import CplexAdapter
+from src.qiskit_algorithms.qiskit_algorithms import QAOA
 from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = Sampler()
