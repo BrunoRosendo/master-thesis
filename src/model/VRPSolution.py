@@ -19,7 +19,7 @@ class VRPSolution:
     - use_capacity (bool): Whether the solution uses vehicle capacity or not.
     """
 
-    COLOR_LIST = [  # TODO: Refine colors
+    COLOR_LIST = [
         "blue",
         "red",
         "green",

@@ -25,7 +25,7 @@ class MultiCVRP(QuboVRP):
         self.capacities = capacities
         self.num_steps = len(distance_matrix) + 1
 
-        self.epsilon = 0  # TODO Check this value
+        self.epsilon = 0
         self.normalization_factor = np.max(distance_matrix) + self.epsilon
 
         self.copy_vars = False

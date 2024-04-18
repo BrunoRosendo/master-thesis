@@ -32,7 +32,7 @@ class InfiniteRPP(QuboVRP):
         self.used_locations_indices = self.get_used_locations()
         self.num_used_locations = len(self.used_locations_indices)
 
-        self.epsilon = 0  # TODO Check this value
+        self.epsilon = 0
         self.normalization_factor = max(max(distance_matrix)) + self.epsilon
 
         super().__init__(
