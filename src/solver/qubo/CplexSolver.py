@@ -1,4 +1,5 @@
 import os
+import time
 
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
@@ -125,7 +126,11 @@ class CplexSolver(QuboSolver):
         """
 
         optimizer = CplexOptimizer(disp=self.track_progress)
+
+        start_time = time.perf_counter_ns()
         result = optimizer.solve(qp)
+        self.run_time = (time.perf_counter_ns() - start_time) // 1000
+
         return result
 
     def solve_qubo(self, qp: QuadraticProgram) -> OptimizationResult:
@@ -146,7 +151,10 @@ class CplexSolver(QuboSolver):
         else:
             optimizer = MinimumEigenOptimizer(qaoa)
 
+        start_time = time.perf_counter_ns()
         result = optimizer.solve(qp)
+        self.run_time = (time.perf_counter_ns() - start_time) // 1000
+
         return result
 
     def qaoa_callback(
@@ -187,7 +195,9 @@ class CplexSolver(QuboSolver):
         Convert the optimizer result to a VRPSolution result.
         """
 
-        return self.model.convert_result(self.var_dict, result.fval, local_run_time)
+        return self.model.convert_result(
+            self.var_dict, result.fval, self.run_time, local_run_time
+        )
 
     def build_var_dict(self, result: OptimizationResult) -> dict[str, float]:
         """

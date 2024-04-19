@@ -98,7 +98,7 @@ class DWaveSolver(QuboSolver):
         """
 
         var_dict, energy = self.build_var_dict(result)
-        timing = result.info["timing"]
+        timing = result.info.get("timing") or {}
         return self.model.convert_result(
             var_dict,
             energy,

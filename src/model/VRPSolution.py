@@ -222,6 +222,8 @@ class VRPSolution:
     def print(self):
         """Print the solution to the console."""
 
+        print()
+
         if self.run_time is not None:
             print(f"Solver runtime: {self.run_time}µs")
 

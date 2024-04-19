@@ -1,12 +1,11 @@
 from dotenv import load_dotenv
-from dwave.system import DWaveSampler
 
-from src.solver.qubo.DWaveSolver import DWaveSolver
+from src.solver.qubo.CplexSolver import CplexSolver
 
 if __name__ == "__main__":
     load_dotenv()
 
-    cvrp = DWaveSolver(
+    cvrp = CplexSolver(
         1,
         None,
         [
@@ -17,7 +16,6 @@ if __name__ == "__main__":
             (0, 1, 6),
         ],
         True,
-        sampler=DWaveSampler(),
     )
     result = cvrp.solve()
     result.print()
