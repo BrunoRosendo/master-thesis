@@ -134,9 +134,9 @@ class QuboVRP(VRP, ABC):
         self,
         var_dict: dict[str, float],
         objective: float,
-        run_time: int,
-        local_run_time: int,
-        qpu_access_time: int = None,
+        run_time: float,
+        local_run_time: float,
+        qpu_access_time: float = None,
     ) -> VRPSolution:
         """
         Convert the final variables into a VRPSolution result.

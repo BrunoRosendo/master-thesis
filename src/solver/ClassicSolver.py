@@ -74,7 +74,7 @@ class ClassicSolver(VRPSolver):
 
         start_time = time.perf_counter_ns()
         or_solution = self.routing.SolveWithParameters(search_parameters)
-        self.run_time = int((time.perf_counter_ns() - start_time) // 1000)
+        self.run_time = (time.perf_counter_ns() - start_time) // 1000
 
         if or_solution is None:
             raise Exception("The solution is infeasible, aborting!")
@@ -202,7 +202,7 @@ class ClassicSolver(VRPSolver):
             for trip in trips
         ]
 
-    def _convert_solution(self, result: any, local_run_time: int) -> VRPSolution:
+    def _convert_solution(self, result: any, local_run_time: float) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
 
         routes = []

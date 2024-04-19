@@ -22,9 +22,9 @@ class VRPSolution:
     - loads (list of lists): The load of each vehicle at each location of its route.
     - depot (int): The index of the depot location.
     - use_capacity (bool): Whether the solution uses vehicle capacity or not.
-    - run_time (int): The total runtime of the solver.
-    - qpu_access_time (int): The total runtime of the QPU.
-    - local_run_time (int): The total runtime of the local machine, including pre-processing and queues.
+    - run_time (float): The total runtime of the solver.
+    - qpu_access_time (float): The total runtime of the QPU.
+    - local_run_time (float): The total runtime of the local machine, including pre-processing and queues.
     """
 
     COLOR_LIST = [
@@ -56,9 +56,9 @@ class VRPSolution:
         capacities: int | list[int] = None,
         loads: list[list[int]] = None,
         use_depot: bool = None,
-        run_time: int = None,
-        qpu_access_time: int = None,
-        local_run_time: int = None,
+        run_time: float = None,
+        qpu_access_time: float = None,
+        local_run_time: float = None,
     ):
         self.num_vehicles = num_vehicles
         self.locations = locations
