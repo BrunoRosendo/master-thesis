@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 from pathlib import Path
 
@@ -237,6 +239,26 @@ class VRPSolution:
         Path(json_path).mkdir(parents=True, exist_ok=True)
 
         with open(f"{json_path}/{file_name}.json", "w") as file:
-            json.dump(
-                self, file, default=lambda o: o.__dict__, sort_keys=True, indent=4
-            )
+            json.dump(self, file, default=lambda o: o.__dict__, indent=4)
+
+    @staticmethod
+    def from_json(file_name: str, results_path: str = RESULTS_PATH) -> VRPSolution:
+        """
+        Load a solution from a JSON file.
+        """
+
+        with open(f"{results_path}/json/{file_name}.json", "r") as file:
+            data = json.load(file)
+
+        return VRPSolution(
+            data["num_vehicles"],
+            [(loc[0], loc[1]) for loc in data["locations"]],
+            data["objective"],
+            data["total_distance"],
+            data["routes"],
+            data["distances"],
+            data["depot"],
+            data["capacities"],
+            data["loads"],
+            data["use_depot"],
+        )
