@@ -180,12 +180,14 @@ class CplexSolver(QuboSolver):
         if not self.model.is_result_feasible(self.var_dict):
             raise Exception("The solution is infeasible, aborting!")
 
-    def _convert_solution(self, result: OptimizationResult) -> VRPSolution:
+    def _convert_solution(
+        self, result: OptimizationResult, local_run_time: int
+    ) -> VRPSolution:
         """
         Convert the optimizer result to a VRPSolution result.
         """
 
-        return self.model.convert_result(self.var_dict, result.fval)
+        return self.model.convert_result(self.var_dict, result.fval, local_run_time)
 
     def build_var_dict(self, result: OptimizationResult) -> dict[str, float]:
         """

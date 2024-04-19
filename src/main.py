@@ -1,12 +1,11 @@
 from dotenv import load_dotenv
 
-from src.model.VRPSolution import VRPSolution
-from src.solver.qubo.CplexSolver import CplexSolver
+from src.solver.ClassicSolver import ClassicSolver
 
 if __name__ == "__main__":
     load_dotenv()
 
-    cvrp = CplexSolver(
+    cvrp = ClassicSolver(
         1,
         None,
         [
@@ -17,10 +16,6 @@ if __name__ == "__main__":
             (0, 1, 6),
         ],
         True,
-        classical_solver=True,
-        # sampler=get_backend_sampler(),
     )
-    # result = cvrp.solve()
-    # result.save_json("test")
-    result = VRPSolution.from_json("test")
-    result.display()
+    result = cvrp.solve()
+    result.print()

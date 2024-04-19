@@ -88,13 +88,19 @@ class DWaveSolver(QuboSolver):
 
         return self.sample_cqm()
 
-    def _convert_solution(self, result: SampleSet) -> VRPSolution:
+    def _convert_solution(self, result: SampleSet, local_run_time: int) -> VRPSolution:
         """
         Convert the optimizer result to a VRPSolution result.
         """
 
         var_dict, energy = self.build_var_dict(result)
-        return self.model.convert_result(var_dict, energy)
+        return self.model.convert_result(
+            var_dict,
+            energy,
+            result.info.get("run_time") or local_run_time,
+            local_run_time,
+            result.info.get("qpu_access_time"),
+        )
 
     def build_var_dict(self, result: SampleSet) -> (dict[str, float], float):
         """

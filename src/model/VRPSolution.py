@@ -22,6 +22,9 @@ class VRPSolution:
     - loads (list of lists): The load of each vehicle at each location of its route.
     - depot (int): The index of the depot location.
     - use_capacity (bool): Whether the solution uses vehicle capacity or not.
+    - run_time (int): The total runtime of the solver.
+    - qpu_access_time (int): The total runtime of the QPU.
+    - local_run_time (int): The total runtime of the local machine, including pre-processing and queues.
     """
 
     COLOR_LIST = [
@@ -53,6 +56,9 @@ class VRPSolution:
         capacities: int | list[int] = None,
         loads: list[list[int]] = None,
         use_depot: bool = None,
+        run_time: int = None,
+        qpu_access_time: int = None,
+        local_run_time: int = None,
     ):
         self.num_vehicles = num_vehicles
         self.locations = locations
@@ -62,6 +68,9 @@ class VRPSolution:
         self.distances = distances
         self.loads = loads
         self.depot = depot
+        self.run_time = run_time
+        self.qpu_access_time = qpu_access_time
+        self.local_run_time = local_run_time
 
         if use_depot is None:
             self.use_depot = depot is not None
@@ -212,7 +221,17 @@ class VRPSolution:
 
     def print(self):
         """Print the solution to the console."""
-        print(f"Objective: {self.objective}\n")
+
+        if self.run_time is not None:
+            print(f"Solver runtime: {self.run_time}µs")
+
+        if self.qpu_access_time is not None:
+            print(f"QPU access time: {self.qpu_access_time}µs")
+
+        if self.local_run_time is not None:
+            print(f"Local runtime: {self.local_run_time}µs")
+
+        print(f"\nObjective: {self.objective}\n")
 
         for vehicle_id in range(self.num_vehicles):
             print(f"Route for vehicle {vehicle_id}:")
@@ -261,4 +280,7 @@ class VRPSolution:
             data["capacities"],
             data["loads"],
             data["use_depot"],
+            data["run_time"],
+            data["qpu_access_time"],
+            data["local_run_time"],
         )

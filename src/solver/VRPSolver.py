@@ -1,3 +1,4 @@
+import time
 from abc import ABC, abstractmethod
 
 from src.model.VRP import VRP
@@ -79,7 +80,7 @@ class VRPSolver(ABC):
         pass
 
     @abstractmethod
-    def _convert_solution(self, result: any) -> VRPSolution:
+    def _convert_solution(self, result: any, local_run_time: int) -> VRPSolution:
         """
         Convert the result from the solver to a CVRP solution.
         """
@@ -89,8 +90,14 @@ class VRPSolver(ABC):
         """
         Solve the CVRP.
         """
+
+        start_time = time.perf_counter_ns()
         result = self._solve_cvrp()
-        return self._convert_solution(result)
+        execution_time = (
+            time.perf_counter_ns() - start_time
+        ) // 1000  # Convert to microseconds
+
+        return self._convert_solution(result, int(execution_time))
 
     @abstractmethod
     def get_model(self) -> VRP:

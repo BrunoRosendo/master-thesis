@@ -1,3 +1,5 @@
+import time
+
 from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
 
@@ -69,7 +71,10 @@ class ClassicSolver(VRPSolver):
             self.set_pickup_and_deliveries()
 
         search_parameters = self.get_search_parameters()
+
+        start_time = time.perf_counter_ns()
         or_solution = self.routing.SolveWithParameters(search_parameters)
+        self.run_time = int((time.perf_counter_ns() - start_time) // 1000)
 
         if or_solution is None:
             raise Exception("The solution is infeasible, aborting!")
@@ -197,7 +202,7 @@ class ClassicSolver(VRPSolver):
             for trip in trips
         ]
 
-    def _convert_solution(self, result: any) -> VRPSolution:
+    def _convert_solution(self, result: any, local_run_time: int) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
 
         routes = []
@@ -249,6 +254,8 @@ class ClassicSolver(VRPSolver):
             self.capacities,
             loads if self.use_capacity else None,
             not self.use_rpp,
+            run_time=self.run_time,
+            local_run_time=local_run_time,
         )
 
     def get_model(self) -> VRP:
