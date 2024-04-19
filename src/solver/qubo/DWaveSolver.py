@@ -1,3 +1,4 @@
+import time
 from logging import warning
 
 from dimod import (
@@ -84,17 +85,27 @@ class DWaveSolver(QuboSolver):
 
         if self.use_bqm:
             result, self.invert = self.sample_as_bqm(self.cqm)
-            return result
+        else:
+            result = self.sample_cqm()
 
-        return self.sample_cqm()
+        return result
 
-    def _convert_solution(self, result: SampleSet) -> VRPSolution:
+    def _convert_solution(
+        self, result: SampleSet, local_run_time: float
+    ) -> VRPSolution:
         """
         Convert the optimizer result to a VRPSolution result.
         """
 
         var_dict, energy = self.build_var_dict(result)
-        return self.model.convert_result(var_dict, energy)
+        timing = result.info.get("timing") or {}
+        return self.model.convert_result(
+            var_dict,
+            energy,
+            timing.get("run_time") or timing.get("qpu_access_time") or self.run_time,
+            local_run_time,
+            timing.get("qpu_access_time"),
+        )
 
     def build_var_dict(self, result: SampleSet) -> (dict[str, float], float):
         """
@@ -167,7 +178,12 @@ class DWaveSolver(QuboSolver):
         Sample the CQM using the selected sampler and time limit.
         """
         kwargs = {"time_limit": self.time_limit} if self.time_limit else {}
-        return self.sampler.sample_cqm(self.cqm, **kwargs)
+
+        start_time = time.perf_counter_ns()
+        result = self.sampler.sample_cqm(self.cqm, **kwargs)
+        self.run_time = (time.perf_counter_ns() - start_time) // 1000
+
+        return result
 
     def sample_bqm(
         self, bqm: BinaryQuadraticModel, sampler: Sampler = None
@@ -181,4 +197,8 @@ class DWaveSolver(QuboSolver):
         if self.time_limit:
             kwargs["time_limit"] = self.time_limit
 
-        return sampler.sample(bqm, **kwargs)
+        start_time = time.perf_counter_ns()
+        result = sampler.sample(bqm, **kwargs)
+        self.run_time = (time.perf_counter_ns() - start_time) // 1000
+
+        return result

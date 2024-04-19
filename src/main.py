@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 
-from src.solver.qubo.CplexSolver import CplexSolver, get_backend_sampler
+from src.solver.qubo.CplexSolver import CplexSolver
 
 if __name__ == "__main__":
     load_dotenv()
@@ -16,7 +16,6 @@ if __name__ == "__main__":
             (0, 1, 6),
         ],
         True,
-        sampler=get_backend_sampler(),
     )
     result = cvrp.solve()
-    result.display()
+    result.print()

@@ -1,3 +1,8 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
 import plotly.graph_objects as go
 
 
@@ -17,6 +22,9 @@ class VRPSolution:
     - loads (list of lists): The load of each vehicle at each location of its route.
     - depot (int): The index of the depot location.
     - use_capacity (bool): Whether the solution uses vehicle capacity or not.
+    - run_time (float): The total runtime of the solver.
+    - qpu_access_time (float): The total runtime of the QPU.
+    - local_run_time (float): The total runtime of the local machine, including pre-processing and queues.
     """
 
     COLOR_LIST = [
@@ -34,6 +42,8 @@ class VRPSolution:
         "magenta",
     ]
 
+    RESULTS_PATH = "results"
+
     def __init__(
         self,
         num_vehicles: int,
@@ -46,6 +56,9 @@ class VRPSolution:
         capacities: int | list[int] = None,
         loads: list[list[int]] = None,
         use_depot: bool = None,
+        run_time: float = None,
+        qpu_access_time: float = None,
+        local_run_time: float = None,
     ):
         self.num_vehicles = num_vehicles
         self.locations = locations
@@ -55,6 +68,9 @@ class VRPSolution:
         self.distances = distances
         self.loads = loads
         self.depot = depot
+        self.run_time = run_time
+        self.qpu_access_time = qpu_access_time
+        self.local_run_time = local_run_time
 
         if use_depot is None:
             self.use_depot = depot is not None
@@ -64,10 +80,12 @@ class VRPSolution:
         self.capacities = capacities
         self.use_capacity = loads is not None and capacities is not None
 
-    def display(self):
+    def display(self, file_name: str = None, results_path: str = RESULTS_PATH):
         """
         Display the solution using a plotly figure.
+        Saves the figure to an HTML file if a file name is provided.
         """
+
         fig = go.Figure()
 
         for vehicle_id in range(self.num_vehicles):
@@ -142,6 +160,11 @@ class VRPSolution:
 
         fig.show()
 
+        if file_name is not None:
+            html_path = f"{results_path}/html"
+            Path(html_path).mkdir(parents=True, exist_ok=True)
+            fig.write_html(f"{html_path}/{file_name}.html")
+
     def plot_direction(self, fig, loc1, loc2, color, line_width, legend_group=None):
         """
         Plot an arrow representing the direction from coord1 to coord2 with the given color and line width.
@@ -198,7 +221,19 @@ class VRPSolution:
 
     def print(self):
         """Print the solution to the console."""
-        print(f"Objective: {self.objective}\n")
+
+        print()
+
+        if self.run_time is not None:
+            print(f"Solver runtime: {self.run_time}µs")
+
+        if self.qpu_access_time is not None:
+            print(f"QPU access time: {self.qpu_access_time}µs")
+
+        if self.local_run_time is not None:
+            print(f"Local runtime: {self.local_run_time}µs")
+
+        print(f"\nObjective: {self.objective}\n")
 
         for vehicle_id in range(self.num_vehicles):
             print(f"Route for vehicle {vehicle_id}:")
@@ -215,3 +250,39 @@ class VRPSolution:
             print(f"\nDistance of the route: {self.distances[vehicle_id]}m\n")
 
         print(f"Total distance of all routes: {self.total_distance}m")
+
+    def save_json(self, file_name: str, results_path: str = RESULTS_PATH):
+        """
+        Save the solution to a JSON file.
+        """
+
+        json_path = f"{results_path}/json"
+        Path(json_path).mkdir(parents=True, exist_ok=True)
+
+        with open(f"{json_path}/{file_name}.json", "w") as file:
+            json.dump(self, file, default=lambda o: o.__dict__, indent=4)
+
+    @staticmethod
+    def from_json(file_name: str, results_path: str = RESULTS_PATH) -> VRPSolution:
+        """
+        Load a solution from a JSON file.
+        """
+
+        with open(f"{results_path}/json/{file_name}.json", "r") as file:
+            data = json.load(file)
+
+        return VRPSolution(
+            data["num_vehicles"],
+            [(loc[0], loc[1]) for loc in data["locations"]],
+            data["objective"],
+            data["total_distance"],
+            data["routes"],
+            data["distances"],
+            data["depot"],
+            data["capacities"],
+            data["loads"],
+            data["use_depot"],
+            data["run_time"],
+            data["qpu_access_time"],
+            data["local_run_time"],
+        )

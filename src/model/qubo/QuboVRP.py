@@ -131,7 +131,12 @@ class QuboVRP(VRP, ABC):
         return round(var_dict[var_name])
 
     def convert_result(
-        self, var_dict: dict[str, float], objective: float
+        self,
+        var_dict: dict[str, float],
+        objective: float,
+        run_time: float,
+        local_run_time: float,
+        qpu_access_time: float = None,
     ) -> VRPSolution:
         """
         Convert the final variables into a VRPSolution result.
@@ -184,6 +189,9 @@ class QuboVRP(VRP, ABC):
             self.depot,
             self.get_capacity(),
             loads if self.get_capacity() else None,
+            run_time=run_time,
+            qpu_access_time=qpu_access_time,
+            local_run_time=local_run_time,
         )
 
     def get_capacity(self) -> int | list[int] | None:

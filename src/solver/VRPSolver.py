@@ -1,3 +1,4 @@
+import time
 from abc import ABC, abstractmethod
 
 from src.model.VRP import VRP
@@ -22,6 +23,7 @@ class VRPSolver(ABC):
         track_progress (bool): Whether to track the progress of the solver or not.
         simplify (bool): Whether to simplify the problem by removing unnecessary variables.
         model (QuboVRP): VRP instance of the model.
+        run_time (int): Time taken to run the solver (measured locally).
     """
 
     def __init__(
@@ -52,6 +54,7 @@ class VRPSolver(ABC):
         self.use_rpp = use_rpp
         self.track_progress = track_progress
         self.simplify = simplify
+        self.run_time: int | None = None
         self.distance_matrix = self.compute_distance()
         self.model = self.get_model()
 
@@ -79,7 +82,7 @@ class VRPSolver(ABC):
         pass
 
     @abstractmethod
-    def _convert_solution(self, result: any) -> VRPSolution:
+    def _convert_solution(self, result: any, local_run_time: float) -> VRPSolution:
         """
         Convert the result from the solver to a CVRP solution.
         """
@@ -89,8 +92,14 @@ class VRPSolver(ABC):
         """
         Solve the CVRP.
         """
+
+        start_time = time.perf_counter_ns()
         result = self._solve_cvrp()
-        return self._convert_solution(result)
+        execution_time = (
+            time.perf_counter_ns() - start_time
+        ) // 1000  # Convert to microseconds
+
+        return self._convert_solution(result, execution_time)
 
     @abstractmethod
     def get_model(self) -> VRP:
