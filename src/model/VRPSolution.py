@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 import plotly.graph_objects as go
 
 
@@ -34,6 +37,8 @@ class VRPSolution:
         "magenta",
     ]
 
+    RESULTS_PATH = "results"
+
     def __init__(
         self,
         num_vehicles: int,
@@ -64,10 +69,12 @@ class VRPSolution:
         self.capacities = capacities
         self.use_capacity = loads is not None and capacities is not None
 
-    def display(self):
+    def display(self, file_name: str = None, results_path: str = RESULTS_PATH):
         """
         Display the solution using a plotly figure.
+        Saves the figure to an HTML file if a file name is provided.
         """
+
         fig = go.Figure()
 
         for vehicle_id in range(self.num_vehicles):
@@ -142,6 +149,11 @@ class VRPSolution:
 
         fig.show()
 
+        if file_name is not None:
+            html_path = f"{results_path}/html"
+            Path(html_path).mkdir(parents=True, exist_ok=True)
+            fig.write_html(f"{html_path}/{file_name}.html")
+
     def plot_direction(self, fig, loc1, loc2, color, line_width, legend_group=None):
         """
         Plot an arrow representing the direction from coord1 to coord2 with the given color and line width.
@@ -215,3 +227,16 @@ class VRPSolution:
             print(f"\nDistance of the route: {self.distances[vehicle_id]}m\n")
 
         print(f"Total distance of all routes: {self.total_distance}m")
+
+    def save_json(self, file_name: str, results_path: str = RESULTS_PATH):
+        """
+        Save the solution to a JSON file.
+        """
+
+        json_path = f"{results_path}/json"
+        Path(json_path).mkdir(parents=True, exist_ok=True)
+
+        with open(f"{json_path}/{file_name}.json", "w") as file:
+            json.dump(
+                self, file, default=lambda o: o.__dict__, sort_keys=True, indent=4
+            )
