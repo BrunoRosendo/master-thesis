@@ -1,9 +1,7 @@
-from docplex.mp.dvar import Var
-
-from src.model.qubo.QuboVRP import QuboVRP
+from src.model.qubo.StepQuboVRP import StepQuboVRP
 
 
-class InfiniteRPP(QuboVRP):
+class InfiniteRPP(StepQuboVRP):
     """
     A class to represent a QUBO math formulation of the RPP model with an infinite capacity.
     Note that this model assumes a starting point with no cost to the first node for each vehicle,
@@ -13,9 +11,7 @@ class InfiniteRPP(QuboVRP):
 
     Attributes:
         num_trips (int): Number of trips to be made.
-        num_steps (int): Number of max steps for each vehicle.
         used_locations_indices (list): Indices of the locations used in the problem, based on trip requests.
-        num_used_locations (int): Number of locations used in the problem.
     """
 
     def __init__(
@@ -27,28 +23,10 @@ class InfiniteRPP(QuboVRP):
     ):
         self.trips = trips
         self.num_trips = len(trips)
-        self.num_steps = 2 * self.num_trips + 1
-
         self.used_locations_indices = self.get_used_locations()
-        self.num_used_locations = len(self.used_locations_indices)
-
-        self.epsilon = 0
-        self.normalization_factor = max(max(distance_matrix)) + self.epsilon
 
         super().__init__(
-            num_vehicles, self.trips, distance_matrix, locations, True, True, None
-        )
-
-    def create_vars(self):
-        """
-        Create the variables for the RPP model.
-        """
-
-        self.x.extend(
-            self.model.binary_var(self.get_var_name(k, i, s))
-            for k in range(self.num_vehicles)
-            for i in range(self.num_used_locations + 1)
-            for s in range(self.num_steps)
+            num_vehicles, self.trips, distance_matrix, locations, True, None
         )
 
     def create_objective(self):
@@ -65,8 +43,8 @@ class InfiniteRPP(QuboVRP):
             * self.x_var(k, i, s)
             * self.x_var(k, j, s + 1)
             for k in range(self.num_vehicles)
-            for i in range(1, self.num_used_locations + 1)
-            for j in range(1, self.num_used_locations + 1)
+            for i in range(1, self.num_used_locations)
+            for j in range(1, self.num_used_locations)
             for s in range(self.num_steps - 1)
         )
 
@@ -74,7 +52,7 @@ class InfiniteRPP(QuboVRP):
         return_to_start_penalty = self.model.sum(
             self.x_var(k, i, s) * self.x_var(k, 0, s + 1)
             for k in range(self.num_vehicles)
-            for i in range(1, self.num_used_locations + 1)
+            for i in range(1, self.num_used_locations)
             for s in range(self.num_steps - 1)
         )
 
@@ -98,29 +76,6 @@ class InfiniteRPP(QuboVRP):
             for s2 in range(s1 + 1, self.num_steps)
         )
 
-    def create_constraints(self):
-        """
-        Create the constraints for the RPP model.
-        """
-
-        self.create_location_constraints()
-        self.create_vehicle_constraints()
-
-    def create_location_constraints(self):
-        """
-        Create the constraints that ensure each location is visited exactly once.
-        """
-
-        self.constraints.extend(
-            self.model.sum(
-                self.x_var(k, i, s)
-                for k in range(self.num_vehicles)
-                for s in range(self.num_steps)
-            )
-            == 1
-            for i in range(1, self.num_used_locations + 1)
-        )
-
     def create_vehicle_constraints(self):
         """
         Create the constraints that ensure each vehicle can only be at one location at a time.
@@ -129,9 +84,7 @@ class InfiniteRPP(QuboVRP):
         final_step = self.num_steps - 1
 
         self.constraints.extend(
-            self.model.sum(
-                self.x_var(k, i, s) for i in range(self.num_used_locations + 1)
-            )
+            self.model.sum(self.x_var(k, i, s) for i in range(self.num_used_locations))
             == 1
             for k in range(self.num_vehicles)
             for s in range(final_step)
@@ -140,8 +93,7 @@ class InfiniteRPP(QuboVRP):
         # Half-hot constraint meant to reduce variables in the last step
         self.constraints.extend(
             self.model.sum(
-                self.x_var(k, i, final_step)
-                for i in range(1, self.num_used_locations + 1)
+                self.x_var(k, i, final_step) for i in range(1, self.num_used_locations)
             )
             <= 1
             for k in range(self.num_vehicles)
@@ -157,7 +109,7 @@ class InfiniteRPP(QuboVRP):
         for k in range(self.num_vehicles):
             # Vehicles start at their respective locations and not anywhere else
             variables[self.get_var_name(k, 0, 0)] = 1
-            for i in range(1, self.num_used_locations + 1):
+            for i in range(1, self.num_used_locations):
                 variables[self.get_var_name(k, i, 0)] = 0
 
             # Vehicles can't be at the starting point at the last step (see paper)
@@ -176,28 +128,26 @@ class InfiniteRPP(QuboVRP):
 
         return variables
 
+    def get_num_steps(self):
+        """
+        Get the number of steps for the model.
+        """
+
+        return 2 * self.num_trips + 1
+
+    def get_num_used_locations(self):
+        """
+        Get the number of used locations for the model.
+        """
+
+        return len(self.used_locations_indices) + 1
+
     def get_used_locations(self) -> list[int]:
         """
         Get the indices of the locations used in the problem. This helps reduce the number of variables.
         """
 
         return list({location for trip in self.trips for location in trip[:2]})
-
-    def get_result_route_starts(self, var_dict: dict[str, float]) -> list[int]:
-        """
-        Get the starting location for each route from the variable dictionary.
-        """
-
-        route_starts = []
-
-        for k in range(self.num_vehicles):
-            for s in range(self.num_steps):
-                if self.get_var(var_dict, k, 0, s) == 0.0:
-                    start = self.get_result_location(var_dict, k, s)
-                    route_starts.append(start)
-                    break
-
-        return route_starts
 
     def get_result_next_location(
         self, var_dict: dict[str, float], cur_location: int
@@ -206,14 +156,8 @@ class InfiniteRPP(QuboVRP):
         Get the next location for a route from the variable dictionary.
         """
 
-        cplex_location = self.used_locations_indices.index(cur_location) + 1
-
-        for k in range(self.num_vehicles):
-            for s in range(self.num_steps - 1):
-                if self.get_var(var_dict, k, cplex_location, s) == 1.0:
-                    return self.get_result_location(var_dict, k, s + 1)
-
-        return None
+        original_location = self.used_locations_indices.index(cur_location) + 1
+        return super().get_result_next_location(var_dict, original_location)
 
     def get_result_location(
         self, var_dict: dict[str, float], k: int, s: int
@@ -251,15 +195,3 @@ class InfiniteRPP(QuboVRP):
                 return False
 
         return True
-
-    def get_var_name(self, k: int, i: int, s: int | None = None) -> str:
-        """
-        Get the name of a variable.
-        """
-
-        return f"x_{k}_{i}_{s}"
-
-    def x_var(self, k: int, i: int, s: int) -> Var:
-        return self.x[
-            k * (self.num_used_locations + 1) * self.num_steps + i * self.num_steps + s
-        ]
