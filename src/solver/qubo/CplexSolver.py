@@ -101,7 +101,8 @@ class CplexSolver(QuboSolver):
         self.check_feasibility(result)
         return result
 
-    def convert_quadratic_program(self, qp: QuadraticProgram) -> QuadraticProgram:
+    @staticmethod
+    def convert_quadratic_program(qp: QuadraticProgram) -> QuadraticProgram:
         """
         Convert the quadratic program to a canonic formulation, using the Qiskit converters.
         """
@@ -151,8 +152,9 @@ class CplexSolver(QuboSolver):
         result, self.run_time = self.measure_time(optimizer.solve, qp)
         return result
 
+    @staticmethod
     def qaoa_callback(
-        self, iter_num: int, ansatz: ndarray, objective: float, metadata: dict[str, Any]
+        iter_num: int, ansatz: ndarray, objective: float, metadata: dict[str, Any]
     ):
         print(f"Iteration {iter_num}: {objective.real} objective")
 

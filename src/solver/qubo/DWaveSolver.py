@@ -140,7 +140,8 @@ class DWaveSolver(QuboSolver):
 
         return s.is_feasible
 
-    def is_cqm_sampler(self, sampler: Sampler) -> bool:
+    @staticmethod
+    def is_cqm_sampler(sampler: Sampler) -> bool:
         """
         Check if the sampler is a CQM sampler.
         """
