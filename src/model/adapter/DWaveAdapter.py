@@ -106,7 +106,8 @@ class DWaveAdapter(Adapter):
         else:
             raise ValueError("Invalid expression type.")
 
-    def _linear_expression_to_tuples(self, expr: LinearExpr) -> list[tuple[str, int]]:
+    @staticmethod
+    def _linear_expression_to_tuples(expr: LinearExpr) -> list[tuple[str, int]]:
         """
         Convert a linear expression to a list of tuples.
         The first element of the tuple is the variable name and the second is the coefficient.
@@ -114,7 +115,8 @@ class DWaveAdapter(Adapter):
 
         return [(v.name, coefficient) for (v, coefficient) in expr.iter_terms()]
 
-    def _quadratic_expression_to_tuples(self, expr: QuadExpr) -> list[tuple]:
+    @staticmethod
+    def _quadratic_expression_to_tuples(expr: QuadExpr) -> list[tuple]:
         """
         Convert a quadratic expression to a list of tuples, including the linear part.
         The first two elements of the tuple are the variable names and the third is the coefficient.
@@ -124,6 +126,6 @@ class DWaveAdapter(Adapter):
             (pair.first.name, pair.second.name, coefficient)
             for (pair, coefficient) in expr.iter_quads()
         ]
-        linear_part = self._linear_expression_to_tuples(expr.linear_part)
+        linear_part = DWaveAdapter._linear_expression_to_tuples(expr.linear_part)
 
         return quad_part + linear_part

@@ -1,4 +1,4 @@
-import time
+from typing import Any
 
 from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
@@ -54,7 +54,7 @@ class ClassicSolver(VRPSolver):
         if self.use_rpp:
             self.add_dummy_depot()
 
-    def _solve_cvrp(self) -> any:
+    def _solve_cvrp(self) -> Any:
         """
         Solve the CVRP using Google's OR Tools.
         """
@@ -71,17 +71,16 @@ class ClassicSolver(VRPSolver):
             self.set_pickup_and_deliveries()
 
         search_parameters = self.get_search_parameters()
-
-        start_time = time.perf_counter_ns()
-        or_solution = self.routing.SolveWithParameters(search_parameters)
-        self.run_time = (time.perf_counter_ns() - start_time) // 1000
+        or_solution, self.run_time = self.measure_time(
+            self.routing.SolveWithParameters, search_parameters
+        )
 
         if or_solution is None:
             raise Exception("The solution is infeasible, aborting!")
 
         return or_solution
 
-    def distance_callback(self, from_index: any, to_index: any) -> int:
+    def distance_callback(self, from_index: Any, to_index: Any) -> int:
         """Returns the distance between the two nodes."""
 
         # Convert from index to distance matrix NodeIndex.
@@ -89,7 +88,7 @@ class ClassicSolver(VRPSolver):
         to_node = self.manager.IndexToNode(to_index)
         return self.distance_matrix[from_node][to_node]
 
-    def demand_callback(self, from_index: any) -> int:
+    def demand_callback(self, from_index: Any) -> int:
         """Returns the demand of the node."""
 
         # Convert from index to demands NodeIndex.
@@ -202,7 +201,7 @@ class ClassicSolver(VRPSolver):
             for trip in trips
         ]
 
-    def _convert_solution(self, result: any, local_run_time: float) -> VRPSolution:
+    def _convert_solution(self, result: Any, local_run_time: float) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
 
         routes = []

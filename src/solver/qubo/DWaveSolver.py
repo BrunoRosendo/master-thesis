@@ -1,4 +1,3 @@
-import time
 from logging import warning
 
 from dimod import (
@@ -141,7 +140,8 @@ class DWaveSolver(QuboSolver):
 
         return s.is_feasible
 
-    def is_cqm_sampler(self, sampler: Sampler) -> bool:
+    @staticmethod
+    def is_cqm_sampler(sampler: Sampler) -> bool:
         """
         Check if the sampler is a CQM sampler.
         """
@@ -178,10 +178,9 @@ class DWaveSolver(QuboSolver):
         Sample the CQM using the selected sampler and time limit.
         """
         kwargs = {"time_limit": self.time_limit} if self.time_limit else {}
-
-        start_time = time.perf_counter_ns()
-        result = self.sampler.sample_cqm(self.cqm, **kwargs)
-        self.run_time = (time.perf_counter_ns() - start_time) // 1000
+        result, self.run_time = self.measure_time(
+            self.sampler.sample_cqm, self.cqm, **kwargs
+        )
 
         return result
 
@@ -197,8 +196,5 @@ class DWaveSolver(QuboSolver):
         if self.time_limit:
             kwargs["time_limit"] = self.time_limit
 
-        start_time = time.perf_counter_ns()
-        result = sampler.sample(bqm, **kwargs)
-        self.run_time = (time.perf_counter_ns() - start_time) // 1000
-
+        result, self.run_time = self.measure_time(sampler.sample, bqm, **kwargs)
         return result

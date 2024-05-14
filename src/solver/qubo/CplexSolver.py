@@ -1,5 +1,5 @@
 import os
-import time
+from typing import Any
 
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
@@ -101,7 +101,8 @@ class CplexSolver(QuboSolver):
         self.check_feasibility(result)
         return result
 
-    def convert_quadratic_program(self, qp: QuadraticProgram) -> QuadraticProgram:
+    @staticmethod
+    def convert_quadratic_program(qp: QuadraticProgram) -> QuadraticProgram:
         """
         Convert the quadratic program to a canonic formulation, using the Qiskit converters.
         """
@@ -126,10 +127,7 @@ class CplexSolver(QuboSolver):
         """
 
         optimizer = CplexOptimizer(disp=self.track_progress)
-
-        start_time = time.perf_counter_ns()
-        result = optimizer.solve(qp)
-        self.run_time = (time.perf_counter_ns() - start_time) // 1000
+        result, self.run_time = self.measure_time(optimizer.solve, qp)
 
         return result
 
@@ -151,14 +149,12 @@ class CplexSolver(QuboSolver):
         else:
             optimizer = MinimumEigenOptimizer(qaoa)
 
-        start_time = time.perf_counter_ns()
-        result = optimizer.solve(qp)
-        self.run_time = (time.perf_counter_ns() - start_time) // 1000
-
+        result, self.run_time = self.measure_time(optimizer.solve, qp)
         return result
 
+    @staticmethod
     def qaoa_callback(
-        self, iter_num: int, ansatz: ndarray, objective: float, metadata: dict[str, any]
+        iter_num: int, ansatz: ndarray, objective: float, metadata: dict[str, Any]
     ):
         print(f"Iteration {iter_num}: {objective.real} objective")
 
