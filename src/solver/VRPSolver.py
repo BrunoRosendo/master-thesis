@@ -1,5 +1,6 @@
 import time
 from abc import ABC, abstractmethod
+from typing import Callable, Any
 
 from src.model.VRP import VRP
 from src.model.VRPSolution import VRPSolution
@@ -75,14 +76,14 @@ class VRPSolver(ABC):
         return distance_matrix
 
     @abstractmethod
-    def _solve_cvrp(self) -> any:
+    def _solve_cvrp(self) -> Any:
         """
         Solve the CVRP with a specific solver.
         """
         pass
 
     @abstractmethod
-    def _convert_solution(self, result: any, local_run_time: float) -> VRPSolution:
+    def _convert_solution(self, result: Any, local_run_time: float) -> VRPSolution:
         """
         Convert the result from the solver to a CVRP solution.
         """
@@ -93,12 +94,7 @@ class VRPSolver(ABC):
         Solve the CVRP.
         """
 
-        start_time = time.perf_counter_ns()
-        result = self._solve_cvrp()
-        execution_time = (
-            time.perf_counter_ns() - start_time
-        ) // 1000  # Convert to microseconds
-
+        result, execution_time = self.measure_time(self._solve_cvrp)
         return self._convert_solution(result, execution_time)
 
     @abstractmethod
@@ -107,3 +103,20 @@ class VRPSolver(ABC):
         Get a VRP instance of the model.
         """
         pass
+
+    @staticmethod
+    def measure_time(
+        fun: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> tuple[Any, int]:
+        """
+        Measure the execution time of a function.
+        Returns the result and the execution time in microseconds.
+        """
+
+        start_time = time.perf_counter_ns()
+        result = fun(*args, **kwargs)
+        execution_time = (
+            time.perf_counter_ns() - start_time
+        ) // 1000  # Convert to microseconds
+
+        return result, execution_time
