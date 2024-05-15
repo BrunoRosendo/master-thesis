@@ -1,0 +1,3 @@
+[submodule "src/qiskit_algorithms"]
+	path = src/qiskit_algorithms
+	url = https://github.com/BrunoRosendo/qiskit-algorithms
