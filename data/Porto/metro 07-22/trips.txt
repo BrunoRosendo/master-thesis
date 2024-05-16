@@ -1,0 +1,1306 @@
+﻿route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
+D,DU,DU0,IPO,0,,D
+D,DU,DU1,Santo Ovidio,1,,D
+D,DS,DS0,IPO,0,,D
+D,DS,DS1,Santo Ovidio,1,,D
+D,DDF,DDF0,IPO,0,,D
+D,DDF,DDF1,Santo Ovidio,1,,D
+FG,FGInvernoA,FGIA0,Batalha,0,,
+FG,FGInvernoA,FGIA1,Ribeira,1,,
+FG,FGInvernoB,FGIB0,Batalha,0,,
+FG,FGInvernoB,FGIB1,Ribeira,1,,
+FG,FGVeraoA,FGVA0,Batalha,0,,
+FG,FGVeraoA,FGVA1,Ribeira,1,,
+FG,FGVeraoB,FGVB0,Batalha,0,,
+FG,FGVeraoB,FGVB1,Ribeira,1,,
+A,AU,AU0,Senhor de Matosinhos,0,,A
+A,AU,AU1,Estadio do Dragao,1,,A
+A,AS,AS0,Senhor de Matosinhos,0,,A
+A,AS,AS1,Estadio do Dragao,1,,A
+A,ADF,ADF0,Senhor de Matosinhos,0,,A
+A,ADF,ADF1,Estadio do Dragao,1,,A
+B,BU,BU0,Povoa de Varzim,0,,B
+B,BU,BU1,Estadio do Dragao,1,,B
+B,BU,BU2,Povoa de Varzim,0,,B
+B,BU,BU3,Estadio do Dragao,1,,B
+B,BU,BU4,Povoa de Varzim,0,,B
+B,BU,BU5,Estadio do Dragao,1,,B
+B,BU,BU6,Povoa de Varzim,0,,B
+B,BU,BU7,Estadio do Dragao,1,,B
+B,BU,BU8,Povoa de Varzim,0,,B
+B,BU,BU9,Estadio do Dragao,1,,B
+B,BU,BU10,Povoa de Varzim,0,,B
+B,BU,BU11,Estadio do Dragao,1,,B
+B,BU,BU12,Povoa de Varzim,0,,B
+B,BU,BU13,Estadio do Dragao,1,,B
+B,BU,BU14,Povoa de Varzim,0,,B
+B,BU,BU15,Estadio do Dragao,1,,B
+B,BU,BU16,Povoa de Varzim,0,,B
+B,BU,BU17,Estadio do Dragao,1,,B
+B,BU,BU18,Povoa de Varzim,0,,B
+B,BU,BU19,Estadio do Dragao,1,,B
+B,BU,BU20,Povoa de Varzim,0,,B
+B,BU,BU21,Estadio do Dragao,1,,B
+B,BU,BU22,Povoa de Varzim,0,,B
+B,BU,BU23,Estadio do Dragao,1,,B
+B,BU,BU24,Povoa de Varzim,0,,B
+B,BU,BU25,Estadio do Dragao,1,,B
+B,BU,BU26,Povoa de Varzim,0,,B
+B,BU,BU27,Estadio do Dragao,1,,B
+B,BU,BU28,Povoa de Varzim,0,,B
+B,BU,BU29,Estadio do Dragao,1,,B
+B,BU,BU30,Povoa de Varzim,0,,B
+B,BU,BU31,Estadio do Dragao,1,,B
+B,BU,BU32,Povoa de Varzim,0,,B
+B,BU,BU33,Estadio do Dragao,1,,B
+B,BU,BU34,Povoa de Varzim,0,,B
+B,BU,BU35,Estadio do Dragao,1,,B
+B,BU,BU36,Povoa de Varzim,0,,B
+B,BU,BU37,Estadio do Dragao,1,,B
+B,BU,BU38,Povoa de Varzim,0,,B
+B,BU,BU39,Estadio do Dragao,1,,B
+B,BU,BU40,Povoa de Varzim,0,,B
+B,BU,BU41,Estadio do Dragao,1,,B
+B,BU,BU42,Povoa de Varzim,0,,B
+B,BU,BU43,Estadio do Dragao,1,,B
+B,BU,BU44,Povoa de Varzim,0,,B
+B,BU,BU45,Estadio do Dragao,1,,B
+B,BU,BU46,Povoa de Varzim,0,,B
+B,BU,BU47,Estadio do Dragao,1,,B
+B,BU,BU48,Povoa de Varzim,0,,B
+B,BU,BU49,Estadio do Dragao,1,,B
+B,BU,BU50,Povoa de Varzim,0,,B
+B,BU,BU51,Estadio do Dragao,1,,B
+B,BU,BU52,Povoa de Varzim,0,,B
+B,BU,BU53,Estadio do Dragao,1,,B
+B,BU,BU54,Povoa de Varzim,0,,B
+B,BU,BU55,Estadio do Dragao,1,,B
+B,BU,BU56,Povoa de Varzim,0,,B
+B,BU,BU57,Estadio do Dragao,1,,B
+B,BU,BU58,Povoa de Varzim,0,,B
+B,BU,BU59,Estadio do Dragao,1,,B
+B,BU,BU60,Povoa de Varzim,0,,B
+B,BU,BU61,Estadio do Dragao,1,,B
+B,BU,BU62,Povoa de Varzim,0,,B
+B,BU,BU63,Estadio do Dragao,1,,B
+B,BU,BU64,Povoa de Varzim,0,,B
+B,BU,BU65,Estadio do Dragao,1,,B
+B,BU,BU66,Povoa de Varzim,0,,B
+B,BU,BU67,Estadio do Dragao,1,,B
+B,BU,BU68,Povoa de Varzim,0,,B
+B,BU,BU69,Estadio do Dragao,1,,B
+B,BU,BU70,Povoa de Varzim,0,,B
+B,BU,BU71,Estadio do Dragao,1,,B
+B,BU,BU72,Povoa de Varzim,0,,B
+B,BU,BU73,Estadio do Dragao,1,,B
+B,BU,BU74,Povoa de Varzim,0,,B
+B,BU,BU75,Estadio do Dragao,1,,B
+B,BS,BS0,Povoa de Varzim,0,,B
+B,BS,BS1,Estadio do Dragao,1,,B
+B,BS,BS2,Povoa de Varzim,0,,B
+B,BS,BS3,Estadio do Dragao,1,,B
+B,BS,BS4,Povoa de Varzim,0,,B
+B,BS,BS5,Estadio do Dragao,1,,B
+B,BS,BS6,Povoa de Varzim,0,,B
+B,BS,BS7,Estadio do Dragao,1,,B
+B,BS,BS8,Povoa de Varzim,0,,B
+B,BS,BS9,Estadio do Dragao,1,,B
+B,BS,BS10,Povoa de Varzim,0,,B
+B,BS,BS11,Estadio do Dragao,1,,B
+B,BS,BS12,Povoa de Varzim,0,,B
+B,BS,BS13,Estadio do Dragao,1,,B
+B,BS,BS14,Povoa de Varzim,0,,B
+B,BS,BS15,Estadio do Dragao,1,,B
+B,BS,BS16,Povoa de Varzim,0,,B
+B,BS,BS17,Estadio do Dragao,1,,B
+B,BS,BS18,Povoa de Varzim,0,,B
+B,BS,BS19,Estadio do Dragao,1,,B
+B,BS,BS20,Povoa de Varzim,0,,B
+B,BS,BS21,Estadio do Dragao,1,,B
+B,BS,BS22,Povoa de Varzim,0,,B
+B,BS,BS23,Estadio do Dragao,1,,B
+B,BS,BS24,Povoa de Varzim,0,,B
+B,BS,BS25,Estadio do Dragao,1,,B
+B,BS,BS26,Povoa de Varzim,0,,B
+B,BS,BS27,Estadio do Dragao,1,,B
+B,BS,BS28,Povoa de Varzim,0,,B
+B,BS,BS29,Estadio do Dragao,1,,B
+B,BS,BS30,Povoa de Varzim,0,,B
+B,BS,BS31,Estadio do Dragao,1,,B
+B,BS,BS32,Povoa de Varzim,0,,B
+B,BS,BS33,Estadio do Dragao,1,,B
+B,BS,BS34,Povoa de Varzim,0,,B
+B,BS,BS35,Estadio do Dragao,1,,B
+B,BS,BS36,Povoa de Varzim,0,,B
+B,BS,BS37,Estadio do Dragao,1,,B
+B,BS,BS38,Povoa de Varzim,0,,B
+B,BS,BS39,Estadio do Dragao,1,,B
+B,BS,BS40,Povoa de Varzim,0,,B
+B,BS,BS41,Estadio do Dragao,1,,B
+B,BS,BS42,Povoa de Varzim,0,,B
+B,BS,BS43,Estadio do Dragao,1,,B
+B,BS,BS44,Povoa de Varzim,0,,B
+B,BS,BS45,Estadio do Dragao,1,,B
+B,BS,BS46,Povoa de Varzim,0,,B
+B,BS,BS47,Estadio do Dragao,1,,B
+B,BS,BS48,Povoa de Varzim,0,,B
+B,BS,BS49,Estadio do Dragao,1,,B
+B,BS,BS50,Povoa de Varzim,0,,B
+B,BS,BS51,Estadio do Dragao,1,,B
+B,BS,BS52,Povoa de Varzim,0,,B
+B,BS,BS53,Estadio do Dragao,1,,B
+B,BS,BS54,Povoa de Varzim,0,,B
+B,BS,BS55,Estadio do Dragao,1,,B
+B,BS,BS56,Povoa de Varzim,0,,B
+B,BS,BS57,Estadio do Dragao,1,,B
+B,BS,BS58,Povoa de Varzim,0,,B
+B,BS,BS59,Estadio do Dragao,1,,B
+B,BS,BS60,Povoa de Varzim,0,,B
+B,BS,BS61,Estadio do Dragao,1,,B
+B,BS,BS62,Povoa de Varzim,0,,B
+B,BS,BS63,Estadio do Dragao,1,,B
+B,BS,BS64,Povoa de Varzim,0,,B
+B,BS,BS65,Estadio do Dragao,1,,B
+B,BS,BS66,Povoa de Varzim,0,,B
+B,BS,BS67,Estadio do Dragao,1,,B
+B,BS,BS68,Povoa de Varzim,0,,B
+B,BS,BS69,Estadio do Dragao,1,,B
+B,BS,BS70,Povoa de Varzim,0,,B
+B,BS,BS71,Estadio do Dragao,1,,B
+B,BS,BS72,Povoa de Varzim,0,,B
+B,BS,BS73,Estadio do Dragao,1,,B
+B,BS,BS74,Povoa de Varzim,0,,B
+B,BS,BS75,Estadio do Dragao,1,,B
+B,BS,BS76,Povoa de Varzim,0,,B
+B,BS,BS77,Estadio do Dragao,1,,B
+B,BS,BS78,Povoa de Varzim,0,,B
+B,BS,BS79,Estadio do Dragao,1,,B
+B,BS,BS80,Povoa de Varzim,0,,B
+B,BS,BS81,Estadio do Dragao,1,,B
+B,BS,BS82,Povoa de Varzim,0,,B
+B,BS,BS83,Estadio do Dragao,1,,B
+B,BS,BS84,Povoa de Varzim,0,,B
+B,BS,BS85,Estadio do Dragao,1,,B
+B,BS,BS86,Povoa de Varzim,0,,B
+B,BS,BS87,Estadio do Dragao,1,,B
+B,BS,BS88,Povoa de Varzim,0,,B
+B,BS,BS89,Estadio do Dragao,1,,B
+B,BS,BS90,Povoa de Varzim,0,,B
+B,BS,BS91,Estadio do Dragao,1,,B
+B,BS,BS92,Povoa de Varzim,0,,B
+B,BS,BS93,Estadio do Dragao,1,,B
+B,BS,BS94,Povoa de Varzim,0,,B
+B,BS,BS95,Estadio do Dragao,1,,B
+B,BS,BS96,Povoa de Varzim,0,,B
+B,BS,BS97,Estadio do Dragao,1,,B
+B,BS,BS98,Povoa de Varzim,0,,B
+B,BS,BS99,Estadio do Dragao,1,,B
+B,BDF,BDF0,Povoa de Varzim,0,,B
+B,BDF,BDF1,Estadio do Dragao,1,,B
+B,BDF,BDF2,Povoa de Varzim,0,,B
+B,BDF,BDF3,Estadio do Dragao,1,,B
+B,BDF,BDF4,Povoa de Varzim,0,,B
+B,BDF,BDF5,Estadio do Dragao,1,,B
+B,BDF,BDF6,Povoa de Varzim,0,,B
+B,BDF,BDF7,Estadio do Dragao,1,,B
+B,BDF,BDF8,Povoa de Varzim,0,,B
+B,BDF,BDF9,Estadio do Dragao,1,,B
+B,BDF,BDF10,Povoa de Varzim,0,,B
+B,BDF,BDF11,Estadio do Dragao,1,,B
+B,BDF,BDF12,Povoa de Varzim,0,,B
+B,BDF,BDF13,Estadio do Dragao,1,,B
+B,BDF,BDF14,Povoa de Varzim,0,,B
+B,BDF,BDF15,Estadio do Dragao,1,,B
+B,BDF,BDF16,Povoa de Varzim,0,,B
+B,BDF,BDF17,Estadio do Dragao,1,,B
+B,BDF,BDF18,Povoa de Varzim,0,,B
+B,BDF,BDF19,Estadio do Dragao,1,,B
+B,BDF,BDF20,Povoa de Varzim,0,,B
+B,BDF,BDF21,Estadio do Dragao,1,,B
+B,BDF,BDF22,Povoa de Varzim,0,,B
+B,BDF,BDF23,Estadio do Dragao,1,,B
+B,BDF,BDF24,Povoa de Varzim,0,,B
+B,BDF,BDF25,Estadio do Dragao,1,,B
+B,BDF,BDF26,Povoa de Varzim,0,,B
+B,BDF,BDF27,Estadio do Dragao,1,,B
+B,BDF,BDF28,Povoa de Varzim,0,,B
+B,BDF,BDF29,Estadio do Dragao,1,,B
+B,BDF,BDF30,Povoa de Varzim,0,,B
+B,BDF,BDF31,Estadio do Dragao,1,,B
+B,BDF,BDF32,Povoa de Varzim,0,,B
+B,BDF,BDF33,Estadio do Dragao,1,,B
+B,BDF,BDF34,Povoa de Varzim,0,,B
+B,BDF,BDF35,Estadio do Dragao,1,,B
+B,BDF,BDF36,Povoa de Varzim,0,,B
+B,BDF,BDF37,Estadio do Dragao,1,,B
+B,BDF,BDF38,Povoa de Varzim,0,,B
+B,BDF,BDF39,Estadio do Dragao,1,,B
+B,BDF,BDF40,Povoa de Varzim,0,,B
+B,BDF,BDF41,Estadio do Dragao,1,,B
+B,BDF,BDF42,Povoa de Varzim,0,,B
+B,BDF,BDF43,Estadio do Dragao,1,,B
+B,BDF,BDF44,Povoa de Varzim,0,,B
+B,BDF,BDF45,Estadio do Dragao,1,,B
+B,BDF,BDF46,Povoa de Varzim,0,,B
+B,BDF,BDF47,Estadio do Dragao,1,,B
+B,BDF,BDF48,Povoa de Varzim,0,,B
+B,BDF,BDF49,Estadio do Dragao,1,,B
+B,BDF,BDF50,Povoa de Varzim,0,,B
+B,BDF,BDF51,Estadio do Dragao,1,,B
+B,BDF,BDF52,Povoa de Varzim,0,,B
+B,BDF,BDF53,Estadio do Dragao,1,,B
+B,BDF,BDF54,Povoa de Varzim,0,,B
+B,BDF,BDF55,Estadio do Dragao,1,,B
+B,BDF,BDF56,Povoa de Varzim,0,,B
+B,BDF,BDF57,Estadio do Dragao,1,,B
+B,BDF,BDF58,Povoa de Varzim,0,,B
+B,BDF,BDF59,Estadio do Dragao,1,,B
+B,BDF,BDF60,Povoa de Varzim,0,,B
+B,BDF,BDF61,Estadio do Dragao,1,,B
+B,BDF,BDF62,Povoa de Varzim,0,,B
+B,BDF,BDF63,Estadio do Dragao,1,,B
+B,BDF,BDF64,Povoa de Varzim,0,,B
+B,BDF,BDF65,Estadio do Dragao,1,,B
+B,BDF,BDF66,Povoa de Varzim,0,,B
+B,BDF,BDF67,Estadio do Dragao,1,,B
+B,BDF,BDF68,Povoa de Varzim,0,,B
+B,BDF,BDF69,Estadio do Dragao,1,,B
+B,BDF,BDF70,Povoa de Varzim,0,,B
+B,BDF,BDF71,Estadio do Dragao,1,,B
+B,BDF,BDF72,Povoa de Varzim,0,,B
+B,BDF,BDF73,Estadio do Dragao,1,,B
+B,BDF,BDF74,Povoa de Varzim,0,,B
+B,BDF,BDF75,Estadio do Dragao,1,,B
+B,BDF,BDF76,Povoa de Varzim,0,,B
+B,BDF,BDF77,Estadio do Dragao,1,,B
+B,BDF,BDF78,Povoa de Varzim,0,,B
+B,BDF,BDF79,Estadio do Dragao,1,,B
+B,BDF,BDF80,Povoa de Varzim,0,,B
+B,BDF,BDF81,Estadio do Dragao,1,,B
+B,BDF,BDF82,Povoa de Varzim,0,,B
+B,BDF,BDF83,Estadio do Dragao,1,,B
+B,BDF,BDF84,Povoa de Varzim,0,,B
+B,BDF,BDF85,Estadio do Dragao,1,,B
+B,BDF,BDF86,Povoa de Varzim,0,,B
+B,BDF,BDF87,Estadio do Dragao,1,,B
+B,BDF,BDF88,Povoa de Varzim,0,,B
+B,BDF,BDF89,Estadio do Dragao,1,,B
+Bex,BexU,BexU0,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU1,Estadio do Dragao,1,,B
+Bex,BexU,BexU2,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU3,Estadio do Dragao,1,,B
+Bex,BexU,BexU4,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU5,Estadio do Dragao,1,,B
+Bex,BexU,BexU6,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU7,Estadio do Dragao,1,,B
+Bex,BexU,BexU8,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU9,Estadio do Dragao,1,,B
+Bex,BexU,BexU10,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU11,Estadio do Dragao,1,,B
+Bex,BexU,BexU12,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU13,Estadio do Dragao,1,,B
+Bex,BexU,BexU14,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU15,Estadio do Dragao,1,,B
+Bex,BexU,BexU16,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU17,Estadio do Dragao,1,,B
+Bex,BexU,BexU18,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU19,Estadio do Dragao,1,,B
+Bex,BexU,BexU20,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU21,Estadio do Dragao,1,,B
+Bex,BexU,BexU22,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU23,Estadio do Dragao,1,,B
+Bex,BexU,BexU24,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU25,Estadio do Dragao,1,,B
+Bex,BexU,BexU26,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU27,Estadio do Dragao,1,,B
+Bex,BexU,BexU28,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU29,Estadio do Dragao,1,,B
+Bex,BexU,BexU30,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU31,Estadio do Dragao,1,,B
+Bex,BexU,BexU32,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU33,Estadio do Dragao,1,,B
+Bex,BexU,BexU34,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU35,Estadio do Dragao,1,,B
+Bex,BexU,BexU36,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU37,Estadio do Dragao,1,,B
+Bex,BexU,BexU38,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU39,Estadio do Dragao,1,,B
+Bex,BexU,BexU40,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU41,Estadio do Dragao,1,,B
+Bex,BexU,BexU42,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU43,Estadio do Dragao,1,,B
+Bex,BexU,BexU44,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU45,Estadio do Dragao,1,,B
+Bex,BexU,BexU46,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU47,Estadio do Dragao,1,,B
+Bex,BexU,BexU48,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU49,Estadio do Dragao,1,,B
+Bex,BexU,BexU50,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU51,Estadio do Dragao,1,,B
+Bex,BexU,BexU52,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU53,Estadio do Dragao,1,,B
+Bex,BexU,BexU54,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU55,Estadio do Dragao,1,,B
+Bex,BexU,BexU56,Povoa de Varzim Expresso,0,,B
+Bex,BexU,BexU57,Estadio do Dragao,1,,B
+C,CU,CU0,ISMAI,0,,C
+C,CU,CU1,Campanha,1,,C
+C,CU,CU2,ISMAI,0,,C
+C,CU,CU3,Campanha,1,,C
+C,CU,CU4,ISMAI,0,,C
+C,CU,CU5,Campanha,1,,C
+C,CU,CU6,ISMAI,0,,C
+C,CU,CU7,Campanha,1,,C
+C,CU,CU8,ISMAI,0,,C
+C,CU,CU9,Campanha,1,,C
+C,CU,CU10,ISMAI,0,,C
+C,CU,CU11,Campanha,1,,C
+C,CU,CU12,ISMAI,0,,C
+C,CU,CU13,Campanha,1,,C
+C,CU,CU14,ISMAI,0,,C
+C,CU,CU15,Campanha,1,,C
+C,CU,CU16,ISMAI,0,,C
+C,CU,CU17,Campanha,1,,C
+C,CU,CU18,ISMAI,0,,C
+C,CU,CU19,Campanha,1,,C
+C,CU,CU20,ISMAI,0,,C
+C,CU,CU21,Campanha,1,,C
+C,CU,CU22,ISMAI,0,,C
+C,CU,CU23,Campanha,1,,C
+C,CU,CU24,ISMAI,0,,C
+C,CU,CU25,Campanha,1,,C
+C,CU,CU26,ISMAI,0,,C
+C,CU,CU27,Campanha,1,,C
+C,CU,CU28,ISMAI,0,,C
+C,CU,CU29,Campanha,1,,C
+C,CU,CU30,ISMAI,0,,C
+C,CU,CU31,Campanha,1,,C
+C,CU,CU32,ISMAI,0,,C
+C,CU,CU33,Campanha,1,,C
+C,CU,CU34,ISMAI,0,,C
+C,CU,CU35,Campanha,1,,C
+C,CU,CU36,ISMAI,0,,C
+C,CU,CU37,Campanha,1,,C
+C,CU,CU38,ISMAI,0,,C
+C,CU,CU39,Campanha,1,,C
+C,CU,CU40,ISMAI,0,,C
+C,CU,CU41,Campanha,1,,C
+C,CU,CU42,ISMAI,0,,C
+C,CU,CU43,Campanha,1,,C
+C,CU,CU44,ISMAI,0,,C
+C,CU,CU45,Campanha,1,,C
+C,CU,CU46,ISMAI,0,,C
+C,CU,CU47,Campanha,1,,C
+C,CU,CU48,ISMAI,0,,C
+C,CU,CU49,Campanha,1,,C
+C,CU,CU50,ISMAI,0,,C
+C,CU,CU51,Campanha,1,,C
+C,CU,CU52,ISMAI,0,,C
+C,CU,CU53,Campanha,1,,C
+C,CU,CU54,ISMAI,0,,C
+C,CU,CU55,Campanha,1,,C
+C,CU,CU56,ISMAI,0,,C
+C,CU,CU57,Campanha,1,,C
+C,CU,CU58,ISMAI,0,,C
+C,CU,CU59,Campanha,1,,C
+C,CU,CU60,ISMAI,0,,C
+C,CU,CU61,Campanha,1,,C
+C,CU,CU62,ISMAI,0,,C
+C,CU,CU63,Campanha,1,,C
+C,CU,CU64,ISMAI,0,,C
+C,CU,CU65,Campanha,1,,C
+C,CU,CU66,ISMAI,0,,C
+C,CU,CU67,Campanha,1,,C
+C,CU,CU68,ISMAI,0,,C
+C,CU,CU69,Campanha,1,,C
+C,CU,CU70,ISMAI,0,,C
+C,CU,CU71,Campanha,1,,C
+C,CU,CU72,ISMAI,0,,C
+C,CU,CU73,Campanha,1,,C
+C,CU,CU74,ISMAI,0,,C
+C,CU,CU75,Campanha,1,,C
+C,CU,CU76,ISMAI,0,,C
+C,CU,CU77,Campanha,1,,C
+C,CU,CU78,ISMAI,0,,C
+C,CU,CU79,Campanha,1,,C
+C,CU,CU80,ISMAI,0,,C
+C,CU,CU81,Campanha,1,,C
+C,CS,CS0,ISMAI,0,,C
+C,CS,CS1,Campanha,1,,C
+C,CS,CS2,ISMAI,0,,C
+C,CS,CS3,Campanha,1,,C
+C,CS,CS4,ISMAI,0,,C
+C,CS,CS5,Campanha,1,,C
+C,CS,CS6,ISMAI,0,,C
+C,CS,CS7,Campanha,1,,C
+C,CS,CS8,ISMAI,0,,C
+C,CS,CS9,Campanha,1,,C
+C,CS,CS10,ISMAI,0,,C
+C,CS,CS11,Campanha,1,,C
+C,CS,CS12,ISMAI,0,,C
+C,CS,CS13,Campanha,1,,C
+C,CS,CS14,ISMAI,0,,C
+C,CS,CS15,Campanha,1,,C
+C,CS,CS16,ISMAI,0,,C
+C,CS,CS17,Campanha,1,,C
+C,CS,CS18,ISMAI,0,,C
+C,CS,CS19,Campanha,1,,C
+C,CS,CS20,ISMAI,0,,C
+C,CS,CS21,Campanha,1,,C
+C,CS,CS22,ISMAI,0,,C
+C,CS,CS23,Campanha,1,,C
+C,CS,CS24,ISMAI,0,,C
+C,CS,CS25,Campanha,1,,C
+C,CS,CS26,ISMAI,0,,C
+C,CS,CS27,Campanha,1,,C
+C,CS,CS28,ISMAI,0,,C
+C,CS,CS29,Campanha,1,,C
+C,CS,CS30,ISMAI,0,,C
+C,CS,CS31,Campanha,1,,C
+C,CS,CS32,ISMAI,0,,C
+C,CS,CS33,Campanha,1,,C
+C,CS,CS34,ISMAI,0,,C
+C,CS,CS35,Campanha,1,,C
+C,CS,CS36,ISMAI,0,,C
+C,CS,CS37,Campanha,1,,C
+C,CS,CS38,ISMAI,0,,C
+C,CS,CS39,Campanha,1,,C
+C,CS,CS40,ISMAI,0,,C
+C,CS,CS41,Campanha,1,,C
+C,CS,CS42,ISMAI,0,,C
+C,CS,CS43,Campanha,1,,C
+C,CS,CS44,ISMAI,0,,C
+C,CS,CS45,Campanha,1,,C
+C,CS,CS46,ISMAI,0,,C
+C,CS,CS47,Campanha,1,,C
+C,CS,CS48,ISMAI,0,,C
+C,CS,CS49,Campanha,1,,C
+C,CS,CS50,ISMAI,0,,C
+C,CS,CS51,Campanha,1,,C
+C,CS,CS52,ISMAI,0,,C
+C,CS,CS53,Campanha,1,,C
+C,CS,CS54,ISMAI,0,,C
+C,CS,CS55,Campanha,1,,C
+C,CS,CS56,ISMAI,0,,C
+C,CS,CS57,Campanha,1,,C
+C,CS,CS58,ISMAI,0,,C
+C,CS,CS59,Campanha,1,,C
+C,CS,CS60,ISMAI,0,,C
+C,CS,CS61,Campanha,1,,C
+C,CS,CS62,ISMAI,0,,C
+C,CS,CS63,Campanha,1,,C
+C,CS,CS64,ISMAI,0,,C
+C,CS,CS65,Campanha,1,,C
+C,CS,CS66,ISMAI,0,,C
+C,CS,CS67,Campanha,1,,C
+C,CS,CS68,ISMAI,0,,C
+C,CS,CS69,Campanha,1,,C
+C,CS,CS70,ISMAI,0,,C
+C,CS,CS71,Campanha,1,,C
+C,CS,CS72,ISMAI,0,,C
+C,CS,CS73,Campanha,1,,C
+C,CS,CS74,ISMAI,0,,C
+C,CS,CS75,Campanha,1,,C
+C,CS,CS76,ISMAI,0,,C
+C,CS,CS77,Campanha,1,,C
+C,CS,CS78,ISMAI,0,,C
+C,CS,CS79,Campanha,1,,C
+C,CS,CS80,ISMAI,0,,C
+C,CS,CS81,Campanha,1,,C
+C,CS,CS82,ISMAI,0,,C
+C,CS,CS83,Campanha,1,,C
+C,CS,CS84,ISMAI,0,,C
+C,CS,CS85,Campanha,1,,C
+C,CS,CS86,ISMAI,0,,C
+C,CS,CS87,Campanha,1,,C
+C,CS,CS88,ISMAI,0,,C
+C,CS,CS89,Campanha,1,,C
+C,CS,CS90,ISMAI,0,,C
+C,CS,CS91,Campanha,1,,C
+C,CS,CS92,ISMAI,0,,C
+C,CS,CS93,Campanha,1,,C
+C,CS,CS94,ISMAI,0,,C
+C,CS,CS95,Campanha,1,,C
+C,CS,CS96,ISMAI,0,,C
+C,CS,CS97,Campanha,1,,C
+C,CS,CS98,ISMAI,0,,C
+C,CS,CS99,Campanha,1,,C
+C,CDF,CDF0,ISMAI,0,,C
+C,CDF,CDF1,Campanha,1,,C
+C,CDF,CDF2,ISMAI,0,,C
+C,CDF,CDF3,Campanha,1,,C
+C,CDF,CDF4,ISMAI,0,,C
+C,CDF,CDF5,Campanha,1,,C
+C,CDF,CDF6,ISMAI,0,,C
+C,CDF,CDF7,Campanha,1,,C
+C,CDF,CDF8,ISMAI,0,,C
+C,CDF,CDF9,Campanha,1,,C
+C,CDF,CDF10,ISMAI,0,,C
+C,CDF,CDF11,Campanha,1,,C
+C,CDF,CDF12,ISMAI,0,,C
+C,CDF,CDF13,Campanha,1,,C
+C,CDF,CDF14,ISMAI,0,,C
+C,CDF,CDF15,Campanha,1,,C
+C,CDF,CDF16,ISMAI,0,,C
+C,CDF,CDF17,Campanha,1,,C
+C,CDF,CDF18,ISMAI,0,,C
+C,CDF,CDF19,Campanha,1,,C
+C,CDF,CDF20,ISMAI,0,,C
+C,CDF,CDF21,Campanha,1,,C
+C,CDF,CDF22,ISMAI,0,,C
+C,CDF,CDF23,Campanha,1,,C
+C,CDF,CDF24,ISMAI,0,,C
+C,CDF,CDF25,Campanha,1,,C
+C,CDF,CDF26,ISMAI,0,,C
+C,CDF,CDF27,Campanha,1,,C
+C,CDF,CDF28,ISMAI,0,,C
+C,CDF,CDF29,Campanha,1,,C
+C,CDF,CDF30,ISMAI,0,,C
+C,CDF,CDF31,Campanha,1,,C
+C,CDF,CDF32,ISMAI,0,,C
+C,CDF,CDF33,Campanha,1,,C
+C,CDF,CDF34,ISMAI,0,,C
+C,CDF,CDF35,Campanha,1,,C
+C,CDF,CDF36,ISMAI,0,,C
+C,CDF,CDF37,Campanha,1,,C
+C,CDF,CDF38,ISMAI,0,,C
+C,CDF,CDF39,Campanha,1,,C
+C,CDF,CDF40,ISMAI,0,,C
+C,CDF,CDF41,Campanha,1,,C
+C,CDF,CDF42,ISMAI,0,,C
+C,CDF,CDF43,Campanha,1,,C
+C,CDF,CDF44,ISMAI,0,,C
+C,CDF,CDF45,Campanha,1,,C
+C,CDF,CDF46,ISMAI,0,,C
+C,CDF,CDF47,Campanha,1,,C
+C,CDF,CDF48,ISMAI,0,,C
+C,CDF,CDF49,Campanha,1,,C
+C,CDF,CDF50,ISMAI,0,,C
+C,CDF,CDF51,Campanha,1,,C
+C,CDF,CDF52,ISMAI,0,,C
+C,CDF,CDF53,Campanha,1,,C
+C,CDF,CDF54,ISMAI,0,,C
+C,CDF,CDF55,Campanha,1,,C
+C,CDF,CDF56,ISMAI,0,,C
+C,CDF,CDF57,Campanha,1,,C
+C,CDF,CDF58,ISMAI,0,,C
+C,CDF,CDF59,Campanha,1,,C
+C,CDF,CDF60,ISMAI,0,,C
+C,CDF,CDF61,Campanha,1,,C
+C,CDF,CDF62,ISMAI,0,,C
+C,CDF,CDF63,Campanha,1,,C
+C,CDF,CDF64,ISMAI,0,,C
+C,CDF,CDF65,Campanha,1,,C
+C,CDF,CDF66,ISMAI,0,,C
+C,CDF,CDF67,Campanha,1,,C
+C,CDF,CDF68,ISMAI,0,,C
+C,CDF,CDF69,Campanha,1,,C
+C,CDF,CDF70,ISMAI,0,,C
+C,CDF,CDF71,Campanha,1,,C
+C,CDF,CDF72,ISMAI,0,,C
+C,CDF,CDF73,Campanha,1,,C
+C,CDF,CDF74,ISMAI,0,,C
+C,CDF,CDF75,Campanha,1,,C
+C,CDF,CDF76,ISMAI,0,,C
+C,CDF,CDF77,Campanha,1,,C
+C,CDF,CDF78,ISMAI,0,,C
+C,CDF,CDF79,Campanha,1,,C
+C,CDF,CDF80,ISMAI,0,,C
+C,CDF,CDF81,Campanha,1,,C
+C,CDF,CDF82,ISMAI,0,,C
+C,CDF,CDF83,Campanha,1,,C
+C,CDF,CDF84,ISMAI,0,,C
+C,CDF,CDF85,Campanha,1,,C
+C,CDF,CDF86,ISMAI,0,,C
+C,CDF,CDF87,Campanha,1,,C
+C,CDF,CDF88,ISMAI,0,,C
+C,CDF,CDF89,Campanha,1,,C
+E,EU,EU0,Aeroporto,0,,E
+E,EU,EU1,Trindade,1,,E
+E,EU,EU2,Aeroporto,0,,E
+E,EU,EU3,Trindade,1,,E
+E,EU,EU4,Aeroporto,0,,E
+E,EU,EU5,Trindade,1,,E
+E,EU,EU6,Aeroporto,0,,E
+E,EU,EU7,Trindade,1,,E
+E,EU,EU8,Aeroporto,0,,E
+E,EU,EU9,Trindade,1,,E
+E,EU,EU10,Aeroporto,0,,E
+E,EU,EU11,Trindade,1,,E
+E,EU,EU12,Aeroporto,0,,E
+E,EU,EU13,Trindade,1,,E
+E,EU,EU14,Aeroporto,0,,E
+E,EU,EU15,Trindade,1,,E
+E,EU,EU16,Aeroporto,0,,E
+E,EU,EU17,Trindade,1,,E
+E,EU,EU18,Aeroporto,0,,E
+E,EU,EU19,Trindade,1,,E
+E,EU,EU20,Aeroporto,0,,E
+E,EU,EU21,Trindade,1,,E
+E,EU,EU22,Aeroporto,0,,E
+E,EU,EU23,Trindade,1,,E
+E,EU,EU24,Aeroporto,0,,E
+E,EU,EU25,Trindade,1,,E
+E,EU,EU26,Aeroporto,0,,E
+E,EU,EU27,Trindade,1,,E
+E,EU,EU28,Aeroporto,0,,E
+E,EU,EU29,Trindade,1,,E
+E,EU,EU30,Aeroporto,0,,E
+E,EU,EU31,Trindade,1,,E
+E,EU,EU32,Aeroporto,0,,E
+E,EU,EU33,Trindade,1,,E
+E,EU,EU34,Aeroporto,0,,E
+E,EU,EU35,Trindade,1,,E
+E,EU,EU36,Aeroporto,0,,E
+E,EU,EU37,Trindade,1,,E
+E,EU,EU38,Aeroporto,0,,E
+E,EU,EU39,Trindade,1,,E
+E,EU,EU40,Aeroporto,0,,E
+E,EU,EU41,Trindade,1,,E
+E,EU,EU42,Aeroporto,0,,E
+E,EU,EU43,Trindade,1,,E
+E,EU,EU44,Aeroporto,0,,E
+E,EU,EU45,Trindade,1,,E
+E,EU,EU46,Aeroporto,0,,E
+E,EU,EU47,Trindade,1,,E
+E,EU,EU48,Aeroporto,0,,E
+E,EU,EU49,Trindade,1,,E
+E,EU,EU50,Aeroporto,0,,E
+E,EU,EU51,Trindade,1,,E
+E,EU,EU52,Aeroporto,0,,E
+E,EU,EU53,Trindade,1,,E
+E,EU,EU54,Aeroporto,0,,E
+E,EU,EU55,Trindade,1,,E
+E,EU,EU56,Aeroporto,0,,E
+E,EU,EU57,Trindade,1,,E
+E,EU,EU58,Aeroporto,0,,E
+E,EU,EU59,Trindade,1,,E
+E,EU,EU60,Aeroporto,0,,E
+E,EU,EU61,Trindade,1,,E
+E,EU,EU62,Aeroporto,0,,E
+E,EU,EU63,Trindade,1,,E
+E,EU,EU64,Aeroporto,0,,E
+E,EU,EU65,Trindade,1,,E
+E,EU,EU66,Aeroporto,0,,E
+E,EU,EU67,Trindade,1,,E
+E,EU,EU68,Aeroporto,0,,E
+E,EU,EU69,Trindade,1,,E
+E,EU,EU70,Aeroporto,0,,E
+E,EU,EU71,Trindade,1,,E
+E,EU,EU72,Aeroporto,0,,E
+E,EU,EU73,Trindade,1,,E
+E,EU,EU74,Aeroporto,0,,E
+E,EU,EU75,Trindade,1,,E
+E,EU,EU76,Aeroporto,0,,E
+E,ES,ES0,Aeroporto,0,,E
+E,ES,ES1,Trindade,1,,E
+E,ES,ES2,Aeroporto,0,,E
+E,ES,ES3,Trindade,1,,E
+E,ES,ES4,Aeroporto,0,,E
+E,ES,ES5,Trindade,1,,E
+E,ES,ES6,Aeroporto,0,,E
+E,ES,ES7,Trindade,1,,E
+E,ES,ES8,Aeroporto,0,,E
+E,ES,ES9,Trindade,1,,E
+E,ES,ES10,Aeroporto,0,,E
+E,ES,ES11,Trindade,1,,E
+E,ES,ES12,Aeroporto,0,,E
+E,ES,ES13,Trindade,1,,E
+E,ES,ES14,Aeroporto,0,,E
+E,ES,ES15,Trindade,1,,E
+E,ES,ES16,Aeroporto,0,,E
+E,ES,ES17,Trindade,1,,E
+E,ES,ES18,Aeroporto,0,,E
+E,ES,ES19,Trindade,1,,E
+E,ES,ES20,Aeroporto,0,,E
+E,ES,ES21,Trindade,1,,E
+E,ES,ES22,Aeroporto,0,,E
+E,ES,ES23,Trindade,1,,E
+E,ES,ES24,Aeroporto,0,,E
+E,ES,ES25,Trindade,1,,E
+E,ES,ES26,Aeroporto,0,,E
+E,ES,ES27,Trindade,1,,E
+E,ES,ES28,Aeroporto,0,,E
+E,ES,ES29,Trindade,1,,E
+E,ES,ES30,Aeroporto,0,,E
+E,ES,ES31,Trindade,1,,E
+E,ES,ES32,Aeroporto,0,,E
+E,ES,ES33,Trindade,1,,E
+E,ES,ES34,Aeroporto,0,,E
+E,ES,ES35,Trindade,1,,E
+E,ES,ES36,Aeroporto,0,,E
+E,ES,ES37,Trindade,1,,E
+E,ES,ES38,Aeroporto,0,,E
+E,ES,ES39,Trindade,1,,E
+E,ES,ES40,Aeroporto,0,,E
+E,ES,ES41,Trindade,1,,E
+E,ES,ES42,Aeroporto,0,,E
+E,ES,ES43,Trindade,1,,E
+E,ES,ES44,Aeroporto,0,,E
+E,ES,ES45,Trindade,1,,E
+E,ES,ES46,Aeroporto,0,,E
+E,ES,ES47,Trindade,1,,E
+E,ES,ES48,Aeroporto,0,,E
+E,ES,ES49,Trindade,1,,E
+E,ES,ES50,Aeroporto,0,,E
+E,ES,ES51,Trindade,1,,E
+E,ES,ES52,Aeroporto,0,,E
+E,ES,ES53,Trindade,1,,E
+E,ES,ES54,Aeroporto,0,,E
+E,ES,ES55,Trindade,1,,E
+E,ES,ES56,Aeroporto,0,,E
+E,ES,ES57,Trindade,1,,E
+E,ES,ES58,Aeroporto,0,,E
+E,ES,ES59,Trindade,1,,E
+E,ES,ES60,Aeroporto,0,,E
+E,ES,ES61,Trindade,1,,E
+E,ES,ES62,Aeroporto,0,,E
+E,ES,ES63,Trindade,1,,E
+E,ES,ES64,Aeroporto,0,,E
+E,ES,ES65,Trindade,1,,E
+E,ES,ES66,Aeroporto,0,,E
+E,ES,ES67,Trindade,1,,E
+E,ES,ES68,Aeroporto,0,,E
+E,ES,ES69,Trindade,1,,E
+E,ES,ES70,Aeroporto,0,,E
+E,ES,ES71,Trindade,1,,E
+E,ES,ES72,Aeroporto,0,,E
+E,ES,ES73,Trindade,1,,E
+E,ES,ES74,Aeroporto,0,,E
+E,ES,ES75,Aeroporto,1,,E
+E,EDF,EDF0,Aeroporto,0,,E
+E,EDF,EDF1,Trindade,1,,E
+E,EDF,EDF2,Aeroporto,0,,E
+E,EDF,EDF3,Trindade,1,,E
+E,EDF,EDF4,Aeroporto,0,,E
+E,EDF,EDF5,Trindade,1,,E
+E,EDF,EDF6,Aeroporto,0,,E
+E,EDF,EDF7,Trindade,1,,E
+E,EDF,EDF8,Aeroporto,0,,E
+E,EDF,EDF9,Trindade,1,,E
+E,EDF,EDF10,Aeroporto,0,,E
+E,EDF,EDF11,Trindade,1,,E
+E,EDF,EDF12,Aeroporto,0,,E
+E,EDF,EDF13,Trindade,1,,E
+E,EDF,EDF14,Aeroporto,0,,E
+E,EDF,EDF15,Trindade,1,,E
+E,EDF,EDF16,Aeroporto,0,,E
+E,EDF,EDF17,Trindade,1,,E
+E,EDF,EDF18,Aeroporto,0,,E
+E,EDF,EDF19,Trindade,1,,E
+E,EDF,EDF20,Aeroporto,0,,E
+E,EDF,EDF21,Trindade,1,,E
+E,EDF,EDF22,Aeroporto,0,,E
+E,EDF,EDF23,Trindade,1,,E
+E,EDF,EDF24,Aeroporto,0,,E
+E,EDF,EDF25,Trindade,1,,E
+E,EDF,EDF26,Aeroporto,0,,E
+E,EDF,EDF27,Trindade,1,,E
+E,EDF,EDF28,Aeroporto,0,,E
+E,EDF,EDF29,Trindade,1,,E
+E,EDF,EDF30,Aeroporto,0,,E
+E,EDF,EDF31,Trindade,1,,E
+E,EDF,EDF32,Aeroporto,0,,E
+E,EDF,EDF33,Trindade,1,,E
+E,EDF,EDF34,Aeroporto,0,,E
+E,EDF,EDF35,Trindade,1,,E
+E,EDF,EDF36,Aeroporto,0,,E
+E,EDF,EDF37,Trindade,1,,E
+E,EDF,EDF38,Aeroporto,0,,E
+E,EDF,EDF39,Trindade,1,,E
+E,EDF,EDF40,Aeroporto,0,,E
+E,EDF,EDF41,Trindade,1,,E
+E,EDF,EDF42,Aeroporto,0,,E
+E,EDF,EDF43,Trindade,1,,E
+E,EDF,EDF44,Aeroporto,0,,E
+E,EDF,EDF45,Trindade,1,,E
+E,EDF,EDF46,Aeroporto,0,,E
+E,EDF,EDF47,Trindade,1,,E
+E,EDF,EDF48,Aeroporto,0,,E
+E,EDF,EDF49,Trindade,1,,E
+E,EDF,EDF50,Aeroporto,0,,E
+E,EDF,EDF51,Trindade,1,,E
+E,EDF,EDF52,Aeroporto,0,,E
+E,EDF,EDF53,Trindade,1,,E
+E,EDF,EDF54,Aeroporto,0,,E
+E,EDF,EDF55,Trindade,1,,E
+E,EDF,EDF56,Aeroporto,0,,E
+E,EDF,EDF57,Trindade,1,,E
+E,EDF,EDF58,Aeroporto,0,,E
+E,EDF,EDF59,Trindade,1,,E
+E,EDF,EDF60,Aeroporto,0,,E
+E,EDF,EDF61,Trindade,1,,E
+E,EDF,EDF62,Aeroporto,0,,E
+E,EDF,EDF63,Trindade,1,,E
+E,EDF,EDF64,Aeroporto,0,,E
+E,EDF,EDF65,Trindade,1,,E
+E,EDF,EDF66,Aeroporto,0,,E
+E,EDF,EDF67,Trindade,1,,E
+E,EDF,EDF68,Aeroporto,0,,E
+E,EDF,EDF69,Trindade,1,,E
+E,EDF,EDF70,Aeroporto,0,,E
+E,EDF,EDF71,Trindade,1,,E
+E,EDF,EDF72,Aeroporto,0,,E
+E,EDF,EDF73,Trindade,1,,E
+E,EDF,EDF74,Trindade,0,,E
+E,EDF,EDF75,Trindade,1,,E
+F,FU,FU0,Senhora da Hora,0,,F
+F,FU,FU1,Fanzeres,1,,F
+F,FU,FU2,Senhora da Hora,0,,F
+F,FU,FU3,Fanzeres,1,,F
+F,FU,FU4,Senhora da Hora,0,,F
+F,FU,FU5,Fanzeres,1,,F
+F,FU,FU6,Senhora da Hora,0,,F
+F,FU,FU7,Fanzeres,1,,F
+F,FU,FU8,Senhora da Hora,0,,F
+F,FU,FU9,Fanzeres,1,,F
+F,FU,FU10,Senhora da Hora,0,,F
+F,FU,FU11,Fanzeres,1,,F
+F,FU,FU12,Senhora da Hora,0,,F
+F,FU,FU13,Fanzeres,1,,F
+F,FU,FU14,Senhora da Hora,0,,F
+F,FU,FU15,Fanzeres,1,,F
+F,FU,FU16,Senhora da Hora,0,,F
+F,FU,FU17,Fanzeres,1,,F
+F,FU,FU18,Senhora da Hora,0,,F
+F,FU,FU19,Fanzeres,1,,F
+F,FU,FU20,Senhora da Hora,0,,F
+F,FU,FU21,Fanzeres,1,,F
+F,FU,FU22,Senhora da Hora,0,,F
+F,FU,FU23,Fanzeres,1,,F
+F,FU,FU24,Senhora da Hora,0,,F
+F,FU,FU25,Fanzeres,1,,F
+F,FU,FU26,Senhora da Hora,0,,F
+F,FU,FU27,Fanzeres,1,,F
+F,FU,FU28,Senhora da Hora,0,,F
+F,FU,FU29,Fanzeres,1,,F
+F,FU,FU30,Senhora da Hora,0,,F
+F,FU,FU31,Fanzeres,1,,F
+F,FU,FU32,Senhora da Hora,0,,F
+F,FU,FU33,Fanzeres,1,,F
+F,FU,FU34,Senhora da Hora,0,,F
+F,FU,FU35,Fanzeres,1,,F
+F,FU,FU36,Senhora da Hora,0,,F
+F,FU,FU37,Fanzeres,1,,F
+F,FU,FU38,Senhora da Hora,0,,F
+F,FU,FU39,Fanzeres,1,,F
+F,FU,FU40,Senhora da Hora,0,,F
+F,FU,FU41,Fanzeres,1,,F
+F,FU,FU42,Senhora da Hora,0,,F
+F,FU,FU43,Fanzeres,1,,F
+F,FU,FU44,Senhora da Hora,0,,F
+F,FU,FU45,Fanzeres,1,,F
+F,FU,FU46,Senhora da Hora,0,,F
+F,FU,FU47,Fanzeres,1,,F
+F,FU,FU48,Senhora da Hora,0,,F
+F,FU,FU49,Fanzeres,1,,F
+F,FU,FU50,Senhora da Hora,0,,F
+F,FU,FU51,Fanzeres,1,,F
+F,FU,FU52,Senhora da Hora,0,,F
+F,FU,FU53,Fanzeres,1,,F
+F,FU,FU54,Senhora da Hora,0,,F
+F,FU,FU55,Fanzeres,1,,F
+F,FU,FU56,Senhora da Hora,0,,F
+F,FU,FU57,Fanzeres,1,,F
+F,FU,FU58,Senhora da Hora,0,,F
+F,FU,FU59,Fanzeres,1,,F
+F,FU,FU60,Senhora da Hora,0,,F
+F,FU,FU61,Fanzeres,1,,F
+F,FU,FU62,Senhora da Hora,0,,F
+F,FU,FU63,Fanzeres,1,,F
+F,FU,FU64,Senhora da Hora,0,,F
+F,FU,FU65,Fanzeres,1,,F
+F,FU,FU66,Senhora da Hora,0,,F
+F,FU,FU67,Fanzeres,1,,F
+F,FU,FU68,Senhora da Hora,0,,F
+F,FU,FU69,Fanzeres,1,,F
+F,FU,FU70,Senhora da Hora,0,,F
+F,FU,FU71,Fanzeres,1,,F
+F,FU,FU72,Senhora da Hora,0,,F
+F,FU,FU73,Fanzeres,1,,F
+F,FU,FU74,Senhora da Hora,0,,F
+F,FU,FU75,Fanzeres,1,,F
+F,FU,FU76,Senhora da Hora,0,,F
+F,FU,FU77,Fanzeres,1,,F
+F,FU,FU78,Senhora da Hora,0,,F
+F,FU,FU79,Fanzeres,1,,F
+F,FU,FU80,Senhora da Hora,0,,F
+F,FU,FU81,Fanzeres,1,,F
+F,FU,FU82,Senhora da Hora,0,,F
+F,FU,FU83,Fanzeres,1,,F
+F,FU,FU84,Senhora da Hora,0,,F
+F,FU,FU85,Fanzeres,1,,F
+F,FU,FU86,Senhora da Hora,0,,F
+F,FU,FU87,Fanzeres,1,,F
+F,FU,FU88,Senhora da Hora,0,,F
+F,FU,FU89,Fanzeres,1,,F
+F,FU,FU90,Senhora da Hora,0,,F
+F,FU,FU91,Fanzeres,1,,F
+F,FU,FU92,Senhora da Hora,0,,F
+F,FU,FU93,Fanzeres,1,,F
+F,FU,FU94,Senhora da Hora,0,,F
+F,FU,FU95,Fanzeres,1,,F
+F,FU,FU96,Senhora da Hora,0,,F
+F,FU,FU97,Fanzeres,1,,F
+F,FU,FU98,Senhora da Hora,0,,F
+F,FU,FU99,Fanzeres,1,,F
+F,FU,FU100,Senhora da Hora,0,,F
+F,FU,FU101,Fanzeres,1,,F
+F,FU,FU102,Senhora da Hora,0,,F
+F,FU,FU103,Fanzeres,1,,F
+F,FU,FU104,Senhora da Hora,0,,F
+F,FU,FU105,Fanzeres,1,,F
+F,FU,FU106,Senhora da Hora,0,,F
+F,FU,FU107,Fanzeres,1,,F
+F,FU,FU108,Senhora da Hora,0,,F
+F,FU,FU109,Fanzeres,1,,F
+F,FU,FU110,Senhora da Hora,0,,F
+F,FU,FU111,Fanzeres,1,,F
+F,FU,FU112,Senhora da Hora,0,,F
+F,FU,FU113,Fanzeres,1,,F
+F,FU,FU114,Senhora da Hora,0,,F
+F,FU,FU115,Fanzeres,1,,F
+F,FU,FU116,Senhora da Hora,0,,F
+F,FU,FU117,Fanzeres,1,,F
+F,FU,FU118,Senhora da Hora,0,,F
+F,FU,FU119,Fanzeres,1,,F
+F,FU,FU120,Senhora da Hora,0,,F
+F,FU,FU121,Fanzeres,1,,F
+F,FU,FU122,Senhora da Hora,0,,F
+F,FU,FU123,Fanzeres,1,,F
+F,FU,FU124,Senhora da Hora,0,,F
+F,FU,FU125,Fanzeres,1,,F
+F,FU,FU126,Senhora da Hora,0,,F
+F,FU,FU127,Fanzeres,1,,F
+F,FU,FU128,Senhora da Hora,0,,F
+F,FU,FU129,Fanzeres,1,,F
+F,FU,FU130,Senhora da Hora,0,,F
+F,FU,FU131,Fanzeres,1,,F
+F,FU,FU132,Senhora da Hora,0,,F
+F,FU,FU133,Fanzeres,1,,F
+F,FU,FU134,Senhora da Hora,0,,F
+F,FU,FU135,Fanzeres,1,,F
+F,FU,FU136,Senhora da Hora,0,,F
+F,FU,FU137,Fanzeres,1,,F
+F,FU,FU138,Senhora da Hora,0,,F
+F,FU,FU139,Fanzeres,1,,F
+F,FU,FU140,Senhora da Hora,0,,F
+F,FU,FU141,Fanzeres,1,,F
+F,FU,FU142,Senhora da Hora,0,,F
+F,FS,FS0,Senhora da Hora,0,,F
+F,FS,FS1,Fanzeres,1,,F
+F,FS,FS2,Senhora da Hora,0,,F
+F,FS,FS3,Fanzeres,1,,F
+F,FS,FS4,Senhora da Hora,0,,F
+F,FS,FS5,Fanzeres,1,,F
+F,FS,FS6,Senhora da Hora,0,,F
+F,FS,FS7,Fanzeres,1,,F
+F,FS,FS8,Senhora da Hora,0,,F
+F,FS,FS9,Fanzeres,1,,F
+F,FS,FS10,Senhora da Hora,0,,F
+F,FS,FS11,Fanzeres,1,,F
+F,FS,FS12,Senhora da Hora,0,,F
+F,FS,FS13,Fanzeres,1,,F
+F,FS,FS14,Senhora da Hora,0,,F
+F,FS,FS15,Fanzeres,1,,F
+F,FS,FS16,Senhora da Hora,0,,F
+F,FS,FS17,Fanzeres,1,,F
+F,FS,FS18,Senhora da Hora,0,,F
+F,FS,FS19,Fanzeres,1,,F
+F,FS,FS20,Senhora da Hora,0,,F
+F,FS,FS21,Fanzeres,1,,F
+F,FS,FS22,Senhora da Hora,0,,F
+F,FS,FS23,Fanzeres,1,,F
+F,FS,FS24,Senhora da Hora,0,,F
+F,FS,FS25,Fanzeres,1,,F
+F,FS,FS26,Senhora da Hora,0,,F
+F,FS,FS27,Fanzeres,1,,F
+F,FS,FS28,Senhora da Hora,0,,F
+F,FS,FS29,Fanzeres,1,,F
+F,FS,FS30,Senhora da Hora,0,,F
+F,FS,FS31,Fanzeres,1,,F
+F,FS,FS32,Senhora da Hora,0,,F
+F,FS,FS33,Fanzeres,1,,F
+F,FS,FS34,Senhora da Hora,0,,F
+F,FS,FS35,Fanzeres,1,,F
+F,FS,FS36,Senhora da Hora,0,,F
+F,FS,FS37,Fanzeres,1,,F
+F,FS,FS38,Senhora da Hora,0,,F
+F,FS,FS39,Fanzeres,1,,F
+F,FS,FS40,Senhora da Hora,0,,F
+F,FS,FS41,Fanzeres,1,,F
+F,FS,FS42,Senhora da Hora,0,,F
+F,FS,FS43,Fanzeres,1,,F
+F,FS,FS44,Senhora da Hora,0,,F
+F,FS,FS45,Fanzeres,1,,F
+F,FS,FS46,Senhora da Hora,0,,F
+F,FS,FS47,Fanzeres,1,,F
+F,FS,FS48,Senhora da Hora,0,,F
+F,FS,FS49,Fanzeres,1,,F
+F,FS,FS50,Senhora da Hora,0,,F
+F,FS,FS51,Fanzeres,1,,F
+F,FS,FS52,Senhora da Hora,0,,F
+F,FS,FS53,Fanzeres,1,,F
+F,FS,FS54,Senhora da Hora,0,,F
+F,FS,FS55,Fanzeres,1,,F
+F,FS,FS56,Senhora da Hora,0,,F
+F,FS,FS57,Fanzeres,1,,F
+F,FS,FS58,Senhora da Hora,0,,F
+F,FS,FS59,Fanzeres,1,,F
+F,FS,FS60,Senhora da Hora,0,,F
+F,FS,FS61,Fanzeres,1,,F
+F,FS,FS62,Senhora da Hora,0,,F
+F,FS,FS63,Fanzeres,1,,F
+F,FS,FS64,Senhora da Hora,0,,F
+F,FS,FS65,Fanzeres,1,,F
+F,FS,FS66,Senhora da Hora,0,,F
+F,FS,FS67,Fanzeres,1,,F
+F,FS,FS68,Senhora da Hora,0,,F
+F,FS,FS69,Fanzeres,1,,F
+F,FS,FS70,Senhora da Hora,0,,F
+F,FS,FS71,Fanzeres,1,,F
+F,FS,FS72,Senhora da Hora,0,,F
+F,FS,FS73,Fanzeres,1,,F
+F,FS,FS74,Senhora da Hora,0,,F
+F,FDF,FDF0,Senhora da Hora,0,,F
+F,FDF,FDF1,Fanzeres,1,,F
+F,FDF,FDF2,Senhora da Hora,0,,F
+F,FDF,FDF3,Fanzeres,1,,F
+F,FDF,FDF4,Senhora da Hora,0,,F
+F,FDF,FDF5,Fanzeres,1,,F
+F,FDF,FDF6,Senhora da Hora,0,,F
+F,FDF,FDF7,Fanzeres,1,,F
+F,FDF,FDF8,Senhora da Hora,0,,F
+F,FDF,FDF9,Fanzeres,1,,F
+F,FDF,FDF10,Senhora da Hora,0,,F
+F,FDF,FDF11,Fanzeres,1,,F
+F,FDF,FDF12,Senhora da Hora,0,,F
+F,FDF,FDF13,Fanzeres,1,,F
+F,FDF,FDF14,Senhora da Hora,0,,F
+F,FDF,FDF15,Fanzeres,1,,F
+F,FDF,FDF16,Senhora da Hora,0,,F
+F,FDF,FDF17,Fanzeres,1,,F
+F,FDF,FDF18,Senhora da Hora,0,,F
+F,FDF,FDF19,Fanzeres,1,,F
+F,FDF,FDF20,Senhora da Hora,0,,F
+F,FDF,FDF21,Fanzeres,1,,F
+F,FDF,FDF22,Senhora da Hora,0,,F
+F,FDF,FDF23,Fanzeres,1,,F
+F,FDF,FDF24,Senhora da Hora,0,,F
+F,FDF,FDF25,Fanzeres,1,,F
+F,FDF,FDF26,Senhora da Hora,0,,F
+F,FDF,FDF27,Fanzeres,1,,F
+F,FDF,FDF28,Senhora da Hora,0,,F
+F,FDF,FDF29,Fanzeres,1,,F
+F,FDF,FDF30,Senhora da Hora,0,,F
+F,FDF,FDF31,Fanzeres,1,,F
+F,FDF,FDF32,Senhora da Hora,0,,F
+F,FDF,FDF33,Fanzeres,1,,F
+F,FDF,FDF34,Senhora da Hora,0,,F
+F,FDF,FDF35,Fanzeres,1,,F
+F,FDF,FDF36,Senhora da Hora,0,,F
+F,FDF,FDF37,Fanzeres,1,,F
+F,FDF,FDF38,Senhora da Hora,0,,F
+F,FDF,FDF39,Fanzeres,1,,F
+F,FDF,FDF40,Senhora da Hora,0,,F
+F,FDF,FDF41,Fanzeres,1,,F
+F,FDF,FDF42,Senhora da Hora,0,,F
+F,FDF,FDF43,Fanzeres,1,,F
+F,FDF,FDF44,Senhora da Hora,0,,F
+F,FDF,FDF45,Fanzeres,1,,F
+F,FDF,FDF46,Senhora da Hora,0,,F
+F,FDF,FDF47,Fanzeres,1,,F
+F,FDF,FDF48,Senhora da Hora,0,,F
+F,FDF,FDF49,Fanzeres,1,,F
+F,FDF,FDF50,Senhora da Hora,0,,F
+F,FDF,FDF51,Fanzeres,1,,F
+F,FDF,FDF52,Senhora da Hora,0,,F
+F,FDF,FDF53,Fanzeres,1,,F
+F,FDF,FDF54,Senhora da Hora,0,,F
+F,FDF,FDF55,Fanzeres,1,,F
+F,FDF,FDF56,Senhora da Hora,0,,F
+F,FDF,FDF57,Fanzeres,1,,F
+F,FDF,FDF58,Senhora da Hora,0,,F
+F,FDF,FDF59,Fanzeres,1,,F
+F,FDF,FDF60,Senhora da Hora,0,,F
+F,FDF,FDF61,Fanzeres,1,,F
+F,FDF,FDF62,Senhora da Hora,0,,F
+F,FDF,FDF63,Fanzeres,1,,F
+F,FDF,FDF64,Senhora da Hora,0,,F
+F,FDF,FDF65,Fanzeres,1,,F
+F,FDF,FDF66,Senhora da Hora,0,,F
+F,FDF,FDF67,Fanzeres,1,,F
+F,FDF,FDF68,Senhora da Hora,0,,F
+F,FDF,FDF69,Fanzeres,1,,F
+F,FDF,FDF70,Senhora da Hora,0,,F
+F,FDF,FDF71,Fanzeres,1,,F
+F,FDF,FDF72,Senhora da Hora,0,,F
+F,FDF,FDF73,Fanzeres,1,,F
+F,FDF,FDF74,Senhora da Hora,0,,F
+F,FDF,FDF75,Aeroporto,0,,F
+F,FDF,FDF76,Trindade,1,,F
+C,CUF,CUF0,Forum Maia,0,,C
+C,CUF,CUF1,Campanha,1,,C
+C,CUF,CUF2,Forum Maia,0,,C
+C,CUF,CUF3,Campanha,1,,C
+C,CUF,CUF4,Forum Maia,0,,C
+C,CUF,CUF5,Campanha,1,,C
+C,CUF,CUF6,Forum Maia,0,,C
+C,CUF,CUF7,Campanha,1,,C
+C,CUF,CUF8,Forum Maia,0,,C
+C,CUF,CUF9,Campanha,1,,C
+C,CUF,CUF10,Forum Maia,0,,C
+C,CUF,CUF11,Campanha,1,,C
+C,CUF,CUF12,Forum Maia,0,,C
+C,CUF,CUF13,Campanha,1,,C
+C,CUF,CUF14,Forum Maia,0,,C
+C,CUF,CUF15,Campanha,1,,C
+C,CUF,CUF16,Forum Maia,0,,C
+C,CUF,CUF17,Campanha,1,,C
+C,CUF,CUF18,Forum Maia,0,,C
+C,CUF,CUF19,Campanha,1,,C
+C,CUF,CUF20,Forum Maia,0,,C
+C,CUF,CUF21,Campanha,1,,C
+C,CUF,CUF22,Forum Maia,0,,C
+C,CUF,CUF23,Campanha,1,,C
+C,CUF,CUF24,Forum Maia,0,,C
+C,CUF,CUF25,Campanha,1,,C
+C,CUF,CUF26,Forum Maia,0,,C
+C,CUF,CUF27,Campanha,1,,C
+C,CUF,CUF28,Forum Maia,0,,C
+C,CUF,CUF29,Campanha,1,,C
+C,CUF,CUF30,Forum Maia,0,,C
+C,CUF,CUF31,Campanha,1,,C
+C,CUF,CUF32,Forum Maia,0,,C
+C,CUF,CUF33,Campanha,1,,C
+C,CUF,CUF34,Forum Maia,0,,C
+C,CUF,CUF35,Campanha,1,,C
+C,CUF,CUF36,Forum Maia,0,,C
+C,CUF,CUF37,Campanha,1,,C
+C,CUF,CUF38,Forum Maia,0,,C
+C,CUF,CUF39,Campanha,1,,C
+C,CUF,CUF40,Forum Maia,0,,C
+C,CUF,CUF41,Campanha,1,,C
+C,CUF,CUF42,Forum Maia,0,,C
+C,CUF,CUF43,Campanha,1,,C
+C,CUF,CUF44,Forum Maia,0,,C
+C,CUF,CUF45,Campanha,1,,C
+C,CUF,CUF46,Forum Maia,0,,C
+C,CUF,CUF47,Campanha,1,,C
+C,CUF,CUF48,Forum Maia,0,,C
+C,CUF,CUF49,Campanha,1,,C
+C,CUF,CUF50,Forum Maia,0,,C
+C,CUF,CUF51,Campanha,1,,C
+C,CUF,CUF52,Forum Maia,0,,C
+C,CUF,CUF53,Campanha,1,,C
+C,CUF,CUF54,Forum Maia,0,,C
+C,CUF,CUF55,Campanha,1,,C
+C,CUF,CUF56,Forum Maia,0,,C
+C,CUF,CUF57,Campanha,1,,C
+E,EU,EUD0,Aeroporto,0,,E
+E,EU,EUD1,Estadio do Dragao,1,,E
+E,EU,EUD2,Aeroporto,0,,E
+E,EU,EUD3,Estadio do Dragao,1,,E
+E,EU,EUD4,Aeroporto,0,,E
+E,EU,EUD5,Estadio do Dragao,1,,E
+E,EU,EUD6,Aeroporto,0,,E
+E,EU,EUD7,Estadio do Dragao,1,,E
+E,EU,EUD8,Aeroporto,0,,E
+E,EU,EUD9,Estadio do Dragao,1,,E
+E,EU,EUD10,Aeroporto,0,,E
+E,EU,EUD11,Estadio do Dragao,1,,E
+E,EU,EUD12,Aeroporto,0,,E
+E,EU,EUD13,Estadio do Dragao,1,,E
+E,EU,EUD14,Aeroporto,0,,E
+E,EU,EUD15,Estadio do Dragao,1,,E
+E,EU,EUD16,Aeroporto,0,,E
+E,EU,EUD17,Estadio do Dragao,1,,E
+E,EU,EUD18,Aeroporto,0,,E
+E,EU,EUD19,Estadio do Dragao,1,,E
+E,EU,EUD20,Aeroporto,0,,E
+E,EU,EUD21,Estadio do Dragao,1,,E
+E,EU,EUD22,Aeroporto,0,,E
+E,EU,EUD23,Estadio do Dragao,1,,E
+E,EU,EUD24,Aeroporto,0,,E
+E,EU,EUD25,Estadio do Dragao,1,,E
+E,EU,EUD26,Aeroporto,0,,E
+E,EU,EUD27,Estadio do Dragao,1,,E
+E,EU,EUD28,Aeroporto,0,,E
+E,EU,EUD29,Estadio do Dragao,1,,E
+E,EU,EUD30,Aeroporto,0,,E
+E,EU,EUD31,Estadio do Dragao,1,,E
+E,EU,EUD32,Aeroporto,0,,E
+E,EU,EUD33,Estadio do Dragao,1,,E
+E,EU,EUD34,Aeroporto,0,,E
+E,EU,EUD35,Estadio do Dragao,1,,E
+E,EU,EUD36,Aeroporto,0,,E
+E,EU,EUD37,Estadio do Dragao,1,,E
+E,EU,EUD38,Aeroporto,0,,E
+E,EU,EUD39,Estadio do Dragao,1,,E
+E,EU,EUD40,Aeroporto,0,,E
+E,EU,EUD41,Estadio do Dragao,1,,E
+E,EU,EUD42,Aeroporto,0,,E
+E,EU,EUD43,Estadio do Dragao,1,,E
+E,EU,EUD44,Aeroporto,0,,E
+E,EU,EUD45,Estadio do Dragao,1,,E
+E,EU,EUD46,Aeroporto,0,,E
+E,EU,EUD47,Estadio do Dragao,1,,E
+E,EU,EUD48,Aeroporto,0,,E
+E,EU,EUD49,Estadio do Dragao,1,,E
+E,EU,EUD50,Aeroporto,0,,E
+E,EU,EUD51,Estadio do Dragao,1,,E
+E,EU,EUD53,Estadio do Dragao,1,,E
+E,ES,ESD0,Aeroporto,0,,E
+E,ES,ESD1,Estadio do Dragao,1,,E
+E,ES,ESD2,Aeroporto,0,,E
+E,ES,ESD3,Estadio do Dragao,1,,E
+E,ES,ESD4,Aeroporto,0,,E
+E,ES,ESD5,Estadio do Dragao,1,,E
+E,ES,ESD6,Aeroporto,0,,E
+E,ES,ESD7,Estadio do Dragao,1,,E
+E,ES,ESD8,Aeroporto,0,,E
+E,ES,ESD9,Estadio do Dragao,1,,E
+E,ES,ESD10,Aeroporto,0,,E
+E,ES,ESD11,Estadio do Dragao,1,,E
+E,ES,ESD12,Aeroporto,0,,E
+E,ES,ESD13,Estadio do Dragao,1,,E
+E,ES,ESD14,Aeroporto,0,,E
+E,ES,ESD15,Estadio do Dragao,1,,E
+E,ES,ESD16,Aeroporto,0,,E
+E,ES,ESD17,Estadio do Dragao,1,,E
+E,ES,ESD18,Aeroporto,0,,E
+E,ES,ESD19,Estadio do Dragao,1,,E
+E,ES,ESD20,Aeroporto,0,,E
+E,ES,ESD21,Estadio do Dragao,1,,E
+E,ES,ESD22,Aeroporto,0,,E
+E,ES,ESD23,Estadio do Dragao,1,,E
+E,ES,ESD24,Aeroporto,0,,E
+E,ES,ESD25,Estadio do Dragao,1,,E
+E,ES,ESD27,Estadio do Dragao,1,,E
+E,EDF,EDD0,Aeroporto,0,,E
+E,EDF,EDD1,Estadio do Dragao,1,,E
+E,EDF,EDD2,Aeroporto,0,,E
+E,EDF,EDD3,Estadio do Dragao,1,,E
+E,EDF,EDD4,Aeroporto,0,,E
+E,EDF,EDD5,Estadio do Dragao,1,,E
+E,EDF,EDD6,Aeroporto,0,,E
+E,EDF,EDD7,Estadio do Dragao,1,,E
+E,EDF,EDD8,Aeroporto,0,,E
+E,EDF,EDD9,Estadio do Dragao,1,,E
+E,EDF,EDD10,Aeroporto,0,,E
+E,EDF,EDD11,Estadio do Dragao,1,,E
+E,EDF,EDD12,Aeroporto,0,,E
+E,EDF,EDD13,Estadio do Dragao,1,,E
+E,EDF,EDD14,Aeroporto,0,,E
+E,EDF,EDD15,Estadio do Dragao,1,,E
+E,EDF,EDD16,Aeroporto,0,,E
+E,EDF,EDD17,Estadio do Dragao,1,,E
+E,EDF,EDD18,Aeroporto,0,,E
+E,EDF,EDD19,Estadio do Dragao,1,,E
+E,EDF,EDD20,Aeroporto,0,,E
+E,EDF,EDD21,Estadio do Dragao,1,,E
+E,EDF,EDD22,Aeroporto,0,,E
+E,EDF,EDD23,Estadio do Dragao,1,,E
+E,EDF,EDD24,Aeroporto,0,,E
+E,EDF,EDD25,Estadio do Dragao,1,,E
+E,EDF,EDD27,Estadio do Dragao,1,,E

@@ -1,0 +1,8 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+A,,A, - ,,1,,199FDA,FFFFFF
+B,,B, - ,,1,,C63920,FFFFFF
+Bexp,,Bx, - ,,1,,C63920,FFFFFF
+C,,C, - ,,1,,A3BE31,FFFFFF
+D,,D, - ,,1,,EBBC14,FFFFFF
+E,,E, - ,,1,,736EB0,FFFFFF
+F,,F, - ,,1,,EE731C,FFFFFF

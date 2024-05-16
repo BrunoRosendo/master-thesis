@@ -1,0 +1,9 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+A,,A,Linha Azul,,1,,00ADEF,
+B,,B,Linha Vermelha,,1,,EF412F,
+Bex,,B Expresso,Linha Vermelha Expresso,,1,,EF412F,
+C,,C,Linha Verde,,1,,8DC63F,
+D,,D,Linha Amarela,,1,,FFC20E,
+E,,E,Linha Violeta,,1,,937CB9,
+FG,,Funicular,Funicular dos Guindais,,7,,,
+F,,F,Linha Laranja,,1,,FF9900,
