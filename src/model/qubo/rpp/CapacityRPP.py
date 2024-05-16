@@ -41,7 +41,7 @@ class CapacityRPP(InfiniteRPP):
             self.model.sum(
                 self.get_location_demand(self.used_locations_indices[i - 1])
                 * self.x_var(k, i, s)
-                for i in range(1, self.num_used_locations + 1)
+                for i in range(1, self.num_used_locations)
                 for s in range(cur_step + 1)
             )
             <= self.capacities[k]
