@@ -1,0 +1,2693 @@
+route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
+B,BDF,BDF0,Póvoa de Varzim,0,,BG
+B,BDF,BDF1,Póvoa de Varzim,0,,BG
+B,BDF,BDF2,Póvoa de Varzim,0,,BG
+B,BDF,BDF3,Póvoa de Varzim,0,,BG
+B,BDF,BDF4,Póvoa de Varzim,0,,BG
+B,BDF,BDF5,Póvoa de Varzim,0,,BG
+B,BDF,BDF6,Póvoa de Varzim,0,,BG
+B,BDF,BDF7,Póvoa de Varzim,0,,BG
+B,BDF,BDF8,Póvoa de Varzim,0,,BG
+B,BDF,BDF9,Póvoa de Varzim,0,,BG
+B,BDF,BDF10,Póvoa de Varzim,0,,BG
+B,BDF,BDF11,Póvoa de Varzim,0,,BG
+B,BDF,BDF12,Póvoa de Varzim,0,,BG
+B,BDF,BDF13,Póvoa de Varzim,0,,BG
+B,BDF,BDF14,Póvoa de Varzim,0,,BG
+B,BDF,BDF15,Póvoa de Varzim,0,,BG
+B,BDF,BDF16,Póvoa de Varzim,0,,BG
+B,BDF,BDF17,Póvoa de Varzim,0,,BG
+B,BDF,BDF18,Póvoa de Varzim,0,,BG
+B,BDF,BDF19,Póvoa de Varzim,0,,BG
+B,BDF,BDF20,Póvoa de Varzim,0,,BG
+B,BDF,BDF21,Póvoa de Varzim,0,,BG
+B,BDF,BDF22,Póvoa de Varzim,0,,BG
+B,BDF,BDF23,Póvoa de Varzim,0,,BG
+B,BDF,BDF24,Póvoa de Varzim,0,,BG
+B,BDF,BDF25,Póvoa de Varzim,0,,BG
+B,BDF,BDF26,Póvoa de Varzim,0,,BG
+B,BDF,BDF27,Póvoa de Varzim,0,,BG
+B,BDF,BDF28,Póvoa de Varzim,0,,BG
+B,BDF,BDF29,Póvoa de Varzim,0,,BG
+B,BDF,BDF30,Póvoa de Varzim,0,,BG
+B,BDF,BDF31,Póvoa de Varzim,0,,BG
+B,BDF,BDF32,Póvoa de Varzim,0,,BG
+B,BDF,BDF33,Póvoa de Varzim,0,,BG
+B,BDF,BDF34,Póvoa de Varzim,0,,BG
+B,BDF,BDF35,Póvoa de Varzim,0,,BG
+B,BDF,BDF36,Póvoa de Varzim,0,,BG
+B,BDF,BDF37,Póvoa de Varzim,0,,BG
+B,BDF,BDF38,Póvoa de Varzim,0,,BG
+B,BDF,BDF39,Póvoa de Varzim,0,,BG
+B,BDF,BDF40,Póvoa de Varzim,0,,BG
+B,BDF,BDF41,Póvoa de Varzim,0,,BG
+B,BDF,BDF42,Póvoa de Varzim,0,,BG
+B,BDF,BDF43,Póvoa de Varzim,0,,BG
+B,BDF,BDF44,Póvoa de Varzim,0,,BG
+B,BDF,BDF45,Póvoa de Varzim,0,,BG
+B,BS,BS0,Póvoa de Varzim,0,,BG
+B,BS,BS1,Póvoa de Varzim,0,,BG
+B,BS,BS2,Póvoa de Varzim,0,,BG
+B,BS,BS3,Póvoa de Varzim,0,,BG
+B,BS,BS4,Póvoa de Varzim,0,,BG
+B,BS,BS5,Póvoa de Varzim,0,,BG
+B,BS,BS6,Póvoa de Varzim,0,,BG
+B,BS,BS7,Póvoa de Varzim,0,,BG
+B,BS,BS8,Póvoa de Varzim,0,,BG
+B,BS,BS9,Póvoa de Varzim,0,,BG
+B,BS,BS10,Póvoa de Varzim,0,,BG
+B,BS,BS11,Póvoa de Varzim,0,,BG
+B,BS,BS12,Póvoa de Varzim,0,,BG
+B,BS,BS13,Póvoa de Varzim,0,,BG
+B,BS,BS14,Póvoa de Varzim,0,,BG
+B,BS,BS15,Póvoa de Varzim,0,,BG
+B,BS,BS16,Póvoa de Varzim,0,,BG
+B,BS,BS17,Póvoa de Varzim,0,,BG
+B,BS,BS18,Póvoa de Varzim,0,,BG
+B,BS,BS19,Póvoa de Varzim,0,,BG
+B,BS,BS20,Póvoa de Varzim,0,,BG
+B,BS,BS21,Póvoa de Varzim,0,,BG
+B,BS,BS22,Póvoa de Varzim,0,,BG
+B,BS,BS23,Póvoa de Varzim,0,,BG
+B,BS,BS24,Póvoa de Varzim,0,,BG
+B,BS,BS25,Póvoa de Varzim,0,,BG
+B,BS,BS26,Póvoa de Varzim,0,,BG
+B,BS,BS27,Póvoa de Varzim,0,,BG
+B,BS,BS28,Póvoa de Varzim,0,,BG
+B,BS,BS29,Póvoa de Varzim,0,,BG
+B,BS,BS30,Póvoa de Varzim,0,,BG
+B,BS,BS31,Póvoa de Varzim,0,,BG
+B,BS,BS32,Póvoa de Varzim,0,,BG
+B,BS,BS33,Póvoa de Varzim,0,,BG
+B,BS,BS34,Póvoa de Varzim,0,,BG
+B,BS,BS35,Póvoa de Varzim,0,,BG
+B,BS,BS36,Póvoa de Varzim,0,,BG
+B,BS,BS37,Póvoa de Varzim,0,,BG
+B,BS,BS38,Póvoa de Varzim,0,,BG
+B,BS,BS39,Póvoa de Varzim,0,,BG
+B,BS,BS40,Póvoa de Varzim,0,,BG
+B,BS,BS41,Póvoa de Varzim,0,,BG
+B,BS,BS42,Póvoa de Varzim,0,,BG
+B,BS,BS43,Póvoa de Varzim,0,,BG
+B,BS,BS44,Póvoa de Varzim,0,,BG
+B,BS,BS45,Póvoa de Varzim,0,,BG
+B,BS,BS46,Póvoa de Varzim,0,,BG
+B,BS,BS47,Póvoa de Varzim,0,,BG
+B,BS,BS48,Póvoa de Varzim,0,,BG
+B,BS,BS49,Póvoa de Varzim,0,,BG
+B,BS,BS50,Póvoa de Varzim,0,,BG
+B,BU,BU0,Póvoa de Varzim,0,,BG
+B,BU,BU1,Póvoa de Varzim,0,,BG
+B,BU,BU2,Póvoa de Varzim,0,,BG
+B,BU,BU3,Póvoa de Varzim,0,,BG
+B,BU,BU4,Póvoa de Varzim,0,,BG
+B,BU,BU5,Póvoa de Varzim,0,,BG
+B,BU,BU6,Póvoa de Varzim,0,,BG
+B,BU,BU7,Póvoa de Varzim,0,,BG
+B,BU,BU8,Póvoa de Varzim,0,,BG
+B,BU,BU9,Póvoa de Varzim,0,,BG
+B,BU,BU10,Póvoa de Varzim,0,,BG
+B,BU,BU11,Póvoa de Varzim,0,,BG
+B,BU,BU12,Póvoa de Varzim,0,,BG
+B,BU,BU13,Póvoa de Varzim,0,,BG
+B,BU,BU14,Póvoa de Varzim,0,,BG
+B,BU,BU15,Póvoa de Varzim,0,,BG
+B,BU,BU16,Póvoa de Varzim,0,,BG
+B,BU,BU17,Póvoa de Varzim,0,,BG
+B,BU,BU18,Póvoa de Varzim,0,,BG
+B,BU,BU19,Póvoa de Varzim,0,,BG
+B,BU,BU20,Póvoa de Varzim,0,,BG
+B,BU,BU21,Póvoa de Varzim,0,,BG
+B,BU,BU22,Póvoa de Varzim,0,,BG
+B,BU,BU23,Póvoa de Varzim,0,,BG
+B,BU,BU24,Póvoa de Varzim,0,,BG
+B,BU,BU25,Póvoa de Varzim,0,,BG
+B,BU,BU26,Póvoa de Varzim,0,,BG
+B,BU,BU27,Póvoa de Varzim,0,,BG
+B,BU,BU28,Póvoa de Varzim,0,,BG
+B,BU,BU29,Póvoa de Varzim,0,,BG
+B,BU,BU30,Póvoa de Varzim,0,,BG
+B,BU,BU31,Póvoa de Varzim,0,,BG
+B,BU,BU32,Póvoa de Varzim,0,,BG
+B,BU,BU33,Póvoa de Varzim,0,,BG
+B,BU,BU34,Póvoa de Varzim,0,,BG
+B,BU,BU35,Póvoa de Varzim,0,,BG
+B,BU,BU36,Póvoa de Varzim,0,,BG
+B,BU,BU37,Póvoa de Varzim,0,,BG
+B,BDF,BDF46,Estádio do Dragão,1,,BR
+B,BDF,BDF47,Estádio do Dragão,1,,BR
+B,BDF,BDF48,Estádio do Dragão,1,,BR
+B,BDF,BDF49,Estádio do Dragão,1,,BR
+B,BDF,BDF50,Estádio do Dragão,1,,BR
+B,BDF,BDF51,Estádio do Dragão,1,,BR
+B,BDF,BDF52,Estádio do Dragão,1,,BR
+B,BDF,BDF53,Estádio do Dragão,1,,BR
+B,BDF,BDF54,Estádio do Dragão,1,,BR
+B,BDF,BDF55,Estádio do Dragão,1,,BR
+B,BDF,BDF56,Estádio do Dragão,1,,BR
+B,BDF,BDF57,Estádio do Dragão,1,,BR
+B,BDF,BDF58,Estádio do Dragão,1,,BR
+B,BDF,BDF59,Estádio do Dragão,1,,BR
+B,BDF,BDF60,Estádio do Dragão,1,,BR
+B,BDF,BDF61,Estádio do Dragão,1,,BR
+B,BDF,BDF62,Estádio do Dragão,1,,BR
+B,BDF,BDF63,Estádio do Dragão,1,,BR
+B,BDF,BDF64,Estádio do Dragão,1,,BR
+B,BDF,BDF65,Estádio do Dragão,1,,BR
+B,BDF,BDF66,Estádio do Dragão,1,,BR
+B,BDF,BDF67,Estádio do Dragão,1,,BR
+B,BDF,BDF68,Estádio do Dragão,1,,BR
+B,BDF,BDF69,Estádio do Dragão,1,,BR
+B,BDF,BDF70,Estádio do Dragão,1,,BR
+B,BDF,BDF71,Estádio do Dragão,1,,BR
+B,BDF,BDF72,Estádio do Dragão,1,,BR
+B,BDF,BDF73,Estádio do Dragão,1,,BR
+B,BDF,BDF74,Estádio do Dragão,1,,BR
+B,BDF,BDF75,Estádio do Dragão,1,,BR
+B,BDF,BDF76,Estádio do Dragão,1,,BR
+B,BDF,BDF77,Estádio do Dragão,1,,BR
+B,BDF,BDF78,Estádio do Dragão,1,,BR
+B,BDF,BDF79,Estádio do Dragão,1,,BR
+B,BDF,BDF80,Estádio do Dragão,1,,BR
+B,BDF,BDF81,Estádio do Dragão,1,,BR
+B,BDF,BDF82,Estádio do Dragão,1,,BR
+B,BDF,BDF83,Estádio do Dragão,1,,BR
+B,BDF,BDF84,Estádio do Dragão,1,,BR
+B,BDF,BDF85,Estádio do Dragão,1,,BR
+B,BDF,BDF86,Estádio do Dragão,1,,BR
+B,BDF,BDF87,Estádio do Dragão,1,,BR
+B,BDF,BDF88,Estádio do Dragão,1,,BR
+B,BDF,BDF89,Estádio do Dragão,1,,BR
+B,BDF,BDF90,Estádio do Dragão,1,,BR
+B,BDF,BDF91,Estádio do Dragão,1,,BR
+B,BS,BS51,Estádio do Dragão,1,,BR
+B,BS,BS52,Estádio do Dragão,1,,BR
+B,BS,BS53,Estádio do Dragão,1,,BR
+B,BS,BS54,Estádio do Dragão,1,,BR
+B,BS,BS55,Estádio do Dragão,1,,BR
+B,BS,BS56,Estádio do Dragão,1,,BR
+B,BS,BS57,Estádio do Dragão,1,,BR
+B,BS,BS58,Estádio do Dragão,1,,BR
+B,BS,BS59,Estádio do Dragão,1,,BR
+B,BS,BS60,Estádio do Dragão,1,,BR
+B,BS,BS61,Estádio do Dragão,1,,BR
+B,BS,BS62,Estádio do Dragão,1,,BR
+B,BS,BS63,Estádio do Dragão,1,,BR
+B,BS,BS64,Estádio do Dragão,1,,BR
+B,BS,BS65,Estádio do Dragão,1,,BR
+B,BS,BS66,Estádio do Dragão,1,,BR
+B,BS,BS67,Estádio do Dragão,1,,BR
+B,BS,BS68,Estádio do Dragão,1,,BR
+B,BS,BS69,Estádio do Dragão,1,,BR
+B,BS,BS70,Estádio do Dragão,1,,BR
+B,BS,BS71,Estádio do Dragão,1,,BR
+B,BS,BS72,Estádio do Dragão,1,,BR
+B,BS,BS73,Estádio do Dragão,1,,BR
+B,BS,BS74,Estádio do Dragão,1,,BR
+B,BS,BS75,Estádio do Dragão,1,,BR
+B,BS,BS76,Estádio do Dragão,1,,BR
+B,BS,BS77,Estádio do Dragão,1,,BR
+B,BS,BS78,Estádio do Dragão,1,,BR
+B,BS,BS79,Estádio do Dragão,1,,BR
+B,BS,BS80,Estádio do Dragão,1,,BR
+B,BS,BS81,Estádio do Dragão,1,,BR
+B,BS,BS82,Estádio do Dragão,1,,BR
+B,BS,BS83,Estádio do Dragão,1,,BR
+B,BS,BS84,Estádio do Dragão,1,,BR
+B,BS,BS85,Estádio do Dragão,1,,BR
+B,BS,BS86,Estádio do Dragão,1,,BR
+B,BS,BS87,Estádio do Dragão,1,,BR
+B,BS,BS88,Estádio do Dragão,1,,BR
+B,BS,BS89,Estádio do Dragão,1,,BR
+B,BS,BS90,Estádio do Dragão,1,,BR
+B,BS,BS91,Estádio do Dragão,1,,BR
+B,BS,BS92,Estádio do Dragão,1,,BR
+B,BS,BS93,Estádio do Dragão,1,,BR
+B,BS,BS94,Estádio do Dragão,1,,BR
+B,BS,BS95,Estádio do Dragão,1,,BR
+B,BS,BS96,Estádio do Dragão,1,,BR
+B,BS,BS97,Estádio do Dragão,1,,BR
+B,BS,BS98,Estádio do Dragão,1,,BR
+B,BS,BS99,Estádio do Dragão,1,,BR
+B,BS,BS100,Estádio do Dragão,1,,BR
+B,BS,BS101,Estádio do Dragão,1,,BR
+B,BU,BU38,Estádio do Dragão,1,,BR
+B,BU,BU39,Estádio do Dragão,1,,BR
+B,BU,BU40,Estádio do Dragão,1,,BR
+B,BU,BU41,Estádio do Dragão,1,,BR
+B,BU,BU42,Estádio do Dragão,1,,BR
+B,BU,BU43,Estádio do Dragão,1,,BR
+B,BU,BU44,Estádio do Dragão,1,,BR
+B,BU,BU45,Estádio do Dragão,1,,BR
+B,BU,BU46,Estádio do Dragão,1,,BR
+B,BU,BU47,Estádio do Dragão,1,,BR
+B,BU,BU48,Estádio do Dragão,1,,BR
+B,BU,BU49,Estádio do Dragão,1,,BR
+B,BU,BU50,Estádio do Dragão,1,,BR
+B,BU,BU51,Estádio do Dragão,1,,BR
+B,BU,BU52,Estádio do Dragão,1,,BR
+B,BU,BU53,Estádio do Dragão,1,,BR
+B,BU,BU54,Estádio do Dragão,1,,BR
+B,BU,BU55,Estádio do Dragão,1,,BR
+B,BU,BU56,Estádio do Dragão,1,,BR
+B,BU,BU57,Estádio do Dragão,1,,BR
+B,BU,BU58,Estádio do Dragão,1,,BR
+B,BU,BU59,Estádio do Dragão,1,,BR
+B,BU,BU60,Estádio do Dragão,1,,BR
+B,BU,BU61,Estádio do Dragão,1,,BR
+B,BU,BU62,Estádio do Dragão,1,,BR
+B,BU,BU63,Estádio do Dragão,1,,BR
+B,BU,BU64,Estádio do Dragão,1,,BR
+B,BU,BU65,Estádio do Dragão,1,,BR
+B,BU,BU66,Estádio do Dragão,1,,BR
+B,BU,BU67,Estádio do Dragão,1,,BR
+B,BU,BU68,Estádio do Dragão,1,,BR
+B,BU,BU69,Estádio do Dragão,1,,BR
+B,BU,BU70,Estádio do Dragão,1,,BR
+B,BU,BU71,Estádio do Dragão,1,,BR
+B,BU,BU72,Estádio do Dragão,1,,BR
+B,BU,BU73,Estádio do Dragão,1,,BR
+B,BU,BU74,Estádio do Dragão,1,,BR
+B,BU,BU75,Estádio do Dragão,1,,BR
+B,BU,BU76,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU0,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU1,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU2,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU3,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU4,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU5,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU6,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU7,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU8,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU9,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU10,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU11,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU12,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU13,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU14,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU15,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU16,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU17,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU18,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU19,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU20,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU21,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU22,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU23,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU24,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU25,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU26,Póvoa de Varzim,0,,BG
+Bexp,BexpU,BexpU27,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU28,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU29,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU30,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU31,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU32,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU33,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU34,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU35,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU36,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU37,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU38,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU39,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU40,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU41,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU42,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU43,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU44,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU45,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU46,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU47,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU48,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU49,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU50,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU51,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU52,Estádio do Dragão,1,,BR
+Bexp,BexpU,BexpU53,Estádio do Dragão,1,,BR
+C,CDF,CDF0,ISMAI,0,,CG
+C,CDF,CDF1,ISMAI,0,,CG
+C,CDF,CDF2,ISMAI,0,,CG
+C,CDF,CDF3,ISMAI,0,,CG
+C,CDF,CDF4,ISMAI,0,,CG
+C,CDF,CDF5,ISMAI,0,,CG
+C,CDF,CDF6,ISMAI,0,,CG
+C,CDF,CDF7,ISMAI,0,,CG
+C,CDF,CDF8,ISMAI,0,,CG
+C,CDF,CDF9,ISMAI,0,,CG
+C,CDF,CDF10,ISMAI,0,,CG
+C,CDF,CDF11,ISMAI,0,,CG
+C,CDF,CDF12,ISMAI,0,,CG
+C,CDF,CDF13,ISMAI,0,,CG
+C,CDF,CDF14,ISMAI,0,,CG
+C,CDF,CDF15,ISMAI,0,,CG
+C,CDF,CDF16,ISMAI,0,,CG
+C,CDF,CDF17,ISMAI,0,,CG
+C,CDF,CDF18,ISMAI,0,,CG
+C,CDF,CDF19,ISMAI,0,,CG
+C,CDF,CDF20,ISMAI,0,,CG
+C,CDF,CDF21,ISMAI,0,,CG
+C,CDF,CDF22,ISMAI,0,,CG
+C,CDF,CDF23,ISMAI,0,,CG
+C,CDF,CDF24,ISMAI,0,,CG
+C,CDF,CDF25,ISMAI,0,,CG
+C,CDF,CDF26,ISMAI,0,,CG
+C,CDF,CDF27,ISMAI,0,,CG
+C,CDF,CDF28,ISMAI,0,,CG
+C,CDF,CDF29,ISMAI,0,,CG
+C,CDF,CDF30,ISMAI,0,,CG
+C,CDF,CDF31,ISMAI,0,,CG
+C,CDF,CDF32,ISMAI,0,,CG
+C,CDF,CDF33,ISMAI,0,,CG
+C,CDF,CDF34,ISMAI,0,,CG
+C,CDF,CDF35,ISMAI,0,,CG
+C,CDF,CDF36,ISMAI,0,,CG
+C,CDF,CDF37,ISMAI,0,,CG
+C,CS,CS0,ISMAI,0,,CG
+C,CS,CS1,ISMAI,0,,CG
+C,CS,CS2,ISMAI,0,,CG
+C,CS,CS3,ISMAI,0,,CG
+C,CS,CS4,ISMAI,0,,CG
+C,CS,CS5,ISMAI,0,,CG
+C,CS,CS6,ISMAI,0,,CG
+C,CS,CS7,ISMAI,0,,CG
+C,CS,CS8,ISMAI,0,,CG
+C,CS,CS9,ISMAI,0,,CG
+C,CS,CS10,ISMAI,0,,CG
+C,CS,CS11,ISMAI,0,,CG
+C,CS,CS12,ISMAI,0,,CG
+C,CS,CS13,ISMAI,0,,CG
+C,CS,CS14,ISMAI,0,,CG
+C,CS,CS15,ISMAI,0,,CG
+C,CS,CS16,ISMAI,0,,CG
+C,CS,CS17,ISMAI,0,,CG
+C,CS,CS18,ISMAI,0,,CG
+C,CS,CS19,ISMAI,0,,CG
+C,CS,CS20,ISMAI,0,,CG
+C,CS,CS21,ISMAI,0,,CG
+C,CS,CS22,ISMAI,0,,CG
+C,CS,CS23,ISMAI,0,,CG
+C,CS,CS24,ISMAI,0,,CG
+C,CS,CS25,ISMAI,0,,CG
+C,CS,CS26,ISMAI,0,,CG
+C,CS,CS27,ISMAI,0,,CG
+C,CS,CS28,ISMAI,0,,CG
+C,CS,CS29,ISMAI,0,,CG
+C,CS,CS30,ISMAI,0,,CG
+C,CS,CS31,ISMAI,0,,CG
+C,CS,CS32,ISMAI,0,,CG
+C,CS,CS33,ISMAI,0,,CG
+C,CS,CS34,ISMAI,0,,CG
+C,CS,CS35,ISMAI,0,,CG
+C,CS,CS36,ISMAI,0,,CG
+C,CS,CS37,ISMAI,0,,CG
+C,CU,CU0,ISMAI,0,,CG
+C,CU,CU1,ISMAI,0,,CG
+C,CU,CU2,ISMAI,0,,CG
+C,CU,CU3,ISMAI,0,,CG
+C,CU,CU4,ISMAI,0,,CG
+C,CU,CU5,ISMAI,0,,CG
+C,CU,CU6,ISMAI,0,,CG
+C,CU,CU7,ISMAI,0,,CG
+C,CU,CU8,ISMAI,0,,CG
+C,CU,CU9,ISMAI,0,,CG
+C,CU,CU10,ISMAI,0,,CG
+C,CU,CU11,ISMAI,0,,CG
+C,CU,CU12,ISMAI,0,,CG
+C,CU,CU13,ISMAI,0,,CG
+C,CU,CU14,ISMAI,0,,CG
+C,CU,CU15,ISMAI,0,,CG
+C,CU,CU16,ISMAI,0,,CG
+C,CU,CU17,ISMAI,0,,CG
+C,CU,CU18,ISMAI,0,,CG
+C,CU,CU19,ISMAI,0,,CG
+C,CU,CU20,ISMAI,0,,CG
+C,CU,CU21,ISMAI,0,,CG
+C,CU,CU22,ISMAI,0,,CG
+C,CU,CU23,ISMAI,0,,CG
+C,CU,CU24,ISMAI,0,,CG
+C,CU,CU25,ISMAI,0,,CG
+C,CU,CU26,ISMAI,0,,CG
+C,CU,CU27,ISMAI,0,,CG
+C,CU,CU28,ISMAI,0,,CG
+C,CU,CU29,ISMAI,0,,CG
+C,CU,CU30,ISMAI,0,,CG
+C,CU,CU31,ISMAI,0,,CG
+C,CU,CU32,ISMAI,0,,CG
+C,CU,CU33,ISMAI,0,,CG
+C,CU,CU34,ISMAI,0,,CG
+C,CU,CU35,ISMAI,0,,CG
+C,CU,CU36,ISMAI,0,,CG
+C,CU,CU37,ISMAI,0,,CG
+C,CU,CU38,ISMAI,0,,CG
+C,CU,CU39,ISMAI,0,,CG
+C,CU,CU40,ISMAI,0,,CG
+C,CU,CU41,ISMAI,0,,CG
+C,CU,CU42,ISMAI,0,,CG
+C,CU,CU43,ISMAI,0,,CG
+C,CU,CU44,ISMAI,0,,CG
+C,CU,CU45,ISMAI,0,,CG
+C,CU,CU46,ISMAI,0,,CG
+C,CU,CU47,ISMAI,0,,CG
+C,CU,CU48,ISMAI,0,,CG
+C,CU,CU49,ISMAI,0,,CG
+C,CDF,CDF38,Campanhã,1,,CR
+C,CDF,CDF39,Campanhã,1,,CR
+C,CDF,CDF40,Campanhã,1,,CR
+C,CDF,CDF41,Campanhã,1,,CR
+C,CDF,CDF42,Campanhã,1,,CR
+C,CDF,CDF43,Campanhã,1,,CR
+C,CDF,CDF44,Campanhã,1,,CR
+C,CDF,CDF45,Campanhã,1,,CR
+C,CDF,CDF46,Campanhã,1,,CR
+C,CDF,CDF47,Campanhã,1,,CR
+C,CDF,CDF48,Campanhã,1,,CR
+C,CDF,CDF49,Campanhã,1,,CR
+C,CDF,CDF50,Campanhã,1,,CR
+C,CDF,CDF51,Campanhã,1,,CR
+C,CDF,CDF52,Campanhã,1,,CR
+C,CDF,CDF53,Campanhã,1,,CR
+C,CDF,CDF54,Campanhã,1,,CR
+C,CDF,CDF55,Campanhã,1,,CR
+C,CDF,CDF56,Campanhã,1,,CR
+C,CDF,CDF57,Campanhã,1,,CR
+C,CDF,CDF58,Campanhã,1,,CR
+C,CDF,CDF59,Campanhã,1,,CR
+C,CDF,CDF60,Campanhã,1,,CR
+C,CDF,CDF61,Campanhã,1,,CR
+C,CDF,CDF62,Campanhã,1,,CR
+C,CDF,CDF63,Campanhã,1,,CR
+C,CDF,CDF64,Campanhã,1,,CR
+C,CDF,CDF65,Campanhã,1,,CR
+C,CDF,CDF66,Campanhã,1,,CR
+C,CDF,CDF67,Campanhã,1,,CR
+C,CDF,CDF68,Campanhã,1,,CR
+C,CDF,CDF69,Campanhã,1,,CR
+C,CDF,CDF70,Campanhã,1,,CR
+C,CDF,CDF71,Campanhã,1,,CR
+C,CDF,CDF72,Campanhã,1,,CR
+C,CDF,CDF73,Campanhã,1,,CR
+C,CDF,CDF74,Campanhã,1,,CR
+C,CDF,CDF75,Campanhã,1,,CR
+C,CS,CS38,Campanhã,1,,CR
+C,CS,CS39,Campanhã,1,,CR
+C,CS,CS40,Campanhã,1,,CR
+C,CS,CS41,Campanhã,1,,CR
+C,CS,CS42,Campanhã,1,,CR
+C,CS,CS43,Campanhã,1,,CR
+C,CS,CS44,Campanhã,1,,CR
+C,CS,CS45,Campanhã,1,,CR
+C,CS,CS46,Campanhã,1,,CR
+C,CS,CS47,Campanhã,1,,CR
+C,CS,CS48,Campanhã,1,,CR
+C,CS,CS49,Campanhã,1,,CR
+C,CS,CS50,Campanhã,1,,CR
+C,CS,CS51,Campanhã,1,,CR
+C,CS,CS52,Campanhã,1,,CR
+C,CS,CS53,Campanhã,1,,CR
+C,CS,CS54,Campanhã,1,,CR
+C,CS,CS55,Campanhã,1,,CR
+C,CS,CS56,Campanhã,1,,CR
+C,CS,CS57,Campanhã,1,,CR
+C,CS,CS58,Campanhã,1,,CR
+C,CS,CS59,Campanhã,1,,CR
+C,CS,CS60,Campanhã,1,,CR
+C,CS,CS61,Campanhã,1,,CR
+C,CS,CS62,Campanhã,1,,CR
+C,CS,CS63,Campanhã,1,,CR
+C,CS,CS64,Campanhã,1,,CR
+C,CS,CS65,Campanhã,1,,CR
+C,CS,CS66,Campanhã,1,,CR
+C,CS,CS67,Campanhã,1,,CR
+C,CS,CS68,Campanhã,1,,CR
+C,CS,CS69,Campanhã,1,,CR
+C,CS,CS70,Campanhã,1,,CR
+C,CS,CS71,Campanhã,1,,CR
+C,CS,CS72,Campanhã,1,,CR
+C,CS,CS73,Campanhã,1,,CR
+C,CS,CS74,Campanhã,1,,CR
+C,CS,CS75,Campanhã,1,,CR
+C,CU,CU50,Campanhã,1,,CR
+C,CU,CU51,Campanhã,1,,CR
+C,CU,CU52,Campanhã,1,,CR
+C,CU,CU53,Campanhã,1,,CR
+C,CU,CU54,Campanhã,1,,CR
+C,CU,CU55,Campanhã,1,,CR
+C,CU,CU56,Campanhã,1,,CR
+C,CU,CU57,Campanhã,1,,CR
+C,CU,CU58,Campanhã,1,,CR
+C,CU,CU59,Campanhã,1,,CR
+C,CU,CU60,Campanhã,1,,CR
+C,CU,CU61,Campanhã,1,,CR
+C,CU,CU62,Campanhã,1,,CR
+C,CU,CU63,Campanhã,1,,CR
+C,CU,CU64,Campanhã,1,,CR
+C,CU,CU65,Campanhã,1,,CR
+C,CU,CU66,Campanhã,1,,CR
+C,CU,CU67,Campanhã,1,,CR
+C,CU,CU68,Campanhã,1,,CR
+C,CU,CU69,Campanhã,1,,CR
+C,CU,CU70,Campanhã,1,,CR
+C,CU,CU71,Campanhã,1,,CR
+C,CU,CU72,Campanhã,1,,CR
+C,CU,CU73,Campanhã,1,,CR
+C,CU,CU74,Campanhã,1,,CR
+C,CU,CU75,Campanhã,1,,CR
+C,CU,CU76,Campanhã,1,,CR
+C,CU,CU77,Campanhã,1,,CR
+C,CU,CU78,Campanhã,1,,CR
+C,CU,CU79,Campanhã,1,,CR
+C,CU,CU80,Campanhã,1,,CR
+C,CU,CU81,Campanhã,1,,CR
+C,CU,CU82,Campanhã,1,,CR
+C,CU,CU83,Campanhã,1,,CR
+C,CU,CU84,Campanhã,1,,CR
+C,CU,CU85,Campanhã,1,,CR
+C,CU,CU86,Campanhã,1,,CR
+C,CU,CU87,Campanhã,1,,CR
+C,CU,CU88,Campanhã,1,,CR
+C,CU,CU89,Campanhã,1,,CR
+C,CU,CU90,Campanhã,1,,CR
+C,CU,CU91,Campanhã,1,,CR
+C,CU,CU92,Campanhã,1,,CR
+C,CU,CU93,Campanhã,1,,CR
+C,CU,CU94,Campanhã,1,,CR
+C,CU,CU95,Campanhã,1,,CR
+C,CU,CU96,Campanhã,1,,CR
+C,CU,CU97,Campanhã,1,,CR
+C,CU,CU98,Campanhã,1,,CR
+C,CU,CU99,Campanhã,1,,CR
+C,CU,CU100,Campanhã,1,,CR
+C,CDF,CDF76,Fórum Maia,0,,CG
+C,CDF,CDF77,Fórum Maia,0,,CG
+C,CDF,CDF78,Fórum Maia,0,,CG
+C,CDF,CDF79,Fórum Maia,0,,CG
+C,CDF,CDF80,Fórum Maia,0,,CG
+C,CDF,CDF81,Fórum Maia,0,,CG
+C,CDF,CDF82,Fórum Maia,0,,CG
+C,CS,CS76,Fórum Maia,0,,CG
+C,CS,CS77,Fórum Maia,0,,CG
+C,CS,CS78,Fórum Maia,0,,CG
+C,CS,CS79,Fórum Maia,0,,CG
+C,CS,CS80,Fórum Maia,0,,CG
+C,CS,CS81,Fórum Maia,0,,CG
+C,CS,CS82,Fórum Maia,0,,CG
+C,CS,CS83,Fórum Maia,0,,CG
+C,CS,CS84,Fórum Maia,0,,CG
+C,CS,CS85,Fórum Maia,0,,CG
+C,CS,CS86,Fórum Maia,0,,CG
+C,CS,CS87,Fórum Maia,0,,CG
+C,CS,CS88,Fórum Maia,0,,CG
+C,CS,CS89,Fórum Maia,0,,CG
+C,CS,CS90,Fórum Maia,0,,CG
+C,CS,CS91,Fórum Maia,0,,CG
+C,CS,CS92,Fórum Maia,0,,CG
+C,CS,CS93,Fórum Maia,0,,CG
+C,CS,CS94,Fórum Maia,0,,CG
+C,CS,CS95,Fórum Maia,0,,CG
+C,CS,CS96,Fórum Maia,0,,CG
+C,CS,CS97,Fórum Maia,0,,CG
+C,CS,CS98,Fórum Maia,0,,CG
+C,CS,CS99,Fórum Maia,0,,CG
+C,CU,CU101,Fórum Maia,0,,CG
+C,CU,CU102,Fórum Maia,0,,CG
+C,CU,CU103,Fórum Maia,0,,CG
+C,CU,CU104,Fórum Maia,0,,CG
+C,CU,CU105,Fórum Maia,0,,CG
+C,CU,CU106,Fórum Maia,0,,CG
+C,CU,CU107,Fórum Maia,0,,CG
+C,CU,CU108,Fórum Maia,0,,CG
+C,CU,CU109,Fórum Maia,0,,CG
+C,CU,CU110,Fórum Maia,0,,CG
+C,CU,CU111,Fórum Maia,0,,CG
+C,CU,CU112,Fórum Maia,0,,CG
+C,CU,CU113,Fórum Maia,0,,CG
+C,CU,CU114,Fórum Maia,0,,CG
+C,CU,CU115,Fórum Maia,0,,CG
+C,CU,CU116,Fórum Maia,0,,CG
+C,CU,CU117,Fórum Maia,0,,CG
+C,CU,CU118,Fórum Maia,0,,CG
+C,CU,CU119,Fórum Maia,0,,CG
+C,CU,CU120,Fórum Maia,0,,CG
+C,CU,CU121,Fórum Maia,0,,CG
+C,CU,CU122,Fórum Maia,0,,CG
+C,CU,CU123,Fórum Maia,0,,CG
+C,CU,CU124,Fórum Maia,0,,CG
+C,CDF,CDF83,Campanhã,1,,CR
+C,CDF,CDF84,Campanhã,1,,CR
+C,CDF,CDF85,Campanhã,1,,CR
+C,CDF,CDF86,Campanhã,1,,CR
+C,CDF,CDF87,Campanhã,1,,CR
+C,CDF,CDF88,Campanhã,1,,CR
+C,CDF,CDF89,Campanhã,1,,CR
+C,CS,CS100,Campanhã,1,,CR
+C,CS,CS101,Campanhã,1,,CR
+C,CS,CS102,Campanhã,1,,CR
+C,CS,CS103,Campanhã,1,,CR
+C,CS,CS104,Campanhã,1,,CR
+C,CS,CS105,Campanhã,1,,CR
+C,CS,CS106,Campanhã,1,,CR
+C,CS,CS107,Campanhã,1,,CR
+C,CS,CS108,Campanhã,1,,CR
+C,CS,CS109,Campanhã,1,,CR
+C,CS,CS110,Campanhã,1,,CR
+C,CS,CS111,Campanhã,1,,CR
+C,CS,CS112,Campanhã,1,,CR
+C,CS,CS113,Campanhã,1,,CR
+C,CS,CS114,Campanhã,1,,CR
+C,CS,CS115,Campanhã,1,,CR
+C,CS,CS116,Campanhã,1,,CR
+C,CS,CS117,Campanhã,1,,CR
+C,CS,CS118,Campanhã,1,,CR
+C,CS,CS119,Campanhã,1,,CR
+C,CS,CS120,Campanhã,1,,CR
+C,CS,CS121,Campanhã,1,,CR
+C,CS,CS122,Campanhã,1,,CR
+C,CS,CS123,Campanhã,1,,CR
+C,CU,CU125,Campanhã,1,,CR
+C,CU,CU126,Campanhã,1,,CR
+C,CU,CU127,Campanhã,1,,CR
+C,CU,CU128,Campanhã,1,,CR
+C,CU,CU129,Campanhã,1,,CR
+C,CU,CU130,Campanhã,1,,CR
+C,CU,CU131,Campanhã,1,,CR
+C,CU,CU132,Campanhã,1,,CR
+C,CU,CU133,Campanhã,1,,CR
+C,CU,CU134,Campanhã,1,,CR
+C,CU,CU135,Campanhã,1,,CR
+C,CU,CU136,Campanhã,1,,CR
+C,CU,CU137,Campanhã,1,,CR
+C,CU,CU138,Campanhã,1,,CR
+C,CU,CU139,Campanhã,1,,CR
+C,CU,CU140,Campanhã,1,,CR
+C,CU,CU141,Campanhã,1,,CR
+C,CU,CU142,Campanhã,1,,CR
+C,CU,CU143,Campanhã,1,,CR
+C,CU,CU144,Campanhã,1,,CR
+C,CU,CU145,Campanhã,1,,CR
+C,CU,CU146,Campanhã,1,,CR
+C,CU,CU147,Campanhã,1,,CR
+D,DDF,DDF0,Hospital São João,0,,DG
+D,DDF,DDF1,Hospital São João,0,,DG
+D,DDF,DDF2,Hospital São João,0,,DG
+D,DDF,DDF3,Hospital São João,0,,DG
+D,DDF,DDF4,Hospital São João,0,,DG
+D,DDF,DDF5,Hospital São João,0,,DG
+D,DDF,DDF6,Hospital São João,0,,DG
+D,DDF,DDF7,Hospital São João,0,,DG
+D,DDF,DDF8,Hospital São João,0,,DG
+D,DDF,DDF9,Hospital São João,0,,DG
+D,DDF,DDF10,Hospital São João,0,,DG
+D,DDF,DDF11,Hospital São João,0,,DG
+D,DDF,DDF12,Hospital São João,0,,DG
+D,DDF,DDF13,Hospital São João,0,,DG
+D,DDF,DDF14,Hospital São João,0,,DG
+D,DDF,DDF15,Hospital São João,0,,DG
+D,DDF,DDF16,Hospital São João,0,,DG
+D,DDF,DDF17,Hospital São João,0,,DG
+D,DDF,DDF18,Hospital São João,0,,DG
+D,DDF,DDF19,Hospital São João,0,,DG
+D,DDF,DDF20,Hospital São João,0,,DG
+D,DDF,DDF21,Hospital São João,0,,DG
+D,DDF,DDF22,Hospital São João,0,,DG
+D,DDF,DDF23,Hospital São João,0,,DG
+D,DDF,DDF24,Hospital São João,0,,DG
+D,DDF,DDF25,Hospital São João,0,,DG
+D,DDF,DDF26,Hospital São João,0,,DG
+D,DDF,DDF27,Hospital São João,0,,DG
+D,DDF,DDF28,Hospital São João,0,,DG
+D,DDF,DDF29,Hospital São João,0,,DG
+D,DDF,DDF30,Hospital São João,0,,DG
+D,DDF,DDF31,Hospital São João,0,,DG
+D,DDF,DDF32,Hospital São João,0,,DG
+D,DDF,DDF33,Hospital São João,0,,DG
+D,DDF,DDF34,Hospital São João,0,,DG
+D,DDF,DDF35,Hospital São João,0,,DG
+D,DDF,DDF36,Hospital São João,0,,DG
+D,DDF,DDF37,Hospital São João,0,,DG
+D,DDF,DDF38,Hospital São João,0,,DG
+D,DDF,DDF39,Hospital São João,0,,DG
+D,DDF,DDF40,Hospital São João,0,,DG
+D,DDF,DDF41,Hospital São João,0,,DG
+D,DDF,DDF42,Hospital São João,0,,DG
+D,DDF,DDF43,Hospital São João,0,,DG
+D,DDF,DDF44,Hospital São João,0,,DG
+D,DDF,DDF45,Hospital São João,0,,DG
+D,DDF,DDF46,Hospital São João,0,,DG
+D,DDF,DDF47,Hospital São João,0,,DG
+D,DDF,DDF48,Hospital São João,0,,DG
+D,DDF,DDF49,Hospital São João,0,,DG
+D,DDF,DDF50,Hospital São João,0,,DG
+D,DDF,DDF51,Hospital São João,0,,DG
+D,DDF,DDF52,Hospital São João,0,,DG
+D,DDF,DDF53,Hospital São João,0,,DG
+D,DDF,DDF54,Hospital São João,0,,DG
+D,DDF,DDF55,Hospital São João,0,,DG
+D,DDF,DDF56,Hospital São João,0,,DG
+D,DDF,DDF57,Hospital São João,0,,DG
+D,DDF,DDF58,Hospital São João,0,,DG
+D,DDF,DDF59,Hospital São João,0,,DG
+D,DDF,DDF60,Hospital São João,0,,DG
+D,DDF,DDF61,Hospital São João,0,,DG
+D,DDF,DDF62,Hospital São João,0,,DG
+D,DDF,DDF63,Hospital São João,0,,DG
+D,DDF,DDF64,Hospital São João,0,,DG
+D,DDF,DDF65,Hospital São João,0,,DG
+D,DDF,DDF66,Hospital São João,0,,DG
+D,DDF,DDF67,Hospital São João,0,,DG
+D,DDF,DDF68,Hospital São João,0,,DG
+D,DDF,DDF69,Hospital São João,0,,DG
+D,DDF,DDF70,Hospital São João,0,,DG
+D,DDF,DDF71,Hospital São João,0,,DG
+D,DDF,DDF72,Hospital São João,0,,DG
+D,DDF,DDF73,Hospital São João,0,,DG
+D,DDF,DDF74,Hospital São João,0,,DG
+D,DDF,DDF75,Hospital São João,0,,DG
+D,DDF,DDF76,Hospital São João,0,,DG
+D,DDF,DDF77,Hospital São João,0,,DG
+D,DDF,DDF78,Hospital São João,0,,DG
+D,DDF,DDF79,Hospital São João,0,,DG
+D,DDF,DDF80,Hospital São João,0,,DG
+D,DDF,DDF81,Hospital São João,0,,DG
+D,DDF,DDF82,Hospital São João,0,,DG
+D,DDF,DDF83,Hospital São João,0,,DG
+D,DDF,DDF84,Hospital São João,0,,DG
+D,DDF,DDF85,Hospital São João,0,,DG
+D,DDF,DDF86,Hospital São João,0,,DG
+D,DDF,DDF87,Hospital São João,0,,DG
+D,DDF,DDF88,Hospital São João,0,,DG
+D,DDF,DDF89,Hospital São João,0,,DG
+D,DDF,DDF90,Hospital São João,0,,DG
+D,DDF,DDF91,Hospital São João,0,,DG
+D,DDF,DDF92,Hospital São João,0,,DG
+D,DDF,DDF93,Hospital São João,0,,DG
+D,DDF,DDF94,Hospital São João,0,,DG
+D,DDF,DDF95,Hospital São João,0,,DG
+D,DDF,DDF96,Hospital São João,0,,DG
+D,DDF,DDF97,Hospital São João,0,,DG
+D,DDF,DDF98,Hospital São João,0,,DG
+D,DDF,DDF99,Hospital São João,0,,DG
+D,DDF,DDF100,Hospital São João,0,,DG
+D,DDF,DDF101,Hospital São João,0,,DG
+D,DDF,DDF102,Hospital São João,0,,DG
+D,DDF,DDF103,Hospital São João,0,,DG
+D,DDF,DDF104,Hospital São João,0,,DG
+D,DDF,DDF105,Hospital São João,0,,DG
+D,DDF,DDF106,Hospital São João,0,,DG
+D,DDF,DDF107,Hospital São João,0,,DG
+D,DDF,DDF108,Hospital São João,0,,DG
+D,DS,DS0,Hospital São João,0,,DG
+D,DS,DS1,Hospital São João,0,,DG
+D,DS,DS2,Hospital São João,0,,DG
+D,DS,DS3,Hospital São João,0,,DG
+D,DS,DS4,Hospital São João,0,,DG
+D,DS,DS5,Hospital São João,0,,DG
+D,DS,DS6,Hospital São João,0,,DG
+D,DS,DS7,Hospital São João,0,,DG
+D,DS,DS8,Hospital São João,0,,DG
+D,DS,DS9,Hospital São João,0,,DG
+D,DS,DS10,Hospital São João,0,,DG
+D,DS,DS11,Hospital São João,0,,DG
+D,DS,DS12,Hospital São João,0,,DG
+D,DS,DS13,Hospital São João,0,,DG
+D,DS,DS14,Hospital São João,0,,DG
+D,DS,DS15,Hospital São João,0,,DG
+D,DS,DS16,Hospital São João,0,,DG
+D,DS,DS17,Hospital São João,0,,DG
+D,DS,DS18,Hospital São João,0,,DG
+D,DS,DS19,Hospital São João,0,,DG
+D,DS,DS20,Hospital São João,0,,DG
+D,DS,DS21,Hospital São João,0,,DG
+D,DS,DS22,Hospital São João,0,,DG
+D,DS,DS23,Hospital São João,0,,DG
+D,DS,DS24,Hospital São João,0,,DG
+D,DS,DS25,Hospital São João,0,,DG
+D,DS,DS26,Hospital São João,0,,DG
+D,DS,DS27,Hospital São João,0,,DG
+D,DS,DS28,Hospital São João,0,,DG
+D,DS,DS29,Hospital São João,0,,DG
+D,DS,DS30,Hospital São João,0,,DG
+D,DS,DS31,Hospital São João,0,,DG
+D,DS,DS32,Hospital São João,0,,DG
+D,DS,DS33,Hospital São João,0,,DG
+D,DS,DS34,Hospital São João,0,,DG
+D,DS,DS35,Hospital São João,0,,DG
+D,DS,DS36,Hospital São João,0,,DG
+D,DS,DS37,Hospital São João,0,,DG
+D,DS,DS38,Hospital São João,0,,DG
+D,DS,DS39,Hospital São João,0,,DG
+D,DS,DS40,Hospital São João,0,,DG
+D,DS,DS41,Hospital São João,0,,DG
+D,DS,DS42,Hospital São João,0,,DG
+D,DS,DS43,Hospital São João,0,,DG
+D,DS,DS44,Hospital São João,0,,DG
+D,DS,DS45,Hospital São João,0,,DG
+D,DS,DS46,Hospital São João,0,,DG
+D,DS,DS47,Hospital São João,0,,DG
+D,DS,DS48,Hospital São João,0,,DG
+D,DS,DS49,Hospital São João,0,,DG
+D,DS,DS50,Hospital São João,0,,DG
+D,DS,DS51,Hospital São João,0,,DG
+D,DS,DS52,Hospital São João,0,,DG
+D,DS,DS53,Hospital São João,0,,DG
+D,DS,DS54,Hospital São João,0,,DG
+D,DS,DS55,Hospital São João,0,,DG
+D,DS,DS56,Hospital São João,0,,DG
+D,DS,DS57,Hospital São João,0,,DG
+D,DS,DS58,Hospital São João,0,,DG
+D,DS,DS59,Hospital São João,0,,DG
+D,DS,DS60,Hospital São João,0,,DG
+D,DS,DS61,Hospital São João,0,,DG
+D,DS,DS62,Hospital São João,0,,DG
+D,DS,DS63,Hospital São João,0,,DG
+D,DS,DS64,Hospital São João,0,,DG
+D,DS,DS65,Hospital São João,0,,DG
+D,DS,DS66,Hospital São João,0,,DG
+D,DS,DS67,Hospital São João,0,,DG
+D,DS,DS68,Hospital São João,0,,DG
+D,DS,DS69,Hospital São João,0,,DG
+D,DS,DS70,Hospital São João,0,,DG
+D,DS,DS71,Hospital São João,0,,DG
+D,DS,DS72,Hospital São João,0,,DG
+D,DS,DS73,Hospital São João,0,,DG
+D,DS,DS74,Hospital São João,0,,DG
+D,DS,DS75,Hospital São João,0,,DG
+D,DS,DS76,Hospital São João,0,,DG
+D,DS,DS77,Hospital São João,0,,DG
+D,DS,DS78,Hospital São João,0,,DG
+D,DS,DS79,Hospital São João,0,,DG
+D,DS,DS80,Hospital São João,0,,DG
+D,DS,DS81,Hospital São João,0,,DG
+D,DS,DS82,Hospital São João,0,,DG
+D,DS,DS83,Hospital São João,0,,DG
+D,DS,DS84,Hospital São João,0,,DG
+D,DS,DS85,Hospital São João,0,,DG
+D,DS,DS86,Hospital São João,0,,DG
+D,DS,DS87,Hospital São João,0,,DG
+D,DS,DS88,Hospital São João,0,,DG
+D,DS,DS89,Hospital São João,0,,DG
+D,DS,DS90,Hospital São João,0,,DG
+D,DS,DS91,Hospital São João,0,,DG
+D,DS,DS92,Hospital São João,0,,DG
+D,DS,DS93,Hospital São João,0,,DG
+D,DS,DS94,Hospital São João,0,,DG
+D,DS,DS95,Hospital São João,0,,DG
+D,DS,DS96,Hospital São João,0,,DG
+D,DS,DS97,Hospital São João,0,,DG
+D,DS,DS98,Hospital São João,0,,DG
+D,DS,DS99,Hospital São João,0,,DG
+D,DS,DS100,Hospital São João,0,,DG
+D,DS,DS101,Hospital São João,0,,DG
+D,DS,DS102,Hospital São João,0,,DG
+D,DS,DS103,Hospital São João,0,,DG
+D,DS,DS104,Hospital São João,0,,DG
+D,DS,DS105,Hospital São João,0,,DG
+D,DS,DS106,Hospital São João,0,,DG
+D,DS,DS107,Hospital São João,0,,DG
+D,DS,DS108,Hospital São João,0,,DG
+D,DS,DS109,Hospital São João,0,,DG
+D,DS,DS110,Hospital São João,0,,DG
+D,DU,DU0,Hospital São João,0,,DG
+D,DU,DU1,Hospital São João,0,,DG
+D,DU,DU2,Hospital São João,0,,DG
+D,DU,DU3,Hospital São João,0,,DG
+D,DU,DU4,Hospital São João,0,,DG
+D,DU,DU5,Hospital São João,0,,DG
+D,DU,DU6,Hospital São João,0,,DG
+D,DU,DU7,Hospital São João,0,,DG
+D,DU,DU8,Hospital São João,0,,DG
+D,DU,DU9,Hospital São João,0,,DG
+D,DU,DU10,Hospital São João,0,,DG
+D,DU,DU11,Hospital São João,0,,DG
+D,DU,DU12,Hospital São João,0,,DG
+D,DU,DU13,Hospital São João,0,,DG
+D,DU,DU14,Hospital São João,0,,DG
+D,DU,DU15,Hospital São João,0,,DG
+D,DU,DU16,Hospital São João,0,,DG
+D,DU,DU17,Hospital São João,0,,DG
+D,DU,DU18,Hospital São João,0,,DG
+D,DU,DU19,Hospital São João,0,,DG
+D,DU,DU20,Hospital São João,0,,DG
+D,DU,DU21,Hospital São João,0,,DG
+D,DU,DU22,Hospital São João,0,,DG
+D,DU,DU23,Hospital São João,0,,DG
+D,DU,DU24,Hospital São João,0,,DG
+D,DU,DU25,Hospital São João,0,,DG
+D,DU,DU26,Hospital São João,0,,DG
+D,DU,DU27,Hospital São João,0,,DG
+D,DU,DU28,Hospital São João,0,,DG
+D,DU,DU29,Hospital São João,0,,DG
+D,DU,DU30,Hospital São João,0,,DG
+D,DU,DU31,Hospital São João,0,,DG
+D,DU,DU32,Hospital São João,0,,DG
+D,DU,DU33,Hospital São João,0,,DG
+D,DU,DU34,Hospital São João,0,,DG
+D,DU,DU35,Hospital São João,0,,DG
+D,DU,DU36,Hospital São João,0,,DG
+D,DU,DU37,Hospital São João,0,,DG
+D,DU,DU38,Hospital São João,0,,DG
+D,DU,DU39,Hospital São João,0,,DG
+D,DU,DU40,Hospital São João,0,,DG
+D,DU,DU41,Hospital São João,0,,DG
+D,DU,DU42,Hospital São João,0,,DG
+D,DU,DU43,Hospital São João,0,,DG
+D,DU,DU44,Hospital São João,0,,DG
+D,DU,DU45,Hospital São João,0,,DG
+D,DU,DU46,Hospital São João,0,,DG
+D,DU,DU47,Hospital São João,0,,DG
+D,DU,DU48,Hospital São João,0,,DG
+D,DU,DU49,Hospital São João,0,,DG
+D,DU,DU50,Hospital São João,0,,DG
+D,DU,DU51,Hospital São João,0,,DG
+D,DU,DU52,Hospital São João,0,,DG
+D,DU,DU53,Hospital São João,0,,DG
+D,DU,DU54,Hospital São João,0,,DG
+D,DU,DU55,Hospital São João,0,,DG
+D,DU,DU56,Hospital São João,0,,DG
+D,DU,DU57,Hospital São João,0,,DG
+D,DU,DU58,Hospital São João,0,,DG
+D,DU,DU59,Hospital São João,0,,DG
+D,DU,DU60,Hospital São João,0,,DG
+D,DU,DU61,Hospital São João,0,,DG
+D,DU,DU62,Hospital São João,0,,DG
+D,DU,DU63,Hospital São João,0,,DG
+D,DU,DU64,Hospital São João,0,,DG
+D,DU,DU65,Hospital São João,0,,DG
+D,DU,DU66,Hospital São João,0,,DG
+D,DU,DU67,Hospital São João,0,,DG
+D,DU,DU68,Hospital São João,0,,DG
+D,DU,DU69,Hospital São João,0,,DG
+D,DU,DU70,Hospital São João,0,,DG
+D,DU,DU71,Hospital São João,0,,DG
+D,DU,DU72,Hospital São João,0,,DG
+D,DU,DU73,Hospital São João,0,,DG
+D,DU,DU74,Hospital São João,0,,DG
+D,DU,DU75,Hospital São João,0,,DG
+D,DU,DU76,Hospital São João,0,,DG
+D,DU,DU77,Hospital São João,0,,DG
+D,DU,DU78,Hospital São João,0,,DG
+D,DU,DU79,Hospital São João,0,,DG
+D,DU,DU80,Hospital São João,0,,DG
+D,DU,DU81,Hospital São João,0,,DG
+D,DU,DU82,Hospital São João,0,,DG
+D,DU,DU83,Hospital São João,0,,DG
+D,DU,DU84,Hospital São João,0,,DG
+D,DU,DU85,Hospital São João,0,,DG
+D,DU,DU86,Hospital São João,0,,DG
+D,DU,DU87,Hospital São João,0,,DG
+D,DU,DU88,Hospital São João,0,,DG
+D,DU,DU89,Hospital São João,0,,DG
+D,DU,DU90,Hospital São João,0,,DG
+D,DU,DU91,Hospital São João,0,,DG
+D,DU,DU92,Hospital São João,0,,DG
+D,DU,DU93,Hospital São João,0,,DG
+D,DU,DU94,Hospital São João,0,,DG
+D,DU,DU95,Hospital São João,0,,DG
+D,DU,DU96,Hospital São João,0,,DG
+D,DU,DU97,Hospital São João,0,,DG
+D,DU,DU98,Hospital São João,0,,DG
+D,DU,DU99,Hospital São João,0,,DG
+D,DU,DU100,Hospital São João,0,,DG
+D,DU,DU101,Hospital São João,0,,DG
+D,DU,DU102,Hospital São João,0,,DG
+D,DU,DU103,Hospital São João,0,,DG
+D,DU,DU104,Hospital São João,0,,DG
+D,DU,DU105,Hospital São João,0,,DG
+D,DU,DU106,Hospital São João,0,,DG
+D,DU,DU107,Hospital São João,0,,DG
+D,DU,DU108,Hospital São João,0,,DG
+D,DU,DU109,Hospital São João,0,,DG
+D,DU,DU110,Hospital São João,0,,DG
+D,DU,DU111,Hospital São João,0,,DG
+D,DU,DU112,Hospital São João,0,,DG
+D,DU,DU113,Hospital São João,0,,DG
+D,DU,DU114,Hospital São João,0,,DG
+D,DU,DU115,Hospital São João,0,,DG
+D,DU,DU116,Hospital São João,0,,DG
+D,DU,DU117,Hospital São João,0,,DG
+D,DU,DU118,Hospital São João,0,,DG
+D,DU,DU119,Hospital São João,0,,DG
+D,DU,DU120,Hospital São João,0,,DG
+D,DU,DU121,Hospital São João,0,,DG
+D,DU,DU122,Hospital São João,0,,DG
+D,DU,DU123,Hospital São João,0,,DG
+D,DU,DU124,Hospital São João,0,,DG
+D,DU,DU125,Hospital São João,0,,DG
+D,DU,DU126,Hospital São João,0,,DG
+D,DU,DU127,Hospital São João,0,,DG
+D,DU,DU128,Hospital São João,0,,DG
+D,DU,DU129,Hospital São João,0,,DG
+D,DU,DU130,Hospital São João,0,,DG
+D,DU,DU131,Hospital São João,0,,DG
+D,DU,DU132,Hospital São João,0,,DG
+D,DU,DU133,Hospital São João,0,,DG
+D,DU,DU134,Hospital São João,0,,DG
+D,DU,DU135,Hospital São João,0,,DG
+D,DU,DU136,Hospital São João,0,,DG
+D,DU,DU137,Hospital São João,0,,DG
+D,DU,DU138,Hospital São João,0,,DG
+D,DU,DU139,Hospital São João,0,,DG
+D,DU,DU140,Hospital São João,0,,DG
+D,DU,DU141,Hospital São João,0,,DG
+D,DU,DU142,Hospital São João,0,,DG
+D,DU,DU143,Hospital São João,0,,DG
+D,DU,DU144,Hospital São João,0,,DG
+D,DU,DU145,Hospital São João,0,,DG
+D,DU,DU146,Hospital São João,0,,DG
+D,DU,DU147,Hospital São João,0,,DG
+D,DU,DU148,Hospital São João,0,,DG
+D,DU,DU149,Hospital São João,0,,DG
+D,DU,DU150,Hospital São João,0,,DG
+D,DU,DU151,Hospital São João,0,,DG
+D,DU,DU152,Hospital São João,0,,DG
+D,DU,DU153,Hospital São João,0,,DG
+D,DU,DU154,Hospital São João,0,,DG
+D,DU,DU155,Hospital São João,0,,DG
+D,DU,DU156,Hospital São João,0,,DG
+D,DU,DU157,Hospital São João,0,,DG
+D,DU,DU158,Hospital São João,0,,DG
+D,DU,DU159,Hospital São João,0,,DG
+D,DU,DU160,Hospital São João,0,,DG
+D,DU,DU161,Hospital São João,0,,DG
+D,DU,DU162,Hospital São João,0,,DG
+D,DU,DU163,Hospital São João,0,,DG
+D,DU,DU164,Hospital São João,0,,DG
+D,DU,DU165,Hospital São João,0,,DG
+D,DU,DU166,Hospital São João,0,,DG
+D,DU,DU167,Hospital São João,0,,DG
+D,DU,DU168,Hospital São João,0,,DG
+D,DDF,DDF109,Santo Ovídio,1,,DR
+D,DDF,DDF110,Santo Ovídio,1,,DR
+D,DDF,DDF111,Santo Ovídio,1,,DR
+D,DDF,DDF112,Santo Ovídio,1,,DR
+D,DDF,DDF113,Santo Ovídio,1,,DR
+D,DDF,DDF114,Santo Ovídio,1,,DR
+D,DDF,DDF115,Santo Ovídio,1,,DR
+D,DDF,DDF116,Santo Ovídio,1,,DR
+D,DDF,DDF117,Santo Ovídio,1,,DR
+D,DDF,DDF118,Santo Ovídio,1,,DR
+D,DDF,DDF119,Santo Ovídio,1,,DR
+D,DDF,DDF120,Santo Ovídio,1,,DR
+D,DDF,DDF121,Santo Ovídio,1,,DR
+D,DDF,DDF122,Santo Ovídio,1,,DR
+D,DDF,DDF123,Santo Ovídio,1,,DR
+D,DDF,DDF124,Santo Ovídio,1,,DR
+D,DDF,DDF125,Santo Ovídio,1,,DR
+D,DDF,DDF126,Santo Ovídio,1,,DR
+D,DDF,DDF127,Santo Ovídio,1,,DR
+D,DDF,DDF128,Santo Ovídio,1,,DR
+D,DDF,DDF129,Santo Ovídio,1,,DR
+D,DDF,DDF130,Santo Ovídio,1,,DR
+D,DDF,DDF131,Santo Ovídio,1,,DR
+D,DDF,DDF132,Santo Ovídio,1,,DR
+D,DDF,DDF133,Santo Ovídio,1,,DR
+D,DDF,DDF134,Santo Ovídio,1,,DR
+D,DDF,DDF135,Santo Ovídio,1,,DR
+D,DDF,DDF136,Santo Ovídio,1,,DR
+D,DDF,DDF137,Santo Ovídio,1,,DR
+D,DDF,DDF138,Santo Ovídio,1,,DR
+D,DDF,DDF139,Santo Ovídio,1,,DR
+D,DDF,DDF140,Santo Ovídio,1,,DR
+D,DDF,DDF141,Santo Ovídio,1,,DR
+D,DDF,DDF142,Santo Ovídio,1,,DR
+D,DDF,DDF143,Santo Ovídio,1,,DR
+D,DDF,DDF144,Santo Ovídio,1,,DR
+D,DDF,DDF145,Santo Ovídio,1,,DR
+D,DDF,DDF146,Santo Ovídio,1,,DR
+D,DDF,DDF147,Santo Ovídio,1,,DR
+D,DDF,DDF148,Santo Ovídio,1,,DR
+D,DDF,DDF149,Santo Ovídio,1,,DR
+D,DDF,DDF150,Santo Ovídio,1,,DR
+D,DDF,DDF151,Santo Ovídio,1,,DR
+D,DDF,DDF152,Santo Ovídio,1,,DR
+D,DDF,DDF153,Santo Ovídio,1,,DR
+D,DDF,DDF154,Santo Ovídio,1,,DR
+D,DDF,DDF155,Santo Ovídio,1,,DR
+D,DDF,DDF156,Santo Ovídio,1,,DR
+D,DDF,DDF157,Santo Ovídio,1,,DR
+D,DDF,DDF158,Santo Ovídio,1,,DR
+D,DDF,DDF159,Santo Ovídio,1,,DR
+D,DDF,DDF160,Santo Ovídio,1,,DR
+D,DDF,DDF161,Santo Ovídio,1,,DR
+D,DDF,DDF162,Santo Ovídio,1,,DR
+D,DDF,DDF163,Santo Ovídio,1,,DR
+D,DDF,DDF164,Santo Ovídio,1,,DR
+D,DDF,DDF165,Santo Ovídio,1,,DR
+D,DDF,DDF166,Santo Ovídio,1,,DR
+D,DDF,DDF167,Santo Ovídio,1,,DR
+D,DDF,DDF168,Santo Ovídio,1,,DR
+D,DDF,DDF169,Santo Ovídio,1,,DR
+D,DDF,DDF170,Santo Ovídio,1,,DR
+D,DDF,DDF171,Santo Ovídio,1,,DR
+D,DDF,DDF172,Santo Ovídio,1,,DR
+D,DDF,DDF173,Santo Ovídio,1,,DR
+D,DDF,DDF174,Santo Ovídio,1,,DR
+D,DDF,DDF175,Santo Ovídio,1,,DR
+D,DDF,DDF176,Santo Ovídio,1,,DR
+D,DDF,DDF177,Santo Ovídio,1,,DR
+D,DDF,DDF178,Santo Ovídio,1,,DR
+D,DDF,DDF179,Santo Ovídio,1,,DR
+D,DDF,DDF180,Santo Ovídio,1,,DR
+D,DDF,DDF181,Santo Ovídio,1,,DR
+D,DDF,DDF182,Santo Ovídio,1,,DR
+D,DDF,DDF183,Santo Ovídio,1,,DR
+D,DDF,DDF184,Santo Ovídio,1,,DR
+D,DDF,DDF185,Santo Ovídio,1,,DR
+D,DDF,DDF186,Santo Ovídio,1,,DR
+D,DDF,DDF187,Santo Ovídio,1,,DR
+D,DDF,DDF188,Santo Ovídio,1,,DR
+D,DDF,DDF189,Santo Ovídio,1,,DR
+D,DDF,DDF190,Santo Ovídio,1,,DR
+D,DDF,DDF191,Santo Ovídio,1,,DR
+D,DDF,DDF192,Santo Ovídio,1,,DR
+D,DDF,DDF193,Santo Ovídio,1,,DR
+D,DDF,DDF194,Santo Ovídio,1,,DR
+D,DDF,DDF195,Santo Ovídio,1,,DR
+D,DDF,DDF196,Santo Ovídio,1,,DR
+D,DDF,DDF197,Santo Ovídio,1,,DR
+D,DDF,DDF198,Santo Ovídio,1,,DR
+D,DDF,DDF199,Santo Ovídio,1,,DR
+D,DDF,DDF200,Santo Ovídio,1,,DR
+D,DDF,DDF201,Santo Ovídio,1,,DR
+D,DDF,DDF202,Santo Ovídio,1,,DR
+D,DDF,DDF203,Santo Ovídio,1,,DR
+D,DDF,DDF204,Santo Ovídio,1,,DR
+D,DDF,DDF205,Santo Ovídio,1,,DR
+D,DDF,DDF206,Santo Ovídio,1,,DR
+D,DDF,DDF207,Santo Ovídio,1,,DR
+D,DDF,DDF208,Santo Ovídio,1,,DR
+D,DDF,DDF209,Santo Ovídio,1,,DR
+D,DDF,DDF210,Santo Ovídio,1,,DR
+D,DDF,DDF211,Santo Ovídio,1,,DR
+D,DDF,DDF212,Santo Ovídio,1,,DR
+D,DDF,DDF213,Santo Ovídio,1,,DR
+D,DDF,DDF214,Santo Ovídio,1,,DR
+D,DDF,DDF215,Santo Ovídio,1,,DR
+D,DDF,DDF216,Santo Ovídio,1,,DR
+D,DDF,DDF217,Santo Ovídio,1,,DR
+D,DS,DS111,Santo Ovídio,1,,DR
+D,DS,DS112,Santo Ovídio,1,,DR
+D,DS,DS113,Santo Ovídio,1,,DR
+D,DS,DS114,Santo Ovídio,1,,DR
+D,DS,DS115,Santo Ovídio,1,,DR
+D,DS,DS116,Santo Ovídio,1,,DR
+D,DS,DS117,Santo Ovídio,1,,DR
+D,DS,DS118,Santo Ovídio,1,,DR
+D,DS,DS119,Santo Ovídio,1,,DR
+D,DS,DS120,Santo Ovídio,1,,DR
+D,DS,DS121,Santo Ovídio,1,,DR
+D,DS,DS122,Santo Ovídio,1,,DR
+D,DS,DS123,Santo Ovídio,1,,DR
+D,DS,DS124,Santo Ovídio,1,,DR
+D,DS,DS125,Santo Ovídio,1,,DR
+D,DS,DS126,Santo Ovídio,1,,DR
+D,DS,DS127,Santo Ovídio,1,,DR
+D,DS,DS128,Santo Ovídio,1,,DR
+D,DS,DS129,Santo Ovídio,1,,DR
+D,DS,DS130,Santo Ovídio,1,,DR
+D,DS,DS131,Santo Ovídio,1,,DR
+D,DS,DS132,Santo Ovídio,1,,DR
+D,DS,DS133,Santo Ovídio,1,,DR
+D,DS,DS134,Santo Ovídio,1,,DR
+D,DS,DS135,Santo Ovídio,1,,DR
+D,DS,DS136,Santo Ovídio,1,,DR
+D,DS,DS137,Santo Ovídio,1,,DR
+D,DS,DS138,Santo Ovídio,1,,DR
+D,DS,DS139,Santo Ovídio,1,,DR
+D,DS,DS140,Santo Ovídio,1,,DR
+D,DS,DS141,Santo Ovídio,1,,DR
+D,DS,DS142,Santo Ovídio,1,,DR
+D,DS,DS143,Santo Ovídio,1,,DR
+D,DS,DS144,Santo Ovídio,1,,DR
+D,DS,DS145,Santo Ovídio,1,,DR
+D,DS,DS146,Santo Ovídio,1,,DR
+D,DS,DS147,Santo Ovídio,1,,DR
+D,DS,DS148,Santo Ovídio,1,,DR
+D,DS,DS149,Santo Ovídio,1,,DR
+D,DS,DS150,Santo Ovídio,1,,DR
+D,DS,DS151,Santo Ovídio,1,,DR
+D,DS,DS152,Santo Ovídio,1,,DR
+D,DS,DS153,Santo Ovídio,1,,DR
+D,DS,DS154,Santo Ovídio,1,,DR
+D,DS,DS155,Santo Ovídio,1,,DR
+D,DS,DS156,Santo Ovídio,1,,DR
+D,DS,DS157,Santo Ovídio,1,,DR
+D,DS,DS158,Santo Ovídio,1,,DR
+D,DS,DS159,Santo Ovídio,1,,DR
+D,DS,DS160,Santo Ovídio,1,,DR
+D,DS,DS161,Santo Ovídio,1,,DR
+D,DS,DS162,Santo Ovídio,1,,DR
+D,DS,DS163,Santo Ovídio,1,,DR
+D,DS,DS164,Santo Ovídio,1,,DR
+D,DS,DS165,Santo Ovídio,1,,DR
+D,DS,DS166,Santo Ovídio,1,,DR
+D,DS,DS167,Santo Ovídio,1,,DR
+D,DS,DS168,Santo Ovídio,1,,DR
+D,DS,DS169,Santo Ovídio,1,,DR
+D,DS,DS170,Santo Ovídio,1,,DR
+D,DS,DS171,Santo Ovídio,1,,DR
+D,DS,DS172,Santo Ovídio,1,,DR
+D,DS,DS173,Santo Ovídio,1,,DR
+D,DS,DS174,Santo Ovídio,1,,DR
+D,DS,DS175,Santo Ovídio,1,,DR
+D,DS,DS176,Santo Ovídio,1,,DR
+D,DS,DS177,Santo Ovídio,1,,DR
+D,DS,DS178,Santo Ovídio,1,,DR
+D,DS,DS179,Santo Ovídio,1,,DR
+D,DS,DS180,Santo Ovídio,1,,DR
+D,DS,DS181,Santo Ovídio,1,,DR
+D,DS,DS182,Santo Ovídio,1,,DR
+D,DS,DS183,Santo Ovídio,1,,DR
+D,DS,DS184,Santo Ovídio,1,,DR
+D,DS,DS185,Santo Ovídio,1,,DR
+D,DS,DS186,Santo Ovídio,1,,DR
+D,DS,DS187,Santo Ovídio,1,,DR
+D,DS,DS188,Santo Ovídio,1,,DR
+D,DS,DS189,Santo Ovídio,1,,DR
+D,DS,DS190,Santo Ovídio,1,,DR
+D,DS,DS191,Santo Ovídio,1,,DR
+D,DS,DS192,Santo Ovídio,1,,DR
+D,DS,DS193,Santo Ovídio,1,,DR
+D,DS,DS194,Santo Ovídio,1,,DR
+D,DS,DS195,Santo Ovídio,1,,DR
+D,DS,DS196,Santo Ovídio,1,,DR
+D,DS,DS197,Santo Ovídio,1,,DR
+D,DS,DS198,Santo Ovídio,1,,DR
+D,DS,DS199,Santo Ovídio,1,,DR
+D,DS,DS200,Santo Ovídio,1,,DR
+D,DS,DS201,Santo Ovídio,1,,DR
+D,DS,DS202,Santo Ovídio,1,,DR
+D,DS,DS203,Santo Ovídio,1,,DR
+D,DS,DS204,Santo Ovídio,1,,DR
+D,DS,DS205,Santo Ovídio,1,,DR
+D,DS,DS206,Santo Ovídio,1,,DR
+D,DS,DS207,Santo Ovídio,1,,DR
+D,DS,DS208,Santo Ovídio,1,,DR
+D,DS,DS209,Santo Ovídio,1,,DR
+D,DS,DS210,Santo Ovídio,1,,DR
+D,DS,DS211,Santo Ovídio,1,,DR
+D,DS,DS212,Santo Ovídio,1,,DR
+D,DS,DS213,Santo Ovídio,1,,DR
+D,DS,DS214,Santo Ovídio,1,,DR
+D,DS,DS215,Santo Ovídio,1,,DR
+D,DS,DS216,Santo Ovídio,1,,DR
+D,DS,DS217,Santo Ovídio,1,,DR
+D,DS,DS218,Santo Ovídio,1,,DR
+D,DS,DS219,Santo Ovídio,1,,DR
+D,DS,DS220,Santo Ovídio,1,,DR
+D,DS,DS221,Santo Ovídio,1,,DR
+D,DU,DU169,Santo Ovídio,1,,DR
+D,DU,DU170,Santo Ovídio,1,,DR
+D,DU,DU171,Santo Ovídio,1,,DR
+D,DU,DU172,Santo Ovídio,1,,DR
+D,DU,DU173,Santo Ovídio,1,,DR
+D,DU,DU174,Santo Ovídio,1,,DR
+D,DU,DU175,Santo Ovídio,1,,DR
+D,DU,DU176,Santo Ovídio,1,,DR
+D,DU,DU177,Santo Ovídio,1,,DR
+D,DU,DU178,Santo Ovídio,1,,DR
+D,DU,DU179,Santo Ovídio,1,,DR
+D,DU,DU180,Santo Ovídio,1,,DR
+D,DU,DU181,Santo Ovídio,1,,DR
+D,DU,DU182,Santo Ovídio,1,,DR
+D,DU,DU183,Santo Ovídio,1,,DR
+D,DU,DU184,Santo Ovídio,1,,DR
+D,DU,DU185,Santo Ovídio,1,,DR
+D,DU,DU186,Santo Ovídio,1,,DR
+D,DU,DU187,Santo Ovídio,1,,DR
+D,DU,DU188,Santo Ovídio,1,,DR
+D,DU,DU189,Santo Ovídio,1,,DR
+D,DU,DU190,Santo Ovídio,1,,DR
+D,DU,DU191,Santo Ovídio,1,,DR
+D,DU,DU192,Santo Ovídio,1,,DR
+D,DU,DU193,Santo Ovídio,1,,DR
+D,DU,DU194,Santo Ovídio,1,,DR
+D,DU,DU195,Santo Ovídio,1,,DR
+D,DU,DU196,Santo Ovídio,1,,DR
+D,DU,DU197,Santo Ovídio,1,,DR
+D,DU,DU198,Santo Ovídio,1,,DR
+D,DU,DU199,Santo Ovídio,1,,DR
+D,DU,DU200,Santo Ovídio,1,,DR
+D,DU,DU201,Santo Ovídio,1,,DR
+D,DU,DU202,Santo Ovídio,1,,DR
+D,DU,DU203,Santo Ovídio,1,,DR
+D,DU,DU204,Santo Ovídio,1,,DR
+D,DU,DU205,Santo Ovídio,1,,DR
+D,DU,DU206,Santo Ovídio,1,,DR
+D,DU,DU207,Santo Ovídio,1,,DR
+D,DU,DU208,Santo Ovídio,1,,DR
+D,DU,DU209,Santo Ovídio,1,,DR
+D,DU,DU210,Santo Ovídio,1,,DR
+D,DU,DU211,Santo Ovídio,1,,DR
+D,DU,DU212,Santo Ovídio,1,,DR
+D,DU,DU213,Santo Ovídio,1,,DR
+D,DU,DU214,Santo Ovídio,1,,DR
+D,DU,DU215,Santo Ovídio,1,,DR
+D,DU,DU216,Santo Ovídio,1,,DR
+D,DU,DU217,Santo Ovídio,1,,DR
+D,DU,DU218,Santo Ovídio,1,,DR
+D,DU,DU219,Santo Ovídio,1,,DR
+D,DU,DU220,Santo Ovídio,1,,DR
+D,DU,DU221,Santo Ovídio,1,,DR
+D,DU,DU222,Santo Ovídio,1,,DR
+D,DU,DU223,Santo Ovídio,1,,DR
+D,DU,DU224,Santo Ovídio,1,,DR
+D,DU,DU225,Santo Ovídio,1,,DR
+D,DU,DU226,Santo Ovídio,1,,DR
+D,DU,DU227,Santo Ovídio,1,,DR
+D,DU,DU228,Santo Ovídio,1,,DR
+D,DU,DU229,Santo Ovídio,1,,DR
+D,DU,DU230,Santo Ovídio,1,,DR
+D,DU,DU231,Santo Ovídio,1,,DR
+D,DU,DU232,Santo Ovídio,1,,DR
+D,DU,DU233,Santo Ovídio,1,,DR
+D,DU,DU234,Santo Ovídio,1,,DR
+D,DU,DU235,Santo Ovídio,1,,DR
+D,DU,DU236,Santo Ovídio,1,,DR
+D,DU,DU237,Santo Ovídio,1,,DR
+D,DU,DU238,Santo Ovídio,1,,DR
+D,DU,DU239,Santo Ovídio,1,,DR
+D,DU,DU240,Santo Ovídio,1,,DR
+D,DU,DU241,Santo Ovídio,1,,DR
+D,DU,DU242,Santo Ovídio,1,,DR
+D,DU,DU243,Santo Ovídio,1,,DR
+D,DU,DU244,Santo Ovídio,1,,DR
+D,DU,DU245,Santo Ovídio,1,,DR
+D,DU,DU246,Santo Ovídio,1,,DR
+D,DU,DU247,Santo Ovídio,1,,DR
+D,DU,DU248,Santo Ovídio,1,,DR
+D,DU,DU249,Santo Ovídio,1,,DR
+D,DU,DU250,Santo Ovídio,1,,DR
+D,DU,DU251,Santo Ovídio,1,,DR
+D,DU,DU252,Santo Ovídio,1,,DR
+D,DU,DU253,Santo Ovídio,1,,DR
+D,DU,DU254,Santo Ovídio,1,,DR
+D,DU,DU255,Santo Ovídio,1,,DR
+D,DU,DU256,Santo Ovídio,1,,DR
+D,DU,DU257,Santo Ovídio,1,,DR
+D,DU,DU258,Santo Ovídio,1,,DR
+D,DU,DU259,Santo Ovídio,1,,DR
+D,DU,DU260,Santo Ovídio,1,,DR
+D,DU,DU261,Santo Ovídio,1,,DR
+D,DU,DU262,Santo Ovídio,1,,DR
+D,DU,DU263,Santo Ovídio,1,,DR
+D,DU,DU264,Santo Ovídio,1,,DR
+D,DU,DU265,Santo Ovídio,1,,DR
+D,DU,DU266,Santo Ovídio,1,,DR
+D,DU,DU267,Santo Ovídio,1,,DR
+D,DU,DU268,Santo Ovídio,1,,DR
+D,DU,DU269,Santo Ovídio,1,,DR
+D,DU,DU270,Santo Ovídio,1,,DR
+D,DU,DU271,Santo Ovídio,1,,DR
+D,DU,DU272,Santo Ovídio,1,,DR
+D,DU,DU273,Santo Ovídio,1,,DR
+D,DU,DU274,Santo Ovídio,1,,DR
+D,DU,DU275,Santo Ovídio,1,,DR
+D,DU,DU276,Santo Ovídio,1,,DR
+D,DU,DU277,Santo Ovídio,1,,DR
+D,DU,DU278,Santo Ovídio,1,,DR
+D,DU,DU279,Santo Ovídio,1,,DR
+D,DU,DU280,Santo Ovídio,1,,DR
+D,DU,DU281,Santo Ovídio,1,,DR
+D,DU,DU282,Santo Ovídio,1,,DR
+D,DU,DU283,Santo Ovídio,1,,DR
+D,DU,DU284,Santo Ovídio,1,,DR
+D,DU,DU285,Santo Ovídio,1,,DR
+D,DU,DU286,Santo Ovídio,1,,DR
+D,DU,DU287,Santo Ovídio,1,,DR
+D,DU,DU288,Santo Ovídio,1,,DR
+D,DU,DU289,Santo Ovídio,1,,DR
+D,DU,DU290,Santo Ovídio,1,,DR
+D,DU,DU291,Santo Ovídio,1,,DR
+D,DU,DU292,Santo Ovídio,1,,DR
+D,DU,DU293,Santo Ovídio,1,,DR
+D,DU,DU294,Santo Ovídio,1,,DR
+D,DU,DU295,Santo Ovídio,1,,DR
+D,DU,DU296,Santo Ovídio,1,,DR
+D,DU,DU297,Santo Ovídio,1,,DR
+D,DU,DU298,Santo Ovídio,1,,DR
+D,DU,DU299,Santo Ovídio,1,,DR
+D,DU,DU300,Santo Ovídio,1,,DR
+D,DU,DU301,Santo Ovídio,1,,DR
+D,DU,DU302,Santo Ovídio,1,,DR
+D,DU,DU303,Santo Ovídio,1,,DR
+D,DU,DU304,Santo Ovídio,1,,DR
+D,DU,DU305,Santo Ovídio,1,,DR
+D,DU,DU306,Santo Ovídio,1,,DR
+D,DU,DU307,Santo Ovídio,1,,DR
+D,DU,DU308,Santo Ovídio,1,,DR
+D,DU,DU309,Santo Ovídio,1,,DR
+D,DU,DU310,Santo Ovídio,1,,DR
+D,DU,DU311,Santo Ovídio,1,,DR
+D,DU,DU312,Santo Ovídio,1,,DR
+D,DU,DU313,Santo Ovídio,1,,DR
+D,DU,DU314,Santo Ovídio,1,,DR
+D,DU,DU315,Santo Ovídio,1,,DR
+D,DU,DU316,Santo Ovídio,1,,DR
+D,DU,DU317,Santo Ovídio,1,,DR
+D,DU,DU318,Santo Ovídio,1,,DR
+D,DU,DU319,Santo Ovídio,1,,DR
+D,DU,DU320,Santo Ovídio,1,,DR
+D,DU,DU321,Santo Ovídio,1,,DR
+D,DU,DU322,Santo Ovídio,1,,DR
+D,DU,DU323,Santo Ovídio,1,,DR
+D,DU,DU324,Santo Ovídio,1,,DR
+D,DU,DU325,Santo Ovídio,1,,DR
+D,DU,DU326,Santo Ovídio,1,,DR
+D,DU,DU327,Santo Ovídio,1,,DR
+D,DU,DU328,Santo Ovídio,1,,DR
+D,DU,DU329,Santo Ovídio,1,,DR
+D,DU,DU330,Santo Ovídio,1,,DR
+D,DU,DU331,Santo Ovídio,1,,DR
+D,DU,DU332,Santo Ovídio,1,,DR
+D,DU,DU333,Santo Ovídio,1,,DR
+D,DU,DU334,Santo Ovídio,1,,DR
+D,DU,DU335,Santo Ovídio,1,,DR
+F,FDF,FDF0,Senhora da Hora,0,,FG
+F,FDF,FDF1,Senhora da Hora,0,,FG
+F,FDF,FDF2,Senhora da Hora,0,,FG
+F,FDF,FDF3,Senhora da Hora,0,,FG
+F,FDF,FDF4,Senhora da Hora,0,,FG
+F,FDF,FDF5,Senhora da Hora,0,,FG
+F,FDF,FDF6,Senhora da Hora,0,,FG
+F,FDF,FDF7,Senhora da Hora,0,,FG
+F,FDF,FDF8,Senhora da Hora,0,,FG
+F,FDF,FDF9,Senhora da Hora,0,,FG
+F,FDF,FDF10,Senhora da Hora,0,,FG
+F,FDF,FDF11,Senhora da Hora,0,,FG
+F,FDF,FDF12,Senhora da Hora,0,,FG
+F,FDF,FDF13,Senhora da Hora,0,,FG
+F,FDF,FDF14,Senhora da Hora,0,,FG
+F,FDF,FDF15,Senhora da Hora,0,,FG
+F,FDF,FDF16,Senhora da Hora,0,,FG
+F,FDF,FDF17,Senhora da Hora,0,,FG
+F,FDF,FDF18,Senhora da Hora,0,,FG
+F,FDF,FDF19,Senhora da Hora,0,,FG
+F,FDF,FDF20,Senhora da Hora,0,,FG
+F,FDF,FDF21,Senhora da Hora,0,,FG
+F,FDF,FDF22,Senhora da Hora,0,,FG
+F,FDF,FDF23,Senhora da Hora,0,,FG
+F,FDF,FDF24,Senhora da Hora,0,,FG
+F,FDF,FDF25,Senhora da Hora,0,,FG
+F,FDF,FDF26,Senhora da Hora,0,,FG
+F,FDF,FDF27,Senhora da Hora,0,,FG
+F,FDF,FDF28,Senhora da Hora,0,,FG
+F,FDF,FDF29,Senhora da Hora,0,,FG
+F,FDF,FDF30,Senhora da Hora,0,,FG
+F,FDF,FDF31,Senhora da Hora,0,,FG
+F,FDF,FDF32,Senhora da Hora,0,,FG
+F,FDF,FDF33,Senhora da Hora,0,,FG
+F,FDF,FDF34,Senhora da Hora,0,,FG
+F,FDF,FDF35,Senhora da Hora,0,,FG
+F,FDF,FDF36,Senhora da Hora,0,,FG
+F,FDF,FDF37,Senhora da Hora,0,,FG
+F,FDF,FDF38,Senhora da Hora,0,,FG
+F,FDF,FDF39,Senhora da Hora,0,,FG
+F,FDF,FDF40,Senhora da Hora,0,,FG
+F,FDF,FDF41,Senhora da Hora,0,,FG
+F,FDF,FDF42,Senhora da Hora,0,,FG
+F,FDF,FDF43,Senhora da Hora,0,,FG
+F,FDF,FDF44,Senhora da Hora,0,,FG
+F,FDF,FDF45,Senhora da Hora,0,,FG
+F,FDF,FDF46,Senhora da Hora,0,,FG
+F,FDF,FDF47,Senhora da Hora,0,,FG
+F,FDF,FDF48,Senhora da Hora,0,,FG
+F,FDF,FDF49,Senhora da Hora,0,,FG
+F,FS,FS0,Senhora da Hora,0,,FG
+F,FS,FS1,Senhora da Hora,0,,FG
+F,FS,FS2,Senhora da Hora,0,,FG
+F,FS,FS3,Senhora da Hora,0,,FG
+F,FS,FS4,Senhora da Hora,0,,FG
+F,FS,FS5,Senhora da Hora,0,,FG
+F,FS,FS6,Senhora da Hora,0,,FG
+F,FS,FS7,Senhora da Hora,0,,FG
+F,FS,FS8,Senhora da Hora,0,,FG
+F,FS,FS9,Senhora da Hora,0,,FG
+F,FS,FS10,Senhora da Hora,0,,FG
+F,FS,FS11,Senhora da Hora,0,,FG
+F,FS,FS12,Senhora da Hora,0,,FG
+F,FS,FS13,Senhora da Hora,0,,FG
+F,FS,FS14,Senhora da Hora,0,,FG
+F,FS,FS15,Senhora da Hora,0,,FG
+F,FS,FS16,Senhora da Hora,0,,FG
+F,FS,FS17,Senhora da Hora,0,,FG
+F,FS,FS18,Senhora da Hora,0,,FG
+F,FS,FS19,Senhora da Hora,0,,FG
+F,FS,FS20,Senhora da Hora,0,,FG
+F,FS,FS21,Senhora da Hora,0,,FG
+F,FS,FS22,Senhora da Hora,0,,FG
+F,FS,FS23,Senhora da Hora,0,,FG
+F,FS,FS24,Senhora da Hora,0,,FG
+F,FS,FS25,Senhora da Hora,0,,FG
+F,FS,FS26,Senhora da Hora,0,,FG
+F,FS,FS27,Senhora da Hora,0,,FG
+F,FS,FS28,Senhora da Hora,0,,FG
+F,FS,FS29,Senhora da Hora,0,,FG
+F,FS,FS30,Senhora da Hora,0,,FG
+F,FS,FS31,Senhora da Hora,0,,FG
+F,FS,FS32,Senhora da Hora,0,,FG
+F,FS,FS33,Senhora da Hora,0,,FG
+F,FS,FS34,Senhora da Hora,0,,FG
+F,FS,FS35,Senhora da Hora,0,,FG
+F,FS,FS36,Senhora da Hora,0,,FG
+F,FS,FS37,Senhora da Hora,0,,FG
+F,FS,FS38,Senhora da Hora,0,,FG
+F,FS,FS39,Senhora da Hora,0,,FG
+F,FS,FS40,Senhora da Hora,0,,FG
+F,FS,FS41,Senhora da Hora,0,,FG
+F,FS,FS42,Senhora da Hora,0,,FG
+F,FS,FS43,Senhora da Hora,0,,FG
+F,FS,FS44,Senhora da Hora,0,,FG
+F,FS,FS45,Senhora da Hora,0,,FG
+F,FS,FS46,Senhora da Hora,0,,FG
+F,FS,FS47,Senhora da Hora,0,,FG
+F,FS,FS48,Senhora da Hora,0,,FG
+F,FS,FS49,Senhora da Hora,0,,FG
+F,FS,FS50,Senhora da Hora,0,,FG
+F,FS,FS51,Senhora da Hora,0,,FG
+F,FS,FS52,Senhora da Hora,0,,FG
+F,FS,FS53,Senhora da Hora,0,,FG
+F,FS,FS54,Senhora da Hora,0,,FG
+F,FS,FS55,Senhora da Hora,0,,FG
+F,FS,FS56,Senhora da Hora,0,,FG
+F,FS,FS57,Senhora da Hora,0,,FG
+F,FS,FS58,Senhora da Hora,0,,FG
+F,FS,FS59,Senhora da Hora,0,,FG
+F,FS,FS60,Senhora da Hora,0,,FG
+F,FS,FS61,Senhora da Hora,0,,FG
+F,FS,FS62,Senhora da Hora,0,,FG
+F,FS,FS63,Senhora da Hora,0,,FG
+F,FU,FU0,Senhora da Hora,0,,FG
+F,FU,FU1,Senhora da Hora,0,,FG
+F,FU,FU2,Senhora da Hora,0,,FG
+F,FU,FU3,Senhora da Hora,0,,FG
+F,FU,FU4,Senhora da Hora,0,,FG
+F,FU,FU5,Senhora da Hora,0,,FG
+F,FU,FU6,Senhora da Hora,0,,FG
+F,FU,FU7,Senhora da Hora,0,,FG
+F,FU,FU8,Senhora da Hora,0,,FG
+F,FU,FU9,Senhora da Hora,0,,FG
+F,FU,FU10,Senhora da Hora,0,,FG
+F,FU,FU11,Senhora da Hora,0,,FG
+F,FU,FU12,Senhora da Hora,0,,FG
+F,FU,FU13,Senhora da Hora,0,,FG
+F,FU,FU14,Senhora da Hora,0,,FG
+F,FU,FU15,Senhora da Hora,0,,FG
+F,FU,FU16,Senhora da Hora,0,,FG
+F,FU,FU17,Senhora da Hora,0,,FG
+F,FU,FU18,Senhora da Hora,0,,FG
+F,FU,FU19,Senhora da Hora,0,,FG
+F,FU,FU20,Senhora da Hora,0,,FG
+F,FU,FU21,Senhora da Hora,0,,FG
+F,FU,FU22,Senhora da Hora,0,,FG
+F,FU,FU23,Senhora da Hora,0,,FG
+F,FU,FU24,Senhora da Hora,0,,FG
+F,FU,FU25,Senhora da Hora,0,,FG
+F,FU,FU26,Senhora da Hora,0,,FG
+F,FU,FU27,Senhora da Hora,0,,FG
+F,FU,FU28,Senhora da Hora,0,,FG
+F,FU,FU29,Senhora da Hora,0,,FG
+F,FU,FU30,Senhora da Hora,0,,FG
+F,FU,FU31,Senhora da Hora,0,,FG
+F,FU,FU32,Senhora da Hora,0,,FG
+F,FU,FU33,Senhora da Hora,0,,FG
+F,FU,FU34,Senhora da Hora,0,,FG
+F,FU,FU35,Senhora da Hora,0,,FG
+F,FU,FU36,Senhora da Hora,0,,FG
+F,FU,FU37,Senhora da Hora,0,,FG
+F,FU,FU38,Senhora da Hora,0,,FG
+F,FU,FU39,Senhora da Hora,0,,FG
+F,FU,FU40,Senhora da Hora,0,,FG
+F,FU,FU41,Senhora da Hora,0,,FG
+F,FU,FU42,Senhora da Hora,0,,FG
+F,FU,FU43,Senhora da Hora,0,,FG
+F,FU,FU44,Senhora da Hora,0,,FG
+F,FU,FU45,Senhora da Hora,0,,FG
+F,FU,FU46,Senhora da Hora,0,,FG
+F,FU,FU47,Senhora da Hora,0,,FG
+F,FU,FU48,Senhora da Hora,0,,FG
+F,FU,FU49,Senhora da Hora,0,,FG
+F,FU,FU50,Senhora da Hora,0,,FG
+F,FU,FU51,Senhora da Hora,0,,FG
+F,FU,FU52,Senhora da Hora,0,,FG
+F,FU,FU53,Senhora da Hora,0,,FG
+F,FU,FU54,Senhora da Hora,0,,FG
+F,FU,FU55,Senhora da Hora,0,,FG
+F,FU,FU56,Senhora da Hora,0,,FG
+F,FU,FU57,Senhora da Hora,0,,FG
+F,FU,FU58,Senhora da Hora,0,,FG
+F,FU,FU59,Senhora da Hora,0,,FG
+F,FU,FU60,Senhora da Hora,0,,FG
+F,FU,FU61,Senhora da Hora,0,,FG
+F,FU,FU62,Senhora da Hora,0,,FG
+F,FU,FU63,Senhora da Hora,0,,FG
+F,FU,FU64,Senhora da Hora,0,,FG
+F,FU,FU65,Senhora da Hora,0,,FG
+F,FU,FU66,Senhora da Hora,0,,FG
+F,FU,FU67,Senhora da Hora,0,,FG
+F,FU,FU68,Senhora da Hora,0,,FG
+F,FU,FU69,Senhora da Hora,0,,FG
+F,FU,FU70,Senhora da Hora,0,,FG
+F,FU,FU71,Senhora da Hora,0,,FG
+F,FU,FU72,Senhora da Hora,0,,FG
+F,FU,FU73,Senhora da Hora,0,,FG
+F,FU,FU74,Senhora da Hora,0,,FG
+F,FU,FU75,Senhora da Hora,0,,FG
+F,FDF,FDF50,Fânzeres,1,,FR
+F,FDF,FDF51,Fânzeres,1,,FR
+F,FDF,FDF52,Fânzeres,1,,FR
+F,FDF,FDF53,Fânzeres,1,,FR
+F,FDF,FDF54,Fânzeres,1,,FR
+F,FDF,FDF55,Fânzeres,1,,FR
+F,FDF,FDF56,Fânzeres,1,,FR
+F,FDF,FDF57,Fânzeres,1,,FR
+F,FDF,FDF58,Fânzeres,1,,FR
+F,FDF,FDF59,Fânzeres,1,,FR
+F,FDF,FDF60,Fânzeres,1,,FR
+F,FDF,FDF61,Fânzeres,1,,FR
+F,FDF,FDF62,Fânzeres,1,,FR
+F,FDF,FDF63,Fânzeres,1,,FR
+F,FDF,FDF64,Fânzeres,1,,FR
+F,FDF,FDF65,Fânzeres,1,,FR
+F,FDF,FDF66,Fânzeres,1,,FR
+F,FDF,FDF67,Fânzeres,1,,FR
+F,FDF,FDF68,Fânzeres,1,,FR
+F,FDF,FDF69,Fânzeres,1,,FR
+F,FDF,FDF70,Fânzeres,1,,FR
+F,FDF,FDF71,Fânzeres,1,,FR
+F,FDF,FDF72,Fânzeres,1,,FR
+F,FDF,FDF73,Fânzeres,1,,FR
+F,FDF,FDF74,Fânzeres,1,,FR
+F,FDF,FDF75,Fânzeres,1,,FR
+F,FDF,FDF76,Fânzeres,1,,FR
+F,FDF,FDF77,Fânzeres,1,,FR
+F,FDF,FDF78,Fânzeres,1,,FR
+F,FDF,FDF79,Fânzeres,1,,FR
+F,FDF,FDF80,Fânzeres,1,,FR
+F,FDF,FDF81,Fânzeres,1,,FR
+F,FDF,FDF82,Fânzeres,1,,FR
+F,FDF,FDF83,Fânzeres,1,,FR
+F,FDF,FDF84,Fânzeres,1,,FR
+F,FDF,FDF85,Fânzeres,1,,FR
+F,FDF,FDF86,Fânzeres,1,,FR
+F,FDF,FDF87,Fânzeres,1,,FR
+F,FDF,FDF88,Fânzeres,1,,FR
+F,FDF,FDF89,Fânzeres,1,,FR
+F,FDF,FDF90,Fânzeres,1,,FR
+F,FDF,FDF91,Fânzeres,1,,FR
+F,FDF,FDF92,Fânzeres,1,,FR
+F,FDF,FDF93,Fânzeres,1,,FR
+F,FDF,FDF94,Fânzeres,1,,FR
+F,FDF,FDF95,Fânzeres,1,,FR
+F,FDF,FDF96,Fânzeres,1,,FR
+F,FDF,FDF97,Fânzeres,1,,FR
+F,FDF,FDF98,Fânzeres,1,,FR
+F,FS,FS64,Fânzeres,1,,FR
+F,FS,FS65,Fânzeres,1,,FR
+F,FS,FS66,Fânzeres,1,,FR
+F,FS,FS67,Fânzeres,1,,FR
+F,FS,FS68,Fânzeres,1,,FR
+F,FS,FS69,Fânzeres,1,,FR
+F,FS,FS70,Fânzeres,1,,FR
+F,FS,FS71,Fânzeres,1,,FR
+F,FS,FS72,Fânzeres,1,,FR
+F,FS,FS73,Fânzeres,1,,FR
+F,FS,FS74,Fânzeres,1,,FR
+F,FS,FS75,Fânzeres,1,,FR
+F,FS,FS76,Fânzeres,1,,FR
+F,FS,FS77,Fânzeres,1,,FR
+F,FS,FS78,Fânzeres,1,,FR
+F,FS,FS79,Fânzeres,1,,FR
+F,FS,FS80,Fânzeres,1,,FR
+F,FS,FS81,Fânzeres,1,,FR
+F,FS,FS82,Fânzeres,1,,FR
+F,FS,FS83,Fânzeres,1,,FR
+F,FS,FS84,Fânzeres,1,,FR
+F,FS,FS85,Fânzeres,1,,FR
+F,FS,FS86,Fânzeres,1,,FR
+F,FS,FS87,Fânzeres,1,,FR
+F,FS,FS88,Fânzeres,1,,FR
+F,FS,FS89,Fânzeres,1,,FR
+F,FS,FS90,Fânzeres,1,,FR
+F,FS,FS91,Fânzeres,1,,FR
+F,FS,FS92,Fânzeres,1,,FR
+F,FS,FS93,Fânzeres,1,,FR
+F,FS,FS94,Fânzeres,1,,FR
+F,FS,FS95,Fânzeres,1,,FR
+F,FS,FS96,Fânzeres,1,,FR
+F,FS,FS97,Fânzeres,1,,FR
+F,FS,FS98,Fânzeres,1,,FR
+F,FS,FS99,Fânzeres,1,,FR
+F,FS,FS100,Fânzeres,1,,FR
+F,FS,FS101,Fânzeres,1,,FR
+F,FS,FS102,Fânzeres,1,,FR
+F,FS,FS103,Fânzeres,1,,FR
+F,FS,FS104,Fânzeres,1,,FR
+F,FS,FS105,Fânzeres,1,,FR
+F,FS,FS106,Fânzeres,1,,FR
+F,FS,FS107,Fânzeres,1,,FR
+F,FS,FS108,Fânzeres,1,,FR
+F,FS,FS109,Fânzeres,1,,FR
+F,FS,FS110,Fânzeres,1,,FR
+F,FS,FS111,Fânzeres,1,,FR
+F,FS,FS112,Fânzeres,1,,FR
+F,FS,FS113,Fânzeres,1,,FR
+F,FS,FS114,Fânzeres,1,,FR
+F,FS,FS115,Fânzeres,1,,FR
+F,FS,FS116,Fânzeres,1,,FR
+F,FS,FS117,Fânzeres,1,,FR
+F,FS,FS118,Fânzeres,1,,FR
+F,FS,FS119,Fânzeres,1,,FR
+F,FS,FS120,Fânzeres,1,,FR
+F,FS,FS121,Fânzeres,1,,FR
+F,FS,FS122,Fânzeres,1,,FR
+F,FS,FS123,Fânzeres,1,,FR
+F,FS,FS124,Fânzeres,1,,FR
+F,FS,FS125,Fânzeres,1,,FR
+F,FS,FS126,Fânzeres,1,,FR
+F,FU,FU76,Fânzeres,1,,FR
+F,FU,FU77,Fânzeres,1,,FR
+F,FU,FU78,Fânzeres,1,,FR
+F,FU,FU79,Fânzeres,1,,FR
+F,FU,FU80,Fânzeres,1,,FR
+F,FU,FU81,Fânzeres,1,,FR
+F,FU,FU82,Fânzeres,1,,FR
+F,FU,FU83,Fânzeres,1,,FR
+F,FU,FU84,Fânzeres,1,,FR
+F,FU,FU85,Fânzeres,1,,FR
+F,FU,FU86,Fânzeres,1,,FR
+F,FU,FU87,Fânzeres,1,,FR
+F,FU,FU88,Fânzeres,1,,FR
+F,FU,FU89,Fânzeres,1,,FR
+F,FU,FU90,Fânzeres,1,,FR
+F,FU,FU91,Fânzeres,1,,FR
+F,FU,FU92,Fânzeres,1,,FR
+F,FU,FU93,Fânzeres,1,,FR
+F,FU,FU94,Fânzeres,1,,FR
+F,FU,FU95,Fânzeres,1,,FR
+F,FU,FU96,Fânzeres,1,,FR
+F,FU,FU97,Fânzeres,1,,FR
+F,FU,FU98,Fânzeres,1,,FR
+F,FU,FU99,Fânzeres,1,,FR
+F,FU,FU100,Fânzeres,1,,FR
+F,FU,FU101,Fânzeres,1,,FR
+F,FU,FU102,Fânzeres,1,,FR
+F,FU,FU103,Fânzeres,1,,FR
+F,FU,FU104,Fânzeres,1,,FR
+F,FU,FU105,Fânzeres,1,,FR
+F,FU,FU106,Fânzeres,1,,FR
+F,FU,FU107,Fânzeres,1,,FR
+F,FU,FU108,Fânzeres,1,,FR
+F,FU,FU109,Fânzeres,1,,FR
+F,FU,FU110,Fânzeres,1,,FR
+F,FU,FU111,Fânzeres,1,,FR
+F,FU,FU112,Fânzeres,1,,FR
+F,FU,FU113,Fânzeres,1,,FR
+F,FU,FU114,Fânzeres,1,,FR
+F,FU,FU115,Fânzeres,1,,FR
+F,FU,FU116,Fânzeres,1,,FR
+F,FU,FU117,Fânzeres,1,,FR
+F,FU,FU118,Fânzeres,1,,FR
+F,FU,FU119,Fânzeres,1,,FR
+F,FU,FU120,Fânzeres,1,,FR
+F,FU,FU121,Fânzeres,1,,FR
+F,FU,FU122,Fânzeres,1,,FR
+F,FU,FU123,Fânzeres,1,,FR
+F,FU,FU124,Fânzeres,1,,FR
+F,FU,FU125,Fânzeres,1,,FR
+F,FU,FU126,Fânzeres,1,,FR
+F,FU,FU127,Fânzeres,1,,FR
+F,FU,FU128,Fânzeres,1,,FR
+F,FU,FU129,Fânzeres,1,,FR
+F,FU,FU130,Fânzeres,1,,FR
+F,FU,FU131,Fânzeres,1,,FR
+F,FU,FU132,Fânzeres,1,,FR
+F,FU,FU133,Fânzeres,1,,FR
+F,FU,FU134,Fânzeres,1,,FR
+F,FU,FU135,Fânzeres,1,,FR
+F,FU,FU136,Fânzeres,1,,FR
+F,FU,FU137,Fânzeres,1,,FR
+F,FU,FU138,Fânzeres,1,,FR
+F,FU,FU139,Fânzeres,1,,FR
+F,FU,FU140,Fânzeres,1,,FR
+F,FU,FU141,Fânzeres,1,,FR
+F,FU,FU142,Fânzeres,1,,FR
+F,FU,FU143,Fânzeres,1,,FR
+F,FU,FU144,Fânzeres,1,,FR
+F,FU,FU145,Fânzeres,1,,FR
+F,FU,FU146,Fânzeres,1,,FR
+F,FU,FU147,Fânzeres,1,,FR
+F,FU,FU148,Fânzeres,1,,FR
+F,FU,FU149,Fânzeres,1,,FR
+F,FU,FU150,Fânzeres,1,,FR
+E,EDF,EDF0,Aeroporto,0,,EG
+E,EDF,EDF1,Aeroporto,0,,EG
+E,EDF,EDF2,Aeroporto,0,,EG
+E,EDF,EDF3,Aeroporto,0,,EG
+E,EDF,EDF4,Aeroporto,0,,EG
+E,EDF,EDF5,Aeroporto,0,,EG
+E,EDF,EDF6,Aeroporto,0,,EG
+E,EDF,EDF7,Aeroporto,0,,EG
+E,EDF,EDF8,Aeroporto,0,,EG
+E,EDF,EDF9,Aeroporto,0,,EG
+E,EDF,EDF10,Aeroporto,0,,EG
+E,EDF,EDF11,Aeroporto,0,,EG
+E,EDF,EDF12,Aeroporto,0,,EG
+E,EDF,EDF13,Aeroporto,0,,EG
+E,EDF,EDF14,Aeroporto,0,,EG
+E,EDF,EDF15,Aeroporto,0,,EG
+E,EDF,EDF16,Aeroporto,0,,EG
+E,EDF,EDF17,Aeroporto,0,,EG
+E,EDF,EDF18,Aeroporto,0,,EG
+E,EDF,EDF19,Aeroporto,0,,EG
+E,EDF,EDF20,Aeroporto,0,,EG
+E,EDF,EDF21,Aeroporto,0,,EG
+E,EDF,EDF22,Aeroporto,0,,EG
+E,EDF,EDF23,Aeroporto,0,,EG
+E,EDF,EDF24,Aeroporto,0,,EG
+E,EDF,EDF25,Aeroporto,0,,EG
+E,EDF,EDF26,Aeroporto,0,,EG
+E,EDF,EDF27,Aeroporto,0,,EG
+E,EDF,EDF28,Aeroporto,0,,EG
+E,EDF,EDF29,Aeroporto,0,,EG
+E,EDF,EDF30,Aeroporto,0,,EG
+E,EDF,EDF31,Aeroporto,0,,EG
+E,EDF,EDF32,Aeroporto,0,,EG
+E,EDF,EDF33,Aeroporto,0,,EG
+E,EDF,EDF34,Aeroporto,0,,EG
+E,ES,ES0,Aeroporto,0,,EG
+E,ES,ES1,Aeroporto,0,,EG
+E,ES,ES2,Aeroporto,0,,EG
+E,ES,ES3,Aeroporto,0,,EG
+E,ES,ES4,Aeroporto,0,,EG
+E,ES,ES5,Aeroporto,0,,EG
+E,ES,ES6,Aeroporto,0,,EG
+E,ES,ES7,Aeroporto,0,,EG
+E,ES,ES8,Aeroporto,0,,EG
+E,ES,ES9,Aeroporto,0,,EG
+E,ES,ES10,Aeroporto,0,,EG
+E,ES,ES11,Aeroporto,0,,EG
+E,ES,ES12,Aeroporto,0,,EG
+E,ES,ES13,Aeroporto,0,,EG
+E,ES,ES14,Aeroporto,0,,EG
+E,ES,ES15,Aeroporto,0,,EG
+E,ES,ES16,Aeroporto,0,,EG
+E,ES,ES17,Aeroporto,0,,EG
+E,ES,ES18,Aeroporto,0,,EG
+E,ES,ES19,Aeroporto,0,,EG
+E,ES,ES20,Aeroporto,0,,EG
+E,ES,ES21,Aeroporto,0,,EG
+E,ES,ES22,Aeroporto,0,,EG
+E,ES,ES23,Aeroporto,0,,EG
+E,ES,ES24,Aeroporto,0,,EG
+E,ES,ES25,Aeroporto,0,,EG
+E,ES,ES26,Aeroporto,0,,EG
+E,ES,ES27,Aeroporto,0,,EG
+E,ES,ES28,Aeroporto,0,,EG
+E,ES,ES29,Aeroporto,0,,EG
+E,ES,ES30,Aeroporto,0,,EG
+E,ES,ES31,Aeroporto,0,,EG
+E,ES,ES32,Aeroporto,0,,EG
+E,ES,ES33,Aeroporto,0,,EG
+E,ES,ES34,Aeroporto,0,,EG
+E,EU,EU0,Aeroporto,0,,EG
+E,EU,EU1,Aeroporto,0,,EG
+E,EU,EU2,Aeroporto,0,,EG
+E,EU,EU3,Aeroporto,0,,EG
+E,EU,EU4,Aeroporto,0,,EG
+E,EU,EU5,Aeroporto,0,,EG
+E,EU,EU6,Aeroporto,0,,EG
+E,EU,EU7,Aeroporto,0,,EG
+E,EU,EU8,Aeroporto,0,,EG
+E,EU,EU9,Aeroporto,0,,EG
+E,EU,EU10,Aeroporto,0,,EG
+E,EU,EU11,Aeroporto,0,,EG
+E,EU,EU12,Aeroporto,0,,EG
+E,EU,EU13,Aeroporto,0,,EG
+E,EU,EU14,Aeroporto,0,,EG
+E,EU,EU15,Aeroporto,0,,EG
+E,EU,EU16,Aeroporto,0,,EG
+E,EU,EU17,Aeroporto,0,,EG
+E,EU,EU18,Aeroporto,0,,EG
+E,EU,EU19,Aeroporto,0,,EG
+E,EU,EU20,Aeroporto,0,,EG
+E,EU,EU21,Aeroporto,0,,EG
+E,EU,EU22,Aeroporto,0,,EG
+E,EU,EU23,Aeroporto,0,,EG
+E,EU,EU24,Aeroporto,0,,EG
+E,EU,EU25,Aeroporto,0,,EG
+E,EU,EU26,Aeroporto,0,,EG
+E,EU,EU27,Aeroporto,0,,EG
+E,EU,EU28,Aeroporto,0,,EG
+E,EU,EU29,Aeroporto,0,,EG
+E,EU,EU30,Aeroporto,0,,EG
+E,EU,EU31,Aeroporto,0,,EG
+E,EU,EU32,Aeroporto,0,,EG
+E,EU,EU33,Aeroporto,0,,EG
+E,EU,EU34,Aeroporto,0,,EG
+E,EDF,EDF35,Estádio do Dragão,1,,ER
+E,EDF,EDF36,Estádio do Dragão,1,,ER
+E,EDF,EDF37,Estádio do Dragão,1,,ER
+E,EDF,EDF38,Estádio do Dragão,1,,ER
+E,EDF,EDF39,Estádio do Dragão,1,,ER
+E,EDF,EDF40,Estádio do Dragão,1,,ER
+E,EDF,EDF41,Estádio do Dragão,1,,ER
+E,EDF,EDF42,Estádio do Dragão,1,,ER
+E,EDF,EDF43,Estádio do Dragão,1,,ER
+E,EDF,EDF44,Estádio do Dragão,1,,ER
+E,EDF,EDF45,Estádio do Dragão,1,,ER
+E,EDF,EDF46,Estádio do Dragão,1,,ER
+E,EDF,EDF47,Estádio do Dragão,1,,ER
+E,EDF,EDF48,Estádio do Dragão,1,,ER
+E,EDF,EDF49,Estádio do Dragão,1,,ER
+E,EDF,EDF50,Estádio do Dragão,1,,ER
+E,EDF,EDF51,Estádio do Dragão,1,,ER
+E,EDF,EDF52,Estádio do Dragão,1,,ER
+E,EDF,EDF53,Estádio do Dragão,1,,ER
+E,EDF,EDF54,Estádio do Dragão,1,,ER
+E,EDF,EDF55,Estádio do Dragão,1,,ER
+E,EDF,EDF56,Estádio do Dragão,1,,ER
+E,EDF,EDF57,Estádio do Dragão,1,,ER
+E,EDF,EDF58,Estádio do Dragão,1,,ER
+E,EDF,EDF59,Estádio do Dragão,1,,ER
+E,EDF,EDF60,Estádio do Dragão,1,,ER
+E,EDF,EDF61,Estádio do Dragão,1,,ER
+E,EDF,EDF62,Estádio do Dragão,1,,ER
+E,EDF,EDF63,Estádio do Dragão,1,,ER
+E,EDF,EDF64,Estádio do Dragão,1,,ER
+E,EDF,EDF65,Estádio do Dragão,1,,ER
+E,EDF,EDF66,Estádio do Dragão,1,,ER
+E,EDF,EDF67,Estádio do Dragão,1,,ER
+E,EDF,EDF68,Estádio do Dragão,1,,ER
+E,EDF,EDF69,Estádio do Dragão,1,,ER
+E,ES,ES35,Estádio do Dragão,1,,ER
+E,ES,ES36,Estádio do Dragão,1,,ER
+E,ES,ES37,Estádio do Dragão,1,,ER
+E,ES,ES38,Estádio do Dragão,1,,ER
+E,ES,ES39,Estádio do Dragão,1,,ER
+E,ES,ES40,Estádio do Dragão,1,,ER
+E,ES,ES41,Estádio do Dragão,1,,ER
+E,ES,ES42,Estádio do Dragão,1,,ER
+E,ES,ES43,Estádio do Dragão,1,,ER
+E,ES,ES44,Estádio do Dragão,1,,ER
+E,ES,ES45,Estádio do Dragão,1,,ER
+E,ES,ES46,Estádio do Dragão,1,,ER
+E,ES,ES47,Estádio do Dragão,1,,ER
+E,ES,ES48,Estádio do Dragão,1,,ER
+E,ES,ES49,Estádio do Dragão,1,,ER
+E,ES,ES50,Estádio do Dragão,1,,ER
+E,ES,ES51,Estádio do Dragão,1,,ER
+E,ES,ES52,Estádio do Dragão,1,,ER
+E,ES,ES53,Estádio do Dragão,1,,ER
+E,ES,ES54,Estádio do Dragão,1,,ER
+E,ES,ES55,Estádio do Dragão,1,,ER
+E,ES,ES56,Estádio do Dragão,1,,ER
+E,ES,ES57,Estádio do Dragão,1,,ER
+E,ES,ES58,Estádio do Dragão,1,,ER
+E,ES,ES59,Estádio do Dragão,1,,ER
+E,ES,ES60,Estádio do Dragão,1,,ER
+E,ES,ES61,Estádio do Dragão,1,,ER
+E,ES,ES62,Estádio do Dragão,1,,ER
+E,ES,ES63,Estádio do Dragão,1,,ER
+E,ES,ES64,Estádio do Dragão,1,,ER
+E,ES,ES65,Estádio do Dragão,1,,ER
+E,ES,ES66,Estádio do Dragão,1,,ER
+E,ES,ES67,Estádio do Dragão,1,,ER
+E,ES,ES68,Estádio do Dragão,1,,ER
+E,ES,ES69,Estádio do Dragão,1,,ER
+E,EU,EU35,Estádio do Dragão,1,,ER
+E,EU,EU36,Estádio do Dragão,1,,ER
+E,EU,EU37,Estádio do Dragão,1,,ER
+E,EU,EU38,Estádio do Dragão,1,,ER
+E,EU,EU39,Estádio do Dragão,1,,ER
+E,EU,EU40,Estádio do Dragão,1,,ER
+E,EU,EU41,Estádio do Dragão,1,,ER
+E,EU,EU42,Estádio do Dragão,1,,ER
+E,EU,EU43,Estádio do Dragão,1,,ER
+E,EU,EU44,Estádio do Dragão,1,,ER
+E,EU,EU45,Estádio do Dragão,1,,ER
+E,EU,EU46,Estádio do Dragão,1,,ER
+E,EU,EU47,Estádio do Dragão,1,,ER
+E,EU,EU48,Estádio do Dragão,1,,ER
+E,EU,EU49,Estádio do Dragão,1,,ER
+E,EU,EU50,Estádio do Dragão,1,,ER
+E,EU,EU51,Estádio do Dragão,1,,ER
+E,EU,EU52,Estádio do Dragão,1,,ER
+E,EU,EU53,Estádio do Dragão,1,,ER
+E,EU,EU54,Estádio do Dragão,1,,ER
+E,EU,EU55,Estádio do Dragão,1,,ER
+E,EU,EU56,Estádio do Dragão,1,,ER
+E,EU,EU57,Estádio do Dragão,1,,ER
+E,EU,EU58,Estádio do Dragão,1,,ER
+E,EU,EU59,Estádio do Dragão,1,,ER
+E,EU,EU60,Estádio do Dragão,1,,ER
+E,EU,EU61,Estádio do Dragão,1,,ER
+E,EU,EU62,Estádio do Dragão,1,,ER
+E,EU,EU63,Estádio do Dragão,1,,ER
+E,EU,EU64,Estádio do Dragão,1,,ER
+E,EU,EU65,Estádio do Dragão,1,,ER
+E,EU,EU66,Estádio do Dragão,1,,ER
+E,EU,EU67,Estádio do Dragão,1,,ER
+E,EU,EU68,Estádio do Dragão,1,,ER
+E,EU,EU69,Estádio do Dragão,1,,ER
+E,EU,EU70,Estádio do Dragão,1,,ER
+E,EU,EU71,Estádio do Dragão,1,,ER
+E,EDF,EDF70,Aeroporto,0,,EG
+E,EDF,EDF71,Aeroporto,0,,EG
+E,EDF,EDF72,Aeroporto,0,,EG
+E,EDF,EDF73,Aeroporto,0,,EG
+E,EDF,EDF74,Aeroporto,0,,EG
+E,EDF,EDF75,Aeroporto,0,,EG
+E,EDF,EDF76,Aeroporto,0,,EG
+E,EDF,EDF77,Aeroporto,0,,EG
+E,EDF,EDF78,Aeroporto,0,,EG
+E,EDF,EDF79,Aeroporto,0,,EG
+E,EDF,EDF80,Aeroporto,0,,EG
+E,EDF,EDF81,Aeroporto,0,,EG
+E,EDF,EDF82,Aeroporto,0,,EG
+E,EDF,EDF83,Aeroporto,0,,EG
+E,EDF,EDF84,Aeroporto,0,,EG
+E,EDF,EDF85,Aeroporto,0,,EG
+E,EDF,EDF86,Aeroporto,0,,EG
+E,EDF,EDF87,Aeroporto,0,,EG
+E,EDF,EDF88,Aeroporto,0,,EG
+E,EDF,EDF89,Aeroporto,0,,EG
+E,EDF,EDF90,Aeroporto,0,,EG
+E,EDF,EDF91,Aeroporto,0,,EG
+E,EDF,EDF92,Aeroporto,0,,EG
+E,EDF,EDF93,Aeroporto,0,,EG
+E,EDF,EDF94,Aeroporto,0,,EG
+E,EDF,EDF95,Aeroporto,0,,EG
+E,EDF,EDF96,Aeroporto,0,,EG
+E,EDF,EDF97,Aeroporto,0,,EG
+E,ES,ES70,Aeroporto,0,,EG
+E,ES,ES71,Aeroporto,0,,EG
+E,ES,ES72,Aeroporto,0,,EG
+E,ES,ES73,Aeroporto,0,,EG
+E,ES,ES74,Aeroporto,0,,EG
+E,ES,ES75,Aeroporto,0,,EG
+E,ES,ES76,Aeroporto,0,,EG
+E,ES,ES77,Aeroporto,0,,EG
+E,ES,ES78,Aeroporto,0,,EG
+E,ES,ES79,Aeroporto,0,,EG
+E,ES,ES80,Aeroporto,0,,EG
+E,ES,ES81,Aeroporto,0,,EG
+E,ES,ES82,Aeroporto,0,,EG
+E,ES,ES83,Aeroporto,0,,EG
+E,ES,ES84,Aeroporto,0,,EG
+E,ES,ES85,Aeroporto,0,,EG
+E,ES,ES86,Aeroporto,0,,EG
+E,ES,ES87,Aeroporto,0,,EG
+E,ES,ES88,Aeroporto,0,,EG
+E,ES,ES89,Aeroporto,0,,EG
+E,ES,ES90,Aeroporto,0,,EG
+E,ES,ES91,Aeroporto,0,,EG
+E,ES,ES92,Aeroporto,0,,EG
+E,ES,ES93,Aeroporto,0,,EG
+E,ES,ES94,Aeroporto,0,,EG
+E,ES,ES95,Aeroporto,0,,EG
+E,ES,ES96,Aeroporto,0,,EG
+E,ES,ES97,Aeroporto,0,,EG
+E,EU,EU72,Aeroporto,0,,EG
+E,EU,EU73,Aeroporto,0,,EG
+E,EU,EU74,Aeroporto,0,,EG
+E,EU,EU75,Aeroporto,0,,EG
+E,EU,EU76,Aeroporto,0,,EG
+E,EU,EU77,Aeroporto,0,,EG
+E,EU,EU78,Aeroporto,0,,EG
+E,EU,EU79,Aeroporto,0,,EG
+E,EU,EU80,Aeroporto,0,,EG
+E,EU,EU81,Aeroporto,0,,EG
+E,EU,EU82,Aeroporto,0,,EG
+E,EU,EU83,Aeroporto,0,,EG
+E,EU,EU84,Aeroporto,0,,EG
+E,EU,EU85,Aeroporto,0,,EG
+E,EU,EU86,Aeroporto,0,,EG
+E,EU,EU87,Aeroporto,0,,EG
+E,EU,EU88,Aeroporto,0,,EG
+E,EU,EU89,Aeroporto,0,,EG
+E,EU,EU90,Aeroporto,0,,EG
+E,EU,EU91,Aeroporto,0,,EG
+E,EU,EU92,Aeroporto,0,,EG
+E,EU,EU93,Aeroporto,0,,EG
+E,EU,EU94,Aeroporto,0,,EG
+E,EU,EU95,Aeroporto,0,,EG
+E,EU,EU96,Aeroporto,0,,EG
+E,EU,EU97,Aeroporto,0,,EG
+E,EU,EU98,Aeroporto,0,,EG
+E,EU,EU99,Aeroporto,0,,EG
+E,EDF,EDF98,Trindade,1,,ER
+E,EDF,EDF99,Trindade,1,,ER
+E,EDF,EDF100,Trindade,1,,ER
+E,EDF,EDF101,Trindade,1,,ER
+E,EDF,EDF102,Trindade,1,,ER
+E,EDF,EDF103,Trindade,1,,ER
+E,EDF,EDF104,Trindade,1,,ER
+E,EDF,EDF105,Trindade,1,,ER
+E,EDF,EDF106,Trindade,1,,ER
+E,EDF,EDF107,Trindade,1,,ER
+E,EDF,EDF108,Trindade,1,,ER
+E,EDF,EDF109,Trindade,1,,ER
+E,EDF,EDF110,Trindade,1,,ER
+E,EDF,EDF111,Trindade,1,,ER
+E,EDF,EDF112,Trindade,1,,ER
+E,EDF,EDF113,Trindade,1,,ER
+E,EDF,EDF114,Trindade,1,,ER
+E,EDF,EDF115,Trindade,1,,ER
+E,EDF,EDF116,Trindade,1,,ER
+E,EDF,EDF117,Trindade,1,,ER
+E,EDF,EDF118,Trindade,1,,ER
+E,EDF,EDF119,Trindade,1,,ER
+E,EDF,EDF120,Trindade,1,,ER
+E,EDF,EDF121,Trindade,1,,ER
+E,EDF,EDF122,Trindade,1,,ER
+E,EDF,EDF123,Trindade,1,,ER
+E,EDF,EDF124,Trindade,1,,ER
+E,EDF,EDF125,Trindade,1,,ER
+E,ES,ES98,Trindade,1,,ER
+E,ES,ES99,Trindade,1,,ER
+E,ES,ES100,Trindade,1,,ER
+E,ES,ES101,Trindade,1,,ER
+E,ES,ES102,Trindade,1,,ER
+E,ES,ES103,Trindade,1,,ER
+E,ES,ES104,Trindade,1,,ER
+E,ES,ES105,Trindade,1,,ER
+E,ES,ES106,Trindade,1,,ER
+E,ES,ES107,Trindade,1,,ER
+E,ES,ES108,Trindade,1,,ER
+E,ES,ES109,Trindade,1,,ER
+E,ES,ES110,Trindade,1,,ER
+E,ES,ES111,Trindade,1,,ER
+E,ES,ES112,Trindade,1,,ER
+E,ES,ES113,Trindade,1,,ER
+E,ES,ES114,Trindade,1,,ER
+E,ES,ES115,Trindade,1,,ER
+E,ES,ES116,Trindade,1,,ER
+E,ES,ES117,Trindade,1,,ER
+E,ES,ES118,Trindade,1,,ER
+E,ES,ES119,Trindade,1,,ER
+E,ES,ES120,Trindade,1,,ER
+E,ES,ES121,Trindade,1,,ER
+E,ES,ES122,Trindade,1,,ER
+E,ES,ES123,Trindade,1,,ER
+E,ES,ES124,Trindade,1,,ER
+E,ES,ES125,Trindade,1,,ER
+E,EU,EU100,Trindade,1,,ER
+E,EU,EU101,Trindade,1,,ER
+E,EU,EU102,Trindade,1,,ER
+E,EU,EU103,Trindade,1,,ER
+E,EU,EU104,Trindade,1,,ER
+E,EU,EU105,Trindade,1,,ER
+E,EU,EU106,Trindade,1,,ER
+E,EU,EU107,Trindade,1,,ER
+E,EU,EU108,Trindade,1,,ER
+E,EU,EU109,Trindade,1,,ER
+E,EU,EU110,Trindade,1,,ER
+E,EU,EU111,Trindade,1,,ER
+E,EU,EU112,Trindade,1,,ER
+E,EU,EU113,Trindade,1,,ER
+E,EU,EU114,Trindade,1,,ER
+E,EU,EU115,Trindade,1,,ER
+E,EU,EU116,Trindade,1,,ER
+E,EU,EU117,Trindade,1,,ER
+E,EU,EU118,Trindade,1,,ER
+E,EU,EU119,Trindade,1,,ER
+E,EU,EU120,Trindade,1,,ER
+E,EU,EU121,Trindade,1,,ER
+E,EU,EU122,Trindade,1,,ER
+E,EU,EU123,Trindade,1,,ER
+E,EU,EU124,Trindade,1,,ER
+E,EU,EU125,Trindade,1,,ER
+A,ADF,ADF0,Senhor de Matosinhos,0,,AG
+A,ADF,ADF1,Senhor de Matosinhos,0,,AG
+A,ADF,ADF2,Senhor de Matosinhos,0,,AG
+A,ADF,ADF3,Senhor de Matosinhos,0,,AG
+A,ADF,ADF4,Senhor de Matosinhos,0,,AG
+A,ADF,ADF5,Senhor de Matosinhos,0,,AG
+A,ADF,ADF6,Senhor de Matosinhos,0,,AG
+A,ADF,ADF7,Senhor de Matosinhos,0,,AG
+A,ADF,ADF8,Senhor de Matosinhos,0,,AG
+A,ADF,ADF9,Senhor de Matosinhos,0,,AG
+A,ADF,ADF10,Senhor de Matosinhos,0,,AG
+A,ADF,ADF11,Senhor de Matosinhos,0,,AG
+A,ADF,ADF12,Senhor de Matosinhos,0,,AG
+A,ADF,ADF13,Senhor de Matosinhos,0,,AG
+A,ADF,ADF14,Senhor de Matosinhos,0,,AG
+A,ADF,ADF15,Senhor de Matosinhos,0,,AG
+A,ADF,ADF16,Senhor de Matosinhos,0,,AG
+A,ADF,ADF17,Senhor de Matosinhos,0,,AG
+A,ADF,ADF18,Senhor de Matosinhos,0,,AG
+A,ADF,ADF19,Senhor de Matosinhos,0,,AG
+A,ADF,ADF20,Senhor de Matosinhos,0,,AG
+A,ADF,ADF21,Senhor de Matosinhos,0,,AG
+A,ADF,ADF22,Senhor de Matosinhos,0,,AG
+A,ADF,ADF23,Senhor de Matosinhos,0,,AG
+A,ADF,ADF24,Senhor de Matosinhos,0,,AG
+A,ADF,ADF25,Senhor de Matosinhos,0,,AG
+A,ADF,ADF26,Senhor de Matosinhos,0,,AG
+A,ADF,ADF27,Senhor de Matosinhos,0,,AG
+A,ADF,ADF28,Senhor de Matosinhos,0,,AG
+A,ADF,ADF29,Senhor de Matosinhos,0,,AG
+A,ADF,ADF30,Senhor de Matosinhos,0,,AG
+A,ADF,ADF31,Senhor de Matosinhos,0,,AG
+A,ADF,ADF32,Senhor de Matosinhos,0,,AG
+A,ADF,ADF33,Senhor de Matosinhos,0,,AG
+A,ADF,ADF34,Senhor de Matosinhos,0,,AG
+A,ADF,ADF35,Senhor de Matosinhos,0,,AG
+A,ADF,ADF36,Senhor de Matosinhos,0,,AG
+A,ADF,ADF37,Senhor de Matosinhos,0,,AG
+A,ADF,ADF38,Senhor de Matosinhos,0,,AG
+A,ADF,ADF39,Senhor de Matosinhos,0,,AG
+A,ADF,ADF40,Senhor de Matosinhos,0,,AG
+A,ADF,ADF41,Senhor de Matosinhos,0,,AG
+A,ADF,ADF42,Senhor de Matosinhos,0,,AG
+A,ADF,ADF43,Senhor de Matosinhos,0,,AG
+A,ADF,ADF44,Senhor de Matosinhos,0,,AG
+A,ADF,ADF45,Senhor de Matosinhos,0,,AG
+A,ADF,ADF46,Senhor de Matosinhos,0,,AG
+A,ADF,ADF47,Senhor de Matosinhos,0,,AG
+A,ADF,ADF48,Senhor de Matosinhos,0,,AG
+A,ADF,ADF49,Senhor de Matosinhos,0,,AG
+A,AS,AS0,Senhor de Matosinhos,0,,AG
+A,AS,AS1,Senhor de Matosinhos,0,,AG
+A,AS,AS2,Senhor de Matosinhos,0,,AG
+A,AS,AS3,Senhor de Matosinhos,0,,AG
+A,AS,AS4,Senhor de Matosinhos,0,,AG
+A,AS,AS5,Senhor de Matosinhos,0,,AG
+A,AS,AS6,Senhor de Matosinhos,0,,AG
+A,AS,AS7,Senhor de Matosinhos,0,,AG
+A,AS,AS8,Senhor de Matosinhos,0,,AG
+A,AS,AS9,Senhor de Matosinhos,0,,AG
+A,AS,AS10,Senhor de Matosinhos,0,,AG
+A,AS,AS11,Senhor de Matosinhos,0,,AG
+A,AS,AS12,Senhor de Matosinhos,0,,AG
+A,AS,AS13,Senhor de Matosinhos,0,,AG
+A,AS,AS14,Senhor de Matosinhos,0,,AG
+A,AS,AS15,Senhor de Matosinhos,0,,AG
+A,AS,AS16,Senhor de Matosinhos,0,,AG
+A,AS,AS17,Senhor de Matosinhos,0,,AG
+A,AS,AS18,Senhor de Matosinhos,0,,AG
+A,AS,AS19,Senhor de Matosinhos,0,,AG
+A,AS,AS20,Senhor de Matosinhos,0,,AG
+A,AS,AS21,Senhor de Matosinhos,0,,AG
+A,AS,AS22,Senhor de Matosinhos,0,,AG
+A,AS,AS23,Senhor de Matosinhos,0,,AG
+A,AS,AS24,Senhor de Matosinhos,0,,AG
+A,AS,AS25,Senhor de Matosinhos,0,,AG
+A,AS,AS26,Senhor de Matosinhos,0,,AG
+A,AS,AS27,Senhor de Matosinhos,0,,AG
+A,AS,AS28,Senhor de Matosinhos,0,,AG
+A,AS,AS29,Senhor de Matosinhos,0,,AG
+A,AS,AS30,Senhor de Matosinhos,0,,AG
+A,AS,AS31,Senhor de Matosinhos,0,,AG
+A,AS,AS32,Senhor de Matosinhos,0,,AG
+A,AS,AS33,Senhor de Matosinhos,0,,AG
+A,AS,AS34,Senhor de Matosinhos,0,,AG
+A,AS,AS35,Senhor de Matosinhos,0,,AG
+A,AS,AS36,Senhor de Matosinhos,0,,AG
+A,AS,AS37,Senhor de Matosinhos,0,,AG
+A,AS,AS38,Senhor de Matosinhos,0,,AG
+A,AS,AS39,Senhor de Matosinhos,0,,AG
+A,AS,AS40,Senhor de Matosinhos,0,,AG
+A,AS,AS41,Senhor de Matosinhos,0,,AG
+A,AS,AS42,Senhor de Matosinhos,0,,AG
+A,AS,AS43,Senhor de Matosinhos,0,,AG
+A,AS,AS44,Senhor de Matosinhos,0,,AG
+A,AS,AS45,Senhor de Matosinhos,0,,AG
+A,AS,AS46,Senhor de Matosinhos,0,,AG
+A,AS,AS47,Senhor de Matosinhos,0,,AG
+A,AS,AS48,Senhor de Matosinhos,0,,AG
+A,AS,AS49,Senhor de Matosinhos,0,,AG
+A,AS,AS50,Senhor de Matosinhos,0,,AG
+A,AS,AS51,Senhor de Matosinhos,0,,AG
+A,AS,AS52,Senhor de Matosinhos,0,,AG
+A,AS,AS53,Senhor de Matosinhos,0,,AG
+A,AS,AS54,Senhor de Matosinhos,0,,AG
+A,AS,AS55,Senhor de Matosinhos,0,,AG
+A,AS,AS56,Senhor de Matosinhos,0,,AG
+A,AS,AS57,Senhor de Matosinhos,0,,AG
+A,AS,AS58,Senhor de Matosinhos,0,,AG
+A,AS,AS59,Senhor de Matosinhos,0,,AG
+A,AS,AS60,Senhor de Matosinhos,0,,AG
+A,AS,AS61,Senhor de Matosinhos,0,,AG
+A,AS,AS62,Senhor de Matosinhos,0,,AG
+A,AS,AS63,Senhor de Matosinhos,0,,AG
+A,AU,AU0,Senhor de Matosinhos,0,,AG
+A,AU,AU1,Senhor de Matosinhos,0,,AG
+A,AU,AU2,Senhor de Matosinhos,0,,AG
+A,AU,AU3,Senhor de Matosinhos,0,,AG
+A,AU,AU4,Senhor de Matosinhos,0,,AG
+A,AU,AU5,Senhor de Matosinhos,0,,AG
+A,AU,AU6,Senhor de Matosinhos,0,,AG
+A,AU,AU7,Senhor de Matosinhos,0,,AG
+A,AU,AU8,Senhor de Matosinhos,0,,AG
+A,AU,AU9,Senhor de Matosinhos,0,,AG
+A,AU,AU10,Senhor de Matosinhos,0,,AG
+A,AU,AU11,Senhor de Matosinhos,0,,AG
+A,AU,AU12,Senhor de Matosinhos,0,,AG
+A,AU,AU13,Senhor de Matosinhos,0,,AG
+A,AU,AU14,Senhor de Matosinhos,0,,AG
+A,AU,AU15,Senhor de Matosinhos,0,,AG
+A,AU,AU16,Senhor de Matosinhos,0,,AG
+A,AU,AU17,Senhor de Matosinhos,0,,AG
+A,AU,AU18,Senhor de Matosinhos,0,,AG
+A,AU,AU19,Senhor de Matosinhos,0,,AG
+A,AU,AU20,Senhor de Matosinhos,0,,AG
+A,AU,AU21,Senhor de Matosinhos,0,,AG
+A,AU,AU22,Senhor de Matosinhos,0,,AG
+A,AU,AU23,Senhor de Matosinhos,0,,AG
+A,AU,AU24,Senhor de Matosinhos,0,,AG
+A,AU,AU25,Senhor de Matosinhos,0,,AG
+A,AU,AU26,Senhor de Matosinhos,0,,AG
+A,AU,AU27,Senhor de Matosinhos,0,,AG
+A,AU,AU28,Senhor de Matosinhos,0,,AG
+A,AU,AU29,Senhor de Matosinhos,0,,AG
+A,AU,AU30,Senhor de Matosinhos,0,,AG
+A,AU,AU31,Senhor de Matosinhos,0,,AG
+A,AU,AU32,Senhor de Matosinhos,0,,AG
+A,AU,AU33,Senhor de Matosinhos,0,,AG
+A,AU,AU34,Senhor de Matosinhos,0,,AG
+A,AU,AU35,Senhor de Matosinhos,0,,AG
+A,AU,AU36,Senhor de Matosinhos,0,,AG
+A,AU,AU37,Senhor de Matosinhos,0,,AG
+A,AU,AU38,Senhor de Matosinhos,0,,AG
+A,AU,AU39,Senhor de Matosinhos,0,,AG
+A,AU,AU40,Senhor de Matosinhos,0,,AG
+A,AU,AU41,Senhor de Matosinhos,0,,AG
+A,AU,AU42,Senhor de Matosinhos,0,,AG
+A,AU,AU43,Senhor de Matosinhos,0,,AG
+A,AU,AU44,Senhor de Matosinhos,0,,AG
+A,AU,AU45,Senhor de Matosinhos,0,,AG
+A,AU,AU46,Senhor de Matosinhos,0,,AG
+A,AU,AU47,Senhor de Matosinhos,0,,AG
+A,AU,AU48,Senhor de Matosinhos,0,,AG
+A,AU,AU49,Senhor de Matosinhos,0,,AG
+A,AU,AU50,Senhor de Matosinhos,0,,AG
+A,AU,AU51,Senhor de Matosinhos,0,,AG
+A,AU,AU52,Senhor de Matosinhos,0,,AG
+A,AU,AU53,Senhor de Matosinhos,0,,AG
+A,AU,AU54,Senhor de Matosinhos,0,,AG
+A,AU,AU55,Senhor de Matosinhos,0,,AG
+A,AU,AU56,Senhor de Matosinhos,0,,AG
+A,AU,AU57,Senhor de Matosinhos,0,,AG
+A,AU,AU58,Senhor de Matosinhos,0,,AG
+A,AU,AU59,Senhor de Matosinhos,0,,AG
+A,AU,AU60,Senhor de Matosinhos,0,,AG
+A,AU,AU61,Senhor de Matosinhos,0,,AG
+A,AU,AU62,Senhor de Matosinhos,0,,AG
+A,AU,AU63,Senhor de Matosinhos,0,,AG
+A,AU,AU64,Senhor de Matosinhos,0,,AG
+A,AU,AU65,Senhor de Matosinhos,0,,AG
+A,AU,AU66,Senhor de Matosinhos,0,,AG
+A,AU,AU67,Senhor de Matosinhos,0,,AG
+A,AU,AU68,Senhor de Matosinhos,0,,AG
+A,AU,AU69,Senhor de Matosinhos,0,,AG
+A,AU,AU70,Senhor de Matosinhos,0,,AG
+A,AU,AU71,Senhor de Matosinhos,0,,AG
+A,AU,AU72,Senhor de Matosinhos,0,,AG
+A,AU,AU73,Senhor de Matosinhos,0,,AG
+A,AU,AU74,Senhor de Matosinhos,0,,AG
+A,AU,AU75,Senhor de Matosinhos,0,,AG
+A,ADF,ADF50,Estádio do Dragão,1,,AR
+A,ADF,ADF51,Estádio do Dragão,1,,AR
+A,ADF,ADF52,Estádio do Dragão,1,,AR
+A,ADF,ADF53,Estádio do Dragão,1,,AR
+A,ADF,ADF54,Estádio do Dragão,1,,AR
+A,ADF,ADF55,Estádio do Dragão,1,,AR
+A,ADF,ADF56,Estádio do Dragão,1,,AR
+A,ADF,ADF57,Estádio do Dragão,1,,AR
+A,ADF,ADF58,Estádio do Dragão,1,,AR
+A,ADF,ADF59,Estádio do Dragão,1,,AR
+A,ADF,ADF60,Estádio do Dragão,1,,AR
+A,ADF,ADF61,Estádio do Dragão,1,,AR
+A,ADF,ADF62,Estádio do Dragão,1,,AR
+A,ADF,ADF63,Estádio do Dragão,1,,AR
+A,ADF,ADF64,Estádio do Dragão,1,,AR
+A,ADF,ADF65,Estádio do Dragão,1,,AR
+A,ADF,ADF66,Estádio do Dragão,1,,AR
+A,ADF,ADF67,Estádio do Dragão,1,,AR
+A,ADF,ADF68,Estádio do Dragão,1,,AR
+A,ADF,ADF69,Estádio do Dragão,1,,AR
+A,ADF,ADF70,Estádio do Dragão,1,,AR
+A,ADF,ADF71,Estádio do Dragão,1,,AR
+A,ADF,ADF72,Estádio do Dragão,1,,AR
+A,ADF,ADF73,Estádio do Dragão,1,,AR
+A,ADF,ADF74,Estádio do Dragão,1,,AR
+A,ADF,ADF75,Estádio do Dragão,1,,AR
+A,ADF,ADF76,Estádio do Dragão,1,,AR
+A,ADF,ADF77,Estádio do Dragão,1,,AR
+A,ADF,ADF78,Estádio do Dragão,1,,AR
+A,ADF,ADF79,Estádio do Dragão,1,,AR
+A,ADF,ADF80,Estádio do Dragão,1,,AR
+A,ADF,ADF81,Estádio do Dragão,1,,AR
+A,ADF,ADF82,Estádio do Dragão,1,,AR
+A,ADF,ADF83,Estádio do Dragão,1,,AR
+A,ADF,ADF84,Estádio do Dragão,1,,AR
+A,ADF,ADF85,Estádio do Dragão,1,,AR
+A,ADF,ADF86,Estádio do Dragão,1,,AR
+A,ADF,ADF87,Estádio do Dragão,1,,AR
+A,ADF,ADF88,Estádio do Dragão,1,,AR
+A,ADF,ADF89,Estádio do Dragão,1,,AR
+A,ADF,ADF90,Estádio do Dragão,1,,AR
+A,ADF,ADF91,Estádio do Dragão,1,,AR
+A,ADF,ADF92,Estádio do Dragão,1,,AR
+A,ADF,ADF93,Estádio do Dragão,1,,AR
+A,ADF,ADF94,Estádio do Dragão,1,,AR
+A,ADF,ADF95,Estádio do Dragão,1,,AR
+A,ADF,ADF96,Estádio do Dragão,1,,AR
+A,ADF,ADF97,Estádio do Dragão,1,,AR
+A,ADF,ADF98,Estádio do Dragão,1,,AR
+A,AS,AS64,Estádio do Dragão,1,,AR
+A,AS,AS65,Estádio do Dragão,1,,AR
+A,AS,AS66,Estádio do Dragão,1,,AR
+A,AS,AS67,Estádio do Dragão,1,,AR
+A,AS,AS68,Estádio do Dragão,1,,AR
+A,AS,AS69,Estádio do Dragão,1,,AR
+A,AS,AS70,Estádio do Dragão,1,,AR
+A,AS,AS71,Estádio do Dragão,1,,AR
+A,AS,AS72,Estádio do Dragão,1,,AR
+A,AS,AS73,Estádio do Dragão,1,,AR
+A,AS,AS74,Estádio do Dragão,1,,AR
+A,AS,AS75,Estádio do Dragão,1,,AR
+A,AS,AS76,Estádio do Dragão,1,,AR
+A,AS,AS77,Estádio do Dragão,1,,AR
+A,AS,AS78,Estádio do Dragão,1,,AR
+A,AS,AS79,Estádio do Dragão,1,,AR
+A,AS,AS80,Estádio do Dragão,1,,AR
+A,AS,AS81,Estádio do Dragão,1,,AR
+A,AS,AS82,Estádio do Dragão,1,,AR
+A,AS,AS83,Estádio do Dragão,1,,AR
+A,AS,AS84,Estádio do Dragão,1,,AR
+A,AS,AS85,Estádio do Dragão,1,,AR
+A,AS,AS86,Estádio do Dragão,1,,AR
+A,AS,AS87,Estádio do Dragão,1,,AR
+A,AS,AS88,Estádio do Dragão,1,,AR
+A,AS,AS89,Estádio do Dragão,1,,AR
+A,AS,AS90,Estádio do Dragão,1,,AR
+A,AS,AS91,Estádio do Dragão,1,,AR
+A,AS,AS92,Estádio do Dragão,1,,AR
+A,AS,AS93,Estádio do Dragão,1,,AR
+A,AS,AS94,Estádio do Dragão,1,,AR
+A,AS,AS95,Estádio do Dragão,1,,AR
+A,AS,AS96,Estádio do Dragão,1,,AR
+A,AS,AS97,Estádio do Dragão,1,,AR
+A,AS,AS98,Estádio do Dragão,1,,AR
+A,AS,AS99,Estádio do Dragão,1,,AR
+A,AS,AS100,Estádio do Dragão,1,,AR
+A,AS,AS101,Estádio do Dragão,1,,AR
+A,AS,AS102,Estádio do Dragão,1,,AR
+A,AS,AS103,Estádio do Dragão,1,,AR
+A,AS,AS104,Estádio do Dragão,1,,AR
+A,AS,AS105,Estádio do Dragão,1,,AR
+A,AS,AS106,Estádio do Dragão,1,,AR
+A,AS,AS107,Estádio do Dragão,1,,AR
+A,AS,AS108,Estádio do Dragão,1,,AR
+A,AS,AS109,Estádio do Dragão,1,,AR
+A,AS,AS110,Estádio do Dragão,1,,AR
+A,AS,AS111,Estádio do Dragão,1,,AR
+A,AS,AS112,Estádio do Dragão,1,,AR
+A,AS,AS113,Estádio do Dragão,1,,AR
+A,AS,AS114,Estádio do Dragão,1,,AR
+A,AS,AS115,Estádio do Dragão,1,,AR
+A,AS,AS116,Estádio do Dragão,1,,AR
+A,AS,AS117,Estádio do Dragão,1,,AR
+A,AS,AS118,Estádio do Dragão,1,,AR
+A,AS,AS119,Estádio do Dragão,1,,AR
+A,AS,AS120,Estádio do Dragão,1,,AR
+A,AS,AS121,Estádio do Dragão,1,,AR
+A,AS,AS122,Estádio do Dragão,1,,AR
+A,AS,AS123,Estádio do Dragão,1,,AR
+A,AS,AS124,Estádio do Dragão,1,,AR
+A,AS,AS125,Estádio do Dragão,1,,AR
+A,AS,AS126,Estádio do Dragão,1,,AR
+A,AU,AU76,Estádio do Dragão,1,,AR
+A,AU,AU77,Estádio do Dragão,1,,AR
+A,AU,AU78,Estádio do Dragão,1,,AR
+A,AU,AU79,Estádio do Dragão,1,,AR
+A,AU,AU80,Estádio do Dragão,1,,AR
+A,AU,AU81,Estádio do Dragão,1,,AR
+A,AU,AU82,Estádio do Dragão,1,,AR
+A,AU,AU83,Estádio do Dragão,1,,AR
+A,AU,AU84,Estádio do Dragão,1,,AR
+A,AU,AU85,Estádio do Dragão,1,,AR
+A,AU,AU86,Estádio do Dragão,1,,AR
+A,AU,AU87,Estádio do Dragão,1,,AR
+A,AU,AU88,Estádio do Dragão,1,,AR
+A,AU,AU89,Estádio do Dragão,1,,AR
+A,AU,AU90,Estádio do Dragão,1,,AR
+A,AU,AU91,Estádio do Dragão,1,,AR
+A,AU,AU92,Estádio do Dragão,1,,AR
+A,AU,AU93,Estádio do Dragão,1,,AR
+A,AU,AU94,Estádio do Dragão,1,,AR
+A,AU,AU95,Estádio do Dragão,1,,AR
+A,AU,AU96,Estádio do Dragão,1,,AR
+A,AU,AU97,Estádio do Dragão,1,,AR
+A,AU,AU98,Estádio do Dragão,1,,AR
+A,AU,AU99,Estádio do Dragão,1,,AR
+A,AU,AU100,Estádio do Dragão,1,,AR
+A,AU,AU101,Estádio do Dragão,1,,AR
+A,AU,AU102,Estádio do Dragão,1,,AR
+A,AU,AU103,Estádio do Dragão,1,,AR
+A,AU,AU104,Estádio do Dragão,1,,AR
+A,AU,AU105,Estádio do Dragão,1,,AR
+A,AU,AU106,Estádio do Dragão,1,,AR
+A,AU,AU107,Estádio do Dragão,1,,AR
+A,AU,AU108,Estádio do Dragão,1,,AR
+A,AU,AU109,Estádio do Dragão,1,,AR
+A,AU,AU110,Estádio do Dragão,1,,AR
+A,AU,AU111,Estádio do Dragão,1,,AR
+A,AU,AU112,Estádio do Dragão,1,,AR
+A,AU,AU113,Estádio do Dragão,1,,AR
+A,AU,AU114,Estádio do Dragão,1,,AR
+A,AU,AU115,Estádio do Dragão,1,,AR
+A,AU,AU116,Estádio do Dragão,1,,AR
+A,AU,AU117,Estádio do Dragão,1,,AR
+A,AU,AU118,Estádio do Dragão,1,,AR
+A,AU,AU119,Estádio do Dragão,1,,AR
+A,AU,AU120,Estádio do Dragão,1,,AR
+A,AU,AU121,Estádio do Dragão,1,,AR
+A,AU,AU122,Estádio do Dragão,1,,AR
+A,AU,AU123,Estádio do Dragão,1,,AR
+A,AU,AU124,Estádio do Dragão,1,,AR
+A,AU,AU125,Estádio do Dragão,1,,AR
+A,AU,AU126,Estádio do Dragão,1,,AR
+A,AU,AU127,Estádio do Dragão,1,,AR
+A,AU,AU128,Estádio do Dragão,1,,AR
+A,AU,AU129,Estádio do Dragão,1,,AR
+A,AU,AU130,Estádio do Dragão,1,,AR
+A,AU,AU131,Estádio do Dragão,1,,AR
+A,AU,AU132,Estádio do Dragão,1,,AR
+A,AU,AU133,Estádio do Dragão,1,,AR
+A,AU,AU134,Estádio do Dragão,1,,AR
+A,AU,AU135,Estádio do Dragão,1,,AR
+A,AU,AU136,Estádio do Dragão,1,,AR
+A,AU,AU137,Estádio do Dragão,1,,AR
+A,AU,AU138,Estádio do Dragão,1,,AR
+A,AU,AU139,Estádio do Dragão,1,,AR
+A,AU,AU140,Estádio do Dragão,1,,AR
+A,AU,AU141,Estádio do Dragão,1,,AR
+A,AU,AU142,Estádio do Dragão,1,,AR
+A,AU,AU143,Estádio do Dragão,1,,AR
+A,AU,AU144,Estádio do Dragão,1,,AR
+A,AU,AU145,Estádio do Dragão,1,,AR
+A,AU,AU146,Estádio do Dragão,1,,AR
+A,AU,AU147,Estádio do Dragão,1,,AR
+A,AU,AU148,Estádio do Dragão,1,,AR
+A,AU,AU149,Estádio do Dragão,1,,AR
+A,AU,AU150,Estádio do Dragão,1,,AR
+A,ADF,ADF99,Senhor de Matosinhos,0,,AG
+A,ADF,ADF100,Senhor de Matosinhos,0,,AG
+A,ADF,ADF101,Senhor de Matosinhos,0,,AG
+A,ADF,ADF102,Senhor de Matosinhos,0,,AG
+A,ADF,ADF103,Senhor de Matosinhos,0,,AG
+A,ADF,ADF104,Senhor de Matosinhos,0,,AG
+A,ADF,ADF105,Senhor de Matosinhos,0,,AG
+A,ADF,ADF106,Senhor de Matosinhos,0,,AG
+A,ADF,ADF107,Senhor de Matosinhos,0,,AG
+A,ADF,ADF108,Senhor de Matosinhos,0,,AG
+A,ADF,ADF109,Senhor de Matosinhos,0,,AG
+A,ADF,ADF110,Senhor de Matosinhos,0,,AG
+A,ADF,ADF111,Senhor de Matosinhos,0,,AG
+A,ADF,ADF112,Senhor de Matosinhos,0,,AG
+A,ADF,ADF113,Senhor de Matosinhos,0,,AG
+A,ADF,ADF114,Senhor de Matosinhos,0,,AG
+A,ADF,ADF115,Senhor de Matosinhos,0,,AG
+A,ADF,ADF116,Senhor de Matosinhos,0,,AG
+A,ADF,ADF117,Senhor de Matosinhos,0,,AG
+A,ADF,ADF118,Senhor de Matosinhos,0,,AG
+A,ADF,ADF119,Senhor de Matosinhos,0,,AG
+A,ADF,ADF120,Senhor de Matosinhos,0,,AG
+A,ADF,ADF121,Senhor de Matosinhos,0,,AG
+A,ADF,ADF122,Senhor de Matosinhos,0,,AG
+A,ADF,ADF123,Senhor de Matosinhos,0,,AG
+A,ADF,ADF124,Senhor de Matosinhos,0,,AG
+A,AS,AS127,Senhor de Matosinhos,0,,AG
+A,AS,AS128,Senhor de Matosinhos,0,,AG
+A,AS,AS129,Senhor de Matosinhos,0,,AG
+A,AS,AS130,Senhor de Matosinhos,0,,AG
+A,AS,AS131,Senhor de Matosinhos,0,,AG
+A,AS,AS132,Senhor de Matosinhos,0,,AG
+A,AS,AS133,Senhor de Matosinhos,0,,AG
+A,AS,AS134,Senhor de Matosinhos,0,,AG
+A,AS,AS135,Senhor de Matosinhos,0,,AG
+A,AS,AS136,Senhor de Matosinhos,0,,AG
+A,AS,AS137,Senhor de Matosinhos,0,,AG
+A,AS,AS138,Senhor de Matosinhos,0,,AG
+A,AU,AU151,Senhor de Matosinhos,0,,AG
+A,AU,AU152,Senhor de Matosinhos,0,,AG
+A,AU,AU153,Senhor de Matosinhos,0,,AG
+A,AU,AU154,Senhor de Matosinhos,0,,AG
+A,AU,AU155,Senhor de Matosinhos,0,,AG
+A,AU,AU156,Senhor de Matosinhos,0,,AG
+A,AU,AU157,Senhor de Matosinhos,0,,AG
+A,AU,AU158,Senhor de Matosinhos,0,,AG
+A,ADF,ADF125,Estádio do Dragão,1,,AR
+A,ADF,ADF126,Estádio do Dragão,1,,AR
+A,ADF,ADF127,Estádio do Dragão,1,,AR
+A,ADF,ADF128,Estádio do Dragão,1,,AR
+A,ADF,ADF129,Estádio do Dragão,1,,AR
+A,ADF,ADF130,Estádio do Dragão,1,,AR
+A,ADF,ADF131,Estádio do Dragão,1,,AR
+A,ADF,ADF132,Estádio do Dragão,1,,AR
+A,ADF,ADF133,Estádio do Dragão,1,,AR
+A,ADF,ADF134,Estádio do Dragão,1,,AR
+A,ADF,ADF135,Estádio do Dragão,1,,AR
+A,ADF,ADF136,Estádio do Dragão,1,,AR
+A,ADF,ADF137,Estádio do Dragão,1,,AR
+A,ADF,ADF138,Estádio do Dragão,1,,AR
+A,ADF,ADF139,Estádio do Dragão,1,,AR
+A,ADF,ADF140,Estádio do Dragão,1,,AR
+A,ADF,ADF141,Estádio do Dragão,1,,AR
+A,ADF,ADF142,Estádio do Dragão,1,,AR
+A,ADF,ADF143,Estádio do Dragão,1,,AR
+A,ADF,ADF144,Estádio do Dragão,1,,AR
+A,ADF,ADF145,Estádio do Dragão,1,,AR
+A,ADF,ADF146,Estádio do Dragão,1,,AR
+A,ADF,ADF147,Estádio do Dragão,1,,AR
+A,ADF,ADF148,Estádio do Dragão,1,,AR
+A,ADF,ADF149,Estádio do Dragão,1,,AR
+A,ADF,ADF150,Estádio do Dragão,1,,AR
+A,ADF,ADF151,Estádio do Dragão,1,,AR
+A,ADF,ADF152,Estádio do Dragão,1,,AR
+A,AS,AS139,Estádio do Dragão,1,,AR
+A,AS,AS140,Estádio do Dragão,1,,AR
+A,AS,AS141,Estádio do Dragão,1,,AR
+A,AS,AS142,Estádio do Dragão,1,,AR
+A,AS,AS143,Estádio do Dragão,1,,AR
+A,AS,AS144,Estádio do Dragão,1,,AR
+A,AS,AS145,Estádio do Dragão,1,,AR
+A,AS,AS146,Estádio do Dragão,1,,AR
+A,AS,AS147,Estádio do Dragão,1,,AR
+A,AS,AS148,Estádio do Dragão,1,,AR
+A,AS,AS149,Estádio do Dragão,1,,AR
+A,AS,AS150,Estádio do Dragão,1,,AR
+A,AS,AS151,Estádio do Dragão,1,,AR
+A,AS,AS152,Estádio do Dragão,1,,AR
+A,AU,AU159,Estádio do Dragão,1,,AR
+A,AU,AU160,Estádio do Dragão,1,,AR
+A,AU,AU161,Estádio do Dragão,1,,AR
+A,AU,AU162,Estádio do Dragão,1,,AR
+A,AU,AU163,Estádio do Dragão,1,,AR
+A,AU,AU164,Estádio do Dragão,1,,AR
+A,AU,AU165,Estádio do Dragão,1,,AR
+A,AU,AU166,Estádio do Dragão,1,,AR
+A,AU,AU167,Estádio do Dragão,1,,AR

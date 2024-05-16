@@ -1,0 +1,9 @@
+fare_id,price,currency_type,payment_method,transfers,transfer_duration
+Z2,1.30,EUR,1,,
+Z3,1.70,EUR,1,,
+Z4,2.15,EUR,1,,
+Z5,2.55,EUR,1,,
+Z6,3.00,EUR,1,,
+Z7,3.45,EUR,1,,
+Z8,3.85,EUR,1,,
+Z9,4.30,EUR,1,,
