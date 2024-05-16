@@ -191,6 +191,10 @@ class CplexSolver(QuboSolver):
         Convert the optimizer result to a VRPSolution result.
         """
 
+        if result.raw_results is not None:
+            # Convert to microseconds
+            self.run_time = round(result.raw_results.solve_details.time * 1e6)
+
         return self.model.convert_result(
             self.var_dict, result.fval, self.run_time, local_run_time
         )
