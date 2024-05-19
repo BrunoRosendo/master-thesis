@@ -23,6 +23,7 @@ class VRPSolver(ABC):
         use_rpp (bool): Whether the problem uses the Ride Pooling Problem (RPP) or not.
         track_progress (bool): Whether to track the progress of the solver or not.
         simplify (bool): Whether to simplify the problem by removing unnecessary variables.
+        distance_function (Callable): Function to compute the distance between two locations.
         model (QuboVRP): VRP instance of the model.
         run_time (int): Time taken to run the solver (measured locally).
     """
@@ -35,6 +36,7 @@ class VRPSolver(ABC):
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         track_progress: bool,
+        distance_function: Callable[[tuple[int, int], tuple[int, int]], float],
         simplify: bool = True,
     ):
         if capacities is None:
@@ -55,25 +57,22 @@ class VRPSolver(ABC):
         self.use_rpp = use_rpp
         self.track_progress = track_progress
         self.simplify = simplify
+        self.distance_function = distance_function
         self.run_time: int | None = None
         self.distance_matrix = self.compute_distance()
         self.model = self.get_model()
 
-    def compute_distance(self) -> list[list[int]]:
+    def compute_distance(self) -> list[list[float]]:
         """
         Compute the distance matrix between each pair of locations using Manhattan.
         """
-
-        distance_matrix = []
-        for from_location in self.locations:
-            row = []
-            for to_location in self.locations:
-                row.append(
-                    abs(from_location[0] - to_location[0])
-                    + abs(from_location[1] - to_location[1])
-                )
-            distance_matrix.append(row)
-        return distance_matrix
+        return [
+            [
+                self.distance_function(from_location, to_location)
+                for to_location in self.locations
+            ]
+            for from_location in self.locations
+        ]
 
     @abstractmethod
     def _solve_cvrp(self) -> Any:
