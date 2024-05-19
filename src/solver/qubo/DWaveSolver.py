@@ -1,4 +1,5 @@
 from logging import warning
+from typing import Callable
 
 from dimod import (
     ExactCQMSolver,
@@ -14,6 +15,7 @@ from dwave.system import EmbeddingComposite
 
 from src.model.VRPSolution import VRPSolution
 from src.model.adapter.DWaveAdapter import DWaveAdapter
+from src.solver.distance_functions import manhattan_distance
 from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = ExactCQMSolver()
@@ -56,6 +58,9 @@ class DWaveSolver(QuboSolver):
         embed_bqm=True,
         num_reads: int = None,
         time_limit: int = None,
+        distance_function: Callable[
+            [tuple[int, int], tuple[int, int]], float
+        ] = manhattan_distance,
     ):
         super().__init__(
             num_vehicles,
@@ -64,6 +69,7 @@ class DWaveSolver(QuboSolver):
             trips,
             use_rpp,
             track_progress,
+            distance_function,
             simplify,
         )
         self.sampler = sampler

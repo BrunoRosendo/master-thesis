@@ -1,5 +1,5 @@
 import os
-from typing import Any
+from typing import Any, Callable
 
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
@@ -28,6 +28,7 @@ from qiskit_optimization.converters import (
 from src.model.VRPSolution import VRPSolution
 from src.model.adapter.CplexAdapter import CplexAdapter
 from src.qiskit_algorithms.qiskit_algorithms import QAOA
+from src.solver.distance_functions import manhattan_distance
 from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = Sampler()
@@ -62,6 +63,9 @@ class CplexSolver(QuboSolver):
         classic_optimizer: Optimizer = DEFAULT_CLASSIC_OPTIMIZER,
         warm_start=False,
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
+        distance_function: Callable[
+            [tuple[int, int], tuple[int, int]], float
+        ] = manhattan_distance,
     ):
         super().__init__(
             num_vehicles,
@@ -70,6 +74,7 @@ class CplexSolver(QuboSolver):
             trips,
             use_rpp,
             track_progress,
+            distance_function,
             simplify,
         )
         self.classical_solver = classical_solver

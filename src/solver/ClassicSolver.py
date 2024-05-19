@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Callable
 
 from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
@@ -6,6 +6,7 @@ from ortools.constraint_solver import routing_enums_pb2
 from src.model.VRP import VRP
 from src.model.VRPSolution import VRPSolution
 from src.solver.VRPSolver import VRPSolver
+from src.solver.distance_functions import manhattan_distance
 
 DEFAULT_SOLUTION_STRATEGY = (
     routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION
@@ -37,12 +38,21 @@ class ClassicSolver(VRPSolver):
         solution_strategy: int = DEFAULT_SOLUTION_STRATEGY,
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
+        distance_function: Callable[
+            [tuple[int, int], tuple[int, int]], float
+        ] = manhattan_distance,
     ):
         if use_rpp:
             self.remove_unused_locations(locations, trips)
 
         super().__init__(
-            num_vehicles, capacities, locations, trips, use_rpp, track_progress
+            num_vehicles,
+            capacities,
+            locations,
+            trips,
+            use_rpp,
+            track_progress,
+            distance_function,
         )
 
         self.solution_strategy = solution_strategy
