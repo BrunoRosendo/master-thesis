@@ -44,7 +44,7 @@ class ClassicSolver(VRPSolver):
         distance_matrix: list[list[float]] = None,
     ):
         if use_rpp:
-            self.remove_unused_locations(locations, trips)
+            self.remove_unused_locations(locations, trips, distance_matrix)
 
         super().__init__(
             num_vehicles,
@@ -195,7 +195,10 @@ class ClassicSolver(VRPSolver):
             self.distance_matrix[i].append(0)
 
     def remove_unused_locations(
-        self, locations: list[tuple[int, int]], trips: list[tuple[int, int, int]]
+        self,
+        locations: list[tuple[int, int]],
+        trips: list[tuple[int, int, int]],
+        distance_matrix: list[list[float]] = None,
     ):
         """
         Remove locations that are not used in the trips. Trips are updated to reflect the new indices.
@@ -212,6 +215,12 @@ class ClassicSolver(VRPSolver):
             (old_to_new_index[trip[0]], old_to_new_index[trip[1]], trip[2])
             for trip in trips
         ]
+
+        # Mutate distance matrix
+        if distance_matrix is not None:
+            distance_matrix[:] = [
+                [distance_matrix[i][j] for j in used_locations] for i in used_locations
+            ]
 
     def _convert_solution(self, result: Any, local_run_time: float) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
