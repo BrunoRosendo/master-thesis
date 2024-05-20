@@ -61,6 +61,7 @@ class DWaveSolver(QuboSolver):
         distance_function: Callable[
             [tuple[int, int], tuple[int, int]], float
         ] = manhattan_distance,
+        distance_matrix: list[list[float]] = None,
     ):
         super().__init__(
             num_vehicles,
@@ -71,6 +72,7 @@ class DWaveSolver(QuboSolver):
             track_progress,
             distance_function,
             simplify,
+            distance_matrix,
         )
         self.sampler = sampler
         self.embedding = embedding

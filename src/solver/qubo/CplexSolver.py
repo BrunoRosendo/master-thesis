@@ -66,6 +66,7 @@ class CplexSolver(QuboSolver):
         distance_function: Callable[
             [tuple[int, int], tuple[int, int]], float
         ] = manhattan_distance,
+        distance_matrix: list[list[float]] = None,
     ):
         super().__init__(
             num_vehicles,
@@ -76,6 +77,7 @@ class CplexSolver(QuboSolver):
             track_progress,
             distance_function,
             simplify,
+            distance_matrix,
         )
         self.classical_solver = classical_solver
         self.sampler = sampler

@@ -38,6 +38,7 @@ class VRPSolver(ABC):
         track_progress: bool,
         distance_function: Callable[[tuple[int, int], tuple[int, int]], float],
         simplify: bool = True,
+        distance_matrix: list[list[float]] = None,
     ):
         if capacities is None:
             self.use_capacity = False
@@ -59,7 +60,12 @@ class VRPSolver(ABC):
         self.simplify = simplify
         self.distance_function = distance_function
         self.run_time: int | None = None
-        self.distance_matrix = self.compute_distance()
+
+        if distance_matrix is None:
+            self.distance_matrix = self.compute_distance()
+        else:
+            self.distance_matrix = distance_matrix
+
         self.model = self.get_model()
 
     def compute_distance(self) -> list[list[float]]:

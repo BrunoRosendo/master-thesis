@@ -41,6 +41,7 @@ class ClassicSolver(VRPSolver):
         distance_function: Callable[
             [tuple[int, int], tuple[int, int]], float
         ] = manhattan_distance,
+        distance_matrix: list[list[float]] = None,
     ):
         if use_rpp:
             self.remove_unused_locations(locations, trips)
@@ -53,6 +54,7 @@ class ClassicSolver(VRPSolver):
             use_rpp,
             track_progress,
             distance_function,
+            distance_matrix=distance_matrix,
         )
 
         self.solution_strategy = solution_strategy
