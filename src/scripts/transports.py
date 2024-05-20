@@ -36,8 +36,10 @@ distance_matrix = [
     [999999999 for _ in range(len(locations))] for _ in range(len(locations))
 ]  # Initialize with large values, indicating no connection
 
+cvrp_trips = []
 
-def calculate_trip_times(trip_id, both_directions=False):
+
+def calculate_distance_matrix(trip_id, both_directions=False):
     route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
 
     for i in range(len(route_stop_times) - 1):
@@ -57,6 +59,22 @@ def calculate_trip_times(trip_id, both_directions=False):
         distance_matrix[from_stop_index][to_stop_index] = distance
         if both_directions:
             distance_matrix[to_stop_index][from_stop_index] = distance
+
+
+def calculate_trips(route_id, trip_id, direction_id):
+    num_trips = trips.loc[
+        (trips.route_id == route_id) & (trips.direction_id == direction_id)
+    ].shape[0]
+
+    route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
+    for i in range(len(route_stop_times) - 1):
+        from_stop = route_stop_times.iloc[i]
+        to_stop = route_stop_times.iloc[i + 1]
+
+        from_stop_index = stops.loc[stops.stop_id == from_stop.stop_id].index[0]
+        to_stop_index = stops.loc[stops.stop_id == to_stop.stop_id].index[0]
+
+        cvrp_trips.append((from_stop_index, to_stop_index, num_trips))
 
 
 def get_trip_id(route_id, direction_id):
@@ -80,9 +98,17 @@ for route in routes.itertuples():
         raise ValueError(f"No trips found for route {route.route_id}")
 
     if departure_trip_id is not None:
-        calculate_trip_times(departure_trip_id, both_directions=return_trip_id is None)
+        calculate_distance_matrix(
+            departure_trip_id, both_directions=return_trip_id is None
+        )
+        calculate_trips(route.route_id, departure_trip_id, 0)
+
     if return_trip_id is not None:
-        calculate_trip_times(return_trip_id, both_directions=departure_trip_id is None)
+        calculate_distance_matrix(
+            return_trip_id, both_directions=departure_trip_id is None
+        )
+        if departure_trip_id is None:
+            calculate_trips(route.route_id, return_trip_id, 1)
 
 
 # RUN ALGORITHM
@@ -91,8 +117,8 @@ cvrp = ClassicSolver(
     1,
     None,
     locations,
-    [],
-    False,
+    cvrp_trips,
+    True,
     distance_matrix=distance_matrix,
 )
 
