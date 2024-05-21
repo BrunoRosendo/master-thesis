@@ -17,12 +17,15 @@ class CapacityRPP(InfiniteRPP):
         self,
         num_vehicles: int,
         trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[int]],
+        distance_matrix: list[list[float]],
         locations: list[tuple[int, int]],
         capacities: list[int],
+        location_names: list[str] = None,
     ):
         self.capacities = capacities
-        super().__init__(num_vehicles, trips, distance_matrix, locations)
+        super().__init__(
+            num_vehicles, trips, distance_matrix, locations, location_names
+        )
 
     def create_constraints(self):
         """

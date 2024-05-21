@@ -9,11 +9,14 @@ class InfiniteCVRP(ConstantCVRP):
     def __init__(
         self,
         num_vehicles: int,
-        distance_matrix: list[list[int]],
+        distance_matrix: list[list[float]],
         locations: list[tuple[int, int]],
         simplify: bool,
+        location_names: list[str] = None,
     ):
-        super().__init__(num_vehicles, distance_matrix, None, locations, simplify)
+        super().__init__(
+            num_vehicles, distance_matrix, None, locations, simplify, location_names
+        )
 
     def create_subtour_constraints(self):
         """

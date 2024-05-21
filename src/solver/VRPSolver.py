@@ -26,6 +26,7 @@ class VRPSolver(ABC):
         distance_function (Callable): Function to compute the distance between two locations.
         model (QuboVRP): VRP instance of the model.
         run_time (int): Time taken to run the solver (measured locally).
+        location_names (list): List of names for each location. Optional.
     """
 
     def __init__(
@@ -39,6 +40,7 @@ class VRPSolver(ABC):
         distance_function: Callable[[tuple[int, int], tuple[int, int]], float],
         simplify: bool = True,
         distance_matrix: list[list[float]] = None,
+        location_names: list[str] = None,
     ):
         if capacities is None:
             self.use_capacity = False
@@ -59,6 +61,7 @@ class VRPSolver(ABC):
         self.track_progress = track_progress
         self.simplify = simplify
         self.distance_function = distance_function
+        self.location_names = location_names
         self.run_time: int | None = None
 
         if distance_matrix is None:

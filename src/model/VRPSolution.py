@@ -59,6 +59,7 @@ class VRPSolution:
         run_time: float = None,
         qpu_access_time: float = None,
         local_run_time: float = None,
+        location_names: list[str] = None,
     ):
         self.num_vehicles = num_vehicles
         self.locations = locations
@@ -71,6 +72,7 @@ class VRPSolution:
         self.run_time = run_time
         self.qpu_access_time = qpu_access_time
         self.local_run_time = local_run_time
+        self.location_names = location_names or [str(i) for i in range(len(locations))]
 
         if use_depot is None:
             self.use_depot = depot is not None
@@ -122,6 +124,8 @@ class VRPSolution:
 
             # Draw annotations
             for i in range(len(route_coordinates) - 1):
+                loc_name = self.location_names[self.routes[vehicle_id][i]]
+
                 self.plot_direction(
                     fig,
                     route_coordinates[i],
@@ -131,7 +135,13 @@ class VRPSolution:
                     legend_group,
                 )
                 self.plot_location(
-                    fig, route_coordinates[i], color, legend_group, vehicle_id, i
+                    fig,
+                    route_coordinates[i],
+                    color,
+                    loc_name,
+                    legend_group,
+                    vehicle_id,
+                    i,
                 )
 
             if not self.use_depot and len(route_coordinates) > 0:
@@ -139,13 +149,16 @@ class VRPSolution:
                     fig,
                     route_coordinates[-1],
                     color,
+                    self.location_names[self.routes[vehicle_id][-1]],
                     legend_group,
                     vehicle_id,
                     len(route_coordinates) - 1,
                 )
 
         if self.use_depot:
-            self.plot_location(fig, self.locations[self.depot], "gray")
+            self.plot_location(
+                fig, self.locations[self.depot], "gray", self.location_names[self.depot]
+            )
 
         fig.update_layout(
             xaxis_title="X Coordinate",
@@ -186,7 +199,14 @@ class VRPSolution:
         )
 
     def plot_location(
-        self, fig, loc, color, legend_group=None, vehicle_id=None, route_id=None
+        self,
+        fig,
+        loc,
+        color,
+        name,
+        legend_group=None,
+        vehicle_id=None,
+        route_id=None,
     ):
         """
         Plot a location with the given color and legend group.
@@ -207,9 +227,7 @@ class VRPSolution:
                 y=[loc[1]],
                 mode="markers+text",
                 marker=dict(size=50, symbol="circle", color=color, line_width=2),
-                text=str(
-                    self.locations.index(loc)
-                ),  # Display the index of the location
+                text=name,  # Display the name or index of the location
                 textposition="middle center",
                 textfont=dict(color="white", size=15),
                 showlegend=False,
@@ -285,4 +303,5 @@ class VRPSolution:
             data["run_time"],
             data["qpu_access_time"],
             data["local_run_time"],
+            data["location_names"],
         )

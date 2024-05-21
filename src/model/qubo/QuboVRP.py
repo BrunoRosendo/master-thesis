@@ -27,14 +27,21 @@ class QuboVRP(VRP, ABC):
         self,
         num_vehicles: int,
         trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[int]],
+        distance_matrix: list[list[float]],
         locations: list[tuple[int, int]],
         use_deliveries: bool,
         simplify: bool,
         depot: int | None = 0,
+        location_names: list[str] = None,
     ):
         super().__init__(
-            num_vehicles, trips, distance_matrix, locations, use_deliveries, depot
+            num_vehicles,
+            trips,
+            distance_matrix,
+            locations,
+            use_deliveries,
+            depot,
+            location_names,
         )
 
         self.simplify = simplify
@@ -192,6 +199,7 @@ class QuboVRP(VRP, ABC):
             run_time=run_time,
             qpu_access_time=qpu_access_time,
             local_run_time=local_run_time,
+            location_names=self.location_names,
         )
 
     def get_capacity(self) -> int | list[int] | None:

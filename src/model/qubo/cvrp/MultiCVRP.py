@@ -16,13 +16,21 @@ class MultiCVRP(StepQuboVRP):
     def __init__(
         self,
         num_vehicles: int,
-        distance_matrix: list[list[int]],
+        distance_matrix: list[list[float]],
         capacities: list[int],
         locations: list[tuple[int, int]],
+        location_names: list[str] = None,
     ):
         self.capacities = capacities
         self.num_locations = len(locations)
-        super().__init__(num_vehicles, [], distance_matrix, locations, False)
+        super().__init__(
+            num_vehicles,
+            [],
+            distance_matrix,
+            locations,
+            False,
+            location_names=location_names,
+        )
 
     def create_objective(self) -> LinearExpr:
         """

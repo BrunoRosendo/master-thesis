@@ -120,6 +120,7 @@ cvrp = ClassicSolver(
     cvrp_trips,
     True,
     distance_matrix=distance_matrix,
+    location_names=location_names,
 )
 
 result = cvrp.solve()

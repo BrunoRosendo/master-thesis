@@ -18,15 +18,22 @@ class InfiniteRPP(StepQuboVRP):
         self,
         num_vehicles: int,
         trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[int]],
+        distance_matrix: list[list[float]],
         locations: list[tuple[int, int]],
+        location_names: list[str] = None,
     ):
         self.trips = trips
         self.num_trips = len(trips)
         self.used_locations_indices = self.get_used_locations()
 
         super().__init__(
-            num_vehicles, self.trips, distance_matrix, locations, True, None
+            num_vehicles,
+            self.trips,
+            distance_matrix,
+            locations,
+            True,
+            None,
+            location_names,
         )
 
     def create_objective(self):

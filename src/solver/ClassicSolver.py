@@ -42,6 +42,7 @@ class ClassicSolver(VRPSolver):
             [tuple[int, int], tuple[int, int]], float
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
+        location_names: list[str] = None,
     ):
         if use_rpp:
             self.remove_unused_locations(locations, trips, distance_matrix)
@@ -55,6 +56,7 @@ class ClassicSolver(VRPSolver):
             track_progress,
             distance_function,
             distance_matrix=distance_matrix,
+            location_names=location_names,
         )
 
         self.solution_strategy = solution_strategy
@@ -276,6 +278,7 @@ class ClassicSolver(VRPSolver):
             not self.use_rpp,
             run_time=self.run_time,
             local_run_time=local_run_time,
+            location_names=self.location_names,
         )
 
     def get_model(self) -> VRP:
@@ -286,4 +289,5 @@ class ClassicSolver(VRPSolver):
             self.locations,
             self.use_rpp,
             self.depot,
+            self.location_names,
         )

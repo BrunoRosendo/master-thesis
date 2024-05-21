@@ -15,13 +15,22 @@ class ConstantCVRP(QuboVRP):
     def __init__(
         self,
         num_vehicles: int,
-        distance_matrix: list[list[int]],
+        distance_matrix: list[list[float]],
         capacity: int | None,
         locations: list[tuple[int, int]],
         simplify: bool,
+        location_names: list[str] = None,
     ):
         self.capacity = capacity
-        super().__init__(num_vehicles, [], distance_matrix, locations, False, simplify)
+        super().__init__(
+            num_vehicles,
+            [],
+            distance_matrix,
+            locations,
+            False,
+            simplify,
+            location_names=location_names,
+        )
 
     def create_vars(self):
         """
