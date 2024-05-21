@@ -3,7 +3,7 @@ from datetime import datetime
 import pandas as pd
 from dotenv import load_dotenv
 
-from src.solver.qubo.CplexSolver import CplexSolver
+from src.solver.ClassicSolver import ClassicSolver
 
 load_dotenv()
 
@@ -33,7 +33,8 @@ locations = [(stop.stop_lat, stop.stop_lon) for stop in stops.itertuples()]
 location_names = [stop.stop_name for stop in stops.itertuples()]
 
 distance_matrix = [
-    [999999999 for _ in range(len(locations))] for _ in range(len(locations))
+    [0 if i == j else 999999999 for i in range(len(locations))]
+    for j in range(len(locations))
 ]  # Initialize with large values, indicating no connection
 
 cvrp_trips = []
@@ -113,7 +114,7 @@ for route in routes.itertuples():
 
 # RUN ALGORITHM
 
-cvrp = CplexSolver(
+cvrp = ClassicSolver(
     1,
     None,
     locations,
@@ -121,7 +122,6 @@ cvrp = CplexSolver(
     True,
     distance_matrix=distance_matrix,
     location_names=location_names,
-    classical_solver=True,
 )
 
 result = cvrp.solve()
