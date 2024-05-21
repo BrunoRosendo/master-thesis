@@ -2,8 +2,9 @@ from datetime import datetime
 
 import pandas as pd
 from dotenv import load_dotenv
+from dwave.system import LeapHybridCQMSampler
 
-from src.solver.ClassicSolver import ClassicSolver
+from src.solver.qubo.DWaveSolver import DWaveSolver
 
 load_dotenv()
 
@@ -75,7 +76,7 @@ def calculate_trips(route_id, trip_id, direction_id):
         from_stop_index = stops.loc[stops.stop_id == from_stop.stop_id].index[0]
         to_stop_index = stops.loc[stops.stop_id == to_stop.stop_id].index[0]
 
-        cvrp_trips.append((from_stop_index, to_stop_index, num_trips))
+        cvrp_trips.append((int(from_stop_index), int(to_stop_index), num_trips))
 
 
 def get_trip_id(route_id, direction_id):
@@ -114,7 +115,7 @@ for route in routes.itertuples():
 
 # RUN ALGORITHM
 
-cvrp = ClassicSolver(
+cvrp = DWaveSolver(
     1,
     None,
     locations,
@@ -122,7 +123,8 @@ cvrp = ClassicSolver(
     True,
     distance_matrix=distance_matrix,
     location_names=location_names,
+    sampler=LeapHybridCQMSampler(),
 )
 
 result = cvrp.solve()
-result.display()
+result.save_json("line A")
