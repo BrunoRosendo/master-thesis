@@ -1,0 +1,29 @@
+{
+    "num_vehicles": 1,
+    "locations": [
+        [
+            456,
+            320
+        ],
+        [
+            228,
+            0
+        ]
+    ],
+    "objective": 0.0,
+    "total_distance": 548,
+    "routes": [
+        [
+            0,
+            1
+        ]
+    ],
+    "distances": [
+        548
+    ],
+    "loads": null,
+    "depot": null,
+    "use_depot": false,
+    "capacities": null,
+    "use_capacity": false
+}
