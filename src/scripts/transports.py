@@ -3,7 +3,7 @@ from datetime import datetime
 import pandas as pd
 from dotenv import load_dotenv
 
-from src.solver.ClassicSolver import ClassicSolver
+from src.solver.qubo.CplexSolver import CplexSolver
 
 load_dotenv()
 
@@ -113,7 +113,7 @@ for route in routes.itertuples():
 
 # RUN ALGORITHM
 
-cvrp = ClassicSolver(
+cvrp = CplexSolver(
     1,
     None,
     locations,
@@ -121,6 +121,7 @@ cvrp = ClassicSolver(
     True,
     distance_matrix=distance_matrix,
     location_names=location_names,
+    classical_solver=True,
 )
 
 result = cvrp.solve()

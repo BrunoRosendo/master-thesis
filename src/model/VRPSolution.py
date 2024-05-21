@@ -221,13 +221,27 @@ class VRPSolution:
             )
         )
 
+        # Add the 'outline' text
+        fig.add_trace(
+            go.Scatter(
+                x=[loc[0]],
+                y=[loc[1]],
+                mode="text",
+                text=name,
+                textposition="middle center",
+                textfont=dict(color="#6b6a6a", size=15.5),  # Slightly larger
+                showlegend=False,
+                hoverinfo="none",  # Disable hover for the 'outline' text
+            )
+        )
+
         fig.add_trace(
             go.Scatter(
                 x=[loc[0]],
                 y=[loc[1]],
                 mode="markers+text",
                 marker=dict(size=50, symbol="circle", color=color, line_width=2),
-                text=name,  # Display the name or index of the location
+                text=name,
                 textposition="middle center",
                 textfont=dict(color="white", size=15),
                 showlegend=False,
