@@ -82,7 +82,9 @@ class VRPSolution:
         self.capacities = capacities
         self.use_capacity = loads is not None and capacities is not None
 
-    def display(self, file_name: str = None, results_path: str = RESULTS_PATH):
+    def display(
+        self, file_name: str = None, results_path: str = RESULTS_PATH, fig_height=None
+    ):
         """
         Display the solution using a plotly figure.
         Saves the figure to an HTML file if a file name is provided.
@@ -160,16 +162,19 @@ class VRPSolution:
                 fig, self.locations[self.depot], "gray", self.location_names[self.depot]
             )
 
-        fig.update_layout(
-            xaxis_title="X Coordinate",
-            yaxis_title="Y Coordinate",
-            legend=dict(
+        layout_args = {
+            "xaxis_title": "X Coordinate",
+            "yaxis_title": "Y Coordinate",
+            "legend": dict(
                 title=f"Total Distance: {self.total_distance}m",
                 orientation="h",
                 yanchor="bottom",
                 y=1.02,
             ),
-        )
+        }
+        if fig_height is not None:
+            layout_args["height"] = fig_height
+        fig.update_layout(**layout_args)
 
         fig.show()
 
