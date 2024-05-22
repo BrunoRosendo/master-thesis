@@ -14,7 +14,8 @@ DATA_FOLDER = "data/"
 DATA_INSTANCE = "Porto/stcp 09-23"
 DATA_PATH = DATA_FOLDER + DATA_INSTANCE
 
-SELECTED_ROUTES = ["18"]
+SELECTED_ROUTES = ["18", "304"]
+SELECTED_TRIP_COUNT = 2  # Only 1 in SELECTED_TRIP_COUNT trips will be added to the model. ALSO REMOVES THE STOPS
 
 # LOAD DATA
 
@@ -45,10 +46,15 @@ cvrp_trips = []
 
 def calculate_distance_matrix(trip_id, both_directions=False):
     route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
+    from_stop = route_stop_times.iloc[0]
+    count = 1
 
-    for i in range(len(route_stop_times) - 1):
-        from_stop = route_stop_times.iloc[i]
-        to_stop = route_stop_times.iloc[i + 1]
+    for i in range(1, len(route_stop_times)):
+        if count < SELECTED_TRIP_COUNT and i < len(route_stop_times) - 1:
+            count += 1
+            continue
+
+        to_stop = route_stop_times.iloc[i]
 
         # Parse the time strings into datetime objects
         from_time = datetime.strptime(from_stop.departure_time, "%H:%M:%S")
@@ -71,14 +77,23 @@ def calculate_trips(route_id, trip_id, direction_id):
     ].shape[0]
 
     route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
-    for i in range(len(route_stop_times) - 1):
-        from_stop = route_stop_times.iloc[i]
-        to_stop = route_stop_times.iloc[i + 1]
+    from_stop = route_stop_times.iloc[0]
+    count = 1
+
+    for i in range(1, len(route_stop_times)):
+        if count < SELECTED_TRIP_COUNT and i < len(route_stop_times) - 1:
+            count += 1
+            continue
+
+        to_stop = route_stop_times.iloc[i]
 
         from_stop_index = stops.loc[stops.stop_id == from_stop.stop_id].index[0]
         to_stop_index = stops.loc[stops.stop_id == to_stop.stop_id].index[0]
 
         cvrp_trips.append((int(from_stop_index), int(to_stop_index), num_trips))
+
+        from_stop = to_stop
+        count = 1
 
 
 def get_trip_id(route_id, direction_id):
@@ -126,9 +141,9 @@ cvrp = DWaveSolver(
     distance_matrix=distance_matrix,
     location_names=location_names,
     sampler=LeapHybridCQMSampler(),
+    time_limit=30,
 )
 
 result = cvrp.solve()
-result.save_json("18+304-1-bus")
+result.save_json("18+304-2-bus")
 result.display()
-# result.save_json("line A")

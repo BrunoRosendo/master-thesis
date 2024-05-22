@@ -1,5 +1,5 @@
 {
-    "num_vehicles": 1,
+    "num_vehicles": 2,
     "locations": [
         [
             41.1570708790605,
@@ -9966,35 +9966,30 @@
             -8.6201911857691
         ]
     ],
-    "objective": -28.999997659999995,
-    "total_distance": 1500,
+    "objective": -1.999999693000401,
+    "total_distance": 3000000304,
     "routes": [
         [
             355,
-            1743,
-            1385,
-            916,
-            1928,
-            914,
-            1804,
-            574,
-            662,
-            2051,
-            915,
-            1371,
-            577,
-            2349,
-            179
+            1385
+        ],
+        [
+            474,
+            1613,
+            1538,
+            2156,
+            2154
         ]
     ],
     "distances": [
-        1500
+        188,
+        3000000116
     ],
     "loads": null,
     "depot": null,
-    "run_time": 8237974,
+    "run_time": 7598180,
     "qpu_access_time": null,
-    "local_run_time": 23105093,
+    "local_run_time": 7786185,
     "location_names": [
         "BELA VISTA",
         "VITORINO NEMESIO",
