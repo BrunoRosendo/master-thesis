@@ -11,8 +11,10 @@ load_dotenv()
 # FILE CONSTANTS
 
 DATA_FOLDER = "data/"
-DATA_INSTANCE = "Porto/metro 04-24"
+DATA_INSTANCE = "Porto/stcp 09-23"
 DATA_PATH = DATA_FOLDER + DATA_INSTANCE
+
+SELECTED_ROUTES = ["18"]
 
 # LOAD DATA
 
@@ -25,7 +27,7 @@ routes = pd.read_csv(f"{DATA_PATH}/routes.txt", sep=",")
 
 stops = stops.loc[(stops.stop_lat != 0) & (stops.stop_lon != 0)]
 routes = routes.loc[
-    routes.route_id != "Bexp"
+    (routes.route_id.isin(SELECTED_ROUTES)) & (routes.route_id != "Bexp")
 ]  # Express route is just a subset of the regular route
 
 # SETUP ALGORITHM
@@ -116,7 +118,7 @@ for route in routes.itertuples():
 # RUN ALGORITHM
 
 cvrp = DWaveSolver(
-    1,
+    2,
     None,
     locations,
     cvrp_trips,
@@ -127,4 +129,6 @@ cvrp = DWaveSolver(
 )
 
 result = cvrp.solve()
-result.save_json("line A")
+result.save_json("18+304-1-bus")
+result.display()
+# result.save_json("line A")

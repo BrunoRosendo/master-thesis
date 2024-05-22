@@ -23,5 +23,5 @@ if __name__ == "__main__":
     # result = cvrp.solve()
     # result.save_json("line test")
 
-    result = VRPSolution.from_json("line A")
+    result = VRPSolution.from_json("18")
     result.display(fig_height=1000)
