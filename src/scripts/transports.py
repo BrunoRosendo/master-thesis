@@ -2,20 +2,20 @@ from datetime import datetime
 
 import pandas as pd
 from dotenv import load_dotenv
-from dwave.system import LeapHybridCQMSampler
 
-from src.solver.qubo.DWaveSolver import DWaveSolver
+from src.solver.ClassicSolver import ClassicSolver
 
 load_dotenv()
 
-# FILE CONSTANTS
+# CONSTANTS
 
 DATA_FOLDER = "data/"
 DATA_INSTANCE = "Porto/stcp 09-23"
 DATA_PATH = DATA_FOLDER + DATA_INSTANCE
 
-SELECTED_ROUTES = ["18", "304"]
-SELECTED_TRIP_COUNT = 2  # Only 1 in SELECTED_TRIP_COUNT trips will be added to the model. ALSO REMOVES THE STOPS
+SELECTED_ROUTES = ["302"]
+SELECTED_TRIP_COUNT = 1  # Only 1 in SELECTED_TRIP_COUNT trips will be added to the model. ALSO REMOVES THE STOPS
+CIRCULAR_ROUTES = True
 
 # LOAD DATA
 
@@ -33,18 +33,20 @@ routes = routes.loc[
 
 # SETUP ALGORITHM
 
-locations = [(stop.stop_lat, stop.stop_lon) for stop in stops.itertuples()]
-location_names = [stop.stop_name for stop in stops.itertuples()]
 
-distance_matrix = [
-    [0 if i == j else 999999999 for i in range(len(locations))]
-    for j in range(len(locations))
-]  # Initialize with large values, indicating no connection
-
-cvrp_trips = []
+def initialize_distance_matrix(size):
+    return [[0 if i == j else 999999999 for i in range(size)] for j in range(size)]
 
 
-def calculate_distance_matrix(trip_id, both_directions=False):
+def get_time_difference(from_time_str, to_time_str):
+    from_time = datetime.strptime(from_time_str, "%H:%M:%S")
+    to_time = datetime.strptime(to_time_str, "%H:%M:%S")
+    return int((to_time - from_time).total_seconds())
+
+
+def calculate_distance_matrix(
+    distance_matrix, trip_id, both_directions=False, location_ids=None
+):
     route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
     from_stop = route_stop_times.iloc[0]
     count = 1
@@ -55,23 +57,24 @@ def calculate_distance_matrix(trip_id, both_directions=False):
             continue
 
         to_stop = route_stop_times.iloc[i]
+        distance = get_time_difference(from_stop.departure_time, to_stop.arrival_time)
 
-        # Parse the time strings into datetime objects
-        from_time = datetime.strptime(from_stop.departure_time, "%H:%M:%S")
-        to_time = datetime.strptime(to_stop.arrival_time, "%H:%M:%S")
-
-        # Calculate the difference in seconds
-        distance = int((to_time - from_time).total_seconds())
-
-        from_stop_index = stops.loc[stops.stop_id == from_stop.stop_id].index[0]
-        to_stop_index = stops.loc[stops.stop_id == to_stop.stop_id].index[0]
+        if location_ids is not None:
+            from_stop_index = location_ids.index(from_stop.stop_id)
+            to_stop_index = location_ids.index(to_stop.stop_id)
+        else:
+            from_stop_index = stops.loc[stops.stop_id == from_stop.stop_id].index[0]
+            to_stop_index = stops.loc[stops.stop_id == to_stop.stop_id].index[0]
 
         distance_matrix[from_stop_index][to_stop_index] = distance
         if both_directions:
             distance_matrix[to_stop_index][from_stop_index] = distance
 
+        from_stop = to_stop
+        count = 1
 
-def calculate_trips(route_id, trip_id, direction_id):
+
+def calculate_trips(cvrp_trips, route_id, trip_id, direction_id):
     num_trips = trips.loc[
         (trips.route_id == route_id) & (trips.direction_id == direction_id)
     ].shape[0]
@@ -96,6 +99,27 @@ def calculate_trips(route_id, trip_id, direction_id):
         count = 1
 
 
+def calculate_circular_route(locations, location_names, location_ids, trip_id):
+    route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
+    count = SELECTED_TRIP_COUNT
+
+    for i in range(
+        len(route_stop_times) - 1
+    ):  # Exclude return to first stop, the algorithm will handle it
+        if count < SELECTED_TRIP_COUNT and i < len(route_stop_times) - 1:
+            count += 1
+            continue
+
+        stop_time = route_stop_times.iloc[i]
+        stop = stops.loc[stops.stop_id == stop_time.stop_id].iloc[0]
+
+        locations.append((stop.stop_lat, stop.stop_lon))
+        location_names.append(stop.stop_name)
+        location_ids.append(stop.stop_id)
+
+        count = 1
+
+
 def get_trip_id(route_id, direction_id):
     try:
         return (
@@ -109,41 +133,73 @@ def get_trip_id(route_id, direction_id):
         return None
 
 
-for route in routes.itertuples():
-    departure_trip_id = get_trip_id(route.route_id, 0)
-    return_trip_id = get_trip_id(route.route_id, 1)
+if CIRCULAR_ROUTES:
+    locations = []
+    location_names = []
+    location_ids = []
+    cvrp_trips = []
 
-    if departure_trip_id is None and return_trip_id is None:
-        raise ValueError(f"No trips found for route {route.route_id}")
+    for route in routes.itertuples():
+        circular_trip_id = get_trip_id(route.route_id, 0)
 
-    if departure_trip_id is not None:
-        calculate_distance_matrix(
-            departure_trip_id, both_directions=return_trip_id is None
+        if circular_trip_id is None:
+            raise ValueError(f"No trips found for route {route.route_id}")
+
+        calculate_circular_route(
+            locations, location_names, location_ids, circular_trip_id
         )
-        calculate_trips(route.route_id, departure_trip_id, 0)
 
-    if return_trip_id is not None:
+    distance_matrix = initialize_distance_matrix(len(locations))
+
+    for route in routes.itertuples():
+        circular_trip_id = get_trip_id(route.route_id, 0)
         calculate_distance_matrix(
-            return_trip_id, both_directions=departure_trip_id is None
+            distance_matrix, circular_trip_id, location_ids=location_ids
         )
-        if departure_trip_id is None:
-            calculate_trips(route.route_id, return_trip_id, 1)
+else:
+    locations = [(stop.stop_lat, stop.stop_lon) for stop in stops.itertuples()]
+    location_names = [stop.stop_name for stop in stops.itertuples()]
+    distance_matrix = initialize_distance_matrix(len(locations))
+
+    cvrp_trips = []
+
+    for route in routes.itertuples():
+        departure_trip_id = get_trip_id(route.route_id, 0)
+        return_trip_id = get_trip_id(route.route_id, 1)
+
+        if departure_trip_id is None and return_trip_id is None:
+            raise ValueError(f"No trips found for route {route.route_id}")
+
+        if departure_trip_id is not None:
+            calculate_distance_matrix(
+                distance_matrix,
+                departure_trip_id,
+                both_directions=return_trip_id is None,
+            )
+            calculate_trips(cvrp_trips, route.route_id, departure_trip_id, 0)
+
+        if return_trip_id is not None:
+            calculate_distance_matrix(
+                distance_matrix,
+                return_trip_id,
+                both_directions=departure_trip_id is None,
+            )
+            if departure_trip_id is None:
+                calculate_trips(cvrp_trips, route.route_id, return_trip_id, 1)
 
 
 # RUN ALGORITHM
 
-cvrp = DWaveSolver(
-    2,
+cvrp = ClassicSolver(
+    1,
     None,
     locations,
     cvrp_trips,
-    True,
+    False,
     distance_matrix=distance_matrix,
     location_names=location_names,
-    sampler=LeapHybridCQMSampler(),
-    time_limit=30,
 )
 
 result = cvrp.solve()
-result.save_json("18+304-2-bus")
+# result.save_json("302-circular")
 result.display()
