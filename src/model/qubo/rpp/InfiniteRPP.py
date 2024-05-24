@@ -20,7 +20,7 @@ class InfiniteRPP(StepQuboVRP):
         num_vehicles: int,
         trips: list[tuple[int, int, int]],
         distance_matrix: list[list[float]],
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         location_names: list[str] = None,
         distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):

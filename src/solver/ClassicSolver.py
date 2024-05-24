@@ -31,7 +31,7 @@ class ClassicSolver(VRPSolver):
         self,
         num_vehicles: int,
         capacities: int | list[int] | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         track_progress: bool = True,
@@ -202,7 +202,7 @@ class ClassicSolver(VRPSolver):
 
     def remove_unused_locations(
         self,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,

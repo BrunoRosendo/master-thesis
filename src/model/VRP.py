@@ -20,7 +20,7 @@ class VRP:
         num_vehicles: int,
         trips: list[tuple[int, int, int]],
         distance_matrix: list[list[float]],
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         use_deliveries: bool,
         depot: int | None = 0,
         location_names: list[str] = None,
