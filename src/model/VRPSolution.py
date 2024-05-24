@@ -1,9 +1,16 @@
 from __future__ import annotations
 
+import datetime
 import json
+from enum import Enum
 from pathlib import Path
 
 import plotly.graph_objects as go
+
+
+class DistanceUnit(str, Enum):
+    METERS = "METERS"
+    SECONDS = "SECONDS"
 
 
 class VRPSolution:
@@ -60,6 +67,7 @@ class VRPSolution:
         qpu_access_time: float = None,
         local_run_time: float = None,
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.num_vehicles = num_vehicles
         self.locations = locations
@@ -73,6 +81,7 @@ class VRPSolution:
         self.qpu_access_time = qpu_access_time
         self.local_run_time = local_run_time
         self.location_names = location_names or [str(i) for i in range(len(locations))]
+        self.distance_unit = distance_unit
 
         if use_depot is None:
             self.use_depot = depot is not None
@@ -166,7 +175,11 @@ class VRPSolution:
             "xaxis_title": "X Coordinate",
             "yaxis_title": "Y Coordinate",
             "legend": dict(
-                title=f"Total Distance: {self.total_distance}m",
+                title=(
+                    f"Total Distance: {self.total_distance}m"
+                    if self.distance_unit == DistanceUnit.METERS
+                    else f"Total Time: {datetime.timedelta(seconds=self.total_distance)}"
+                ),
                 orientation="h",
                 yanchor="bottom",
                 y=1.02,
@@ -284,9 +297,19 @@ class VRPSolution:
                 if i < len(self.routes[vehicle_id]) - 1:
                     print(" -> ", end="")
 
-            print(f"\nDistance of the route: {self.distances[vehicle_id]}m\n")
+            if self.distance_unit == DistanceUnit.METERS:
+                print(f"\nDistance of the route: {self.distances[vehicle_id]}m\n")
+            else:
+                print(
+                    f"\nTime of the route: {datetime.timedelta(seconds=self.distances[vehicle_id])}\n"
+                )
 
-        print(f"Total distance of all routes: {self.total_distance}m")
+        if self.distance_unit == DistanceUnit.METERS:
+            print(f"Total distance of all routes: {self.total_distance}m")
+        else:
+            print(
+                f"Total time of all routes: {datetime.timedelta(seconds=self.total_distance)}"
+            )
 
     def save_json(self, file_name: str, results_path: str = RESULTS_PATH):
         """
@@ -323,4 +346,5 @@ class VRPSolution:
             data["qpu_access_time"],
             data["local_run_time"],
             data["location_names"],
+            data["distance_unit"],
         )

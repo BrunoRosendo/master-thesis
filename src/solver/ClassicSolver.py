@@ -4,7 +4,7 @@ from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
 
 from src.model.VRP import VRP
-from src.model.VRPSolution import VRPSolution
+from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.solver.VRPSolver import VRPSolver
 from src.solver.distance_functions import manhattan_distance
 
@@ -43,6 +43,7 @@ class ClassicSolver(VRPSolver):
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         if use_rpp:
             self.remove_unused_locations(
@@ -59,6 +60,7 @@ class ClassicSolver(VRPSolver):
             distance_function,
             distance_matrix=distance_matrix,
             location_names=location_names,
+            distance_unit=distance_unit,
         )
 
         self.solution_strategy = solution_strategy
@@ -286,6 +288,7 @@ class ClassicSolver(VRPSolver):
             run_time=self.run_time,
             local_run_time=local_run_time,
             location_names=self.location_names,
+            distance_unit=self.distance_unit,
         )
 
     def get_model(self) -> VRP:
@@ -297,4 +300,5 @@ class ClassicSolver(VRPSolver):
             self.use_rpp,
             self.depot,
             self.location_names,
+            self.distance_unit,
         )

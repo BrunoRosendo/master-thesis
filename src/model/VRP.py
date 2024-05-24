@@ -1,3 +1,6 @@
+from src.model.VRPSolution import DistanceUnit
+
+
 class VRP:
     """
     A class to represent a formulation of the VRP model.
@@ -21,6 +24,7 @@ class VRP:
         use_deliveries: bool,
         depot: int | None = 0,
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
 
         self.num_vehicles = num_vehicles
@@ -31,6 +35,7 @@ class VRP:
         self.use_deliveries = use_deliveries
         self.depot = depot
         self.location_names = location_names
+        self.distance_unit = distance_unit
 
     def get_location_demand(self, idx: int) -> int:
         """

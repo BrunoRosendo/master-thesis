@@ -1,3 +1,4 @@
+from src.model.VRPSolution import DistanceUnit
 from src.model.qubo.rpp.InfiniteRPP import InfiniteRPP
 
 
@@ -21,10 +22,16 @@ class CapacityRPP(InfiniteRPP):
         locations: list[tuple[int, int]],
         capacities: list[int],
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.capacities = capacities
         super().__init__(
-            num_vehicles, trips, distance_matrix, locations, location_names
+            num_vehicles,
+            trips,
+            distance_matrix,
+            locations,
+            location_names,
+            distance_unit,
         )
 
     def create_constraints(self):

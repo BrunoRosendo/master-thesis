@@ -1,6 +1,7 @@
 from docplex.mp.dvar import Var
 from docplex.mp.linear import LinearExpr
 
+from src.model.VRPSolution import DistanceUnit
 from src.model.qubo.QuboVRP import QuboVRP
 
 
@@ -20,6 +21,7 @@ class ConstantCVRP(QuboVRP):
         locations: list[tuple[int, int]],
         simplify: bool,
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.capacity = capacity
         super().__init__(
@@ -30,6 +32,7 @@ class ConstantCVRP(QuboVRP):
             False,
             simplify,
             location_names=location_names,
+            distance_unit=distance_unit,
         )
 
     def create_vars(self):

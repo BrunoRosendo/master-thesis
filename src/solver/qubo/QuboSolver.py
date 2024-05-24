@@ -28,6 +28,7 @@ class QuboSolver(VRPSolver, ABC):
                         else self.capacities
                     ),
                     self.location_names,
+                    self.distance_unit,
                 )
             return InfiniteRPP(
                 self.num_vehicles,
@@ -35,6 +36,7 @@ class QuboSolver(VRPSolver, ABC):
                 self.distance_matrix,
                 self.locations,
                 self.location_names,
+                self.distance_unit,
             )
 
         if not self.use_capacity:
@@ -44,6 +46,7 @@ class QuboSolver(VRPSolver, ABC):
                 self.locations,
                 self.simplify,
                 self.location_names,
+                self.distance_unit,
             )
         if self.same_capacity:
             return ConstantCVRP(
@@ -53,6 +56,7 @@ class QuboSolver(VRPSolver, ABC):
                 self.locations,
                 self.simplify,
                 self.location_names,
+                self.distance_unit,
             )
 
         return MultiCVRP(
@@ -61,4 +65,5 @@ class QuboSolver(VRPSolver, ABC):
             self.capacities,
             self.locations,
             self.location_names,
+            self.distance_unit,
         )

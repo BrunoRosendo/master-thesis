@@ -6,7 +6,7 @@ from docplex.mp.linear import LinearExpr
 from docplex.mp.model import Model
 
 from src.model.VRP import VRP
-from src.model.VRPSolution import VRPSolution
+from src.model.VRPSolution import VRPSolution, DistanceUnit
 
 
 class QuboVRP(VRP, ABC):
@@ -33,6 +33,7 @@ class QuboVRP(VRP, ABC):
         simplify: bool,
         depot: int | None = 0,
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         super().__init__(
             num_vehicles,
@@ -42,6 +43,7 @@ class QuboVRP(VRP, ABC):
             use_deliveries,
             depot,
             location_names,
+            distance_unit,
         )
 
         self.simplify = simplify
@@ -200,6 +202,7 @@ class QuboVRP(VRP, ABC):
             qpu_access_time=qpu_access_time,
             local_run_time=local_run_time,
             location_names=self.location_names,
+            distance_unit=self.distance_unit,
         )
 
     def get_capacity(self) -> int | list[int] | None:

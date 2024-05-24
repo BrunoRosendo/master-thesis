@@ -1,3 +1,4 @@
+from src.model.VRPSolution import DistanceUnit
 from src.model.qubo.StepQuboVRP import StepQuboVRP
 
 
@@ -21,6 +22,7 @@ class InfiniteRPP(StepQuboVRP):
         distance_matrix: list[list[float]],
         locations: list[tuple[int, int]],
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.trips = trips
         self.num_trips = len(trips)
@@ -34,6 +36,7 @@ class InfiniteRPP(StepQuboVRP):
             True,
             None,
             location_names,
+            distance_unit,
         )
 
     def create_objective(self):

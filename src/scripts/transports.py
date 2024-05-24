@@ -2,9 +2,9 @@ from datetime import datetime
 
 import pandas as pd
 from dotenv import load_dotenv
-from dwave.system import LeapHybridCQMSampler
 
-from src.solver.qubo.DWaveSolver import DWaveSolver
+from src.model.VRPSolution import DistanceUnit
+from src.solver.ClassicSolver import ClassicSolver
 
 load_dotenv()
 
@@ -14,7 +14,7 @@ DATA_FOLDER = "data/"
 DATA_INSTANCE = "Porto/stcp 09-23"
 DATA_PATH = DATA_FOLDER + DATA_INSTANCE
 
-SELECTED_ROUTES = ["18", "304"]
+SELECTED_ROUTES = ["18"]
 SELECTED_TRIP_COUNT = 1  # Only 1 in SELECTED_TRIP_COUNT trips will be added to the model. ALSO REMOVES THE STOPS
 CIRCULAR_ROUTES = False
 
@@ -191,18 +191,17 @@ else:
 
 # RUN ALGORITHM
 
-cvrp = DWaveSolver(
-    2,
+cvrp = ClassicSolver(
+    1,
     None,
     locations,
     cvrp_trips,
     not CIRCULAR_ROUTES,
     distance_matrix=distance_matrix,
     location_names=location_names,
-    sampler=LeapHybridCQMSampler(),
-    time_limit=30,
+    distance_unit=DistanceUnit.SECONDS,
 )
 
 result = cvrp.solve()
-# result.save_json("18+304")
+# result.save_json("18")
 result.display()

@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Callable, Any
 
 from src.model.VRP import VRP
-from src.model.VRPSolution import VRPSolution
+from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.model.qubo.QuboVRP import QuboVRP
 
 
@@ -27,6 +27,7 @@ class VRPSolver(ABC):
         model (QuboVRP): VRP instance of the model.
         run_time (int): Time taken to run the solver (measured locally).
         location_names (list): List of names for each location. Optional.
+        distance_unit (DistanceUnit): Unit of distance used in the problem.
     """
 
     def __init__(
@@ -41,6 +42,7 @@ class VRPSolver(ABC):
         simplify: bool = True,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         if capacities is None:
             self.use_capacity = False
@@ -62,6 +64,7 @@ class VRPSolver(ABC):
         self.simplify = simplify
         self.distance_function = distance_function
         self.location_names = location_names
+        self.distance_unit = distance_unit
         self.run_time: int | None = None
 
         if distance_matrix is None:

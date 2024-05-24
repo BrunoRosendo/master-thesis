@@ -25,7 +25,7 @@ from qiskit_optimization.converters import (
     LinearEqualityToPenalty,
 )
 
-from src.model.VRPSolution import VRPSolution
+from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.model.adapter.CplexAdapter import CplexAdapter
 from src.qiskit_algorithms.qiskit_algorithms import QAOA
 from src.solver.distance_functions import manhattan_distance
@@ -68,6 +68,7 @@ class CplexSolver(QuboSolver):
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         super().__init__(
             num_vehicles,
@@ -80,6 +81,7 @@ class CplexSolver(QuboSolver):
             simplify,
             distance_matrix,
             location_names,
+            distance_unit,
         )
         self.classical_solver = classical_solver
         self.sampler = sampler

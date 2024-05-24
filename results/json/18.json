@@ -88,9 +88,9 @@
   ],
   "loads": null,
   "depot": 15,
-  "run_time": 8376,
+  "run_time": 4127,
   "qpu_access_time": null,
-  "local_run_time": 11954,
+  "local_run_time": 6122,
   "location_names": [
     "PASSEIO ALEGRE",
     "CL\u00c9RIGOS",
@@ -108,6 +108,7 @@
     "ENCOSTA DA ARR\u00c1BIDA",
     "CANTAREIRA"
   ],
+  "distance_unit": "SECONDS",
   "use_depot": false,
   "capacities": null,
   "use_capacity": false
