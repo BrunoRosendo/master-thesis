@@ -18,10 +18,8 @@ if __name__ == "__main__":
         [],
         False,
         distance_function=distance_api,
-        distance_unit=DistanceUnit.SECONDS,
+        distance_unit=DistanceUnit.METERS,
     )
     result = cvrp.solve()
-    result.save_json("line test")
-
     # result = VRPSolution.from_json("18")
     result.display()

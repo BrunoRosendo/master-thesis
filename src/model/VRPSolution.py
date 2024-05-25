@@ -176,7 +176,7 @@ class VRPSolution:
             "yaxis_title": "Y Coordinate",
             "legend": dict(
                 title=(
-                    f"Total Distance: {self.total_distance}m"
+                    f"Total Distance: {self.parse_distance(self.total_distance)}"
                     if self.distance_unit == DistanceUnit.METERS
                     else f"Total Time: {datetime.timedelta(seconds=self.total_distance)}"
                 ),
@@ -298,14 +298,18 @@ class VRPSolution:
                     print(" -> ", end="")
 
             if self.distance_unit == DistanceUnit.METERS:
-                print(f"\nDistance of the route: {self.distances[vehicle_id]}m\n")
+                print(
+                    f"\nDistance of the route: {self.parse_distance(self.distances[vehicle_id])}\n"
+                )
             else:
                 print(
                     f"\nTime of the route: {datetime.timedelta(seconds=self.distances[vehicle_id])}\n"
                 )
 
         if self.distance_unit == DistanceUnit.METERS:
-            print(f"Total distance of all routes: {self.total_distance}m")
+            print(
+                f"Total distance of all routes: {self.parse_distance(self.total_distance)}"
+            )
         else:
             print(
                 f"Total time of all routes: {datetime.timedelta(seconds=self.total_distance)}"
@@ -321,6 +325,14 @@ class VRPSolution:
 
         with open(f"{json_path}/{file_name}.json", "w") as file:
             json.dump(self, file, default=lambda o: o.__dict__, indent=4)
+
+    @staticmethod
+    def parse_distance(distance: float) -> str:
+        """
+        Parse the distance to a string with the correct unit (meters or kilometers).
+        """
+
+        return f"{distance // 1000}km" if distance > 10000 else f"{distance}m"
 
     @staticmethod
     def from_json(file_name: str, results_path: str = RESULTS_PATH) -> VRPSolution:
