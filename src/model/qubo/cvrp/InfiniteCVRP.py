@@ -1,3 +1,4 @@
+from src.model.VRPSolution import DistanceUnit
 from src.model.qubo.cvrp.ConstantCVRP import ConstantCVRP
 
 
@@ -9,11 +10,21 @@ class InfiniteCVRP(ConstantCVRP):
     def __init__(
         self,
         num_vehicles: int,
-        distance_matrix: list[list[int]],
-        locations: list[tuple[int, int]],
+        distance_matrix: list[list[float]],
+        locations: list[tuple[float, float]],
         simplify: bool,
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
-        super().__init__(num_vehicles, distance_matrix, None, locations, simplify)
+        super().__init__(
+            num_vehicles,
+            distance_matrix,
+            None,
+            locations,
+            simplify,
+            location_names,
+            distance_unit,
+        )
 
     def create_subtour_constraints(self):
         """

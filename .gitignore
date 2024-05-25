@@ -1,6 +1,5 @@
 *.out
 __pycache__/
 .idea/
-results/json/*
 results/html/*
 .env

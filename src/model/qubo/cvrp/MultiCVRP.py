@@ -1,5 +1,6 @@
 from docplex.mp.linear import LinearExpr
 
+from src.model.VRPSolution import DistanceUnit
 from src.model.qubo.StepQuboVRP import StepQuboVRP
 
 
@@ -16,13 +17,23 @@ class MultiCVRP(StepQuboVRP):
     def __init__(
         self,
         num_vehicles: int,
-        distance_matrix: list[list[int]],
+        distance_matrix: list[list[float]],
         capacities: list[int],
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.capacities = capacities
         self.num_locations = len(locations)
-        super().__init__(num_vehicles, [], distance_matrix, locations, False)
+        super().__init__(
+            num_vehicles,
+            [],
+            distance_matrix,
+            locations,
+            False,
+            location_names=location_names,
+            distance_unit=distance_unit,
+        )
 
     def create_objective(self) -> LinearExpr:
         """

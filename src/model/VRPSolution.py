@@ -1,9 +1,16 @@
 from __future__ import annotations
 
+import datetime
 import json
+from enum import Enum
 from pathlib import Path
 
 import plotly.graph_objects as go
+
+
+class DistanceUnit(str, Enum):
+    METERS = "METERS"
+    SECONDS = "SECONDS"
 
 
 class VRPSolution:
@@ -47,7 +54,7 @@ class VRPSolution:
     def __init__(
         self,
         num_vehicles: int,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         objective: float,
         total_distance: int,
         routes: list[list[int]],
@@ -59,6 +66,8 @@ class VRPSolution:
         run_time: float = None,
         qpu_access_time: float = None,
         local_run_time: float = None,
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.num_vehicles = num_vehicles
         self.locations = locations
@@ -71,6 +80,8 @@ class VRPSolution:
         self.run_time = run_time
         self.qpu_access_time = qpu_access_time
         self.local_run_time = local_run_time
+        self.location_names = location_names or [str(i) for i in range(len(locations))]
+        self.distance_unit = distance_unit
 
         if use_depot is None:
             self.use_depot = depot is not None
@@ -80,7 +91,9 @@ class VRPSolution:
         self.capacities = capacities
         self.use_capacity = loads is not None and capacities is not None
 
-    def display(self, file_name: str = None, results_path: str = RESULTS_PATH):
+    def display(
+        self, file_name: str = None, results_path: str = RESULTS_PATH, fig_height=None
+    ):
         """
         Display the solution using a plotly figure.
         Saves the figure to an HTML file if a file name is provided.
@@ -122,6 +135,8 @@ class VRPSolution:
 
             # Draw annotations
             for i in range(len(route_coordinates) - 1):
+                loc_name = self.location_names[self.routes[vehicle_id][i]]
+
                 self.plot_direction(
                     fig,
                     route_coordinates[i],
@@ -131,7 +146,13 @@ class VRPSolution:
                     legend_group,
                 )
                 self.plot_location(
-                    fig, route_coordinates[i], color, legend_group, vehicle_id, i
+                    fig,
+                    route_coordinates[i],
+                    color,
+                    loc_name,
+                    legend_group,
+                    vehicle_id,
+                    i,
                 )
 
             if not self.use_depot and len(route_coordinates) > 0:
@@ -139,24 +160,34 @@ class VRPSolution:
                     fig,
                     route_coordinates[-1],
                     color,
+                    self.location_names[self.routes[vehicle_id][-1]],
                     legend_group,
                     vehicle_id,
                     len(route_coordinates) - 1,
                 )
 
         if self.use_depot:
-            self.plot_location(fig, self.locations[self.depot], "gray")
+            self.plot_location(
+                fig, self.locations[self.depot], "gray", self.location_names[self.depot]
+            )
 
-        fig.update_layout(
-            xaxis_title="X Coordinate",
-            yaxis_title="Y Coordinate",
-            legend=dict(
-                title=f"Total Distance: {self.total_distance}m",
+        layout_args = {
+            "xaxis_title": "X Coordinate",
+            "yaxis_title": "Y Coordinate",
+            "legend": dict(
+                title=(
+                    f"Total Distance: {self.parse_distance(self.total_distance)}"
+                    if self.distance_unit == DistanceUnit.METERS
+                    else f"Total Time: {datetime.timedelta(seconds=self.total_distance)}"
+                ),
                 orientation="h",
                 yanchor="bottom",
                 y=1.02,
             ),
-        )
+        }
+        if fig_height is not None:
+            layout_args["height"] = fig_height
+        fig.update_layout(**layout_args)
 
         fig.show()
 
@@ -186,7 +217,14 @@ class VRPSolution:
         )
 
     def plot_location(
-        self, fig, loc, color, legend_group=None, vehicle_id=None, route_id=None
+        self,
+        fig,
+        loc,
+        color,
+        name,
+        legend_group=None,
+        vehicle_id=None,
+        route_id=None,
     ):
         """
         Plot a location with the given color and legend group.
@@ -201,15 +239,28 @@ class VRPSolution:
             )
         )
 
+        # Add the 'outline' text
+        fig.add_trace(
+            go.Scatter(
+                x=[loc[0]],
+                y=[loc[1]],
+                mode="text",
+                text=name,
+                textposition="middle center",
+                textfont=dict(color="#6b6a6a", size=15.5),  # Slightly larger
+                showlegend=False,
+                hoverinfo="none",  # Disable hover for the 'outline' text
+                legendgroup=legend_group,
+            )
+        )
+
         fig.add_trace(
             go.Scatter(
                 x=[loc[0]],
                 y=[loc[1]],
                 mode="markers+text",
                 marker=dict(size=50, symbol="circle", color=color, line_width=2),
-                text=str(
-                    self.locations.index(loc)
-                ),  # Display the index of the location
+                text=name,
                 textposition="middle center",
                 textfont=dict(color="white", size=15),
                 showlegend=False,
@@ -247,9 +298,23 @@ class VRPSolution:
                 if i < len(self.routes[vehicle_id]) - 1:
                     print(" -> ", end="")
 
-            print(f"\nDistance of the route: {self.distances[vehicle_id]}m\n")
+            if self.distance_unit == DistanceUnit.METERS:
+                print(
+                    f"\nDistance of the route: {self.parse_distance(self.distances[vehicle_id])}\n"
+                )
+            else:
+                print(
+                    f"\nTime of the route: {datetime.timedelta(seconds=self.distances[vehicle_id])}\n"
+                )
 
-        print(f"Total distance of all routes: {self.total_distance}m")
+        if self.distance_unit == DistanceUnit.METERS:
+            print(
+                f"Total distance of all routes: {self.parse_distance(self.total_distance)}"
+            )
+        else:
+            print(
+                f"Total time of all routes: {datetime.timedelta(seconds=self.total_distance)}"
+            )
 
     def save_json(self, file_name: str, results_path: str = RESULTS_PATH):
         """
@@ -261,6 +326,14 @@ class VRPSolution:
 
         with open(f"{json_path}/{file_name}.json", "w") as file:
             json.dump(self, file, default=lambda o: o.__dict__, indent=4)
+
+    @staticmethod
+    def parse_distance(distance: float) -> str:
+        """
+        Parse the distance to a string with the correct unit (meters or kilometers).
+        """
+
+        return f"{distance // 1000}km" if distance > 10000 else f"{distance}m"
 
     @staticmethod
     def from_json(file_name: str, results_path: str = RESULTS_PATH) -> VRPSolution:
@@ -285,4 +358,6 @@ class VRPSolution:
             data["run_time"],
             data["qpu_access_time"],
             data["local_run_time"],
+            data["location_names"],
+            data["distance_unit"],
         )

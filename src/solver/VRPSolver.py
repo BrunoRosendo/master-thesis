@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Callable, Any
 
 from src.model.VRP import VRP
-from src.model.VRPSolution import VRPSolution
+from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.model.qubo.QuboVRP import QuboVRP
 
 
@@ -18,26 +18,34 @@ class VRPSolver(ABC):
         same_capacity (bool): Whether all vehicles have the same capacity or not
         depot (int): Index of the depot, which is the starting and ending point for each vehicle.
         locations (list): List of coordinates for each location.
-        trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
+        trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount
+            of customers for a trip.
         distance_matrix (list): Matrix with the distance between each pair of locations.
         use_rpp (bool): Whether the problem uses the Ride Pooling Problem (RPP) or not.
         track_progress (bool): Whether to track the progress of the solver or not.
         simplify (bool): Whether to simplify the problem by removing unnecessary variables.
-        distance_function (Callable): Function to compute the distance between two locations.
+        distance_function (Callable): Function to compute the distance matrix.
         model (QuboVRP): VRP instance of the model.
         run_time (int): Time taken to run the solver (measured locally).
+        location_names (list): List of names for each location. Optional.
+        distance_unit (DistanceUnit): Unit of distance used in the problem.
     """
 
     def __init__(
         self,
         num_vehicles: int,
         capacities: int | list[int] | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         track_progress: bool,
-        distance_function: Callable[[tuple[int, int], tuple[int, int]], float],
+        distance_function: Callable[
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
+        ],
         simplify: bool = True,
+        distance_matrix: list[list[float]] = None,
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         if capacities is None:
             self.use_capacity = False
@@ -58,21 +66,18 @@ class VRPSolver(ABC):
         self.track_progress = track_progress
         self.simplify = simplify
         self.distance_function = distance_function
+        self.location_names = location_names
+        self.distance_unit = distance_unit
         self.run_time: int | None = None
-        self.distance_matrix = self.compute_distance()
-        self.model = self.get_model()
 
-    def compute_distance(self) -> list[list[float]]:
-        """
-        Compute the distance matrix between each pair of locations using Manhattan.
-        """
-        return [
-            [
-                self.distance_function(from_location, to_location)
-                for to_location in self.locations
-            ]
-            for from_location in self.locations
-        ]
+        if distance_matrix is None:
+            self.distance_matrix = self.distance_function(
+                self.locations, self.distance_unit
+            )
+        else:
+            self.distance_matrix = distance_matrix
+
+        self.model = self.get_model()
 
     @abstractmethod
     def _solve_cvrp(self) -> Any:

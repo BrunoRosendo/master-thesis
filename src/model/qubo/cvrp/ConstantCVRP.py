@@ -1,6 +1,7 @@
 from docplex.mp.dvar import Var
 from docplex.mp.linear import LinearExpr
 
+from src.model.VRPSolution import DistanceUnit
 from src.model.qubo.QuboVRP import QuboVRP
 
 
@@ -15,13 +16,24 @@ class ConstantCVRP(QuboVRP):
     def __init__(
         self,
         num_vehicles: int,
-        distance_matrix: list[list[int]],
+        distance_matrix: list[list[float]],
         capacity: int | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         simplify: bool,
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.capacity = capacity
-        super().__init__(num_vehicles, [], distance_matrix, locations, False, simplify)
+        super().__init__(
+            num_vehicles,
+            [],
+            distance_matrix,
+            locations,
+            False,
+            simplify,
+            location_names=location_names,
+            distance_unit=distance_unit,
+        )
 
     def create_vars(self):
         """

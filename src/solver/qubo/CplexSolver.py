@@ -1,5 +1,5 @@
 import os
-from typing import Any, Callable
+from typing import Any, Callable, Literal
 
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
@@ -25,7 +25,7 @@ from qiskit_optimization.converters import (
     LinearEqualityToPenalty,
 )
 
-from src.model.VRPSolution import VRPSolution
+from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.model.adapter.CplexAdapter import CplexAdapter
 from src.qiskit_algorithms.qiskit_algorithms import QAOA
 from src.solver.distance_functions import manhattan_distance
@@ -47,13 +47,15 @@ class CplexSolver(QuboSolver):
     - classic_optimizer (Optimizer): The Qiskit optimizer to use for the QUBO problem.
     - warm_start (bool): Whether to use a warm start for the QAOA optimizer.
     - pre_solver (OptimizationAlgorithm): The Qiskit optimizer to use for the pre-solver.
+    - adapter (CplexAdapter): The adapter to convert the model to a Qiskit QuadraticProgram.
+    - var_dict (dict[str, float]): The dictionary with the variable values from the result.
     """
 
     def __init__(
         self,
         num_vehicles: int,
         capacities: int | list[int] | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         classical_solver=False,
@@ -64,8 +66,11 @@ class CplexSolver(QuboSolver):
         warm_start=False,
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
         distance_function: Callable[
-            [tuple[int, int], tuple[int, int]], float
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
+        distance_matrix: list[list[float]] = None,
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         super().__init__(
             num_vehicles,
@@ -76,6 +81,9 @@ class CplexSolver(QuboSolver):
             track_progress,
             distance_function,
             simplify,
+            distance_matrix,
+            location_names,
+            distance_unit,
         )
         self.classical_solver = classical_solver
         self.sampler = sampler
@@ -83,6 +91,7 @@ class CplexSolver(QuboSolver):
         self.warm_start = warm_start
         self.pre_solver = pre_solver
         self.adapter = CplexAdapter(self.model)
+        self.var_dict = None
 
     def _solve_cvrp(self) -> OptimizationResult:
         """
@@ -215,14 +224,18 @@ class CplexSolver(QuboSolver):
 
 
 def get_backend_sampler(
-    backend_name: str = None, channel: str = "ibm_quantum"
+    backend_name: str = None,
+    channel: Literal["ibm_quantum"] | Literal["ibm_cloud"] = "ibm_quantum",
 ) -> CloudSampler:
     """
     Get a Qiskit sampler for the specified backend.
     Loads the IBM-Q account using the token from the environment variable.
     """
 
-    service = QiskitRuntimeService(token=os.getenv("IBM_TOKEN"), channel=channel)
+    token = os.getenv("IBM_TOKEN")
+    if not token:
+        raise ValueError("IBM token not found. Set the IBM_TOKEN environment variable.")
+    service = QiskitRuntimeService(token=token, channel=channel)
 
     if backend_name is None:
         backend = service.least_busy(operational=True, simulator=False)

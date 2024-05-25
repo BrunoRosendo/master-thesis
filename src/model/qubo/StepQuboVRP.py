@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 import numpy as np
 from docplex.mp.dvar import Var
 
+from src.model.VRPSolution import DistanceUnit
 from src.model.qubo.QuboVRP import QuboVRP
 
 
@@ -22,10 +23,12 @@ class StepQuboVRP(QuboVRP, ABC):
         self,
         num_vehicles: int,
         trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[int]],
-        locations: list[tuple[int, int]],
+        distance_matrix: list[list[float]],
+        locations: list[tuple[float, float]],
         use_deliveries: bool,
         depot: int | None = 0,
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.distance_matrix = distance_matrix
         self.num_steps = self.get_num_steps()
@@ -34,7 +37,15 @@ class StepQuboVRP(QuboVRP, ABC):
         self.normalization_factor = np.max(self.distance_matrix) + self.epsilon
 
         super().__init__(
-            num_vehicles, trips, distance_matrix, locations, use_deliveries, True, depot
+            num_vehicles,
+            trips,
+            distance_matrix,
+            locations,
+            use_deliveries,
+            True,
+            depot,
+            location_names,
+            distance_unit,
         )
 
     def create_vars(self):

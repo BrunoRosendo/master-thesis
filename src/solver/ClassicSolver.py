@@ -4,7 +4,7 @@ from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
 
 from src.model.VRP import VRP
-from src.model.VRPSolution import VRPSolution
+from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.solver.VRPSolver import VRPSolver
 from src.solver.distance_functions import manhattan_distance
 
@@ -25,13 +25,14 @@ class ClassicSolver(VRPSolver):
     - solution_strategy (int): The strategy to use to find the first solution.
     - local_search_metaheuristic (int): The local search metaheuristic to use.
     - distance_global_span_cost_coefficient (int): The coefficient for the global span cost.
+    - distance_dimension (pywrapcp.RoutingDimension): The distance dimension for the problem.
     """
 
     def __init__(
         self,
         num_vehicles: int,
         capacities: int | list[int] | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         track_progress: bool = True,
@@ -39,11 +40,16 @@ class ClassicSolver(VRPSolver):
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
         distance_function: Callable[
-            [tuple[int, int], tuple[int, int]], float
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
+        distance_matrix: list[list[float]] = None,
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         if use_rpp:
-            self.remove_unused_locations(locations, trips)
+            self.remove_unused_locations(
+                locations, trips, distance_matrix, location_names
+            )
 
         super().__init__(
             num_vehicles,
@@ -53,6 +59,9 @@ class ClassicSolver(VRPSolver):
             use_rpp,
             track_progress,
             distance_function,
+            distance_matrix=distance_matrix,
+            location_names=location_names,
+            distance_unit=distance_unit,
         )
 
         self.solution_strategy = solution_strategy
@@ -63,6 +72,8 @@ class ClassicSolver(VRPSolver):
 
         if self.use_rpp:
             self.add_dummy_depot()
+
+        self.distance_dimension = None
 
     def _solve_cvrp(self) -> Any:
         """
@@ -90,7 +101,7 @@ class ClassicSolver(VRPSolver):
 
         return or_solution
 
-    def distance_callback(self, from_index: Any, to_index: Any) -> int:
+    def distance_callback(self, from_index: Any, to_index: Any) -> float:
         """Returns the distance between the two nodes."""
 
         # Convert from index to distance matrix NodeIndex.
@@ -193,23 +204,37 @@ class ClassicSolver(VRPSolver):
             self.distance_matrix[i].append(0)
 
     def remove_unused_locations(
-        self, locations: list[tuple[int, int]], trips: list[tuple[int, int, int]]
+        self,
+        locations: list[tuple[float, float]],
+        trips: list[tuple[int, int, int]],
+        distance_matrix: list[list[float]] = None,
+        location_names: list[str] = None,
     ):
         """
         Remove locations that are not used in the trips. Trips are updated to reflect the new indices.
         """
 
-        used_locations = {loc for trip in trips for loc in trip[:2]}
+        used_locations = sorted({loc for trip in trips for loc in trip[:2]})
         old_to_new_index = {old: new for new, old in enumerate(used_locations)}
 
-        # Mutate locations list
-        locations[:] = [loc for i, loc in enumerate(locations) if i in used_locations]
+        # Update locations list with new indices
+        locations[:] = [locations[i] for i in used_locations]
 
-        # Mutate trips list
+        # Update trips list with new indices
         trips[:] = [
             (old_to_new_index[trip[0]], old_to_new_index[trip[1]], trip[2])
             for trip in trips
         ]
+
+        # Update distance matrix if provided
+        if distance_matrix is not None:
+            distance_matrix[:] = [
+                [distance_matrix[i][j] for j in used_locations] for i in used_locations
+            ]
+
+        # Update location names if provided
+        if location_names is not None:
+            location_names[:] = [location_names[i] for i in used_locations]
 
     def _convert_solution(self, result: Any, local_run_time: float) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
@@ -265,6 +290,8 @@ class ClassicSolver(VRPSolver):
             not self.use_rpp,
             run_time=self.run_time,
             local_run_time=local_run_time,
+            location_names=self.location_names,
+            distance_unit=self.distance_unit,
         )
 
     def get_model(self) -> VRP:
@@ -275,4 +302,6 @@ class ClassicSolver(VRPSolver):
             self.locations,
             self.use_rpp,
             self.depot,
+            self.location_names,
+            self.distance_unit,
         )

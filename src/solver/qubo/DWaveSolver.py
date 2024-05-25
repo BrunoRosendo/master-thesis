@@ -13,7 +13,7 @@ from dimod import (
 from dimod.constrained.constrained import CQMToBQMInverter
 from dwave.system import EmbeddingComposite
 
-from src.model.VRPSolution import VRPSolution
+from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.model.adapter.DWaveAdapter import DWaveAdapter
 from src.solver.distance_functions import manhattan_distance
 from src.solver.qubo.QuboSolver import QuboSolver
@@ -48,7 +48,7 @@ class DWaveSolver(QuboSolver):
         self,
         num_vehicles: int,
         capacities: int | list[int] | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         simplify=True,
@@ -59,8 +59,11 @@ class DWaveSolver(QuboSolver):
         num_reads: int = None,
         time_limit: int = None,
         distance_function: Callable[
-            [tuple[int, int], tuple[int, int]], float
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
+        distance_matrix: list[list[float]] = None,
+        location_names: list[str] = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         super().__init__(
             num_vehicles,
@@ -71,6 +74,9 @@ class DWaveSolver(QuboSolver):
             track_progress,
             distance_function,
             simplify,
+            distance_matrix,
+            location_names,
+            distance_unit,
         )
         self.sampler = sampler
         self.embedding = embedding
