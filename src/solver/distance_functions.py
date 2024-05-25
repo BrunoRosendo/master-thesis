@@ -86,14 +86,14 @@ def distance_api(
         return distance_matrix
 
     def fetch_and_build_matrix(
-        locations: list[tuple[float, float]],
+        origin_addresses: list[tuple[float, float]],
         dest_addresses: list[tuple[float, float]],
-        start_idx: int,
-        end_idx: int,
     ) -> list[list[float]]:
         """Fetch distances and build matrix for a range of origin addresses."""
-        origin_addresses = locations[start_idx:end_idx]
+
         response = send_request(origin_addresses, dest_addresses, api_key)
+        if response["status"] != "OK":
+            raise ValueError(f"Request to distance API failed: {response}")
         return build_distance_matrix(response)
 
     api_key = os.getenv("GOOGLE_API_KEY")
@@ -104,22 +104,17 @@ def distance_api(
 
     max_elements = 100
     num_locations = len(locations)
-    num_requests, remaining_rows = divmod(num_locations, max_elements)
-    dest_addresses = locations
-    distance_matrix = []
+    max_origins_destinations = math.isqrt(max_elements)
+    distance_matrix = [[0 for _ in range(num_locations)] for _ in range(num_locations)]
 
-    for i in range(num_requests):
-        start_idx = i * max_elements
-        end_idx = (i + 1) * max_elements
-        distance_matrix += fetch_and_build_matrix(
-            locations, dest_addresses, start_idx, end_idx
-        )
+    for i in range(0, num_locations, max_origins_destinations):
+        for j in range(0, num_locations, max_origins_destinations):
+            origin_chunk = locations[i : i + max_origins_destinations]
+            dest_chunk = locations[j : j + max_origins_destinations]
+            chunk_matrix = fetch_and_build_matrix(origin_chunk, dest_chunk)
 
-    if remaining_rows > 0:
-        start_idx = num_requests * max_elements
-        end_idx = num_requests * max_elements + remaining_rows
-        distance_matrix += fetch_and_build_matrix(
-            locations, dest_addresses, start_idx, end_idx
-        )
+            for oi, origin in enumerate(origin_chunk):
+                for di, dest in enumerate(dest_chunk):
+                    distance_matrix[i + oi][j + di] = chunk_matrix[oi][di]
 
     return distance_matrix
