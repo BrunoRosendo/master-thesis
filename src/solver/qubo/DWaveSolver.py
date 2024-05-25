@@ -59,7 +59,7 @@ class DWaveSolver(QuboSolver):
         num_reads: int = None,
         time_limit: int = None,
         distance_function: Callable[
-            [tuple[int, int], tuple[int, int]], float
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,

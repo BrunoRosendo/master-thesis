@@ -38,7 +38,9 @@ class VRPSolver(ABC):
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         track_progress: bool,
-        distance_function: Callable[[list[tuple[int, int]]], list[list[float]]],
+        distance_function: Callable[
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
+        ],
         simplify: bool = True,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,
@@ -68,7 +70,9 @@ class VRPSolver(ABC):
         self.run_time: int | None = None
 
         if distance_matrix is None:
-            self.distance_matrix = self.distance_function(self.locations)
+            self.distance_matrix = self.distance_function(
+                self.locations, self.distance_unit
+            )
         else:
             self.distance_matrix = distance_matrix
 

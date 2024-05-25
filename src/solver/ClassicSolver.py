@@ -39,7 +39,7 @@ class ClassicSolver(VRPSolver):
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
         distance_function: Callable[
-            [tuple[int, int], tuple[int, int]], float
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,
@@ -98,7 +98,7 @@ class ClassicSolver(VRPSolver):
 
         return or_solution
 
-    def distance_callback(self, from_index: Any, to_index: Any) -> int:
+    def distance_callback(self, from_index: Any, to_index: Any) -> float:
         """Returns the distance between the two nodes."""
 
         # Convert from index to distance matrix NodeIndex.
