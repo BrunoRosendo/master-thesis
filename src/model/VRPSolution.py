@@ -54,7 +54,7 @@ class VRPSolution:
     def __init__(
         self,
         num_vehicles: int,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         objective: float,
         total_distance: int,
         routes: list[list[int]],

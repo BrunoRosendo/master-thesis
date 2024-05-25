@@ -53,7 +53,7 @@ class CplexSolver(QuboSolver):
         self,
         num_vehicles: int,
         capacities: int | list[int] | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         classical_solver=False,
@@ -64,7 +64,7 @@ class CplexSolver(QuboSolver):
         warm_start=False,
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
         distance_function: Callable[
-            [tuple[int, int], tuple[int, int]], float
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,
@@ -228,7 +228,10 @@ def get_backend_sampler(
     Loads the IBM-Q account using the token from the environment variable.
     """
 
-    service = QiskitRuntimeService(token=os.getenv("IBM_TOKEN"), channel=channel)
+    token = os.getenv("IBM_TOKEN")
+    if not token:
+        raise ValueError("IBM token not found. Set the IBM_TOKEN environment variable.")
+    service = QiskitRuntimeService(token=token, channel=channel)
 
     if backend_name is None:
         backend = service.least_busy(operational=True, simulator=False)

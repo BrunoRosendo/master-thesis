@@ -18,7 +18,7 @@ class ConstantCVRP(QuboVRP):
         num_vehicles: int,
         distance_matrix: list[list[float]],
         capacity: int | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         simplify: bool,
         location_names: list[str] = None,
         distance_unit: DistanceUnit = DistanceUnit.METERS,

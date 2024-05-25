@@ -31,7 +31,7 @@ class ClassicSolver(VRPSolver):
         self,
         num_vehicles: int,
         capacities: int | list[int] | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         track_progress: bool = True,
@@ -39,7 +39,7 @@ class ClassicSolver(VRPSolver):
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
         distance_function: Callable[
-            [tuple[int, int], tuple[int, int]], float
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,
@@ -98,7 +98,7 @@ class ClassicSolver(VRPSolver):
 
         return or_solution
 
-    def distance_callback(self, from_index: Any, to_index: Any) -> int:
+    def distance_callback(self, from_index: Any, to_index: Any) -> float:
         """Returns the distance between the two nodes."""
 
         # Convert from index to distance matrix NodeIndex.
@@ -202,7 +202,7 @@ class ClassicSolver(VRPSolver):
 
     def remove_unused_locations(
         self,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,

@@ -48,7 +48,7 @@ class DWaveSolver(QuboSolver):
         self,
         num_vehicles: int,
         capacities: int | list[int] | None,
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         simplify=True,
@@ -59,7 +59,7 @@ class DWaveSolver(QuboSolver):
         num_reads: int = None,
         time_limit: int = None,
         distance_function: Callable[
-            [tuple[int, int], tuple[int, int]], float
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
         location_names: list[str] = None,

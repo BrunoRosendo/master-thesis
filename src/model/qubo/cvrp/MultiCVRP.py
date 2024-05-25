@@ -19,7 +19,7 @@ class MultiCVRP(StepQuboVRP):
         num_vehicles: int,
         distance_matrix: list[list[float]],
         capacities: list[int],
-        locations: list[tuple[int, int]],
+        locations: list[tuple[float, float]],
         location_names: list[str] = None,
         distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
