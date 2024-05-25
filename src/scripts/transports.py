@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 from src.model.VRPSolution import DistanceUnit
 from src.solver.ClassicSolver import ClassicSolver
+from src.solver.distance_functions import distance_api
 
 load_dotenv()
 
@@ -15,8 +16,8 @@ DATA_FOLDER = "data/"
 DATA_INSTANCE = "Porto/stcp 09-23"
 DATA_PATH = DATA_FOLDER + DATA_INSTANCE
 
-SELECTED_ROUTES = ["300", "302"]
-SELECTED_TRIP_COUNT = 3  # Only 1 in SELECTED_TRIP_COUNT trips will be added to the model. ALSO REMOVES THE STOPS
+SELECTED_ROUTES = ["302"]
+SELECTED_TRIP_COUNT = 1  # Only 1 in SELECTED_TRIP_COUNT trips will be added to the model. ALSO REMOVES THE STOPS
 CIRCULAR_ROUTES = True
 NUM_VEHICLES = 2
 VEHICLE_CAPACITY = None
@@ -277,12 +278,12 @@ cvrp = ClassicSolver(
     locations,
     cvrp_trips,
     not CIRCULAR_ROUTES,
-    distance_matrix=distance_matrix,
-    # distance_function=distance_api,
+    # distance_matrix=distance_matrix,
+    distance_function=distance_api,
     location_names=location_names,
     distance_unit=DistanceUnit.SECONDS,
 )
 
 result = cvrp.solve()
-# result.save_json("300+302-2v")
+# result.save_json("test2")
 result.display()
