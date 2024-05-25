@@ -7,7 +7,8 @@ class VRP:
 
     Attributes:
         num_vehicles (int): Number of vehicles available.
-        trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of customers for a trip.
+        trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of
+            customers for a trip.
         distance_matrix (list): Matrix with the distance between each pair of locations.
         locations (list): List of coordinates for each location.
         use_deliveries (bool): Whether the problem uses deliveries or not.

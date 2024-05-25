@@ -25,6 +25,7 @@ class ClassicSolver(VRPSolver):
     - solution_strategy (int): The strategy to use to find the first solution.
     - local_search_metaheuristic (int): The local search metaheuristic to use.
     - distance_global_span_cost_coefficient (int): The coefficient for the global span cost.
+    - distance_dimension (pywrapcp.RoutingDimension): The distance dimension for the problem.
     """
 
     def __init__(
@@ -71,6 +72,8 @@ class ClassicSolver(VRPSolver):
 
         if self.use_rpp:
             self.add_dummy_depot()
+
+        self.distance_dimension = None
 
     def _solve_cvrp(self) -> Any:
         """

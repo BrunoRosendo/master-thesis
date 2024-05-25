@@ -38,18 +38,21 @@ routes = routes.loc[
 # SETUP ALGORITHM
 
 
-def initialize_distance_matrix(size):
+def initialize_distance_matrix(size: int):
     return [[0 if i == j else 999999999 for i in range(size)] for j in range(size)]
 
 
-def get_time_difference(from_time_str, to_time_str):
+def get_time_difference(from_time_str: str, to_time_str: str):
     from_time = datetime.strptime(from_time_str, "%H:%M:%S")
     to_time = datetime.strptime(to_time_str, "%H:%M:%S")
     return int((to_time - from_time).total_seconds())
 
 
 def calculate_distance_matrix(
-    distance_matrix, trip_id, both_directions=False, location_ids=None
+    distance_matrix: list[list[float]],
+    trip_id: int,
+    both_directions: bool = False,
+    location_ids: list[int] = None,
 ):
     route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
     from_stop = route_stop_times.iloc[0]
@@ -88,7 +91,13 @@ def calculate_distance_matrix(
         count = 1
 
 
-def calculate_trips(cvrp_trips, route_id, trip_id, direction_id, location_freq):
+def calculate_trips(
+    cvrp_trips: list[tuple[int, int, int]],
+    route_id: int,
+    trip_id: int,
+    direction_id: int,
+    location_freq: list[int],
+):
     num_trips = trips.loc[
         (trips.route_id == route_id) & (trips.direction_id == direction_id)
     ].shape[0]
@@ -115,7 +124,12 @@ def calculate_trips(cvrp_trips, route_id, trip_id, direction_id, location_freq):
         count = 1
 
 
-def calculate_circular_route(locations, location_names, location_ids, trip_id):
+def calculate_circular_route(
+    locations: list[tuple[float, float]],
+    location_names: list[str],
+    location_ids: list[int],
+    trip_id: int,
+):
     route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
     count = SELECTED_TRIP_COUNT
 
@@ -137,7 +151,7 @@ def calculate_circular_route(locations, location_names, location_ids, trip_id):
         count = 1
 
 
-def get_trip_id(route_id, direction_id):
+def get_trip_id(route_id: int, direction_id: int):
     try:
         return (
             trips.loc[
@@ -150,7 +164,11 @@ def get_trip_id(route_id, direction_id):
         return None
 
 
-def check_common_stops_and_change_depot(locations, location_names, location_ids):
+def check_common_stops_and_change_depot(
+    locations: list[tuple[float, float]],
+    location_names: list[str],
+    location_ids: list[int],
+):
     location_freqs = Counter(location_ids)
     most_common_id, most_common_freq = location_freqs.most_common(1)[0]
 

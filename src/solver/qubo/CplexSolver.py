@@ -1,5 +1,5 @@
 import os
-from typing import Any, Callable
+from typing import Any, Callable, Literal
 
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
@@ -47,6 +47,8 @@ class CplexSolver(QuboSolver):
     - classic_optimizer (Optimizer): The Qiskit optimizer to use for the QUBO problem.
     - warm_start (bool): Whether to use a warm start for the QAOA optimizer.
     - pre_solver (OptimizationAlgorithm): The Qiskit optimizer to use for the pre-solver.
+    - adapter (CplexAdapter): The adapter to convert the model to a Qiskit QuadraticProgram.
+    - var_dict (dict[str, float]): The dictionary with the variable values from the result.
     """
 
     def __init__(
@@ -89,6 +91,7 @@ class CplexSolver(QuboSolver):
         self.warm_start = warm_start
         self.pre_solver = pre_solver
         self.adapter = CplexAdapter(self.model)
+        self.var_dict = None
 
     def _solve_cvrp(self) -> OptimizationResult:
         """
@@ -221,7 +224,8 @@ class CplexSolver(QuboSolver):
 
 
 def get_backend_sampler(
-    backend_name: str = None, channel: str = "ibm_quantum"
+    backend_name: str = None,
+    channel: Literal["ibm_quantum"] | Literal["ibm_cloud"] = "ibm_quantum",
 ) -> CloudSampler:
     """
     Get a Qiskit sampler for the specified backend.
