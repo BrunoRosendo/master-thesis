@@ -250,6 +250,7 @@ class VRPSolution:
                 textfont=dict(color="#6b6a6a", size=15.5),  # Slightly larger
                 showlegend=False,
                 hoverinfo="none",  # Disable hover for the 'outline' text
+                legendgroup=legend_group,
             )
         )
 

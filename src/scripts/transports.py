@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 
 from src.model.VRPSolution import DistanceUnit
 from src.solver.ClassicSolver import ClassicSolver
-from src.solver.distance_functions import distance_api
 
 load_dotenv()
 
@@ -171,6 +170,18 @@ def check_common_stops_and_change_depot(locations, location_names, location_ids)
     location_names.insert(0, location_names.pop(new_depot_idx))
     location_ids.insert(0, location_ids.pop(new_depot_idx))
 
+    # Delete duplicates of the new depot. Needed to avoid unfeasible solutions with multiple vehicles.
+    to_delete = min(NUM_VEHICLES - 1, most_common_freq - 1)
+    i = 1
+    while i < len(location_ids) and to_delete > 0:
+        if location_ids[i] == most_common_id:
+            del location_ids[i]
+            del locations[i]
+            del location_names[i]
+            to_delete -= 1
+        else:
+            i += 1
+
 
 if CIRCULAR_ROUTES:
     locations = []
@@ -248,11 +259,12 @@ cvrp = ClassicSolver(
     locations,
     cvrp_trips,
     not CIRCULAR_ROUTES,
-    distance_function=distance_api,
+    distance_matrix=distance_matrix,
+    # distance_function=distance_api,
     location_names=location_names,
     distance_unit=DistanceUnit.SECONDS,
 )
 
 result = cvrp.solve()
-# result.save_json("300+302-1v-api")
+# result.save_json("300+302-2v")
 result.display()
