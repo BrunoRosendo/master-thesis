@@ -39,6 +39,13 @@ class InfiniteCVRP(ConstantCVRP):
             if i != j
         )
 
+    def get_u_lower_bound(self, i: int) -> int:
+        """
+        Get the lower bound for the auxiliary variable, at the given index.
+        """
+
+        return 1
+
     def get_u_upper_bound(self):
         """
         Get the upper bound for the variable u.
