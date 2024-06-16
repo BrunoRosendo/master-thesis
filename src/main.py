@@ -1,23 +1,25 @@
 from dotenv import load_dotenv
 
-from src.model.VRPSolution import VRPSolution
+from src.solver.ClassicSolver import ClassicSolver
+from src.solver.qubo.CplexSolver import CplexSolver
 
 if __name__ == "__main__":
     load_dotenv()
 
-    # cvrp = ClassicSolver(
-    #     1,
-    #     None,
-    #     [
-    #         (41.165063341024, -8.55722805166063),
-    #         (41.1570708790605, -8.51599248615023),
-    #         (41.1910277341427, -8.5216944398509),
-    #     ],
-    #     [],
-    #     False,
-    #     distance_function=distance_api,
-    #     distance_unit=DistanceUnit.METERS,
-    # )
-    # result = cvrp.solve()
-    result = VRPSolution.from_json("300+302-2v-test")
+    cvrp = CplexSolver(
+        2,
+        [1, 3],
+        [
+            (456, 320),
+            (228, 0),
+            (100, 100),
+            (50, 50),
+            (150, 0)
+        ],
+        [],
+        False,
+        True,
+        simplify=True,
+    )
+    result = cvrp.solve()
     result.display()

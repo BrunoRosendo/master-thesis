@@ -80,11 +80,10 @@ class MultiCVRP(StepQuboVRP):
             self.model.sum(
                 self.get_location_demand(i) * self.x_var(k, i, s)
                 for i in range(1, self.num_used_locations)
-                for s in range(cur_step + 1)
+                for s in range(self.num_steps)
             )
             <= self.capacities[k]
             for k in range(self.num_vehicles)
-            for cur_step in range(1, self.num_steps)
         )
 
     def get_simplified_variables(self) -> dict[str, int]:
