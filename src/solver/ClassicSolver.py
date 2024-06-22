@@ -6,10 +6,10 @@ from ortools.constraint_solver import routing_enums_pb2
 from src.model.VRP import VRP
 from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.solver.VRPSolver import VRPSolver
-from src.solver.distance_functions import manhattan_distance
+from src.solver.cost_functions import manhattan_distance
 
 DEFAULT_SOLUTION_STRATEGY = (
-    routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION
+    routing_enums_pb2.FirstSolutionStrategy.AUTOMATIC
 )
 DEFAULT_LOCAL_SEARCH_METAHEURISTIC = (
     routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
@@ -39,7 +39,7 @@ class ClassicSolver(VRPSolver):
         solution_strategy: int = DEFAULT_SOLUTION_STRATEGY,
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
-        distance_function: Callable[
+        cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
@@ -58,7 +58,7 @@ class ClassicSolver(VRPSolver):
             trips,
             use_rpp,
             track_progress,
-            distance_function,
+            cost_function,
             distance_matrix=distance_matrix,
             location_names=location_names,
             distance_unit=distance_unit,

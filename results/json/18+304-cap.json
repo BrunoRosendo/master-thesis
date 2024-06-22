@@ -9966,55 +9966,54 @@
             -8.6201911857691
         ]
     ],
-    "objective": -29.99999766,
+    "objective": -10.999997659999998,
     "total_distance": 2340,
     "routes": [
         [
-            474,
-            1607,
-            1613,
-            1714,
-            1538,
-            325,
-            2156,
-            2212,
-            2154,
-            1482,
-            2190,
-            820,
-            2437,
-            1940,
-            2153,
-            1695,
-            1191
+            355,
+            916,
+            1804,
+            2051,
+            577,
+            179
         ],
         [
-            355,
-            1743,
-            1385,
-            916,
-            1928,
-            914,
-            1804,
-            574,
-            662,
-            2051,
-            915,
-            1371,
-            577,
-            2349,
-            179
+            474,
+            1714,
+            2156,
+            1482,
+            2437,
+            1695,
+            1191
         ]
     ],
     "distances": [
-        840,
-        1500
+        1500,
+        840
     ],
-    "loads": null,
+    "loads": [
+        [
+            57,
+            57,
+            57,
+            57,
+            57,
+            0
+        ],
+        [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            0
+        ]
+    ],
     "depot": null,
-    "run_time": 6347517,
+    "run_time": 221300915,
     "qpu_access_time": null,
-    "local_run_time": 6835332,
+    "local_run_time": 221871089,
     "location_names": [
         "BELA VISTA",
         "VITORINO NEMESIO",
@@ -12508,8 +12507,11 @@
         "BR. CAMPINAS",
         "MONSANTO"
     ],
+    "distance_unit": "SECONDS",
     "use_depot": false,
-    "capacities": null,
-    "use_capacity": false,
-    "distance_unit": "SECONDS"
+    "capacities": [
+        60,
+        100
+    ],
+    "use_capacity": true
 }

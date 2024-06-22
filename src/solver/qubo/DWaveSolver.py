@@ -15,7 +15,7 @@ from dwave.system import EmbeddingComposite
 
 from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.model.adapter.DWaveAdapter import DWaveAdapter
-from src.solver.distance_functions import manhattan_distance
+from src.solver.cost_functions import manhattan_distance
 from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = ExactCQMSolver()
@@ -29,7 +29,6 @@ class DWaveSolver(QuboSolver):
     Attributes:
     - simplify (bool): Whether to simplify the problem by removing unnecessary constraints.
     - sampler (Sampler): The Qiskit sampler to use for the QUBO problem.
-    - classic_optimizer (Optimizer): The Qiskit optimizer to use for the QUBO problem.
     - warm_start (bool): Whether to use a warm start for the QAOA optimizer.
     - pre_solver (OptimizationAlgorithm): The Qiskit optimizer to use for the pre-solver.
     - sampler (Sampler): The DWave sampler to use for the QUBO problem. Must implement the `sample_cqm` method.
@@ -58,7 +57,7 @@ class DWaveSolver(QuboSolver):
         embed_bqm=True,
         num_reads: int = None,
         time_limit: int = None,
-        distance_function: Callable[
+        cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
@@ -72,7 +71,7 @@ class DWaveSolver(QuboSolver):
             trips,
             use_rpp,
             track_progress,
-            distance_function,
+            cost_function,
             simplify,
             distance_matrix,
             location_names,

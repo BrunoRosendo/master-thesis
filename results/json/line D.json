@@ -116,5 +116,6 @@
     ],
     "use_depot": false,
     "capacities": null,
-    "use_capacity": false
+    "use_capacity": false,
+    "distance_unit": "SECONDS"
 }

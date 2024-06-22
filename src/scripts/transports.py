@@ -3,10 +3,13 @@ from datetime import datetime
 
 import pandas as pd
 from dotenv import load_dotenv
+from dwave.system import LeapHybridCQMSampler
 
 from src.model.VRPSolution import DistanceUnit
 from src.solver.ClassicSolver import ClassicSolver
-from src.solver.distance_functions import distance_api
+from src.solver.cost_functions import distance_api
+from src.solver.qubo.DWaveSolver import DWaveSolver
+from src.solver.qubo.QiskitSolver import QiskitSolver
 
 load_dotenv()
 
@@ -16,11 +19,11 @@ DATA_FOLDER = "data/"
 DATA_INSTANCE = "Porto/stcp 09-23"
 DATA_PATH = DATA_FOLDER + DATA_INSTANCE
 
-SELECTED_ROUTES = ["302"]
-SELECTED_TRIP_COUNT = 1  # Only 1 in SELECTED_TRIP_COUNT trips will be added to the model. ALSO REMOVES THE STOPS
-CIRCULAR_ROUTES = True
+SELECTED_ROUTES = ["18", "304"]
+STOP_GAP = 3  # Only 1 in STOP_GAP trips will be added to the model. ALSO REMOVES THE STOPS
+CIRCULAR_ROUTES = False
 NUM_VEHICLES = 2
-VEHICLE_CAPACITY = None
+VEHICLE_CAPACITY = [60, 100]
 
 # LOAD DATA
 
@@ -60,7 +63,7 @@ def calculate_distance_matrix(
     count = 1
 
     for i in range(1, len(route_stop_times)):
-        if count < SELECTED_TRIP_COUNT and i < len(route_stop_times) - 1:
+        if count < STOP_GAP and i < len(route_stop_times) - 1:
             count += 1
             continue
 
@@ -109,7 +112,7 @@ def calculate_trips(
     count = 1
 
     for i in range(1, len(route_stop_times)):
-        if count < SELECTED_TRIP_COUNT and i < len(route_stop_times) - 1:
+        if count < STOP_GAP and i < len(route_stop_times) - 1:
             count += 1
             continue
 
@@ -132,10 +135,10 @@ def calculate_circular_route(
     trip_id: int,
 ):
     route_stop_times = stop_times.loc[stop_times.trip_id == trip_id]
-    count = SELECTED_TRIP_COUNT
+    count = STOP_GAP
 
     for i in range(len(route_stop_times)):
-        if count < SELECTED_TRIP_COUNT and i < len(route_stop_times) - 1:
+        if count < STOP_GAP and i < len(route_stop_times) - 1:
             count += 1
             continue
 
@@ -272,18 +275,20 @@ else:
 
 # RUN ALGORITHM
 
-cvrp = ClassicSolver(
+cvrp = QiskitSolver(
     NUM_VEHICLES,
     VEHICLE_CAPACITY,
     locations,
     cvrp_trips,
     not CIRCULAR_ROUTES,
-    # distance_matrix=distance_matrix,
-    distance_function=distance_api,
+    distance_matrix=distance_matrix,
     location_names=location_names,
     distance_unit=DistanceUnit.SECONDS,
+    classical_solver=True,
+    # sampler=LeapHybridCQMSampler(),
+    # time_limit=30,
 )
 
 result = cvrp.solve()
-# result.save_json("test2")
+result.save_json("tmp")
 result.display()

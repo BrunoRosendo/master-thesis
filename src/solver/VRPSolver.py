@@ -24,7 +24,7 @@ class VRPSolver(ABC):
         use_rpp (bool): Whether the problem uses the Ride Pooling Problem (RPP) or not.
         track_progress (bool): Whether to track the progress of the solver or not.
         simplify (bool): Whether to simplify the problem by removing unnecessary variables.
-        distance_function (Callable): Function to compute the distance matrix.
+        cost_function (Callable): Function to compute the distance matrix.
         model (QuboVRP): VRP instance of the model.
         run_time (int): Time taken to run the solver (measured locally).
         location_names (list): List of names for each location. Optional.
@@ -39,7 +39,7 @@ class VRPSolver(ABC):
         trips: list[tuple[int, int, int]],
         use_rpp: bool,
         track_progress: bool,
-        distance_function: Callable[
+        cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ],
         simplify: bool = True,
@@ -65,13 +65,13 @@ class VRPSolver(ABC):
         self.use_rpp = use_rpp
         self.track_progress = track_progress
         self.simplify = simplify
-        self.distance_function = distance_function
+        self.cost_function = cost_function
         self.location_names = location_names
         self.distance_unit = distance_unit
         self.run_time: int | None = None
 
         if distance_matrix is None:
-            self.distance_matrix = self.distance_function(
+            self.distance_matrix = self.cost_function(
                 self.locations, self.distance_unit
             )
         else:

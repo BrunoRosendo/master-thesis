@@ -4,7 +4,7 @@ from qiskit_optimization.translators import from_docplex_mp
 from src.model.adapter.Adapter import Adapter
 
 
-class CplexAdapter(Adapter):
+class QiskitAdapter(Adapter):
     """
     A class to represent an adapter for the CPLEX model.
 
