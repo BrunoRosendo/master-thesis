@@ -98,7 +98,7 @@
             -8.60027774459115
         ]
     ],
-    "objective": 6360,
+    "objective": 6360.0,
     "total_distance": 6360,
     "routes": [
         [
@@ -139,9 +139,9 @@
     ],
     "loads": null,
     "depot": 0,
-    "run_time": 6813,
+    "run_time": 7748239,
     "qpu_access_time": null,
-    "local_run_time": 8737,
+    "local_run_time": 7752591,
     "location_names": [
         "CARMO",
         "HOSP. S. JO\u00c3O (URG\u00caNCIA)",

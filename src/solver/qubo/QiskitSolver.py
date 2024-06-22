@@ -26,25 +26,26 @@ from qiskit_optimization.converters import (
 )
 
 from src.model.VRPSolution import VRPSolution, DistanceUnit
-from src.model.adapter.CplexAdapter import CplexAdapter
+from src.model.adapter.QiskitAdapter import QiskitAdapter
 from src.qiskit_algorithms.qiskit_algorithms import QAOA
-from src.solver.distance_functions import manhattan_distance
+from src.solver.cost_functions import manhattan_distance
 from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = Sampler()
-DEFAULT_CLASSIC_OPTIMIZER = COBYLA()
+DEFAULT_CLASSICAL_OPTIMIZER = COBYLA()
 DEFAULT_PRE_SOLVER = CplexOptimizer()
 
 
-class CplexSolver(QuboSolver):
+class QiskitSolver(QuboSolver):
     """
-    Class for solving the Capacitated Vehicle Routing Problem (CVRP) with QUBO algorithm, using Qiskit.
+    Class for solving the Capacitated Vehicle Routing Problem (CVRP) with QUBO algorithm,
+    using CPLEX or Qiskit.
 
     Attributes:
     - classical_solver (bool): Whether to use a classical solver to solve the QUBO problem.
     - simplify (bool): Whether to simplify the problem by removing unnecessary constraints.
     - sampler (Sampler): The Qiskit sampler to use for the QUBO problem.
-    - classic_optimizer (Optimizer): The Qiskit optimizer to use for the QUBO problem.
+    - classical_optimizer (Optimizer): The Qiskit optimizer to use for the QUBO problem.
     - warm_start (bool): Whether to use a warm start for the QAOA optimizer.
     - pre_solver (OptimizationAlgorithm): The Qiskit optimizer to use for the pre-solver.
     - adapter (CplexAdapter): The adapter to convert the model to a Qiskit QuadraticProgram.
@@ -62,10 +63,10 @@ class CplexSolver(QuboSolver):
         simplify=True,
         track_progress=True,
         sampler: Sampler | CloudSampler = DEFAULT_SAMPLER,
-        classic_optimizer: Optimizer = DEFAULT_CLASSIC_OPTIMIZER,
+        classical_optimizer: Optimizer = DEFAULT_CLASSICAL_OPTIMIZER,
         warm_start=False,
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
-        distance_function: Callable[
+        cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
         distance_matrix: list[list[float]] = None,
@@ -79,7 +80,7 @@ class CplexSolver(QuboSolver):
             trips,
             use_rpp,
             track_progress,
-            distance_function,
+            cost_function,
             simplify,
             distance_matrix,
             location_names,
@@ -87,10 +88,10 @@ class CplexSolver(QuboSolver):
         )
         self.classical_solver = classical_solver
         self.sampler = sampler
-        self.classic_optimizer = classic_optimizer
+        self.classical_optimizer = classical_optimizer
         self.warm_start = warm_start
         self.pre_solver = pre_solver
-        self.adapter = CplexAdapter(self.model)
+        self.adapter = QiskitAdapter(self.model)
         self.var_dict = None
 
     def _solve_cvrp(self) -> OptimizationResult:
@@ -110,7 +111,7 @@ class CplexSolver(QuboSolver):
             print(f"The number of variables is {qp.get_num_vars()}")
             print(qp.prettyprint())
 
-            result = self.solve_qubo(qp)
+            result = self.solve_qaoa(qp)
 
         self.check_feasibility(result)
         return result
@@ -145,14 +146,14 @@ class CplexSolver(QuboSolver):
 
         return result
 
-    def solve_qubo(self, qp: QuadraticProgram) -> OptimizationResult:
+    def solve_qaoa(self, qp: QuadraticProgram) -> OptimizationResult:
         """
         Solve the QUBO problem using the configured Qiskit optimizer.
         """
 
         qaoa = QAOA(
             sampler=self.sampler,
-            optimizer=self.classic_optimizer,
+            optimizer=self.classical_optimizer,
             callback=self.qaoa_callback if self.track_progress else None,
         )
 
