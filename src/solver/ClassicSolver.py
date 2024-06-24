@@ -15,6 +15,7 @@ DEFAULT_LOCAL_SEARCH_METAHEURISTIC = (
     routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
 )
 DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 100
+DEFAULT_TIME_LIMIT_SECONDS = 10
 
 
 class ClassicSolver(VRPSolver):
@@ -39,6 +40,7 @@ class ClassicSolver(VRPSolver):
         solution_strategy: int = DEFAULT_SOLUTION_STRATEGY,
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
+            time_limit_seconds: int = DEFAULT_TIME_LIMIT_SECONDS,
         cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
@@ -69,6 +71,7 @@ class ClassicSolver(VRPSolver):
         self.distance_global_span_cost_coefficient = (
             distance_global_span_cost_coefficient
         )
+        self.time_limit_seconds = time_limit_seconds
 
         if self.use_rpp:
             self.add_dummy_depot()
@@ -189,6 +192,7 @@ class ClassicSolver(VRPSolver):
         search_parameters.first_solution_strategy = self.solution_strategy
         search_parameters.local_search_metaheuristic = self.local_search_metaheuristic
         search_parameters.log_search = self.track_progress
+        search_parameters.time_limit.seconds = self.time_limit_seconds
 
         return search_parameters
 
