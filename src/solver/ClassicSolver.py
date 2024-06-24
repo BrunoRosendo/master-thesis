@@ -205,6 +205,9 @@ class ClassicSolver(VRPSolver):
         for i in range(len(self.distance_matrix)):
             self.distance_matrix[i].append(0)
 
+        # Update the model with the new dummy
+        self.model = self.get_model()
+
     def remove_unused_locations(
         self,
         locations: list[tuple[float, float]],
