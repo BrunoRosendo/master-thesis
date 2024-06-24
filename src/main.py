@@ -10,19 +10,29 @@ from src.solver.qubo.QiskitSolver import QiskitSolver, get_backend_sampler
 
 if __name__ == "__main__":
     cvrp = ClassicSolver(
-        1,
-        [12],
+        2,
+        [12, 10],
         [
-            (456, 320),
-            (400, 0)
+            (46, 32),
+            (40, 0),
+            (91, 0),
+            (0, 8),
+            (57, 40),
+            (91, 40),
+            (11, 48),
+            (23, 48),
         ],
         [
-            (0, 1, 1),
+            (1, 6, 5),
+            (2, 7, 6),
+            (4, 3, 4),
+            (5, 0, 2),
+            (5, 1, 3)
         ],
         True,
         # local_search_metaheuristic=routing_enums_pb2.LocalSearchMetaheuristic.GUIDED_LOCAL_SEARCH,
-        # solution_strategy=routing_enums_pb2.FirstSolutionStrategy.AUTOMATIC,
         # time_limit_seconds=2,
+        # solution_strategy=routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION,
         # classical_solver=True,
     )
     result = cvrp.solve()

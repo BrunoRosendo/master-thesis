@@ -12,7 +12,7 @@ DEFAULT_SOLUTION_STRATEGY = routing_enums_pb2.FirstSolutionStrategy.AUTOMATIC
 DEFAULT_LOCAL_SEARCH_METAHEURISTIC = (
     routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
 )
-DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 100
+DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 1
 DEFAULT_TIME_LIMIT_SECONDS = 10
 
 
@@ -132,7 +132,7 @@ class ClassicSolver(VRPSolver):
             self.routing.AddDimension(
                 transit_callback_index,
                 0,
-                3000,
+                2**63 - 1,
                 True,
                 dimension_name,
             )
