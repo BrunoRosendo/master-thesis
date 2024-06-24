@@ -11,7 +11,7 @@ dwave_system==1.23.0
 ipython==8.12.3
 nlopt==2.7.1
 numpy==1.23.5
-ortools==9.8.3296
+ortools==9.10.4067
 pandas==2.2.2
 plotly==5.19.0
 pyenchant==3.2.2

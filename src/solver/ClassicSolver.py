@@ -8,9 +8,7 @@ from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.solver.VRPSolver import VRPSolver
 from src.solver.cost_functions import manhattan_distance
 
-DEFAULT_SOLUTION_STRATEGY = (
-    routing_enums_pb2.FirstSolutionStrategy.AUTOMATIC
-)
+DEFAULT_SOLUTION_STRATEGY = routing_enums_pb2.FirstSolutionStrategy.AUTOMATIC
 DEFAULT_LOCAL_SEARCH_METAHEURISTIC = (
     routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
 )
@@ -40,7 +38,7 @@ class ClassicSolver(VRPSolver):
         solution_strategy: int = DEFAULT_SOLUTION_STRATEGY,
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
-            time_limit_seconds: int = DEFAULT_TIME_LIMIT_SECONDS,
+        time_limit_seconds: int = DEFAULT_TIME_LIMIT_SECONDS,
         cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
