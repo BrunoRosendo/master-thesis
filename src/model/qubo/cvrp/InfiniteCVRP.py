@@ -18,6 +18,7 @@ class InfiniteCVRP(ConstantCVRP):
     ):
         super().__init__(
             num_vehicles,
+            [],
             distance_matrix,
             None,
             locations,

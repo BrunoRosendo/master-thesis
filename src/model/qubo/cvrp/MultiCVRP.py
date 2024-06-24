@@ -17,6 +17,7 @@ class MultiCVRP(StepQuboVRP):
     def __init__(
         self,
         num_vehicles: int,
+        trips: list[tuple[int, int, int]],
         distance_matrix: list[list[float]],
         capacities: list[int],
         locations: list[tuple[float, float]],
@@ -27,7 +28,7 @@ class MultiCVRP(StepQuboVRP):
         self.num_locations = len(locations)
         super().__init__(
             num_vehicles,
-            [],
+            trips,
             distance_matrix,
             locations,
             False,

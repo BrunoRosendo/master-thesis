@@ -51,6 +51,7 @@ class QuboSolver(VRPSolver, ABC):
         if self.same_capacity:
             return ConstantCVRP(
                 self.num_vehicles,
+                self.trips,
                 self.distance_matrix,
                 self.capacities,
                 self.locations,
@@ -61,6 +62,7 @@ class QuboSolver(VRPSolver, ABC):
 
         return MultiCVRP(
             self.num_vehicles,
+            self.trips,
             self.distance_matrix,
             self.capacities,
             self.locations,

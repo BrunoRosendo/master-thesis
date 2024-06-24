@@ -16,6 +16,7 @@ class ConstantCVRP(QuboVRP):
     def __init__(
         self,
         num_vehicles: int,
+        trips: list[tuple[int, int, int]],
         distance_matrix: list[list[float]],
         capacity: int | None,
         locations: list[tuple[float, float]],
@@ -26,7 +27,7 @@ class ConstantCVRP(QuboVRP):
         self.capacity = capacity
         super().__init__(
             num_vehicles,
-            [],
+            trips,
             distance_matrix,
             locations,
             False,

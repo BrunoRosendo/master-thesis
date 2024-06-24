@@ -42,6 +42,9 @@ class VRP:
         """
         Get the demand for a location.
         """
+        if idx == self.depot:
+            return 0
+
         pickup_demand = self.get_location_pickup(idx)
         if not self.use_deliveries:
             return max(pickup_demand, 1)
