@@ -40,13 +40,13 @@ class VRPSolution:
         "green",
         "purple",
         "orange",
-        "yellow",
-        "pink",
         "brown",
+        "pink",
         "grey",
         "black",
         "cyan",
         "magenta",
+        "yellow",
     ]
 
     RESULTS_PATH = "results"

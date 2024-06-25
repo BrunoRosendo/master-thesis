@@ -61,6 +61,7 @@ if __name__ == "__main__":
         solution_strategy=routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION,
         # classical_solver=True,
     )
-    result = cvrp.solve()
-    result.save_json("rpp-n26-k6-or2")
+    # result = cvrp.solve()
+    # result.save_json("rpp-n26-k6-or2")
+    result = VRPSolution.from_json("rpp-n26-k6-or")
     result.display()
