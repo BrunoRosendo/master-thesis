@@ -13,6 +13,7 @@ DEFAULT_LOCAL_SEARCH_METAHEURISTIC = (
     routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC
 )
 DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT = 1
+DEFAULT_MAX_DISTANCE_CAPACITY = 3000
 DEFAULT_TIME_LIMIT_SECONDS = 10
 
 
@@ -39,6 +40,7 @@ class ClassicSolver(VRPSolver):
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
         time_limit_seconds: int = DEFAULT_TIME_LIMIT_SECONDS,
+        max_distance_capacity: int = DEFAULT_MAX_DISTANCE_CAPACITY,
         cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
         ] = manhattan_distance,
@@ -70,6 +72,7 @@ class ClassicSolver(VRPSolver):
             distance_global_span_cost_coefficient
         )
         self.time_limit_seconds = time_limit_seconds
+        self.max_distance_capacity = max_distance_capacity
 
         if self.use_rpp:
             self.add_dummy_depot()
@@ -132,7 +135,7 @@ class ClassicSolver(VRPSolver):
             self.routing.AddDimension(
                 transit_callback_index,
                 0,
-                2**63 - 1,
+                self.max_distance_capacity,
                 True,
                 dimension_name,
             )

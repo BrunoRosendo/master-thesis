@@ -9,31 +9,39 @@ from src.solver.qubo.DWaveSolver import DWaveSolver
 from src.solver.qubo.QiskitSolver import QiskitSolver, get_backend_sampler
 
 if __name__ == "__main__":
-    cvrp = ClassicSolver(
-        2,
-        [12, 10],
+    cvrp = QiskitSolver(
+        4,
+        8,
         [
             (46, 32),
-            (40, 0),
+            (23, 0),
             (91, 0),
             (0, 8),
+            (11, 8),
+            (57, 16),
+            (80, 16),
+            (34, 24),
+            (69, 24),
             (57, 40),
             (91, 40),
             (11, 48),
             (23, 48),
+            (80, 64),
         ],
         [
-            (1, 6, 5),
-            (2, 7, 6),
-            (4, 3, 4),
-            (5, 0, 2),
-            (5, 1, 3)
+            (0, 5, 5),
+            (1, 9, 6),
+            (3, 2, 4),
+            (4, 8, 3),
+            (6, 7, 7),
+            (13, 10, 5),
+            (12, 11, 6),
         ],
         True,
         # local_search_metaheuristic=routing_enums_pb2.LocalSearchMetaheuristic.GUIDED_LOCAL_SEARCH,
         # time_limit_seconds=2,
         # solution_strategy=routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION,
-        # classical_solver=True,
+        classical_solver=True,
     )
     result = cvrp.solve()
     result.display()
