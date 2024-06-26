@@ -10,37 +10,13 @@ from src.solver.qubo.QiskitSolver import QiskitSolver, get_backend_sampler
 
 if __name__ == "__main__":
     cvrp = QiskitSolver(
-        4,
-        8,
-        [
-            (46, 32),
-            (23, 0),
-            (91, 0),
-            (0, 8),
-            (11, 8),
-            (57, 16),
-            (80, 16),
-            (34, 24),
-            (69, 24),
-            (57, 40),
-            (91, 40),
-            (11, 48),
-            (23, 48),
-            (80, 64),
-        ],
-        [
-            (0, 5, 5),
-            (1, 9, 6),
-            (3, 2, 4),
-            (4, 8, 3),
-            (6, 7, 7),
-            (13, 10, 5),
-            (12, 11, 6),
-        ],
-        True,
-        classical_solver=True,
+        1,
+        None,
+        [(5, 5), (15, 10)],
+        [],
+        False,
     )
-    # result = cvrp.solve()
-    # result.save_json("rpp-n14-k4-cplex")
-    result = VRPSolution.from_json("rpp-n14-k4-cplex")
+    result = cvrp.solve()
+    result.save_json("vrp-n2-k1-qiskit2")
+    # result = VRPSolution.from_json("rpp-n8-k2-cplex")
     result.display()
