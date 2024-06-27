@@ -40,7 +40,8 @@ class DWaveSolver(QuboSolver):
     - cqm (ConstrainedQuadraticModel): The CQM model to be solved.
     - use_bqm (bool): Flag to indicate if the model should be converted to a BQM.
     - invert (CQMToBQMInverter): Inverter to convert the BQM solution back to the CQM solution.
-    - time_limit (int): Time limit for the sampler.
+    - time_limit (int): Time limit for the sampler, in seconds.
+    - embedding_timeout (int): Timeout for the embedding, in seconds.
     """
 
     def __init__(
@@ -55,6 +56,7 @@ class DWaveSolver(QuboSolver):
         sampler: Sampler = DEFAULT_SAMPLER,
         embedding: type = DEFAULT_EMBEDDING,
         embed_bqm=True,
+        embedding_timeout: int = None,
         num_reads: int = None,
         time_limit: int = None,
         cost_function: Callable[
@@ -84,6 +86,7 @@ class DWaveSolver(QuboSolver):
         self.use_bqm = not self.is_cqm_sampler(sampler)
         self.adapter = DWaveAdapter(self.model, self.use_bqm)
         self.embed_bqm = embed_bqm
+        self.embedding_timeout = embedding_timeout
         self.invert: CQMToBQMInverter | None = None
         self.cqm = self.adapter.solver_model()
 
@@ -176,6 +179,7 @@ class DWaveSolver(QuboSolver):
             composed_sampler = self.sampler
 
         bqm, invert = cqm_to_bqm(cqm)
+        print("Number of variables in BQM: ", len(bqm.variables))
 
         try:
             return self.sample_bqm(bqm, composed_sampler), invert
@@ -206,6 +210,10 @@ class DWaveSolver(QuboSolver):
         kwargs = {"num_reads": self.num_reads} if self.num_reads else {}
         if self.time_limit:
             kwargs["time_limit"] = self.time_limit
+        if self.embed_bqm:
+            kwargs["return_embedding"] = True
+        if self.embedding_timeout:
+            kwargs["embedding_parameters"] = dict(timeout=self.embedding_timeout)
 
         result, self.run_time = self.measure_time(sampler.sample, bqm, **kwargs)
         return result

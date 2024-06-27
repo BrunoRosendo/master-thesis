@@ -1,0 +1,61 @@
+{
+    "num_vehicles": 2,
+    "locations": [
+        [
+            46,
+            32
+        ],
+        [
+            20,
+            32
+        ],
+        [
+            71,
+            32
+        ],
+        [
+            46,
+            60
+        ],
+        [
+            46,
+            4
+        ]
+    ],
+    "objective": 774.0,
+    "total_distance": 214,
+    "routes": [
+        [
+            0,
+            1,
+            2,
+            0
+        ],
+        [
+            0,
+            3,
+            4,
+            0
+        ]
+    ],
+    "distances": [
+        102,
+        112
+    ],
+    "loads": null,
+    "depot": 0,
+    "run_time": 3674599,
+    "qpu_access_time": null,
+    "local_run_time": 3676860,
+    "location_names": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+    ],
+    "distance_unit": "METERS",
+    "use_depot": true,
+    "capacities": null,
+    "use_capacity": false
+}

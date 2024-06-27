@@ -10,28 +10,29 @@
             10
         ]
     ],
-    "objective": -6.6666222222622196e-06,
-    "total_distance": 15,
+    "objective": 30.0,
+    "total_distance": 30,
     "routes": [
         [
             0,
-            1
+            1,
+            0
         ]
     ],
     "distances": [
-        15
+        30
     ],
     "loads": null,
-    "depot": null,
-    "run_time": 294261,
-    "qpu_access_time": null,
-    "local_run_time": 377639,
+    "depot": 0,
+    "run_time": 4303189,
+    "qpu_access_time": 15836,
+    "local_run_time": 10577322,
     "location_names": [
         "0",
         "1"
     ],
     "distance_unit": "METERS",
-    "use_depot": false,
+    "use_depot": true,
     "capacities": null,
     "use_capacity": false
 }

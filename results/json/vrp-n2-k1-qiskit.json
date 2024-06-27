@@ -24,9 +24,9 @@
     ],
     "loads": null,
     "depot": 0,
-    "run_time": 2889003,
+    "run_time": 2719520,
     "qpu_access_time": null,
-    "local_run_time": 2970652,
+    "local_run_time": 2804659,
     "location_names": [
         "0",
         "1"

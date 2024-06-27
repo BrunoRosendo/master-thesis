@@ -10,7 +10,7 @@
             10
         ]
     ],
-    "objective": -6.6666222222622196e-06,
+    "objective": -6.666622222484264e-06,
     "total_distance": 15,
     "routes": [
         [
@@ -23,9 +23,9 @@
     ],
     "loads": null,
     "depot": null,
-    "run_time": 294261,
+    "run_time": 7222,
     "qpu_access_time": null,
-    "local_run_time": 377639,
+    "local_run_time": 8238,
     "location_names": [
         "0",
         "1"
