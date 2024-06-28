@@ -1,0 +1,37 @@
+{
+    "num_vehicles": 1,
+    "locations": [
+        [
+            5,
+            5
+        ],
+        [
+            15,
+            10
+        ]
+    ],
+    "objective": -6.666622222484264e-06,
+    "total_distance": 15,
+    "routes": [
+        [
+            0,
+            1
+        ]
+    ],
+    "distances": [
+        15
+    ],
+    "loads": null,
+    "depot": null,
+    "run_time": 2995492,
+    "qpu_access_time": 111557,
+    "local_run_time": 4350146,
+    "location_names": [
+        "0",
+        "1"
+    ],
+    "distance_unit": "METERS",
+    "use_depot": false,
+    "capacities": null,
+    "use_capacity": false
+}

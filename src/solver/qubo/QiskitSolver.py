@@ -9,6 +9,7 @@ from qiskit_ibm_runtime import (
     QiskitRuntimeService,
     Session,
     SamplerV1 as CloudSampler,
+    Options,
 )
 from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.algorithms import (
@@ -227,6 +228,7 @@ class QiskitSolver(QuboSolver):
 def get_backend_sampler(
     backend_name: str = None,
     channel: Literal["ibm_quantum"] | Literal["ibm_cloud"] = "ibm_quantum",
+    resiliency_level: int = 0,
 ) -> CloudSampler:
     """
     Get a Qiskit sampler for the specified backend.
@@ -238,10 +240,14 @@ def get_backend_sampler(
         raise ValueError("IBM token not found. Set the IBM_TOKEN environment variable.")
     service = QiskitRuntimeService(token=token, channel=channel)
 
-    if backend_name is None:
-        backend = service.least_busy(operational=True, simulator=False)
-    else:
+    if backend_name:
         backend = service.backend(backend_name)
+    else:
+        backend = service.least_busy(operational=True, simulator=False)
 
     session = Session(service, backend)
-    return CloudSampler(session=session)
+
+    options = Options()
+    options.resilience_level = resiliency_level
+
+    return CloudSampler(session=session, options=options)
