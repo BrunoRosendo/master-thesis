@@ -228,7 +228,7 @@ class QiskitSolver(QuboSolver):
 def get_backend_sampler(
     backend_name: str = None,
     channel: Literal["ibm_quantum"] | Literal["ibm_cloud"] = "ibm_quantum",
-    resiliency_level: int = 0,
+    resilience_level: int = 0,
 ) -> CloudSampler:
     """
     Get a Qiskit sampler for the specified backend.
@@ -248,6 +248,6 @@ def get_backend_sampler(
     session = Session(service, backend)
 
     options = Options()
-    options.resilience_level = resiliency_level
+    options.resilience_level = resilience_level
 
     return CloudSampler(session=session, options=options)
