@@ -1,10 +1,13 @@
+from typing import Callable
+
 from docplex.mp.linear import LinearExpr
 
 from src.model.VRPSolution import DistanceUnit
-from src.model.qubo.StepQuboVRP import StepQuboVRP
+from src.model.StepVRP import StepVRP
+from src.solver.cost_functions import manhattan_distance
 
 
-class MultiCVRP(StepQuboVRP):
+class MultiCVRP(StepVRP):
     """
     A class to represent a QUBO math formulation of the CVRP model with all vehicles having different capacities.
 
@@ -17,23 +20,28 @@ class MultiCVRP(StepQuboVRP):
     def __init__(
         self,
         num_vehicles: int,
-        trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[float]],
-        capacities: list[int],
         locations: list[tuple[float, float]],
-        location_names: list[str] = None,
+        demands: list[int],
+        capacities: list[int],
+        cost_function: Callable[
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
+        ] = manhattan_distance,
+        depot: int | None = 0,
+        distance_matrix: list[list[float]] | None = None,
+        location_names: list[str] | None = None,
         distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.capacities = capacities
         self.num_locations = len(locations)
         super().__init__(
             num_vehicles,
-            trips,
-            distance_matrix,
             locations,
-            False,
-            location_names=location_names,
-            distance_unit=distance_unit,
+            demands,
+            depot,
+            cost_function,
+            distance_matrix,
+            location_names,
+            distance_unit,
         )
 
     def create_objective(self) -> LinearExpr:

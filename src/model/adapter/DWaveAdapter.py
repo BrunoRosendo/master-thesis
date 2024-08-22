@@ -6,7 +6,7 @@ from docplex.mp.linear import LinearExpr, ConstantExpr
 from docplex.mp.quad import QuadExpr
 
 from src.model.adapter.Adapter import Adapter
-from src.model.qubo.QuboVRP import QuboVRP
+from src.model.VRP import VRP
 
 
 class DWaveAdapter(Adapter):
@@ -19,7 +19,7 @@ class DWaveAdapter(Adapter):
         use_bqm (bool): Flag to indicate if the model should be converted to a BQM.
     """
 
-    def __init__(self, qubo: QuboVRP, use_bqm: bool):
+    def __init__(self, qubo: VRP, use_bqm: bool):
         self.model = ConstrainedQuadraticModel()
         self.copy_vars = False
         self.use_bqm = use_bqm

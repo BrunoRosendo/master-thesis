@@ -1,11 +1,11 @@
 from abc import ABC
 
-from src.model.qubo.QuboVRP import QuboVRP
-from src.model.qubo.cvrp.ConstantCVRP import ConstantCVRP
-from src.model.qubo.cvrp.InfiniteCVRP import InfiniteCVRP
-from src.model.qubo.cvrp.MultiCVRP import MultiCVRP
-from src.model.qubo.rpp.CapacityRPP import CapacityRPP
-from src.model.qubo.rpp.InfiniteRPP import InfiniteRPP
+from src.model.VRP import VRP
+from src.model.cvrp.InfiniteCVRP import ConstantCVRP
+from src.model.cvrp.ConstantCVRP import InfiniteCVRP
+from src.model.cvrp.MultiCVRP import MultiCVRP
+from src.model.rpp.CapacityRPP import CapacityRPP
+from src.model.rpp.InfiniteRPP import InfiniteRPP
 from src.solver.VRPSolver import VRPSolver
 
 
@@ -14,7 +14,7 @@ class QuboSolver(VRPSolver, ABC):
     Abstract class for solving the Capacitated Vehicle Routing Problem (CVRP) with QUBO algorithm.
     """
 
-    def get_model(self) -> QuboVRP:
+    def get_model(self) -> VRP:
         if self.use_rpp:
             if self.use_capacity:
                 return CapacityRPP(

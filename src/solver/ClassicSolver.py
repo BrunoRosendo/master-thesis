@@ -3,7 +3,7 @@ from typing import Any, Callable
 from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
 
-from src.model.VRP import VRP
+from src.model.OldVRP import OldVRP
 from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.solver.VRPSolver import VRPSolver
 from src.solver.cost_functions import manhattan_distance
@@ -20,6 +20,7 @@ DEFAULT_TIME_LIMIT_SECONDS = 10
 class ClassicSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with classic algorithms, using Google's OR Tools.
+    Simplifying the model has no impact on this solver.
 
     Attributes:
     - solution_strategy (int): The strategy to use to find the first solution.
@@ -302,8 +303,8 @@ class ClassicSolver(VRPSolver):
             distance_unit=self.distance_unit,
         )
 
-    def get_model(self) -> VRP:
-        return VRP(
+    def get_model(self) -> OldVRP:
+        return OldVRP(
             self.num_vehicles,
             self.trips,
             self.distance_matrix,

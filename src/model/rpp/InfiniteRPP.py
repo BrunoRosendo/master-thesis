@@ -1,8 +1,11 @@
+from typing import Callable
+
 from src.model.VRPSolution import DistanceUnit
-from src.model.qubo.StepQuboVRP import StepQuboVRP
+from src.model.StepVRP import StepVRP
+from src.solver.cost_functions import manhattan_distance
 
 
-class InfiniteRPP(StepQuboVRP):
+class InfiniteRPP(StepVRP):
     """
     A class to represent a QUBO math formulation of the RPP model with an infinite capacity.
     Note that this model assumes a starting point with no cost to the first node for each vehicle,
@@ -11,6 +14,7 @@ class InfiniteRPP(StepQuboVRP):
     This model is always be simplified, since some constraints assume the simplification.
 
     Attributes:
+        trips (list): List of tuples, where each tuple contains the pickup and delivery locations, and the amount of passengers.
         num_trips (int): Number of trips to be made.
         used_locations_indices (list): Indices of the locations used in the problem, based on trip requests.
     """
@@ -18,10 +22,13 @@ class InfiniteRPP(StepQuboVRP):
     def __init__(
         self,
         num_vehicles: int,
-        trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[float]],
         locations: list[tuple[float, float]],
-        location_names: list[str] = None,
+        trips: list[tuple[int, int, int]],
+        cost_function: Callable[
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
+        ] = manhattan_distance,
+        distance_matrix: list[list[float]] | None = None,
+        location_names: list[str] | None = None,
         distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.trips = trips
@@ -30,11 +37,11 @@ class InfiniteRPP(StepQuboVRP):
 
         super().__init__(
             num_vehicles,
-            self.trips,
-            distance_matrix,
             locations,
-            True,
             None,
+            None,
+            cost_function,
+            distance_matrix,
             location_names,
             distance_unit,
         )
@@ -137,6 +144,14 @@ class InfiniteRPP(StepQuboVRP):
                 ] = 0
 
         return variables
+
+    def get_location_demand(self, idx: int) -> int:
+        """
+        Get the demand for a location.
+        """
+        pickup_demand = sum(trip[2] for trip in self.trips if idx == trip[0])
+        delivery_demand = sum(trip[2] for trip in self.trips if idx == trip[1])
+        return pickup_demand - delivery_demand
 
     def get_num_steps(self):
         """

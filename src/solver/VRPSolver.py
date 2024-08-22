@@ -2,9 +2,9 @@ import time
 from abc import ABC, abstractmethod
 from typing import Callable, Any
 
-from src.model.VRP import VRP
+from src.model.OldVRP import OldVRP
 from src.model.VRPSolution import VRPSolution, DistanceUnit
-from src.model.qubo.QuboVRP import QuboVRP
+from src.model.VRP import VRP
 
 
 class VRPSolver(ABC):
@@ -25,7 +25,7 @@ class VRPSolver(ABC):
         track_progress (bool): Whether to track the progress of the solver or not.
         simplify (bool): Whether to simplify the problem by removing unnecessary variables.
         cost_function (Callable): Function to compute the distance matrix.
-        model (QuboVRP): VRP instance of the model.
+        model (VRP): VRP instance of the model.
         run_time (int): Time taken to run the solver (measured locally).
         location_names (list): List of names for each location. Optional.
         distance_unit (DistanceUnit): Unit of distance used in the problem.
@@ -102,7 +102,7 @@ class VRPSolver(ABC):
         return self._convert_solution(result, execution_time)
 
     @abstractmethod
-    def get_model(self) -> VRP:
+    def get_model(self) -> OldVRP:
         """
         Get a VRP instance of the model.
         """
