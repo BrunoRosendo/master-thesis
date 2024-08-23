@@ -56,6 +56,8 @@ class ClassicSolver(VRPSolver):
 
         if self.use_rpp:
             self.add_dummy_depot()
+        else:
+            self.depot = model.depot
 
         self.distance_dimension = None
 
@@ -181,7 +183,7 @@ class ClassicSolver(VRPSolver):
         It's important to add the dummy depot after the distance matrix is set, to avoid indexing issues.
         """
 
-        self.model.depot = len(self.model.distance_matrix)
+        self.depot = len(self.model.distance_matrix)
         self.model.distance_matrix.append([0] * len(self.model.distance_matrix))
         for i in range(len(self.model.distance_matrix)):
             self.model.distance_matrix[i].append(0)
@@ -255,20 +257,13 @@ class ClassicSolver(VRPSolver):
             loads.append(route_loads)
             total_distance += route_distance
 
-        # TODO change
-        return VRPSolution(
-            self.model.num_vehicles,
-            self.model.locations,
+        return VRPSolution.from_model(
+            self.model,
             result.ObjectiveValue(),
             total_distance,
             routes,
             distances,
-            self.model.depot,
-            self.model.capacities,
             loads if self.use_capacity else None,
-            not self.use_rpp,
             run_time=self.run_time,
             local_run_time=local_run_time,
-            location_names=self.model.location_names,
-            distance_unit=self.model.distance_unit,
         )

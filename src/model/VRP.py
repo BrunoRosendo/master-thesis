@@ -166,7 +166,7 @@ class VRP(ABC):
         """
         pass
 
-    def convert_result(
+    def convert_qubo_result(
         self,
         var_dict: dict[str, float],
         objective: float,
@@ -215,21 +215,18 @@ class VRP(ABC):
             loads.append(route_loads)
             total_distance += route_distance
 
-        return VRPSolution(
-            self.num_vehicles,
-            self.locations,
+        return VRPSolution.from_model(
+            self,
             objective,
             total_distance,
             routes,
             distances,
-            self.depot,
-            self.get_capacity(),
-            loads if self.get_capacity() else None,
+            (
+                loads if self.get_capacity() else None
+            ),  # TODO change and remove get_capacity
             run_time=run_time,
             qpu_access_time=qpu_access_time,
             local_run_time=local_run_time,
-            location_names=self.location_names,
-            distance_unit=self.distance_unit,
         )
 
     def get_capacity(self) -> int | list[int] | None:

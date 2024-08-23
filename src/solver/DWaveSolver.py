@@ -89,7 +89,7 @@ class DWaveSolver(VRPSolver):
 
         var_dict, energy = self.build_var_dict(result)
         timing = result.info.get("timing") or result.info
-        return self.model.convert_result(
+        return self.model.convert_qubo_result(
             var_dict,
             energy,
             timing.get("run_time") or timing.get("qpu_access_time") or self.run_time,

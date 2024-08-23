@@ -187,7 +187,7 @@ class QiskitSolver(VRPSolver):
             # Convert to microseconds
             self.run_time = round(result.raw_results.solve_details.time * 1e6)
 
-        return self.model.convert_result(
+        return self.model.convert_qubo_result(
             self.var_dict, result.fval, self.run_time, local_run_time
         )
 
