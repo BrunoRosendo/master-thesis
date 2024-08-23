@@ -13,21 +13,21 @@ from dimod import (
 from dimod.constrained.constrained import CQMToBQMInverter
 from dwave.system import EmbeddingComposite
 
+from src.model.VRP import VRP
 from src.model.VRPSolution import VRPSolution, DistanceUnit
 from src.model.adapter.DWaveAdapter import DWaveAdapter
+from src.solver.VRPSolver import VRPSolver
 from src.solver.cost_functions import manhattan_distance
-from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = ExactCQMSolver()
 DEFAULT_EMBEDDING = EmbeddingComposite
 
 
-class DWaveSolver(QuboSolver):
+class DWaveSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with Quantum Annealing, using DWave's system.
 
     Attributes:
-    - simplify (bool): Whether to simplify the problem by removing unnecessary constraints.
     - sampler (Sampler): The Qiskit sampler to use for the QUBO problem.
     - warm_start (bool): Whether to use a warm start for the QAOA optimizer.
     - pre_solver (OptimizationAlgorithm): The Qiskit optimizer to use for the pre-solver.
@@ -46,12 +46,7 @@ class DWaveSolver(QuboSolver):
 
     def __init__(
         self,
-        num_vehicles: int,
-        capacities: int | list[int] | None,
-        locations: list[tuple[float, float]],
-        trips: list[tuple[int, int, int]],
-        use_rpp: bool,
-        simplify=True,
+        model: VRP,
         track_progress=True,
         sampler: Sampler = DEFAULT_SAMPLER,
         embedding: type = DEFAULT_EMBEDDING,
@@ -59,26 +54,8 @@ class DWaveSolver(QuboSolver):
         embedding_timeout: int = None,
         num_reads: int = None,
         time_limit: int = None,
-        cost_function: Callable[
-            [list[tuple[float, float]], DistanceUnit], list[list[float]]
-        ] = manhattan_distance,
-        distance_matrix: list[list[float]] = None,
-        location_names: list[str] = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
-        super().__init__(
-            num_vehicles,
-            capacities,
-            locations,
-            trips,
-            use_rpp,
-            track_progress,
-            cost_function,
-            simplify,
-            distance_matrix,
-            location_names,
-            distance_unit,
-        )
+        super().__init__(model, track_progress)
         self.sampler = sampler
         self.embedding = embedding
         self.num_reads = num_reads
@@ -138,7 +115,7 @@ class DWaveSolver(QuboSolver):
             raise Exception("The solution is infeasible, aborting!")
 
         var_dict = self.invert(solution.sample) if self.use_bqm else solution.sample
-        if self.simplify:
+        if self.model.simplify:
             var_dict = self.model.re_add_variables(dict(var_dict))
         return var_dict, solution.energy
 

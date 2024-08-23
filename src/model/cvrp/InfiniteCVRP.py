@@ -1,13 +1,43 @@
+from typing import Callable
+
 from docplex.mp.dvar import Var
 from docplex.mp.linear import LinearExpr
 
 from src.model.VRP import VRP
+from src.model.VRPSolution import DistanceUnit
+from src.solver.cost_functions import manhattan_distance
 
 
 class InfiniteCVRP(VRP):
     """
     A class to represent a QUBO math formulation of the CVRP model with all vehicles having infinite capacity.
     """
+
+    def __init__(
+        self,
+        num_vehicles: int,
+        locations: list[tuple[float, float]],
+        demands: list[int],
+        simplify: bool = True,
+        cost_function: Callable[
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
+        ] = manhattan_distance,
+        depot: int | None = 0,
+        distance_matrix: list[list[float]] | None = None,
+        location_names: list[str] | None = None,
+        distance_unit: DistanceUnit = DistanceUnit.METERS,
+    ):
+        super().__init__(
+            num_vehicles,
+            locations,
+            demands,
+            depot,
+            simplify,
+            cost_function,
+            distance_matrix,
+            location_names,
+            distance_unit,
+        )
 
     def create_vars(self):
         """

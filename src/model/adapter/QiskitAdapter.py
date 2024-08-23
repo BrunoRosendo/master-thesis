@@ -1,6 +1,7 @@
 from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.translators import from_docplex_mp
 
+from src.model.VRP import VRP
 from src.model.adapter.Adapter import Adapter
 
 
@@ -12,7 +13,7 @@ class QiskitAdapter(Adapter):
         model (Model): CPLEX model to be adapted.
     """
 
-    def __init__(self, qubo):
+    def __init__(self, qubo: VRP):
         self.model = qubo.model
         super().__init__(qubo)
 

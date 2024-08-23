@@ -81,8 +81,7 @@ class VRP(ABC):
         if idx == self.depot:
             return 0
 
-        demand = sum(self.demands)
-        return max(demand, 1)
+        return max(self.demands[idx], 1)
 
     @abstractmethod
     def create_vars(self):

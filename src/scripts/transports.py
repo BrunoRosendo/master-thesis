@@ -3,13 +3,9 @@ from datetime import datetime
 
 import pandas as pd
 from dotenv import load_dotenv
-from dwave.system import LeapHybridCQMSampler
 
 from src.model.VRPSolution import DistanceUnit
-from src.solver.ClassicSolver import ClassicSolver
-from src.solver.cost_functions import distance_api
-from src.solver.qubo.DWaveSolver import DWaveSolver
-from src.solver.qubo.QiskitSolver import QiskitSolver
+from src.solver.QiskitSolver import QiskitSolver
 
 load_dotenv()
 
@@ -20,7 +16,9 @@ DATA_INSTANCE = "Porto/stcp 09-23"
 DATA_PATH = DATA_FOLDER + DATA_INSTANCE
 
 SELECTED_ROUTES = ["18", "304"]
-STOP_GAP = 3  # Only 1 in STOP_GAP trips will be added to the model. ALSO REMOVES THE STOPS
+STOP_GAP = (
+    3  # Only 1 in STOP_GAP trips will be added to the model. ALSO REMOVES THE STOPS
+)
 CIRCULAR_ROUTES = False
 NUM_VEHICLES = 2
 VEHICLE_CAPACITY = [60, 100]
