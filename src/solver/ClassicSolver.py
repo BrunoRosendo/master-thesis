@@ -73,7 +73,7 @@ class ClassicSolver(VRPSolver):
         """
 
         self.manager = pywrapcp.RoutingIndexManager(
-            len(self.model.distance_matrix), self.model.num_vehicles, self.model.depot
+            len(self.model.distance_matrix), self.model.num_vehicles, self.depot
         )
         self.routing = pywrapcp.RoutingModel(self.manager)
 

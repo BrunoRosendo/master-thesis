@@ -32,9 +32,15 @@ class StepVRP(VRP, ABC):
         location_names: list[str] | None,
         distance_unit: DistanceUnit,
     ):
+        self.distance_matrix = distance_matrix
+        self.locations = locations
+        self.cost_function = cost_function
+        self.distance_unit = distance_unit
+        self.create_distance_matrix()
         self.num_steps = self.get_num_steps()
         self.num_used_locations = self.get_num_used_locations()
         self.epsilon = 0.0001
+        self.normalization_factor = np.max(self.distance_matrix) + self.epsilon
 
         super().__init__(
             num_vehicles,
@@ -47,10 +53,6 @@ class StepVRP(VRP, ABC):
             location_names,
             distance_unit,
         )
-
-    def create_distance_matrix(self):
-        super().create_distance_matrix()
-        self.normalization_factor = np.max(self.distance_matrix) + self.epsilon
 
     def create_vars(self):
         """
