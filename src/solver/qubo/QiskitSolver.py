@@ -30,14 +30,14 @@ from src.model.VRP import VRP
 from src.model.VRPSolution import VRPSolution
 from src.model.adapter.QiskitAdapter import QiskitAdapter
 from src.qiskit_algorithms.qiskit_algorithms import QAOA
-from src.solver.VRPSolver import VRPSolver
+from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = Sampler()
 DEFAULT_CLASSICAL_OPTIMIZER = COBYLA()
 DEFAULT_PRE_SOLVER = CplexOptimizer()
 
 
-class QiskitSolver(VRPSolver):
+class QiskitSolver(QuboSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with QUBO algorithm,
     using CPLEX or Qiskit.
@@ -187,7 +187,7 @@ class QiskitSolver(VRPSolver):
             # Convert to microseconds
             self.run_time = round(result.raw_results.solve_details.time * 1e6)
 
-        return self.model.convert_qubo_result(
+        return self.convert_qubo_result(
             self.var_dict, result.fval, self.run_time, local_run_time
         )
 

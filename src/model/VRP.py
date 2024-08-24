@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from enum import Enum
 from typing import Callable
 
 from docplex.mp.constr import LinearConstraint
@@ -6,7 +7,10 @@ from docplex.mp.dvar import Var
 from docplex.mp.linear import LinearExpr
 from docplex.mp.model import Model
 
-from src.model.VRPSolution import VRPSolution, DistanceUnit
+
+class DistanceUnit(str, Enum):
+    METERS = "METERS"
+    SECONDS = "SECONDS"
 
 
 class VRP(ABC):
@@ -45,7 +49,6 @@ class VRP(ABC):
         distance_unit: DistanceUnit,
     ):
         self.num_vehicles = num_vehicles
-        self.num_locations = len(distance_matrix)
         self.locations = locations
         self.demands = demands
         self.depot = depot
@@ -61,6 +64,7 @@ class VRP(ABC):
         self.constraints: list[LinearConstraint] = []
 
         self.create_distance_matrix()
+        self.num_locations = len(self.distance_matrix)
         self.create_vars()
         self.objective = self.create_objective()
         self.create_constraints()
@@ -165,64 +169,3 @@ class VRP(ABC):
         Get the value of a variable for the given indices.
         """
         pass
-
-    def convert_qubo_result(
-        self,
-        var_dict: dict[str, float],
-        objective: float,
-        run_time: float,
-        local_run_time: float,
-        qpu_access_time: float = None,
-    ) -> VRPSolution:
-        """
-        Convert the final variables into a VRPSolution result.
-        """
-
-        use_depot = self.depot is not None
-        route_starts = self.get_result_route_starts(var_dict)
-
-        routes = []
-        loads = []
-        distances = []
-        total_distance = 0
-
-        for i in range(self.num_vehicles):
-            route = []
-            route_loads = []
-            route_distance = 0
-            cur_load = 0
-
-            index = route_starts[i] if i < len(route_starts) else None
-            previous_index = self.depot if use_depot else index
-            if use_depot:
-                route.append(self.depot)
-                route_loads.append(0)
-
-            while index is not None:
-                route_distance += self.distance_matrix[previous_index][index]
-                cur_load += self.get_location_demand(index)
-                route.append(index)
-                route_loads.append(cur_load)
-
-                if use_depot and index == self.depot:
-                    break
-
-                previous_index = index
-                index = self.get_result_next_location(var_dict, index)
-
-            routes.append(route)
-            distances.append(route_distance)
-            loads.append(route_loads)
-            total_distance += route_distance
-
-        return VRPSolution.from_model(
-            self,
-            objective,
-            total_distance,
-            routes,
-            distances,
-            loads,
-            run_time=run_time,
-            qpu_access_time=qpu_access_time,
-            local_run_time=local_run_time,
-        )

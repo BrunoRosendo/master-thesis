@@ -3,7 +3,7 @@ import math
 import os
 import urllib.request
 
-from src.model.VRPSolution import DistanceUnit
+from src.model.VRP import DistanceUnit
 
 
 def manhattan_distance(
@@ -32,10 +32,12 @@ def euclidean_distance(
 
     return [
         [
-            round(math.sqrt(
-                (from_location[0] - to_location[0]) ** 2
-                + (from_location[1] - to_location[1]) ** 2
-            ))
+            round(
+                math.sqrt(
+                    (from_location[0] - to_location[0]) ** 2
+                    + (from_location[1] - to_location[1]) ** 2
+                )
+            )
             for to_location in locations
         ]
         for from_location in locations

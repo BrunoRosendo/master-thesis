@@ -4,8 +4,7 @@ from typing import Callable
 import numpy as np
 from docplex.mp.dvar import Var
 
-from src.model.VRPSolution import DistanceUnit
-from src.model.VRP import VRP
+from src.model.VRP import VRP, DistanceUnit
 
 
 class StepVRP(VRP, ABC):

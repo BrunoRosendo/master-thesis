@@ -142,7 +142,8 @@ class ClassicSolver(VRPSolver):
         )
 
         capacities = (
-            self.model.capacities or [self.model.capacity] * self.model.num_vehicles
+            getattr(self.model, "capacities", None)
+            or [self.model.capacity] * self.model.num_vehicles
         )
 
         self.routing.AddDimensionWithVehicleCapacity(

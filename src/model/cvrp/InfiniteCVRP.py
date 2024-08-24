@@ -3,8 +3,7 @@ from typing import Callable
 from docplex.mp.dvar import Var
 from docplex.mp.linear import LinearExpr
 
-from src.model.VRP import VRP
-from src.model.VRPSolution import DistanceUnit
+from src.model.VRP import VRP, DistanceUnit
 from src.solver.cost_functions import manhattan_distance
 
 

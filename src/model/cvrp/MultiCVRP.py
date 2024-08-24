@@ -2,8 +2,8 @@ from typing import Callable
 
 from docplex.mp.linear import LinearExpr
 
-from src.model.VRPSolution import DistanceUnit
 from src.model.StepVRP import StepVRP
+from src.model.VRP import DistanceUnit
 from src.solver.cost_functions import manhattan_distance
 
 

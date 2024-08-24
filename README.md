@@ -88,7 +88,7 @@ This solver does not require any authentication, as it is a local solver. It has
 A cost function generates a distance matrix from the locations list. The default cost function is the Manhattan distance, but you can define your own cost function by creating a function that takes a list of coordinates and returns the matrix. For example:
 
 ```python
-from src.model.VRPSolution import DistanceUnit
+from src.model.VRP import DistanceUnit
 
 def manhattan_distance(
     locations: list[tuple[int, int]], unit: DistanceUnit = DistanceUnit.METERS

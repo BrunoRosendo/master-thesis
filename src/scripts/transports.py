@@ -4,8 +4,8 @@ from datetime import datetime
 import pandas as pd
 from dotenv import load_dotenv
 
-from src.model.VRPSolution import DistanceUnit
-from src.solver.QiskitSolver import QiskitSolver
+from src.model.VRP import DistanceUnit
+from src.solver.qubo.QiskitSolver import QiskitSolver
 
 load_dotenv()
 

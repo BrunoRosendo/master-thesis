@@ -1,5 +1,4 @@
 from logging import warning
-from typing import Callable
 
 from dimod import (
     ExactCQMSolver,
@@ -14,16 +13,15 @@ from dimod.constrained.constrained import CQMToBQMInverter
 from dwave.system import EmbeddingComposite
 
 from src.model.VRP import VRP
-from src.model.VRPSolution import VRPSolution, DistanceUnit
+from src.model.VRPSolution import VRPSolution
 from src.model.adapter.DWaveAdapter import DWaveAdapter
-from src.solver.VRPSolver import VRPSolver
-from src.solver.cost_functions import manhattan_distance
+from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = ExactCQMSolver()
 DEFAULT_EMBEDDING = EmbeddingComposite
 
 
-class DWaveSolver(VRPSolver):
+class DWaveSolver(QuboSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with Quantum Annealing, using DWave's system.
 
@@ -89,7 +87,7 @@ class DWaveSolver(VRPSolver):
 
         var_dict, energy = self.build_var_dict(result)
         timing = result.info.get("timing") or result.info
-        return self.model.convert_qubo_result(
+        return self.convert_qubo_result(
             var_dict,
             energy,
             timing.get("run_time") or timing.get("qpu_access_time") or self.run_time,

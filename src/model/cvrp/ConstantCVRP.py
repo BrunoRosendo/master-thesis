@@ -1,6 +1,6 @@
 from typing import Callable
 
-from src.model.VRPSolution import DistanceUnit
+from src.model.VRP import DistanceUnit
 from src.model.cvrp.InfiniteCVRP import InfiniteCVRP
 from src.solver.cost_functions import manhattan_distance
 

@@ -2,17 +2,11 @@ from __future__ import annotations
 
 import datetime
 import json
-from enum import Enum
 from pathlib import Path
 
 import plotly.graph_objects as go
 
-from src.model.VRP import VRP
-
-
-class DistanceUnit(str, Enum):
-    METERS = "METERS"
-    SECONDS = "SECONDS"
+from src.model.VRP import VRP, DistanceUnit
 
 
 class VRPSolution:
@@ -377,7 +371,7 @@ class VRPSolution:
             routes,
             distances,
             model.depot,
-            model.capacities or model.capacity,
+            getattr(model, "capacities", None) or getattr(model, "capacity", None),
             loads,
             run_time,
             qpu_access_time,
