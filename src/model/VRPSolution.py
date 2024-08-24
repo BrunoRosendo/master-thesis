@@ -85,7 +85,7 @@ class VRPSolution:
         self.distance_unit = distance_unit
         self.use_depot = depot is not None
         self.capacities = capacities
-        self.use_capacity = loads is not None and capacities is not None
+        self.use_capacity = capacities is not None
 
     def display(
         self, file_name: str = None, results_path: str = RESULTS_PATH, fig_height=None

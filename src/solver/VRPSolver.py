@@ -11,7 +11,6 @@ class VRPSolver(ABC):
     Abstract class for solving the Capacitated Vehicle Routing Problem (CVRP).
 
     Attributes:
-        use_capacity (bool): Whether the problem uses vehicle capacities or not
         track_progress (bool): Whether to track the progress of the solver or not.
         model (VRP): VRP instance of the model.
         run_time (int): Time taken to run the solver (measured locally).
@@ -22,11 +21,6 @@ class VRPSolver(ABC):
         model: VRP,
         track_progress: bool,
     ):
-        if hasattr(model, "capacity") or hasattr(model, "capacities"):
-            self.use_capacity = True
-        else:
-            self.use_capacity = False
-
         self.model = model
         self.track_progress = track_progress
         self.run_time: int | None = None

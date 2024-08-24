@@ -221,16 +221,8 @@ class VRP(ABC):
             total_distance,
             routes,
             distances,
-            (
-                loads if self.get_capacity() else None
-            ),  # TODO change and remove get_capacity
+            loads,
             run_time=run_time,
             qpu_access_time=qpu_access_time,
             local_run_time=local_run_time,
         )
-
-    def get_capacity(self) -> int | list[int] | None:
-        """
-        Get the capacity of the vehicles. This method can optionally be implemented by the subclass.
-        """
-        return None

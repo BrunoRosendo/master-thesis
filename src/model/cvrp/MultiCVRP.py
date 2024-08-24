@@ -139,10 +139,3 @@ class MultiCVRP(StepVRP):
                 return i
 
         return None
-
-    def get_capacity(self) -> int | list[int] | None:
-        """
-        Get the capacity of the vehicles.
-        """
-
-        return self.capacities

@@ -27,6 +27,7 @@ class ClassicSolver(VRPSolver):
     - local_search_metaheuristic (int): The local search metaheuristic to use.
     - distance_global_span_cost_coefficient (int): The coefficient for the global span cost.
     - distance_dimension (pywrapcp.RoutingDimension): The distance dimension for the problem.
+    - use_capacity (bool): Whether the problem uses vehicle capacities or not
     """
 
     def __init__(
@@ -53,6 +54,11 @@ class ClassicSolver(VRPSolver):
         )
         self.time_limit_seconds = time_limit_seconds
         self.max_distance_capacity = max_distance_capacity
+
+        if hasattr(model, "capacity") or hasattr(model, "capacities"):
+            self.use_capacity = True
+        else:
+            self.use_capacity = False
 
         if self.use_rpp:
             self.add_dummy_depot()
@@ -263,7 +269,7 @@ class ClassicSolver(VRPSolver):
             total_distance,
             routes,
             distances,
-            loads if self.use_capacity else None,
+            loads,
             run_time=self.run_time,
             local_run_time=local_run_time,
         )

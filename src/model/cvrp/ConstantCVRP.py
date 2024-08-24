@@ -67,9 +67,3 @@ class ConstantCVRP(InfiniteCVRP):
         """
 
         return self.capacity
-
-    def get_capacity(self) -> int | list[int] | None:
-        """
-        Get the capacity of the vehicles.
-        """
-        return self.capacity
