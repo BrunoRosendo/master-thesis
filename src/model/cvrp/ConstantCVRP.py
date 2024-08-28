@@ -2,7 +2,6 @@ from typing import Callable
 
 from src.model.VRP import DistanceUnit
 from src.model.cvrp.InfiniteCVRP import InfiniteCVRP
-from src.solver.cost_functions import manhattan_distance
 
 
 class ConstantCVRP(InfiniteCVRP):
@@ -19,14 +18,14 @@ class ConstantCVRP(InfiniteCVRP):
         locations: list[tuple[float, float]],
         demands: list[int],
         capacity: int | None,
-        simplify: bool = True,
+        simplify: bool,
         cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
-        ] = manhattan_distance,
-        depot: int | None = 0,
-        distance_matrix: list[list[float]] | None = None,
-        location_names: list[str] | None = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
+        ],
+        depot: int | None,
+        distance_matrix: list[list[float]] | None,
+        location_names: list[str] | None,
+        distance_unit: DistanceUnit,
     ):
         self.capacity = capacity
         super().__init__(

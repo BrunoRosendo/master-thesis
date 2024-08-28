@@ -1,14 +1,13 @@
 from dotenv import load_dotenv
 
-from src.model.VRPSolution import VRPSolution
-from src.model.cvrp.ConstantCVRP import ConstantCVRP
-from src.model.cvrp.InfiniteCVRP import InfiniteCVRP
-from src.model.cvrp.MultiCVRP import MultiCVRP
-from src.model.rpp.CapacityRPP import CapacityRPP
-from src.model.rpp.InfiniteRPP import InfiniteRPP
+from src.model.dispatcher import RPP, CVRP
 from src.solver.ClassicSolver import ClassicSolver
 
 if __name__ == "__main__":
     load_dotenv()
 
-    VRPSolution.from_json("18").display()
+    model = CVRP(1, [(46, 32), (20, 32), (71, 32), (46, 60), (46, 4)], 5, [1] * 5)
+
+    solver = ClassicSolver(model)
+    solution = solver.solve()
+    solution.display()

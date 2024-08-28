@@ -25,11 +25,11 @@ class MultiCVRP(StepVRP):
         capacities: list[int],
         cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
-        ] = manhattan_distance,
-        depot: int | None = 0,
-        distance_matrix: list[list[float]] | None = None,
-        location_names: list[str] | None = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
+        ],
+        depot: int | None,
+        distance_matrix: list[list[float]] | None,
+        location_names: list[str] | None,
+        distance_unit: DistanceUnit,
     ):
         self.capacities = capacities
         self.num_locations = len(locations)

@@ -4,7 +4,6 @@ from docplex.mp.dvar import Var
 from docplex.mp.linear import LinearExpr
 
 from src.model.VRP import VRP, DistanceUnit
-from src.solver.cost_functions import manhattan_distance
 
 
 class InfiniteCVRP(VRP):
@@ -17,14 +16,14 @@ class InfiniteCVRP(VRP):
         num_vehicles: int,
         locations: list[tuple[float, float]],
         demands: list[int],
-        simplify: bool = True,
+        simplify: bool,
         cost_function: Callable[
             [list[tuple[float, float]], DistanceUnit], list[list[float]]
-        ] = manhattan_distance,
-        depot: int | None = 0,
-        distance_matrix: list[list[float]] | None = None,
-        location_names: list[str] | None = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
+        ],
+        depot: int | None,
+        distance_matrix: list[list[float]] | None,
+        location_names: list[str] | None,
+        distance_unit: DistanceUnit,
     ):
         super().__init__(
             num_vehicles,
