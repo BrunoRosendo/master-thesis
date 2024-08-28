@@ -77,6 +77,7 @@ The `QiskitSolver` interacts with the [IBM Quantum](https://quantum.ibm.com/) cl
 To set it up, you need to authenticate yourself in one of two ways:
 - Copy your API token from the platform and create a `.env` file in the project's root with the line `IBM_TOKEN=<token>`.
 - Create an `IBM_TOKEN` environment variable under your Python (virtual) environment with your API token.
+- To solve it in a quantum computer, you can use the `get_backend_sampler()` function to get the right sampler.
 
 This solver has the following parameters that can be configured:
 
