@@ -1,5 +1,8 @@
-from src.model.VRPSolution import DistanceUnit
-from src.model.qubo.rpp.InfiniteRPP import InfiniteRPP
+from typing import Callable
+
+from src.model.VRP import DistanceUnit
+from src.model.rpp.InfiniteRPP import InfiniteRPP
+from src.solver.cost_functions import manhattan_distance
 
 
 class CapacityRPP(InfiniteRPP):
@@ -17,19 +20,23 @@ class CapacityRPP(InfiniteRPP):
     def __init__(
         self,
         num_vehicles: int,
-        trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[float]],
         locations: list[tuple[float, float]],
+        trips: list[tuple[int, int, int]],
         capacities: list[int],
-        location_names: list[str] = None,
+        cost_function: Callable[
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
+        ] = manhattan_distance,
+        distance_matrix: list[list[float]] | None = None,
+        location_names: list[str] | None = None,
         distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
         self.capacities = capacities
         super().__init__(
             num_vehicles,
-            trips,
-            distance_matrix,
             locations,
+            trips,
+            cost_function,
+            distance_matrix,
             location_names,
             distance_unit,
         )
@@ -58,10 +65,3 @@ class CapacityRPP(InfiniteRPP):
             for k in range(self.num_vehicles)
             for cur_step in range(1, self.num_steps)
         )
-
-    def get_capacity(self) -> int | list[int] | None:
-        """
-        Get the capacity of the vehicles.
-        """
-
-        return self.capacities

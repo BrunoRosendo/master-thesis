@@ -1,12 +1,12 @@
-from typing import Any, Callable
+from typing import Any
 
 from ortools.constraint_solver import pywrapcp
 from ortools.constraint_solver import routing_enums_pb2
 
 from src.model.VRP import VRP
-from src.model.VRPSolution import VRPSolution, DistanceUnit
+from src.model.VRPSolution import VRPSolution
+from src.model.rpp.InfiniteRPP import InfiniteRPP
 from src.solver.VRPSolver import VRPSolver
-from src.solver.cost_functions import manhattan_distance
 
 DEFAULT_SOLUTION_STRATEGY = routing_enums_pb2.FirstSolutionStrategy.AUTOMATIC
 DEFAULT_LOCAL_SEARCH_METAHEURISTIC = (
@@ -20,51 +20,32 @@ DEFAULT_TIME_LIMIT_SECONDS = 10
 class ClassicSolver(VRPSolver):
     """
     Class for solving the Capacitated Vehicle Routing Problem (CVRP) with classic algorithms, using Google's OR Tools.
+    Simplifying the model has no impact on this solver.
 
     Attributes:
     - solution_strategy (int): The strategy to use to find the first solution.
     - local_search_metaheuristic (int): The local search metaheuristic to use.
     - distance_global_span_cost_coefficient (int): The coefficient for the global span cost.
     - distance_dimension (pywrapcp.RoutingDimension): The distance dimension for the problem.
+    - use_capacity (bool): Whether the problem uses vehicle capacities or not
     """
 
     def __init__(
         self,
-        num_vehicles: int,
-        capacities: int | list[int] | None,
-        locations: list[tuple[float, float]],
-        trips: list[tuple[int, int, int]],
-        use_rpp: bool,
+        model: VRP,
         track_progress: bool = True,
         solution_strategy: int = DEFAULT_SOLUTION_STRATEGY,
         local_search_metaheuristic: int = DEFAULT_LOCAL_SEARCH_METAHEURISTIC,
         distance_global_span_cost_coefficient: int = DEFAULT_DISTANCE_GLOBAL_SPAN_COST_COEFFICIENT,
         time_limit_seconds: int = DEFAULT_TIME_LIMIT_SECONDS,
         max_distance_capacity: int = DEFAULT_MAX_DISTANCE_CAPACITY,
-        cost_function: Callable[
-            [list[tuple[float, float]], DistanceUnit], list[list[float]]
-        ] = manhattan_distance,
-        distance_matrix: list[list[float]] = None,
-        location_names: list[str] = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
-        if use_rpp:
-            self.remove_unused_locations(
-                locations, trips, distance_matrix, location_names
-            )
+        self.use_rpp = isinstance(model, InfiniteRPP)
 
-        super().__init__(
-            num_vehicles,
-            capacities,
-            locations,
-            trips,
-            use_rpp,
-            track_progress,
-            cost_function,
-            distance_matrix=distance_matrix,
-            location_names=location_names,
-            distance_unit=distance_unit,
-        )
+        if self.use_rpp:
+            self.remove_unused_locations(model)
+
+        super().__init__(model, track_progress)
 
         self.solution_strategy = solution_strategy
         self.local_search_metaheuristic = local_search_metaheuristic
@@ -74,8 +55,15 @@ class ClassicSolver(VRPSolver):
         self.time_limit_seconds = time_limit_seconds
         self.max_distance_capacity = max_distance_capacity
 
+        if hasattr(model, "capacity") or hasattr(model, "capacities"):
+            self.use_capacity = True
+        else:
+            self.use_capacity = False
+
         if self.use_rpp:
             self.add_dummy_depot()
+        else:
+            self.depot = model.depot
 
         self.distance_dimension = None
 
@@ -85,7 +73,7 @@ class ClassicSolver(VRPSolver):
         """
 
         self.manager = pywrapcp.RoutingIndexManager(
-            len(self.distance_matrix), self.num_vehicles, self.depot
+            len(self.model.distance_matrix), self.model.num_vehicles, self.depot
         )
         self.routing = pywrapcp.RoutingModel(self.manager)
 
@@ -111,7 +99,7 @@ class ClassicSolver(VRPSolver):
         # Convert from index to distance matrix NodeIndex.
         from_node = self.manager.IndexToNode(from_index)
         to_node = self.manager.IndexToNode(to_index)
-        return self.distance_matrix[from_node][to_node]
+        return self.model.distance_matrix[from_node][to_node]
 
     def demand_callback(self, from_index: Any) -> int:
         """Returns the demand of the node."""
@@ -154,9 +142,8 @@ class ClassicSolver(VRPSolver):
         )
 
         capacities = (
-            [self.capacities] * self.num_vehicles
-            if self.same_capacity
-            else self.capacities
+            getattr(self.model, "capacities", None)
+            or [self.model.capacity] * self.model.num_vehicles
         )
 
         self.routing.AddDimensionWithVehicleCapacity(
@@ -170,7 +157,7 @@ class ClassicSolver(VRPSolver):
     def set_pickup_and_deliveries(self):
         """Set the pickup and delivery constraints for the problem."""
 
-        for trip in self.trips:
+        for trip in self.model.trips:
             pickup_index = self.manager.NodeToIndex(trip[0])
             delivery_index = self.manager.NodeToIndex(trip[1])
 
@@ -203,46 +190,38 @@ class ClassicSolver(VRPSolver):
         It's important to add the dummy depot after the distance matrix is set, to avoid indexing issues.
         """
 
-        self.depot = len(self.distance_matrix)
-        self.distance_matrix.append([0] * len(self.distance_matrix))
-        for i in range(len(self.distance_matrix)):
-            self.distance_matrix[i].append(0)
+        self.depot = len(self.model.distance_matrix)
+        self.model.distance_matrix.append([0] * len(self.model.distance_matrix))
+        for i in range(len(self.model.distance_matrix)):
+            self.model.distance_matrix[i].append(0)
 
-        # Update the model with the new dummy
-        self.model = self.get_model()
-
-    def remove_unused_locations(
-        self,
-        locations: list[tuple[float, float]],
-        trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[float]] = None,
-        location_names: list[str] = None,
-    ):
+    def remove_unused_locations(self, model: InfiniteRPP):
         """
         Remove locations that are not used in the trips. Trips are updated to reflect the new indices.
         """
 
-        used_locations = sorted({loc for trip in trips for loc in trip[:2]})
+        used_locations = sorted({loc for trip in model.trips for loc in trip[:2]})
         old_to_new_index = {old: new for new, old in enumerate(used_locations)}
 
         # Update locations list with new indices
-        locations[:] = [locations[i] for i in used_locations]
+        model.locations[:] = [model.locations[i] for i in used_locations]
 
         # Update trips list with new indices
-        trips[:] = [
+        model.trips[:] = [
             (old_to_new_index[trip[0]], old_to_new_index[trip[1]], trip[2])
-            for trip in trips
+            for trip in model.trips
         ]
 
         # Update distance matrix if provided
-        if distance_matrix is not None:
-            distance_matrix[:] = [
-                [distance_matrix[i][j] for j in used_locations] for i in used_locations
+        if model.distance_matrix is not None:
+            model.distance_matrix[:] = [
+                [model.distance_matrix[i][j] for j in used_locations]
+                for i in used_locations
             ]
 
         # Update location names if provided
-        if location_names is not None:
-            location_names[:] = [location_names[i] for i in used_locations]
+        if model.location_names is not None:
+            model.location_names[:] = [model.location_names[i] for i in used_locations]
 
     def _convert_solution(self, result: Any, local_run_time: float) -> VRPSolution:
         """Converts OR-Tools result to CVRP solution."""
@@ -252,7 +231,7 @@ class ClassicSolver(VRPSolver):
         distances = []
         total_distance = 0
 
-        for vehicle_id in range(self.num_vehicles):
+        for vehicle_id in range(self.model.num_vehicles):
             index = self.routing.Start(vehicle_id)
             if self.use_rpp:  # Skip dummy depot
                 index = result.Value(self.routing.NextVar(index))
@@ -285,31 +264,13 @@ class ClassicSolver(VRPSolver):
             loads.append(route_loads)
             total_distance += route_distance
 
-        return VRPSolution(
-            self.num_vehicles,
-            self.locations,
+        return VRPSolution.from_model(
+            self.model,
             result.ObjectiveValue(),
             total_distance,
             routes,
             distances,
-            self.depot,
-            self.capacities,
-            loads if self.use_capacity else None,
-            not self.use_rpp,
+            loads,
             run_time=self.run_time,
             local_run_time=local_run_time,
-            location_names=self.location_names,
-            distance_unit=self.distance_unit,
-        )
-
-    def get_model(self) -> VRP:
-        return VRP(
-            self.num_vehicles,
-            self.trips,
-            self.distance_matrix,
-            self.locations,
-            self.use_rpp,
-            self.depot,
-            self.location_names,
-            self.distance_unit,
         )

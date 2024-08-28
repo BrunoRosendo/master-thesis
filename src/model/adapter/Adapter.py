@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.model.qubo.QuboVRP import QuboVRP
+from src.model.VRP import VRP
 
 
 class Adapter(ABC):
@@ -9,10 +9,10 @@ class Adapter(ABC):
     It should be implemented by the solver-specific adapter.
 
     Attributes:
-        qubo (QuboVRP): QUBO model to be adapted.
+        qubo (VRP): QUBO model to be adapted.
     """
 
-    def __init__(self, qubo: QuboVRP):
+    def __init__(self, qubo: VRP):
         self.qubo = qubo
 
         self.add_vars()

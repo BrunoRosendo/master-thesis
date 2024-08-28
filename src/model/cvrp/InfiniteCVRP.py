@@ -1,39 +1,40 @@
+from typing import Callable
+
 from docplex.mp.dvar import Var
 from docplex.mp.linear import LinearExpr
 
-from src.model.VRPSolution import DistanceUnit
-from src.model.qubo.QuboVRP import QuboVRP
+from src.model.VRP import VRP, DistanceUnit
 
 
-class ConstantCVRP(QuboVRP):
+class InfiniteCVRP(VRP):
     """
-    A class to represent a QUBO math formulation of the CVRP model with all vehicles having the same capacity.
-
-    Attributes:
-        capacity (int): Capacity of each vehicle.
+    A class to represent a QUBO math formulation of the CVRP model with all vehicles having infinite capacity.
     """
 
     def __init__(
         self,
         num_vehicles: int,
-        trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[float]],
-        capacity: int | None,
         locations: list[tuple[float, float]],
+        demands: list[int],
         simplify: bool,
-        location_names: list[str] = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
+        cost_function: Callable[
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
+        ],
+        depot: int | None,
+        distance_matrix: list[list[float]] | None,
+        location_names: list[str] | None,
+        distance_unit: DistanceUnit,
     ):
-        self.capacity = capacity
         super().__init__(
             num_vehicles,
-            trips,
-            distance_matrix,
             locations,
-            False,
+            demands,
+            depot,
             simplify,
-            location_names=location_names,
-            distance_unit=distance_unit,
+            cost_function,
+            distance_matrix,
+            location_names,
+            distance_unit,
         )
 
     def create_vars(self):
@@ -116,8 +117,8 @@ class ConstantCVRP(QuboVRP):
         """
 
         self.constraints.extend(
-            self.u[i - 1] - self.u[j - 1] + self.capacity * self.x_var(i, j)
-            <= self.capacity - self.get_location_demand(j)
+            self.u[i - 1] - self.u[j - 1] + self.num_locations * self.x_var(i, j)
+            <= self.num_locations - 1
             for i in range(1, self.num_locations)
             for j in range(1, self.num_locations)
             if i != j
@@ -173,17 +174,11 @@ class ConstantCVRP(QuboVRP):
         Get the lower bound for the auxiliary variable, at the given index.
         """
 
-        return self.get_location_demand(i)
+        return 1
 
-    def get_u_upper_bound(self) -> int:
+    def get_u_upper_bound(self):
         """
-        Get the upper bound for the auxiliary variables.
+        Get the upper bound for the variable u.
         """
 
-        return self.capacity
-
-    def get_capacity(self) -> int | list[int] | None:
-        """
-        Get the capacity of the vehicles.
-        """
-        return self.capacity
+        return self.num_locations

@@ -1,5 +1,5 @@
 import os
-from typing import Any, Callable, Literal
+from typing import Any, Literal
 
 from docplex.util.status import JobSolveStatus
 from numpy import ndarray
@@ -26,10 +26,10 @@ from qiskit_optimization.converters import (
     LinearEqualityToPenalty,
 )
 
-from src.model.VRPSolution import VRPSolution, DistanceUnit
+from src.model.VRP import VRP
+from src.model.VRPSolution import VRPSolution
 from src.model.adapter.QiskitAdapter import QiskitAdapter
 from src.qiskit_algorithms.qiskit_algorithms import QAOA
-from src.solver.cost_functions import manhattan_distance
 from src.solver.qubo.QuboSolver import QuboSolver
 
 DEFAULT_SAMPLER = Sampler()
@@ -44,7 +44,6 @@ class QiskitSolver(QuboSolver):
 
     Attributes:
     - classical_solver (bool): Whether to use a classical solver to solve the QUBO problem.
-    - simplify (bool): Whether to simplify the problem by removing unnecessary constraints.
     - sampler (Sampler): The Qiskit sampler to use for the QUBO problem.
     - classical_optimizer (Optimizer): The Qiskit optimizer to use for the QUBO problem.
     - warm_start (bool): Whether to use a warm start for the QAOA optimizer.
@@ -55,38 +54,15 @@ class QiskitSolver(QuboSolver):
 
     def __init__(
         self,
-        num_vehicles: int,
-        capacities: int | list[int] | None,
-        locations: list[tuple[float, float]],
-        trips: list[tuple[int, int, int]],
-        use_rpp: bool,
+        model: VRP,
         classical_solver=False,
-        simplify=True,
         track_progress=True,
         sampler: Sampler | CloudSampler = DEFAULT_SAMPLER,
         classical_optimizer: Optimizer = DEFAULT_CLASSICAL_OPTIMIZER,
         warm_start=False,
         pre_solver: OptimizationAlgorithm = DEFAULT_PRE_SOLVER,
-        cost_function: Callable[
-            [list[tuple[float, float]], DistanceUnit], list[list[float]]
-        ] = manhattan_distance,
-        distance_matrix: list[list[float]] = None,
-        location_names: list[str] = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
     ):
-        super().__init__(
-            num_vehicles,
-            capacities,
-            locations,
-            trips,
-            use_rpp,
-            track_progress,
-            cost_function,
-            simplify,
-            distance_matrix,
-            location_names,
-            distance_unit,
-        )
+        super().__init__(model, track_progress)
         self.classical_solver = classical_solver
         self.sampler = sampler
         self.classical_optimizer = classical_optimizer
@@ -211,7 +187,7 @@ class QiskitSolver(QuboSolver):
             # Convert to microseconds
             self.run_time = round(result.raw_results.solve_details.time * 1e6)
 
-        return self.model.convert_result(
+        return self.convert_qubo_result(
             self.var_dict, result.fval, self.run_time, local_run_time
         )
 
@@ -220,7 +196,7 @@ class QiskitSolver(QuboSolver):
         Build a dictionary with the variable values from the result. It takes the simplification step into consideration
         """
         var_dict = result.variables_dict
-        if self.simplify:
+        if self.model.simplify:
             var_dict = self.model.re_add_variables(var_dict)
         return var_dict
 

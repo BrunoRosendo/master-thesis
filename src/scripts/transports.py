@@ -3,12 +3,9 @@ from datetime import datetime
 
 import pandas as pd
 from dotenv import load_dotenv
-from dwave.system import LeapHybridCQMSampler
 
-from src.model.VRPSolution import DistanceUnit
-from src.solver.ClassicSolver import ClassicSolver
-from src.solver.cost_functions import distance_api
-from src.solver.qubo.DWaveSolver import DWaveSolver
+from src.model.VRP import DistanceUnit
+from src.model.dispatcher import CVRP, RPP
 from src.solver.qubo.QiskitSolver import QiskitSolver
 
 load_dotenv()
@@ -20,7 +17,9 @@ DATA_INSTANCE = "Porto/stcp 09-23"
 DATA_PATH = DATA_FOLDER + DATA_INSTANCE
 
 SELECTED_ROUTES = ["18", "304"]
-STOP_GAP = 3  # Only 1 in STOP_GAP trips will be added to the model. ALSO REMOVES THE STOPS
+STOP_GAP = (
+    3  # Only 1 in STOP_GAP trips will be added to the model. ALSO REMOVES THE STOPS
+)
 CIRCULAR_ROUTES = False
 NUM_VEHICLES = 2
 VEHICLE_CAPACITY = [60, 100]
@@ -205,11 +204,12 @@ def check_common_stops_and_change_depot(
             i += 1
 
 
+cvrp_trips = []
+
 if CIRCULAR_ROUTES:
     locations = []
     location_names = []
     location_ids = []
-    cvrp_trips = []
 
     for route in routes.itertuples():
         circular_trip_id = get_trip_id(route.route_id, 0)
@@ -239,8 +239,6 @@ else:
     location_names = [stop.stop_name for stop in stops.itertuples()]
     location_freq = [0 for _ in locations]
     distance_matrix = initialize_distance_matrix(len(locations))
-
-    cvrp_trips = []
 
     for route in routes.itertuples():
         departure_trip_id = get_trip_id(route.route_id, 0)
@@ -275,20 +273,29 @@ else:
 
 # RUN ALGORITHM
 
-cvrp = QiskitSolver(
-    NUM_VEHICLES,
-    VEHICLE_CAPACITY,
-    locations,
-    cvrp_trips,
-    not CIRCULAR_ROUTES,
-    distance_matrix=distance_matrix,
-    location_names=location_names,
-    distance_unit=DistanceUnit.SECONDS,
-    classical_solver=True,
-    # sampler=LeapHybridCQMSampler(),
-    # time_limit=30,
-)
+if CIRCULAR_ROUTES:
+    model = CVRP(
+        NUM_VEHICLES,
+        locations,
+        VEHICLE_CAPACITY,
+        [1] * len(locations),  # Assuming all locations have the same demand
+        distance_matrix=distance_matrix,
+        location_names=location_names,
+        distance_unit=DistanceUnit.SECONDS,
+    )
+else:
+    model = RPP(
+        NUM_VEHICLES,
+        locations,
+        VEHICLE_CAPACITY,
+        cvrp_trips,
+        distance_matrix=distance_matrix,
+        location_names=location_names,
+        distance_unit=DistanceUnit.SECONDS,
+    )
 
-result = cvrp.solve()
+solver = QiskitSolver(model, classical_solver=True)
+
+result = solver.solve()
 result.save_json("tmp")
 result.display()

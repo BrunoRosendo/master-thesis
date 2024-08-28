@@ -1,15 +1,15 @@
 from abc import ABC, abstractmethod
+from typing import Callable
 
 import numpy as np
 from docplex.mp.dvar import Var
 
-from src.model.VRPSolution import DistanceUnit
-from src.model.qubo.QuboVRP import QuboVRP
+from src.model.VRP import VRP, DistanceUnit
 
 
-class StepQuboVRP(QuboVRP, ABC):
+class StepVRP(VRP, ABC):
     """
-    A class to represent a QUBO math formulation of the step-based CVRP model.
+    A class to represent a QUBO math formulation of the step-based VRP model.
     This model should always be simplified, since some constraints assume the simplification.
 
     Attributes:
@@ -22,15 +22,21 @@ class StepQuboVRP(QuboVRP, ABC):
     def __init__(
         self,
         num_vehicles: int,
-        trips: list[tuple[int, int, int]],
-        distance_matrix: list[list[float]],
         locations: list[tuple[float, float]],
-        use_deliveries: bool,
-        depot: int | None = 0,
-        location_names: list[str] = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
+        demands: list[int] | None,
+        depot: int | None,
+        cost_function: Callable[
+            [list[tuple[float, float]], DistanceUnit], list[list[float]]
+        ],
+        distance_matrix: list[list[float]] | None,
+        location_names: list[str] | None,
+        distance_unit: DistanceUnit,
     ):
         self.distance_matrix = distance_matrix
+        self.locations = locations
+        self.cost_function = cost_function
+        self.distance_unit = distance_unit
+        self.create_distance_matrix()
         self.num_steps = self.get_num_steps()
         self.num_used_locations = self.get_num_used_locations()
         self.epsilon = 0.0001
@@ -38,12 +44,12 @@ class StepQuboVRP(QuboVRP, ABC):
 
         super().__init__(
             num_vehicles,
-            trips,
-            distance_matrix,
             locations,
-            use_deliveries,
-            True,
+            demands,
             depot,
+            True,
+            cost_function,
+            distance_matrix,
             location_names,
             distance_unit,
         )

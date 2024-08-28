@@ -2,15 +2,11 @@ from __future__ import annotations
 
 import datetime
 import json
-from enum import Enum
 from pathlib import Path
 
 import plotly.graph_objects as go
 
-
-class DistanceUnit(str, Enum):
-    METERS = "METERS"
-    SECONDS = "SECONDS"
+from src.model.VRP import VRP, DistanceUnit
 
 
 class VRPSolution:
@@ -60,14 +56,13 @@ class VRPSolution:
         routes: list[list[int]],
         distances: list[int],
         depot: int | None,
-        capacities: int | list[int] = None,
-        loads: list[list[int]] = None,
-        use_depot: bool = None,
-        run_time: float = None,
-        qpu_access_time: float = None,
-        local_run_time: float = None,
-        location_names: list[str] = None,
-        distance_unit: DistanceUnit = DistanceUnit.METERS,
+        capacities: int | list[int] | None,
+        loads: list[list[int]] | None,
+        run_time: float | None,
+        qpu_access_time: float | None,
+        local_run_time: float | None,
+        location_names: list[str] | None,
+        distance_unit: DistanceUnit,
     ):
         self.num_vehicles = num_vehicles
         self.locations = locations
@@ -82,14 +77,9 @@ class VRPSolution:
         self.local_run_time = local_run_time
         self.location_names = location_names or [str(i) for i in range(len(locations))]
         self.distance_unit = distance_unit
-
-        if use_depot is None:
-            self.use_depot = depot is not None
-        else:
-            self.use_depot = use_depot
-
+        self.use_depot = depot is not None
         self.capacities = capacities
-        self.use_capacity = loads is not None and capacities is not None
+        self.use_capacity = capacities is not None
 
     def display(
         self, file_name: str = None, results_path: str = RESULTS_PATH, fig_height=None
@@ -354,10 +344,38 @@ class VRPSolution:
             data["depot"],
             data["capacities"],
             data["loads"],
-            data["use_depot"],
             data["run_time"],
             data["qpu_access_time"],
             data["local_run_time"],
             data["location_names"],
             data["distance_unit"],
+        )
+
+    @staticmethod
+    def from_model(
+        model: VRP,
+        objective: float,
+        total_distance: int,
+        routes: list[list[int]],
+        distances: list[int],
+        loads: list[list[int]] = None,
+        run_time: float = None,
+        qpu_access_time: float = None,
+        local_run_time: float = None,
+    ):
+        return VRPSolution(
+            model.num_vehicles,
+            model.locations,
+            objective,
+            total_distance,
+            routes,
+            distances,
+            model.depot,
+            getattr(model, "capacities", None) or getattr(model, "capacity", None),
+            loads,
+            run_time,
+            qpu_access_time,
+            local_run_time,
+            model.location_names,
+            model.distance_unit,
         )
