@@ -90,9 +90,9 @@ This solver has the following parameters that can be configured:
 | `warm_start`          | bool                                                                                                                                            | Whether to run QAOA with a warm start.                                                                                                                                                                                                                                  | False                                                                                                                             |
 | `pre_solver`          | [OptimizationAlgorithm](https://qiskit-community.github.io/qiskit-optimization/stubs/qiskit_optimization.algorithms.OptimizationAlgorithm.html) | Classical optimizer used to pre-solve the problem if warm start is used.                                                                                                                                                                                                | [CplexOptimizer](https://qiskit-community.github.io/qiskit-optimization/stubs/qiskit_optimization.algorithms.CplexOptimizer.html) |
 
-#### Classical Solver (OR-Tools)
+#### Classic Solver (OR-Tools)
 
-The `ClassicalSolver` uses the [Google OR-Tools](https://developers.google.com/optimization) library to solve the routing problem classically. This is a great way to test your inputs or compare the quantum solvers with a well-known classical solver.
+The `ClassicSolver` uses the [Google OR-Tools](https://developers.google.com/optimization) library to solve the routing problem classically. This is a great way to test your inputs or compare the quantum solvers with a well-known classical solver.
 
 This solver does not require any authentication, as it is a local solver. It has the following parameters that can be configured:
 
